@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public float sugarPickUpSpeed = 0.2f;
     public float dropoffDelay = 0.5f;
+    public int maxSugarCarry = 10;
 
     public GameObject playerPrefab;
     public Material[] playerMats;
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour {
                                                             DropoffPoints[x].transform.position.z), Quaternion.identity);
             player.GetComponent<MeshRenderer>().material = playerMats[x];
             PlayerClass ply = new PlayerClass();
-            ply.SetUpPlayer(x, player, DropoffPoints[x], "Player " + x);
+            ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
             player.GetComponent<PlayerController>().player = ply;
             playerList.Add(ply);
 

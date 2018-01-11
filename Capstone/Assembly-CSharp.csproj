@@ -54,6 +54,7 @@
      <Compile Include="Assets\CraftingController.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GameSettings.cs" />
+     <Compile Include="Assets\ItemScript.cs" />
      <Compile Include="Assets\MainMenuManager.cs" />
      <Compile Include="Assets\PlayerClass.cs" />
      <Compile Include="Assets\PlayerController.cs" />
@@ -134,10 +135,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
- <HintPath>C:/Users/JKUO3/Documents/FTB Capstone Project/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+ <HintPath>C:/Users/JKUO3/Desktop/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
- <HintPath>C:/Users/JKUO3/Documents/FTB Capstone Project/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
+ <HintPath>C:/Users/JKUO3/Desktop/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -26,7 +26,8 @@ public class PlayerSugarPickup : MonoBehaviour {
     {
         if (other.tag == "SugarCube")
         {
-            StartCoroutine(PickupSugarAni(other.gameObject));
+            if(player.sugarInBackpack < player.maxCanCarry)
+                StartCoroutine(PickupSugarAni(other.gameObject));
             return;
         }
 
@@ -79,18 +80,30 @@ public class PlayerSugarPickup : MonoBehaviour {
 
     private IEnumerator DropoffSugarAni(GameObject dropoffPoint)
     {
+        int count = 0;
+
         Vector3 saveScale = sugarInBackpack[0].transform.localScale;
         GameObject sugar = sugarInBackpack[0];
         sugarInBackpack.Remove(sugarInBackpack[0]);
-        sugar.transform.localScale = Vector3.zero;
         sugar.transform.parent = null;
         player.DropoffSugar();
         sugar.SetActive(true);
-        Debug.Log(dropoffPoint.transform.position);
 
-        while (sugar.transform.position != dropoffPoint.transform.position)
+        Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 1, sugar.transform.position.z);
+
+        while(count < 10)
         {
-            sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, saveScale, sugarPickupSpeed);
+            count++;
+            sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, topPos, sugarPickupSpeed);
+            yield return null;
+        }
+
+        count = 0;
+
+        while (count < 10)
+        {
+            count++;
+            sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.zero, sugarPickupSpeed);
             sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, dropoffPoint.transform.position, sugarPickupSpeed);
             yield return null;
         }

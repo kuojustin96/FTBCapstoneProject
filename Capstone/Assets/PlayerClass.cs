@@ -8,15 +8,17 @@ public class PlayerClass {
     public GameObject playerGO;
     public GameObject dropoffPoint;
     public string playerName;
+    public int maxCanCarry = 10;
     public int sugarInBackpack = 0;
     public int currentPlayerScore = 0;
     public bool isStunned = false;
     public CraftingController.CraftableItem item;
     public int itemNum;
 
-    public void SetUpPlayer(int playerNum, GameObject playerGO, GameObject dropoffPoint, string playerName)
+    public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
     {
         this.playerNum = playerNum;
+        this.maxCanCarry = maxCanCarry;
         this.playerGO = playerGO;
         this.dropoffPoint = dropoffPoint;
         this.playerName = playerName;
@@ -46,7 +48,6 @@ public class PlayerClass {
     {
         if (player.item != null)
         {
-            Debug.Log("DSASDA");
             CraftingController.instance.DisableItem(player.item, player.itemNum);
         }
 
@@ -60,7 +61,8 @@ public class PlayerClass {
     public void UseItem()
     {
         item.usesLeft--;
-        Debug.Log("Item used 1 time. Number of uses left is " + item.usesLeft);
+        Debug.Log(item.name + " used 1 time. Number of uses left is " + item.usesLeft);
+        item.gameObject.GetComponent<ItemScript>().UseItem(item.type, item.name, this);
 
         if(item.usesLeft <= 0)
         {

@@ -7,6 +7,7 @@ public enum ItemType
     Offensive = 0,
     Defensive = 1,
     Utility = 2,
+    NoItem = 3,
 }
 
 public class CraftingController : MonoBehaviour {
@@ -24,6 +25,7 @@ public class CraftingController : MonoBehaviour {
         public int numUses = 1;
         [HideInInspector]
         public int usesLeft;
+        public float effectAmt = 1;
         public ItemType type;
 
         [HideInInspector]
