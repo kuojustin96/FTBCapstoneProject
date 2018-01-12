@@ -85,9 +85,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CraftingController.cs" />
+    <Compile Include="Assets\FadeManager.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\GameSettings.cs" />
+    <Compile Include="Assets\ItemScript.cs" />
     <Compile Include="Assets\MainMenuManager.cs" />
+    <Compile Include="Assets\MusicManager.cs" />
     <Compile Include="Assets\PlayerClass.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\PlayerSugarPickup.cs" />
