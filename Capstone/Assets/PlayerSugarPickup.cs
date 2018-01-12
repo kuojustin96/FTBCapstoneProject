@@ -12,7 +12,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        player = GetComponentInParent<PlayerController>().player;
+        player = GetComponentInParent<KuoController>().player;
         sugarPickupSpeed = GameManager.instance.sugarPickUpSpeed;
         dropoffDelay = GameManager.instance.dropoffDelay;
 	}

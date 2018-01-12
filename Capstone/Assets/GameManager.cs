@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour {
             player.GetComponent<MeshRenderer>().material = playerMats[x];
             PlayerClass ply = new PlayerClass();
             ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
-            player.GetComponent<PlayerController>().player = ply;
+            player.GetComponent<KuoController>().player = ply;
             playerList.Add(ply);
 
             ScoreController.instance.SetUpScoreController(x);

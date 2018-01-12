@@ -52,13 +52,39 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CraftingController.cs" />
+     <Compile Include="Assets\EnableAllThisShit.cs" />
+     <Compile Include="Assets\FadeManager.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GameSettings.cs" />
      <Compile Include="Assets\ItemScript.cs" />
+     <Compile Include="Assets\KuoController.cs" />
+     <Compile Include="Assets\Lobby\Scripts\DraggablePanel.cs" />
+     <Compile Include="Assets\Lobby\Scripts\EventSystemChecker.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyHook.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyManager.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerList.cs" />
+     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
      <Compile Include="Assets\MainMenuManager.cs" />
+     <Compile Include="Assets\MusicManager.cs" />
+     <Compile Include="Assets\NetScript\CameraChec.cs" />
+     <Compile Include="Assets\NetScript\NetManager.cs" />
+     <Compile Include="Assets\NetScript\NetMouseLook.cs" />
+     <Compile Include="Assets\NetScript\NetMoveTest.cs" />
+     <Compile Include="Assets\NetScript\Spawning.cs" />
      <Compile Include="Assets\PlayerClass.cs" />
-     <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\PlayerSugarPickup.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\NetworkAsteroid.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\NetworkGameManager.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\NetworkLobbyHook.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\NetworkPlayerValues.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\NetworkSpaceship.cs" />
+     <Compile Include="Assets\SampleScenes\Scripts\NetworkSpaceshipBullet.cs" />
      <Compile Include="Assets\ScoreController.cs" />
      <Compile Include="Assets\SimpleRotate.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
@@ -99,8 +125,10 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\Lobby\Documentation.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\Lobby\Instruction.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
@@ -109,10 +137,15 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\NotoSans - License.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\Fonts\OpenSans\License!.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
+     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity 2017.1.0f3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -135,11 +168,15 @@
  <HintPath>C:/Program Files/Unity 2017.1.0f3/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
- <HintPath>C:/Users/Choco/Desktop/Capstones/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+ <HintPath>C:/Users/blknb/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
- <HintPath>C:/Users/Choco/Desktop/Capstones/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
+ <HintPath>C:/Users/blknb/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{7F56E623-E214-5249-7A68-5A6003024663}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
