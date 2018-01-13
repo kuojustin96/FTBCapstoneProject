@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
@@ -11,6 +12,7 @@ public class MainMenuManager : MonoBehaviour {
     public CanvasGroup gameSettings;
     public TMP_Dropdown qualityDropdown;
     public TMP_Dropdown resoDropdown;
+    public Toggle fullscreenToggle;
     private CanvasGroup currentPanel;
 
     private Resolution[] resolutions;
@@ -75,8 +77,9 @@ public class MainMenuManager : MonoBehaviour {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-    public void SetFullscreen(bool isFullscreen)
+    public void SetFullscreen()
     {
+        bool isFullscreen = fullscreenToggle.isOn;
         Screen.fullScreen = isFullscreen;
     }
 

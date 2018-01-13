@@ -1317,6 +1317,7 @@ MonoBehaviour:
   gameSettings: {fileID: 1363665913}
   qualityDropdown: {fileID: 636050187}
   resoDropdown: {fileID: 1499469219}
+  fullscreenToggle: {fileID: 1227437335}
 --- !u!4 &395628782
 Transform:
   m_ObjectHideFlags: 0
@@ -1849,7 +1850,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
