@@ -14,6 +14,7 @@ public class PlayerClass {
     public bool isStunned = false;
     public CraftingController.CraftableItem item;
     public int itemNum;
+    public bool usingItem = false;
 
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
     {
@@ -30,7 +31,7 @@ public class PlayerClass {
         ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
     }
 
-    public void DropoffSugar()
+    public void DropoffSugarInStash()
     {
         currentPlayerScore++;
         sugarInBackpack--;
@@ -44,6 +45,12 @@ public class PlayerClass {
         ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
     }
 
+    public void DropSugar()
+    {
+        sugarInBackpack--;
+        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+    }
+
     public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum)
     {
         if (player.item != null)
@@ -51,6 +58,7 @@ public class PlayerClass {
             CraftingController.instance.DisableItem(player.item, player.itemNum);
         }
 
+        Debug.Log(player.playerName + " crafted a " + item.name + "!");
         player.item = item;
         player.itemNum = itemNum;
         item.gameObject.transform.position = player.playerGO.transform.position;
@@ -60,15 +68,9 @@ public class PlayerClass {
 
     public void UseItem()
     {
+        ItemScript IS = item.gameObject.GetComponent<ItemScript>();
         item.usesLeft--;
         Debug.Log(item.name + " used 1 time. Number of uses left is " + item.usesLeft);
-        item.gameObject.GetComponent<ItemScript>().UseItem(item.type, item.name, this);
-
-        if(item.usesLeft <= 0)
-        {
-            CraftingController.instance.DisableItem(item, itemNum);
-            item = null;
-            itemNum = 0;
-        }
+        IS.UseItem(item.type, item.name, this);
     }
 }

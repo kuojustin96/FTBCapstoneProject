@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4890e1daa60c3804ca609b041c077547, type: 3}
+  m_Name: ItemsSO
+  m_EditorClassIdentifier: 
+  OffensiveItems:
+  - name: Sword
+    gameObject: {fileID: 1499481568326956, guid: dec0feca6422c834494917070d82f097,
+      type: 2}
+    numUses: 1
+    effectAmt: 3
+    type: 0
+  DefensiveItems:
+  - name: Shield
+    gameObject: {fileID: 1022292755540698, guid: 949fa2989cc4b3445a427988e4ce0789,
+      type: 2}
+    numUses: 1
+    effectAmt: 0
+    type: 1
+  - name: Lego Wall
+    gameObject: {fileID: 1758664529197830, guid: bcb4a0d0b6fe84644b90c83b4ae2a05c,
+      type: 2}
+    numUses: 1
+    effectAmt: 5
+    type: 1
+  UtilityItems:
+  - name: Backpack
+    gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,
+      type: 2}
+    numUses: 1
+    effectAmt: 10
+    type: 2
+  - name: Magnet
+    gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,
+      type: 2}
+    numUses: 1
+    effectAmt: 3
+    type: 2

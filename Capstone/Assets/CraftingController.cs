@@ -7,17 +7,16 @@ public enum ItemType
     Offensive = 0,
     Defensive = 1,
     Utility = 2,
-    NoItem = 3,
 }
 
 public class CraftingController : MonoBehaviour {
 
     public static CraftingController instance = null;
+    public ItemsScriptableObject itemSO;
 
     public int sugarNeededToCraft = 3;
     public float timeToCraft = 3;
 
-    [System.Serializable]
     public class CraftableItem
     {
         public string name;
@@ -34,7 +33,7 @@ public class CraftingController : MonoBehaviour {
         public List<CraftableItem> activeItems = new List<CraftableItem>();
     }
 
-    public CraftableItem[] craftableItems;
+    private List<CraftableItem> craftableItems = new List<CraftableItem>();
 
     [HideInInspector]
     public List<CraftableItem> OffensiveItems = new List<CraftableItem>();
@@ -50,7 +49,7 @@ public class CraftingController : MonoBehaviour {
             instance = this;
         }
 
-        PoolItems();
+        GetItemsFromSOandPool();
     }
 
 	// Use this for initialization
@@ -138,12 +137,46 @@ public class CraftingController : MonoBehaviour {
         }
     }
 
-
-
-
-    public void PoolItems()
+    private void GetItemsFromSOandPool()
     {
-        foreach (CraftableItem c in craftableItems) {
+        //Get items from Scriptable Object
+        foreach(ItemsScriptableObject.Items i in itemSO.OffensiveItems)
+        {
+            CraftableItem citem = new CraftableItem();
+            citem.name = i.name;
+            citem.gameObject = i.gameObject;
+            citem.numUses = i.numUses;
+            citem.effectAmt = i.effectAmt;
+            citem.type = i.type;
+            craftableItems.Add(citem);
+        }
+
+        foreach (ItemsScriptableObject.Items i in itemSO.DefensiveItems)
+        {
+            CraftableItem citem = new CraftableItem();
+            citem.name = i.name;
+            citem.gameObject = i.gameObject;
+            citem.numUses = i.numUses;
+            citem.effectAmt = i.effectAmt;
+            citem.type = i.type;
+            craftableItems.Add(citem);
+        }
+
+        foreach (ItemsScriptableObject.Items i in itemSO.UtilityItems)
+        {
+            CraftableItem citem = new CraftableItem();
+            citem.name = i.name;
+            citem.gameObject = i.gameObject;
+            citem.numUses = i.numUses;
+            citem.effectAmt = i.effectAmt;
+            citem.type = i.type;
+            craftableItems.Add(citem);
+        }
+
+
+        //Pool Items
+        foreach (CraftableItem c in craftableItems)
+        {
             for (int x = 0; x < GameManager.instance.numPlayers; x++)
             {
                 GameObject item = Instantiate(c.gameObject, Vector3.zero, Quaternion.identity, transform);
