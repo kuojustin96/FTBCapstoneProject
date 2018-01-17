@@ -15,9 +15,10 @@ MonoBehaviour:
   - name: Sword
     gameObject: {fileID: 1499481568326956, guid: dec0feca6422c834494917070d82f097,
       type: 2}
-    numUses: 1
+    numUses: 4
     effectAmt: 3
     type: 0
+    item: 2
   DefensiveItems:
   - name: Shield
     gameObject: {fileID: 1022292755540698, guid: 949fa2989cc4b3445a427988e4ce0789,
@@ -25,12 +26,14 @@ MonoBehaviour:
     numUses: 1
     effectAmt: 0
     type: 1
+    item: 7
   - name: Lego Wall
     gameObject: {fileID: 1758664529197830, guid: bcb4a0d0b6fe84644b90c83b4ae2a05c,
       type: 2}
     numUses: 1
     effectAmt: 5
     type: 1
+    item: 11
   UtilityItems:
   - name: Backpack
     gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,
@@ -38,9 +41,11 @@ MonoBehaviour:
     numUses: 1
     effectAmt: 10
     type: 2
+    item: 13
   - name: Magnet
     gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,
       type: 2}
     numUses: 1
     effectAmt: 3
     type: 2
+    item: 14

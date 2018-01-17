@@ -133,6 +133,7 @@ public class KuoController : MonoBehaviour {
 
     private IEnumerator StunPlayerCoroutine(float duration)
     {
+        Debug.Log(gameObject.name + " is stunned!");
         player.isStunned = true;
         rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(duration);
@@ -141,7 +142,7 @@ public class KuoController : MonoBehaviour {
 
     private IEnumerator UseBodySlam()
     {
-        Debug.Log("Used Body Slam");
+        Debug.Log("Use Body Slam");
         StartCoroutine(StunPlayerCoroutine(bodySlamStunDur / 2));
         player.usingItem = true;
         bodySlamCol.enabled = true;

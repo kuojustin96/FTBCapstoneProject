@@ -13,6 +13,7 @@ public class ItemsScriptableObject : ScriptableObject {
         public int numUses = 1;
         public float effectAmt = 1;
         public ItemType type;
+        public Item item;
     }
 
     public Items[] OffensiveItems;

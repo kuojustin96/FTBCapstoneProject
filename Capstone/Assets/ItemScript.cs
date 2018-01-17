@@ -7,9 +7,9 @@ public class ItemScript : MonoBehaviour {
     private float bodySlamDuration;
     private Collider itemCol;
 
-    private Dictionary<string, System.Action> OffensiveItems = new Dictionary<string, System.Action>();
-    private Dictionary<string, System.Action> DefensiveItems = new Dictionary<string, System.Action>();
-    private Dictionary<string, System.Action> UtilityItems = new Dictionary<string, System.Action>();
+    //private Dictionary<string, System.Action> OffensiveItems = new Dictionary<string, System.Action>();
+    //private Dictionary<string, System.Action> DefensiveItems = new Dictionary<string, System.Action>();
+    //private Dictionary<string, System.Action> UtilityItems = new Dictionary<string, System.Action>();
 
     private PlayerClass currentPlayer;
     private CraftingController.CraftableItem currentItem;
@@ -25,33 +25,33 @@ public class ItemScript : MonoBehaviour {
 
         // =========== OFFENSIVE ITEMS ===========
 
-        OffensiveItems.Add("Minigun", UseMinigun);
-        OffensiveItems.Add("Sniper Rifle", UseSniperRifle);
-        OffensiveItems.Add("Sword", UseSword);
-        OffensiveItems.Add("Grenade", UseGrenade);
-        OffensiveItems.Add("Scythe", UseScythe);
-        OffensiveItems.Add("Magic Staff", UseMagicStaff);
-        OffensiveItems.Add("Hand Cannon", UseHandCannon);
-        OffensiveItems.Add("FTB Cannon", UseFTBCannon);
-        OffensiveItems.Add("Fireball", UseFireball);
-        OffensiveItems.Add("Frost Beam", UseFrostBeam);
-        OffensiveItems.Add("Lightning", UseLightning);
+        //OffensiveItems.Add("Minigun", UseMinigun);
+        //OffensiveItems.Add("Sniper Rifle", UseSniperRifle);
+        //OffensiveItems.Add("Sword", UseSword);
+        //OffensiveItems.Add("Grenade", UseGrenade);
+        //OffensiveItems.Add("Scythe", UseScythe);
+        //OffensiveItems.Add("Magic Staff", UseMagicStaff);
+        //OffensiveItems.Add("Hand Cannon", UseHandCannon);
+        ////OffensiveItems.Add("FTB Cannon", UseFTBCannon);
+        ////OffensiveItems.Add("Fireball", UseFireball);
+        ////OffensiveItems.Add("Frost Beam", UseFrostBeam);
+        ////OffensiveItems.Add("Lightning", UseLightning);
 
-        // =========== DEFENSIVE ITEMS ===========
+        //// =========== DEFENSIVE ITEMS ===========
 
-        DefensiveItems.Add("Shield", UseShield);
-        DefensiveItems.Add("Mirror", UseMirror);
-        DefensiveItems.Add("Chewed Gum", UseChewedGum);
-        DefensiveItems.Add("Mouse Trap", UsedMouseTrap);
-        DefensiveItems.Add("Lego Wall", UseLegoWall);
+        //DefensiveItems.Add("Shield", UseShield);
+        //DefensiveItems.Add("Mirror", UseMirror);
+        //DefensiveItems.Add("Chewed Gum", UseChewedGum);
+        //DefensiveItems.Add("Mouse Trap", UsedMouseTrap);
+        //DefensiveItems.Add("Lego Wall", UseLegoWall);
 
-        // =========== UTILITY ITEMS ===========
+        //// =========== UTILITY ITEMS ===========
 
-        UtilityItems.Add("Grappling Hook", UseGrapplingHook);
-        UtilityItems.Add("Backpack", UseBackpack);
-        UtilityItems.Add("Magnet", UseMagnet);
-        UtilityItems.Add("Running Shoes", UseRunningShoes);
-        UtilityItems.Add("Breezy Jardons", UseBreezyJardons);
+        //UtilityItems.Add("Grappling Hook", UseGrapplingHook);
+        //UtilityItems.Add("Backpack", UseBackpack);
+        //UtilityItems.Add("Magnet", UseMagnet);
+        //UtilityItems.Add("Running Shoes", UseRunningShoes);
+        //UtilityItems.Add("Breezy Jardons", UseBreezyJardons);
 
     }
 
@@ -62,7 +62,7 @@ public class ItemScript : MonoBehaviour {
         bodySlamDuration = transform.parent.GetComponent<KuoController>().bodySlamStunDur;
     }
 
-	public void UseItem(ItemType type, string name, PlayerClass player)
+	public void UseItem(ItemType type, Item item, PlayerClass player)
     {
         currentPlayer = player;
         currentItem = currentPlayer.item;
@@ -70,20 +70,99 @@ public class ItemScript : MonoBehaviour {
         switch (type)
         {
             case ItemType.Offensive:
-                OffensiveItems[name].Invoke();
+                //OffensiveItems[name].Invoke();
+                switch (item)
+                {
+                    case Item.Minigun:
+                        Debug.Log("Used Minigun");
+                        break;
+
+                    case Item.SniperRifle:
+                        Debug.Log("Used Sniper Rifle");
+                        break;
+
+                    case Item.Sword:
+                        Debug.Log("Used Sword");
+                        StartCoroutine(UseSwordCoroutine());
+                        break;
+
+                    case Item.Grenade:
+                        Debug.Log("Used Grenade");
+                        break;
+
+                    case Item.Scythe:
+                        Debug.Log("Used Scythe");
+                        break;
+
+                    case Item.MagicStaff:
+                        Debug.Log("Used Magic Staff");
+                        break;
+
+                    case Item.HandCannon:
+                        Debug.Log("Used Hand Cannon");
+                        break;
+                }
                 break;
 
             case ItemType.Defensive:
-                DefensiveItems[name].Invoke();
+                //DefensiveItems[name].Invoke();
+                switch (item)
+                {
+                    case Item.Shield:
+                        Debug.Log("Used Shield");
+                        break;
+
+                    case Item.Mirror:
+                        Debug.Log("Used Mirror");
+                        break;
+
+                    case Item.ChewedGum:
+                        Debug.Log("Used Chewed Gum");
+                        break;
+
+                    case Item.MouseTrap:
+                        Debug.Log("Used Mouse Trap");
+                        break;
+
+                    case Item.LegoWall:
+                        Debug.Log("Used Lego Wall");
+                        StartCoroutine(LegoWallCoroutine());
+                        break;
+                }
                 break;
 
             case ItemType.Utility:
-                UtilityItems[name].Invoke();
+                //UtilityItems[name].Invoke();
+                switch (item)
+                {
+                    case Item.GrapplingHook:
+                        Debug.Log("Used Grappling Hook");
+                        break;
+
+                    case Item.Backpack:
+                        Debug.Log("Used Backpack");
+                        currentPlayer.maxCanCarry += (int)currentPlayer.item.effectAmt;
+                        CheckItemUses();
+                        break;
+
+                    case Item.Magnet:
+                        Debug.Log("Used Magnet");
+                        StartCoroutine(UseMagnetCoroutine());
+                        break;
+
+                    case Item.RunningShoes:
+                        Debug.Log("Used Running Shoes");
+                        break;
+
+                    case Item.BreezyJardons:
+                        Debug.Log("Used Breezy Jardon's");
+                        break;
+                }
                 break;
         }
     }
 
-
+    #region Offensive Items
     // =========== OFFENSIVE ITEMS ===========
 
     public void UseMinigun()
@@ -99,6 +178,16 @@ public class ItemScript : MonoBehaviour {
     public void UseSword()
     {
         Debug.Log("Used Sword");
+        StartCoroutine(UseSwordCoroutine());
+    }
+
+    private IEnumerator UseSwordCoroutine()
+    {
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x + 90, transform.eulerAngles.y, transform.eulerAngles.z);
+        itemCol.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x - 90, transform.eulerAngles.y, transform.eulerAngles.z);
+        itemCol.enabled = false;
     }
 
     public void UseGrenade()
@@ -120,29 +209,9 @@ public class ItemScript : MonoBehaviour {
     {
         Debug.Log("Used Hand Cannon");
     }
+    #endregion
 
-    public void UseFTBCannon()
-    {
-        Debug.Log("Used FTB Cannon");
-    }
-
-    public void UseFireball()
-    {
-        Debug.Log("Used Fireball");
-    }
-
-    public void UseFrostBeam()
-    {
-        Debug.Log("Used Frost Beam");
-    }
-
-    public void UseLightning()
-    {
-        Debug.Log("Used Lightning");
-    }
-
-
-
+    #region Defensive Items
     // =========== DEFENSIVE ITEMS ===========
 
     public void UseShield()
@@ -165,12 +234,6 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Mouse Trap");
     }
 
-    public void UseLegoWall()
-    {
-        Debug.Log("Used Lego Wall");
-        StartCoroutine(LegoWallCoroutine());
-    }
-
     private IEnumerator LegoWallCoroutine()
     {
         currentPlayer.usingItem = true;
@@ -178,49 +241,38 @@ public class ItemScript : MonoBehaviour {
         GameObject wall = currentPlayer.item.gameObject;
         wall.transform.parent = null;
         wall.transform.position = new Vector3(currentPlayer.playerGO.transform.position.x, currentPlayer.playerGO.transform.position.y - 2, currentPlayer.playerGO.transform.position.z + 2);
+        Vector3 saveWallPos = wall.transform.position;
+        currentPlayer.usingItem = false;
 
         while (wall.transform.position.y < currentPlayer.playerGO.transform.position.y)
         {
-            wall.transform.Translate(Vector3.up * 0.1f);
+            wall.transform.Translate(Vector3.up * 0.2f);
             yield return null;
         }
 
-        currentPlayer.usingItem = false;
+
         currentPlayer.item = null;
         currentPlayer.itemNum = 0;
 
         yield return new WaitForSeconds(currentItem.effectAmt);
 
-        while (wall.transform.position.y > wall.transform.position.y - 2)
+        while (wall.transform.position.y > saveWallPos.y)
         {
-            wall.transform.Translate(Vector3.down * 0.1f);
+            wall.transform.Translate(Vector3.down * 0.2f);
             yield return null;
         }
 
         itemCol.enabled = false;
         CheckItemUses(false);
     }
+    #endregion
 
-
+    #region Utility Items
     // =========== UTILITY ITEMS ===========
 
     public void UseGrapplingHook()
     {
         Debug.Log("Used Grappling Hook");
-    }
-
-    public void UseBackpack()
-    {
-        Debug.Log("Used Backpack");
-        currentPlayer.maxCanCarry += (int) currentPlayer.item.effectAmt;
-
-        CheckItemUses();
-    }
-
-    public void UseMagnet()
-    {
-        Debug.Log("Used Magnet");
-        StartCoroutine(UseMagnetCoroutine());
     }
 
     private IEnumerator UseMagnetCoroutine()
@@ -244,11 +296,13 @@ public class ItemScript : MonoBehaviour {
     {
         Debug.Log("Used Breezy Jardon's");
     }
+    #endregion
 
+    //-------------------------------------------------------
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && other.gameObject != currentPlayer.playerGO)
         {
             //Stun player
             if (currentPlayer.item != null)
@@ -262,7 +316,7 @@ public class ItemScript : MonoBehaviour {
 
     private void CheckItemUses(bool setItemNull = true)
     {
-        if (currentPlayer.item.usesLeft <= 0)
+        if (currentItem.usesLeft <= 0)
         {
             CraftingController.instance.DisableItem(currentItem, currentItemNum);
 

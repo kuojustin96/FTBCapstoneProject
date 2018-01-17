@@ -9,6 +9,27 @@ public enum ItemType
     Utility = 2,
 }
 
+public enum Item
+{
+    Minigun = 0,
+    SniperRifle = 1,
+    Sword = 2,
+    Grenade = 3,
+    Scythe = 4,
+    MagicStaff = 5,
+    HandCannon = 6,
+    Shield = 7,
+    Mirror = 8,
+    ChewedGum = 9,
+    MouseTrap = 10,
+    LegoWall = 11,
+    GrapplingHook = 12,
+    Backpack = 13,
+    Magnet = 14,
+    RunningShoes = 15,
+    BreezyJardons = 16,
+}
+
 public class CraftingController : MonoBehaviour {
 
     public static CraftingController instance = null;
@@ -26,14 +47,15 @@ public class CraftingController : MonoBehaviour {
         public int usesLeft;
         public float effectAmt = 1;
         public ItemType type;
+        public Item item;
 
-        [HideInInspector]
+        //[HideInInspector]
         public List<CraftableItem> inactiveItems = new List<CraftableItem>();
-        [HideInInspector]
+        //[HideInInspector]
         public List<CraftableItem> activeItems = new List<CraftableItem>();
     }
 
-    private List<CraftableItem> craftableItems = new List<CraftableItem>();
+    //private List<CraftableItem> craftableItems = new List<CraftableItem>();
 
     [HideInInspector]
     public List<CraftableItem> OffensiveItems = new List<CraftableItem>();
@@ -116,6 +138,7 @@ public class CraftingController : MonoBehaviour {
         item.gameObject.SetActive(false);
         item.gameObject.transform.position = Vector3.zero;
         item.gameObject.transform.parent = transform;
+        item.gameObject.GetComponent<Collider>().enabled = false;
         item.usesLeft = item.numUses;
 
         switch (item.type)
@@ -142,64 +165,91 @@ public class CraftingController : MonoBehaviour {
         //Get items from Scriptable Object
         foreach(ItemsScriptableObject.Items i in itemSO.OffensiveItems)
         {
-            CraftableItem citem = new CraftableItem();
-            citem.name = i.name;
-            citem.gameObject = i.gameObject;
-            citem.numUses = i.numUses;
-            citem.effectAmt = i.effectAmt;
-            citem.type = i.type;
-            craftableItems.Add(citem);
+            for(int x = 0; x < GameManager.instance.numPlayers ; x++)
+            {
+                GameObject item = Instantiate(i.gameObject, Vector3.zero, Quaternion.identity, transform);
+                item.SetActive(false);
+                CraftableItem citem = new CraftableItem();
+                citem.name = i.name;
+                citem.gameObject = item;
+                citem.numUses = i.numUses;
+                citem.usesLeft = i.numUses;
+                citem.effectAmt = i.effectAmt;
+                citem.type = i.type;
+                citem.item = i.item;
+                //craftableItems.Add(citem);
+                citem.inactiveItems.Add(citem);
+                OffensiveItems.Add(citem);
+            }
         }
 
         foreach (ItemsScriptableObject.Items i in itemSO.DefensiveItems)
         {
-            CraftableItem citem = new CraftableItem();
-            citem.name = i.name;
-            citem.gameObject = i.gameObject;
-            citem.numUses = i.numUses;
-            citem.effectAmt = i.effectAmt;
-            citem.type = i.type;
-            craftableItems.Add(citem);
+            for (int x = 0; x < GameManager.instance.numPlayers + 1; x++)
+            {
+                GameObject item = Instantiate(i.gameObject, Vector3.zero, Quaternion.identity, transform);
+                item.SetActive(false);
+                CraftableItem citem = new CraftableItem();
+                citem.name = i.name;
+                citem.gameObject = item;
+                citem.numUses = i.numUses;
+                citem.usesLeft = i.numUses;
+                citem.effectAmt = i.effectAmt;
+                citem.type = i.type;
+                citem.item = i.item;
+                //craftableItems.Add(citem);
+                citem.inactiveItems.Add(citem);
+                DefensiveItems.Add(citem);
+            }
         }
 
         foreach (ItemsScriptableObject.Items i in itemSO.UtilityItems)
         {
-            CraftableItem citem = new CraftableItem();
-            citem.name = i.name;
-            citem.gameObject = i.gameObject;
-            citem.numUses = i.numUses;
-            citem.effectAmt = i.effectAmt;
-            citem.type = i.type;
-            craftableItems.Add(citem);
-        }
-
-
-        //Pool Items
-        foreach (CraftableItem c in craftableItems)
-        {
-            for (int x = 0; x < GameManager.instance.numPlayers; x++)
+            for (int x = 0; x < GameManager.instance.numPlayers + 1; x++)
             {
-                GameObject item = Instantiate(c.gameObject, Vector3.zero, Quaternion.identity, transform);
+                GameObject item = Instantiate(i.gameObject, Vector3.zero, Quaternion.identity, transform);
                 item.SetActive(false);
-                c.gameObject = item;
-                c.usesLeft = c.numUses;
-                c.inactiveItems.Add(c);
-
-                switch (c.type)
-                {
-                    case ItemType.Offensive:
-                        OffensiveItems.Add(c);
-                        break;
-
-                    case ItemType.Defensive:
-                        DefensiveItems.Add(c);
-                        break;
-
-                    case ItemType.Utility:
-                        UtilityItems.Add(c);
-                        break;
-                }
+                CraftableItem citem = new CraftableItem();
+                citem.name = i.name;
+                citem.gameObject = item;
+                citem.numUses = i.numUses;
+                citem.usesLeft = i.numUses;
+                citem.effectAmt = i.effectAmt;
+                citem.type = i.type;
+                citem.item = i.item;
+                //craftableItems.Add(citem);
+                citem.inactiveItems.Add(citem);
+                UtilityItems.Add(citem);
             }
         }
+
+
+        ////Pool Items
+        //foreach (CraftableItem c in craftableItems)
+        //{
+        //    for (int x = 0; x < GameManager.instance.numPlayers; x++)
+        //    {
+        //        GameObject item = Instantiate(c.gameObject, Vector3.zero, Quaternion.identity, transform);
+        //        item.SetActive(false);
+        //        c.gameObject = item;
+        //        c.usesLeft = c.numUses;
+        //        c.inactiveItems.Add(c);
+
+        //        switch (c.type)
+        //        {
+        //            case ItemType.Offensive:
+        //                OffensiveItems.Add(c);
+        //                break;
+
+        //            case ItemType.Defensive:
+        //                DefensiveItems.Add(c);
+        //                break;
+
+        //            case ItemType.Utility:
+        //                UtilityItems.Add(c);
+        //                break;
+        //        }
+        //    }
+        //}
     }
 }
