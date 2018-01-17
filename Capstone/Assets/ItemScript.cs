@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemScript : MonoBehaviour {
@@ -83,7 +82,7 @@ public class ItemScript : MonoBehaviour {
 
                     case Item.Sword:
                         Debug.Log("Used Sword");
-                        StartCoroutine(UseSwordCoroutine());
+                        StartCoroutine(UseSword());
                         break;
 
                     case Item.Grenade:
@@ -118,6 +117,7 @@ public class ItemScript : MonoBehaviour {
 
                     case Item.ChewedGum:
                         Debug.Log("Used Chewed Gum");
+                        StartCoroutine(UseChewedGum());
                         break;
 
                     case Item.MouseTrap:
@@ -126,7 +126,7 @@ public class ItemScript : MonoBehaviour {
 
                     case Item.LegoWall:
                         Debug.Log("Used Lego Wall");
-                        StartCoroutine(LegoWallCoroutine());
+                        StartCoroutine(LegoWall());
                         break;
                 }
                 break;
@@ -147,7 +147,7 @@ public class ItemScript : MonoBehaviour {
 
                     case Item.Magnet:
                         Debug.Log("Used Magnet");
-                        StartCoroutine(UseMagnetCoroutine());
+                        StartCoroutine(UseMagnet());
                         break;
 
                     case Item.RunningShoes:
@@ -175,13 +175,7 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Sniper Rifle");
     }
 
-    public void UseSword()
-    {
-        Debug.Log("Used Sword");
-        StartCoroutine(UseSwordCoroutine());
-    }
-
-    private IEnumerator UseSwordCoroutine()
+    private IEnumerator UseSword()
     {
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + 90, transform.eulerAngles.y, transform.eulerAngles.z);
         itemCol.enabled = true;
@@ -224,9 +218,18 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Mirror");
     }
 
-    public void UseChewedGum()
+    public IEnumerator UseChewedGum()
     {
         Debug.Log("Used Chewed Gum");
+        GameObject chewingGum = currentItem.gameObject;
+        GameObject player = currentPlayer.playerGO;
+        chewingGum.transform.parent = null;
+        chewingGum.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - player.transform.localScale.y / 2, player.transform.position.z - 3);
+
+        itemCol.enabled = true;
+        yield return new WaitForSeconds(8f);
+        itemCol.enabled = false;
+        CheckItemUses(false);
     }
 
     public void UsedMouseTrap()
@@ -234,11 +237,11 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Mouse Trap");
     }
 
-    private IEnumerator LegoWallCoroutine()
+    private IEnumerator LegoWall()
     {
         currentPlayer.usingItem = true;
         itemCol.enabled = true;
-        GameObject wall = currentPlayer.item.gameObject;
+        GameObject wall = currentItem.gameObject;
         wall.transform.parent = null;
         wall.transform.position = new Vector3(currentPlayer.playerGO.transform.position.x, currentPlayer.playerGO.transform.position.y - 2, currentPlayer.playerGO.transform.position.z + 2);
         Vector3 saveWallPos = wall.transform.position;
@@ -275,7 +278,7 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Grappling Hook");
     }
 
-    private IEnumerator UseMagnetCoroutine()
+    private IEnumerator UseMagnet()
     {
         currentPlayer.usingItem = true;
         Transform pickUpGO = currentPlayer.playerGO.transform.GetChild(0);

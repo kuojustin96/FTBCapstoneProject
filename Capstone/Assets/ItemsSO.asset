@@ -34,6 +34,13 @@ MonoBehaviour:
     effectAmt: 5
     type: 1
     item: 11
+  - name: Chewing Gum
+    gameObject: {fileID: 1412247563062796, guid: 4cf3b7598b5868540806e1566fae42f1,
+      type: 2}
+    numUses: 1
+    effectAmt: 5
+    type: 1
+    item: 9
   UtilityItems:
   - name: Backpack
     gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,
