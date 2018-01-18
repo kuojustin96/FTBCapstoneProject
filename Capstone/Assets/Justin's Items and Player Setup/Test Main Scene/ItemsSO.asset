@@ -41,6 +41,13 @@ MonoBehaviour:
     effectAmt: 5
     type: 1
     item: 9
+  - name: Mouse Trap
+    gameObject: {fileID: 1599124681878180, guid: fdac0e7067c44eb4485f8ab65d629b33,
+      type: 2}
+    numUses: 1
+    effectAmt: 6
+    type: 1
+    item: 10
   UtilityItems:
   - name: Backpack
     gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,

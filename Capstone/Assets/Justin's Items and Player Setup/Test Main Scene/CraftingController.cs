@@ -11,13 +11,13 @@ public enum ItemType
 
 public enum Item
 {
-    Minigun = 0,
+    NerfGun = 0,
     SniperRifle = 1,
     Sword = 2,
     Grenade = 3,
     Scythe = 4,
     MagicStaff = 5,
-    HandCannon = 6,
+    Shotgun = 6,
     Shield = 7,
     Mirror = 8,
     ChewedGum = 9,
@@ -108,6 +108,11 @@ public class CraftingController : MonoBehaviour {
 
                 if (DefensiveItems[x].inactiveItems.Count > 0)
                 {
+                    if (DefensiveItems[x].item == Item.Mirror || DefensiveItems[x].item == Item.Shield)
+                        DefensiveItems[x].gameObject.GetComponent<Collider>().enabled = true;
+                    else
+                        DefensiveItems[x].gameObject.GetComponent<Collider>().enabled = false;
+
                     player.SetItem(player, DefensiveItems[x].inactiveItems[0], x);
                     DefensiveItems[x].activeItems.Add(DefensiveItems[x].inactiveItems[0]);
                     DefensiveItems[x].inactiveItems.Remove(DefensiveItems[x].inactiveItems[0]);
@@ -136,6 +141,12 @@ public class CraftingController : MonoBehaviour {
     public void DisableItem(CraftableItem item, int itemNum)
     {
         item.gameObject.SetActive(false);
+
+        if(item.item == Item.Mirror || item.item == Item.Shield)
+        {
+            item.gameObject.GetComponent<Collider>().enabled = false;
+        }
+
         item.gameObject.transform.position = Vector3.zero;
         item.gameObject.transform.parent = transform;
         item.gameObject.GetComponent<Collider>().enabled = false;
@@ -165,7 +176,7 @@ public class CraftingController : MonoBehaviour {
         //Get items from Scriptable Object
         foreach(ItemsScriptableObject.Items i in itemSO.OffensiveItems)
         {
-            for(int x = 0; x < GameManager.instance.numPlayers ; x++)
+            for(int x = 0; x < GameManager.instance.numPlayers * 2; x++)
             {
                 GameObject item = Instantiate(i.gameObject, Vector3.zero, Quaternion.identity, transform);
                 item.SetActive(false);
@@ -185,7 +196,7 @@ public class CraftingController : MonoBehaviour {
 
         foreach (ItemsScriptableObject.Items i in itemSO.DefensiveItems)
         {
-            for (int x = 0; x < GameManager.instance.numPlayers + 1; x++)
+            for (int x = 0; x < GameManager.instance.numPlayers * 2; x++)
             {
                 GameObject item = Instantiate(i.gameObject, Vector3.zero, Quaternion.identity, transform);
                 item.SetActive(false);
@@ -205,7 +216,7 @@ public class CraftingController : MonoBehaviour {
 
         foreach (ItemsScriptableObject.Items i in itemSO.UtilityItems)
         {
-            for (int x = 0; x < GameManager.instance.numPlayers + 1; x++)
+            for (int x = 0; x < GameManager.instance.numPlayers * 2; x++)
             {
                 GameObject item = Instantiate(i.gameObject, Vector3.zero, Quaternion.identity, transform);
                 item.SetActive(false);
@@ -222,34 +233,5 @@ public class CraftingController : MonoBehaviour {
                 UtilityItems.Add(citem);
             }
         }
-
-
-        ////Pool Items
-        //foreach (CraftableItem c in craftableItems)
-        //{
-        //    for (int x = 0; x < GameManager.instance.numPlayers; x++)
-        //    {
-        //        GameObject item = Instantiate(c.gameObject, Vector3.zero, Quaternion.identity, transform);
-        //        item.SetActive(false);
-        //        c.gameObject = item;
-        //        c.usesLeft = c.numUses;
-        //        c.inactiveItems.Add(c);
-
-        //        switch (c.type)
-        //        {
-        //            case ItemType.Offensive:
-        //                OffensiveItems.Add(c);
-        //                break;
-
-        //            case ItemType.Defensive:
-        //                DefensiveItems.Add(c);
-        //                break;
-
-        //            case ItemType.Utility:
-        //                UtilityItems.Add(c);
-        //                break;
-        //        }
-        //    }
-        //}
     }
 }

@@ -6,58 +6,14 @@ public class ItemScript : MonoBehaviour {
     private float bodySlamDuration;
     private Collider itemCol;
 
-    //private Dictionary<string, System.Action> OffensiveItems = new Dictionary<string, System.Action>();
-    //private Dictionary<string, System.Action> DefensiveItems = new Dictionary<string, System.Action>();
-    //private Dictionary<string, System.Action> UtilityItems = new Dictionary<string, System.Action>();
-
     private PlayerClass currentPlayer;
     private CraftingController.CraftableItem currentItem;
     private int currentItemNum;
     private KuoController playerKC;
 
-    void Awake()
-    {
-        // =========== IMPORTANT ===========
-        //STRINGS MUST BE THE SAME AS THE ITEM NAME GIVEN IN THE CRAFTING CONTROLLER
-        //SCRIPT WILL BREAK IF NOT CORRECT
-
-
-        // =========== OFFENSIVE ITEMS ===========
-
-        //OffensiveItems.Add("Minigun", UseMinigun);
-        //OffensiveItems.Add("Sniper Rifle", UseSniperRifle);
-        //OffensiveItems.Add("Sword", UseSword);
-        //OffensiveItems.Add("Grenade", UseGrenade);
-        //OffensiveItems.Add("Scythe", UseScythe);
-        //OffensiveItems.Add("Magic Staff", UseMagicStaff);
-        //OffensiveItems.Add("Hand Cannon", UseHandCannon);
-        ////OffensiveItems.Add("FTB Cannon", UseFTBCannon);
-        ////OffensiveItems.Add("Fireball", UseFireball);
-        ////OffensiveItems.Add("Frost Beam", UseFrostBeam);
-        ////OffensiveItems.Add("Lightning", UseLightning);
-
-        //// =========== DEFENSIVE ITEMS ===========
-
-        //DefensiveItems.Add("Shield", UseShield);
-        //DefensiveItems.Add("Mirror", UseMirror);
-        //DefensiveItems.Add("Chewed Gum", UseChewedGum);
-        //DefensiveItems.Add("Mouse Trap", UsedMouseTrap);
-        //DefensiveItems.Add("Lego Wall", UseLegoWall);
-
-        //// =========== UTILITY ITEMS ===========
-
-        //UtilityItems.Add("Grappling Hook", UseGrapplingHook);
-        //UtilityItems.Add("Backpack", UseBackpack);
-        //UtilityItems.Add("Magnet", UseMagnet);
-        //UtilityItems.Add("Running Shoes", UseRunningShoes);
-        //UtilityItems.Add("Breezy Jardons", UseBreezyJardons);
-
-    }
-
     void Start()
     {
         itemCol = GetComponent<Collider>();
-        itemCol.enabled = false;
         bodySlamDuration = transform.parent.GetComponent<KuoController>().bodySlamStunDur;
     }
 
@@ -69,15 +25,10 @@ public class ItemScript : MonoBehaviour {
         switch (type)
         {
             case ItemType.Offensive:
-                //OffensiveItems[name].Invoke();
                 switch (item)
                 {
-                    case Item.Minigun:
+                    case Item.NerfGun:
                         Debug.Log("Used Minigun");
-                        break;
-
-                    case Item.SniperRifle:
-                        Debug.Log("Used Sniper Rifle");
                         break;
 
                     case Item.Sword:
@@ -97,14 +48,13 @@ public class ItemScript : MonoBehaviour {
                         Debug.Log("Used Magic Staff");
                         break;
 
-                    case Item.HandCannon:
+                    case Item.Shotgun:
                         Debug.Log("Used Hand Cannon");
                         break;
                 }
                 break;
 
             case ItemType.Defensive:
-                //DefensiveItems[name].Invoke();
                 switch (item)
                 {
                     case Item.Shield:
@@ -122,6 +72,7 @@ public class ItemScript : MonoBehaviour {
 
                     case Item.MouseTrap:
                         Debug.Log("Used Mouse Trap");
+                        UsedMouseTrap();
                         break;
 
                     case Item.LegoWall:
@@ -132,7 +83,6 @@ public class ItemScript : MonoBehaviour {
                 break;
 
             case ItemType.Utility:
-                //UtilityItems[name].Invoke();
                 switch (item)
                 {
                     case Item.GrapplingHook:
@@ -165,14 +115,9 @@ public class ItemScript : MonoBehaviour {
     #region Offensive Items
     // =========== OFFENSIVE ITEMS ===========
 
-    public void UseMinigun()
+    public void UseNerfGun()
     {
-        Debug.Log("Used Minigun");
-    }
-
-    public void UseSniperRifle()
-    {
-        Debug.Log("Used Sniper Rifle");
+        Debug.Log("Used Nerf Gun");
     }
 
     private IEnumerator UseSword()
@@ -199,9 +144,9 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Magic Staff");
     }
 
-    public void UseHandCannon()
+    public void UseShotgun()
     {
-        Debug.Log("Used Hand Cannon");
+        Debug.Log("Used Shotgun");
     }
     #endregion
 
@@ -227,7 +172,7 @@ public class ItemScript : MonoBehaviour {
         chewingGum.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - player.transform.localScale.y / 2, player.transform.position.z - 3);
 
         itemCol.enabled = true;
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(8f); //Length item is active for
         itemCol.enabled = false;
         CheckItemUses(false);
     }
@@ -235,6 +180,11 @@ public class ItemScript : MonoBehaviour {
     public void UsedMouseTrap()
     {
         Debug.Log("Used Mouse Trap");
+        GameObject chewingGum = currentItem.gameObject;
+        GameObject player = currentPlayer.playerGO;
+        chewingGum.transform.parent = null;
+        chewingGum.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - player.transform.localScale.y / 2, player.transform.position.z - 3);
+        itemCol.enabled = true;
     }
 
     private IEnumerator LegoWall()
@@ -305,13 +255,37 @@ public class ItemScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && other.gameObject != currentPlayer.playerGO)
+        if(currentPlayer == null)
         {
-            //Stun player
-            if (currentPlayer.item != null)
-                other.gameObject.GetComponent<KuoController>().StunPlayer(currentPlayer.item.effectAmt);
-            else
-                other.gameObject.GetComponent<KuoController>().StunPlayer(bodySlamDuration);
+            return;
+        }
+
+        if (other.gameObject != currentPlayer.playerGO)
+        {
+            if(currentItem.item == Item.Sword && other.gameObject.tag == "MeleeDefensiveShield")
+            {
+                return;
+            }
+
+            if ((currentItem.item == Item.NerfGun || currentItem.item == Item.Shotgun) && other.gameObject.tag == "RangedDefensiveShield")
+            {
+                return;
+            }
+
+            if (other.gameObject.tag == "Player")
+            {
+                //Stun player
+                if (currentPlayer.item != null)
+                    other.gameObject.GetComponent<KuoController>().StunPlayer(currentPlayer.item.effectAmt);
+                else
+                    other.gameObject.GetComponent<KuoController>().StunPlayer(bodySlamDuration);
+
+                if (currentItem.item == Item.MouseTrap)
+                {
+                    CheckItemUses(false);
+                    itemCol.enabled = false;
+                }
+            }
         }
     }
 
