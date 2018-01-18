@@ -90,14 +90,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CraftingController.cs" />
     <Compile Include="Assets\EnableAllThisShit.cs" />
     <Compile Include="Assets\FadeManager.cs" />
-    <Compile Include="Assets\GameManager.cs" />
-    <Compile Include="Assets\GameSettings.cs" />
-    <Compile Include="Assets\ItemScript.cs" />
-    <Compile Include="Assets\ItemsScriptableObject.cs" />
-    <Compile Include="Assets\KuoController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\GameSettings.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\MainMenuManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\CraftingController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\GameManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ItemScript.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ItemsScriptableObject.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\KuoController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\PlayerClass.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\PlayerSugarPickup.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
     <Compile Include="Assets\Lobby\Scripts\DraggablePanel.cs" />
     <Compile Include="Assets\Lobby\Scripts\EventSystemChecker.cs" />
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
@@ -110,23 +115,18 @@
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerList.cs" />
     <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
-    <Compile Include="Assets\MainMenuManager.cs" />
     <Compile Include="Assets\MusicManager.cs" />
     <Compile Include="Assets\NetScript\CameraChec.cs" />
     <Compile Include="Assets\NetScript\NetManager.cs" />
     <Compile Include="Assets\NetScript\NetMouseLook.cs" />
     <Compile Include="Assets\NetScript\NetMoveTest.cs" />
     <Compile Include="Assets\NetScript\Spawning.cs" />
-    <Compile Include="Assets\PlayerClass.cs" />
-    <Compile Include="Assets\PlayerSugarPickup.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\NetworkAsteroid.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\NetworkGameManager.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\NetworkLobbyHook.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\NetworkPlayerValues.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\NetworkSpaceship.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\NetworkSpaceshipBullet.cs" />
-    <Compile Include="Assets\ScoreController.cs" />
-    <Compile Include="Assets\SimpleRotate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
