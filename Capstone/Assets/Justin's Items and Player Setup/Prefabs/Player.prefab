@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4001359707731352}
   - component: {fileID: 135171994666183128}
   - component: {fileID: 114069580120048670}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sugar Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4625783459908512}
   - component: {fileID: 65737218487303028}
   - component: {fileID: 114818680086274830}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bodyslam Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,6 +309,7 @@ MonoBehaviour:
     usingItem: 0
   bodySlamStunDur: 4
   bodySlamCol: {fileID: 65737218487303028}
+  psp: {fileID: 114069580120048670}
   timeToCraft: 3
   CraftingBar: {fileID: 114272493238921806}
 --- !u!114 &114621234190955028

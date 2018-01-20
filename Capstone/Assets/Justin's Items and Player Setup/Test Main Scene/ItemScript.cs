@@ -27,7 +27,7 @@ public class ItemScript : MonoBehaviour {
             case ItemType.Offensive:
                 switch (item)
                 {
-                    case Item.NerfGun:
+                    case Item.Fan:
                         Debug.Log("Used Minigun");
                         break;
 
@@ -46,6 +46,7 @@ public class ItemScript : MonoBehaviour {
 
                     case Item.MagicStaff:
                         Debug.Log("Used Magic Staff");
+                        UseMagicStaff();
                         break;
 
                     case Item.Shotgun:
@@ -58,11 +59,11 @@ public class ItemScript : MonoBehaviour {
                 switch (item)
                 {
                     case Item.Shield:
-                        Debug.Log("Used Shield");
+                        //Debug.Log("Used Shield");
                         break;
 
                     case Item.Mirror:
-                        Debug.Log("Used Mirror");
+                        //Debug.Log("Used Mirror");
                         break;
 
                     case Item.ChewedGum:
@@ -141,7 +142,24 @@ public class ItemScript : MonoBehaviour {
 
     public void UseMagicStaff()
     {
-        Debug.Log("Used Magic Staff");
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.forward, out hit, 5f))
+        {
+            if(hit.collider.tag == "Player")
+            {
+                KuoController kc = hit.collider.GetComponent<KuoController>();
+                if (kc.player.item != null)
+                {
+                    if (kc.player.item.item != Item.Mirror)
+                        kc.StunPlayer(currentItem.effectAmt);
+                    else
+                        kc.player.CheckedRangedShield();
+                } else
+                {
+                    kc.StunPlayer(currentItem.effectAmt);
+                }
+            }
+        }
     }
 
     public void UseShotgun()
@@ -264,13 +282,17 @@ public class ItemScript : MonoBehaviour {
         {
             if(currentItem.item == Item.Sword && other.gameObject.tag == "MeleeDefensiveShield")
             {
+                currentItem.usesLeft--;
+                CheckItemUses();
                 return;
             }
 
-            if ((currentItem.item == Item.NerfGun || currentItem.item == Item.Shotgun) && other.gameObject.tag == "RangedDefensiveShield")
-            {
-                return;
-            }
+            //if ((currentItem.item == Item.NerfGun || currentItem.item == Item.Shotgun) && other.gameObject.tag == "RangedDefensiveShield")
+            //{
+            //    currentItem.usesLeft--;
+            //    CheckItemUses();
+            //    return;
+            //}
 
             if (other.gameObject.tag == "Player")
             {

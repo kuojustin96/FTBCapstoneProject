@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     public List<GameObject> DropoffPoints = new List<GameObject>();
     public List<PlayerClass> playerList = new List<PlayerClass>();
 
+    public Dictionary<GameObject, PlayerClass> playerDropOffDict = new Dictionary<GameObject, PlayerClass>();
+
     [HideInInspector]
     public int numPlayers;
 
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour {
             ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
             player.GetComponent<KuoController>().player = ply;
             playerList.Add(ply);
+            playerDropOffDict.Add(DropoffPoints[x], ply);
 
             ScoreController.instance.SetUpScoreController(x);
         }
@@ -69,5 +72,10 @@ public class GameManager : MonoBehaviour {
     public PlayerClass GetPlayer(int playerNum)
     {
         return playerList[playerNum];
+    }
+
+    public PlayerClass GetPlayerFromDropoff(GameObject dropoffPoint)
+    {
+        return playerDropOffDict[dropoffPoint];
     }
 }

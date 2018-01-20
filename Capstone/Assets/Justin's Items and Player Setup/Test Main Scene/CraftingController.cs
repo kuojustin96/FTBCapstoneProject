@@ -11,7 +11,7 @@ public enum ItemType
 
 public enum Item
 {
-    NerfGun = 0,
+    Fan = 0,
     SniperRifle = 1,
     Sword = 2,
     Grenade = 3,

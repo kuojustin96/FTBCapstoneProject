@@ -8,7 +8,7 @@ public class PlayerSugarPickup : MonoBehaviour {
     private float sugarPickupSpeed;
     private float dropoffDelay;
     private List<GameObject> sugarInBackpack = new List<GameObject>();
-    private bool runDropoffAni = false;
+    private bool runAnimation = false;
 
 	// Use this for initialization
 	void Start () {
@@ -37,15 +37,19 @@ public class PlayerSugarPickup : MonoBehaviour {
 
         if (other.tag == "Dropoff Point")
         {
-            if (player.dropoffPoint == other.gameObject)
+            runAnimation = true;
+            if (player.dropoffPoint == other.gameObject) //If player owns this dropoff point
             {
                 //Debug.Log(sugarInBackpack.Count);
                 if (sugarInBackpack.Count > 0)
                 {
-                    runDropoffAni = true;
+                    //runAnimation = true;
                     StartCoroutine(DropoffSugarAni(other.gameObject));
                 }
                 return;
+            } else //If player does not own this dropoff point
+            {
+                StartCoroutine(StealSugarAni(other.gameObject));
             }
         }
     }
@@ -54,11 +58,12 @@ public class PlayerSugarPickup : MonoBehaviour {
     {
         if (other.tag == "Dropoff Point")
         {
-            if (player.dropoffPoint == other.gameObject)
-            {
-                runDropoffAni = false;
-                return;
-            }
+            runAnimation = false;
+            //if (player.dropoffPoint == other.gameObject)
+            //{
+            //    runAnimation = false;
+            //    return;
+            //}
         }
     }
 
@@ -68,6 +73,23 @@ public class PlayerSugarPickup : MonoBehaviour {
         {
             //Breaks if you spam the drop button
             StartCoroutine(DropSugarAni());
+        }
+    }
+
+    public void StunDropSugar()
+    {
+        if (sugarInBackpack.Count > 0)
+        {
+            int dropAmount;
+            if (sugarInBackpack.Count == 1)
+                dropAmount = 1;
+            else
+                dropAmount = sugarInBackpack.Count / 2;
+
+            for (int x = 0; x < dropAmount; x++)
+            {
+                StartCoroutine(DropSugarAni());
+            }
         }
     }
 
@@ -88,18 +110,61 @@ public class PlayerSugarPickup : MonoBehaviour {
             yield return null;
         }
 
-        Vector3 randomDropLoc = Random.onUnitSphere;
+        Vector3 randomDropLoc = Random.onUnitSphere * 1.5f;
+        randomDropLoc.y = 1f;
         count = 0;
 
-        while(count < 30)
+        while(sugar.transform.position != randomDropLoc)
         {
             count++;
-            sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, randomDropLoc, sugarPickupSpeed);
+            sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, randomDropLoc, sugarPickupSpeed * 2);
             yield return null;
         }
 
         sugar.GetComponent<SimpleRotate>().enabled = true;
         sugar.GetComponent<BoxCollider>().enabled = true;
+    }
+
+    private IEnumerator StealSugarAni(GameObject dropoffPoint)
+    {
+        int count = 0;
+
+        PlayerClass otherPlayer = GameManager.instance.GetPlayerFromDropoff(dropoffPoint);
+
+        if (otherPlayer.currentPlayerScore > 0)
+        {
+            GameObject sugar = otherPlayer.dropoffPoint.transform.GetChild(0).gameObject;
+            sugarInBackpack.Add(sugar);
+            otherPlayer.LoseSugar(1);
+            player.PickupSugar();
+            Vector3 topPos = new Vector3(dropoffPoint.transform.position.x, dropoffPoint.transform.position.y + 2, dropoffPoint.transform.position.z);
+            sugar.transform.parent = null;
+            sugar.SetActive(true);
+
+            while (count < 20)
+            {
+                count++;
+                sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, topPos, sugarPickupSpeed);
+                yield return null;
+            }
+
+            count = 0;
+
+            while (count < 20)
+            {
+                count++;
+                sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.zero, sugarPickupSpeed);
+                sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, transform.position, sugarPickupSpeed);
+                yield return null;
+            }
+
+            sugar.SetActive(false);
+            sugar.transform.localScale = Vector3.one; //Reset sugar scale, might need to change later
+            sugar.transform.parent = transform;
+
+            if (otherPlayer.currentPlayerScore > 0 && runAnimation)
+                StartCoroutine(StealSugarAni(dropoffPoint));
+        }
     }
 
     private IEnumerator PickupSugarAni(GameObject sugar)
@@ -154,10 +219,11 @@ public class PlayerSugarPickup : MonoBehaviour {
 
         sugar.SetActive(false);
         sugar.transform.localScale = saveScale;
+        sugar.transform.parent = dropoffPoint.transform;
 
         yield return new WaitForSeconds(dropoffDelay);
 
-        if (sugarInBackpack.Count > 0 && runDropoffAni)
+        if (sugarInBackpack.Count > 0 && runAnimation)
             StartCoroutine(DropoffSugarAni(dropoffPoint));
      }
 }

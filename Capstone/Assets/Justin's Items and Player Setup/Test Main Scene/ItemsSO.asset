@@ -19,11 +19,25 @@ MonoBehaviour:
     effectAmt: 3
     type: 0
     item: 2
+  - name: Magic Staff
+    gameObject: {fileID: 1842027233459624, guid: f96f896ab7e9aba47b7cd12c0d729515,
+      type: 2}
+    numUses: 4
+    effectAmt: 5
+    type: 0
+    item: 5
+  - name: Fan
+    gameObject: {fileID: 1842027233459624, guid: f96f896ab7e9aba47b7cd12c0d729515,
+      type: 2}
+    numUses: 2
+    effectAmt: 20
+    type: 0
+    item: 0
   DefensiveItems:
   - name: Shield
     gameObject: {fileID: 1022292755540698, guid: 949fa2989cc4b3445a427988e4ce0789,
       type: 2}
-    numUses: 1
+    numUses: 2
     effectAmt: 0
     type: 1
     item: 7
@@ -48,6 +62,13 @@ MonoBehaviour:
     effectAmt: 6
     type: 1
     item: 10
+  - name: Mirror
+    gameObject: {fileID: 1086861190946622, guid: 279f4fc1f876bd946ab77e54d5855386,
+      type: 2}
+    numUses: 3
+    effectAmt: 0
+    type: 1
+    item: 8
   UtilityItems:
   - name: Backpack
     gameObject: {fileID: 1961397499936618, guid: 76bf7d95a26479b44af3e1dba37bfb6c,
