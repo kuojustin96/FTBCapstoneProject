@@ -90,10 +90,36 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EnableAllThisShit.cs" />
-    <Compile Include="Assets\FadeManager.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\DraggablePanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyHook.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerList.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\CameraChec.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\net_CapturePointScript.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\net_CapturePointTriggerScript.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\net_SliderValueScript.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\NetManager.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\NetMouseLook.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\NetMoveTest.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkAsteroid.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkGameManager.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkLobbyHook.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkPlayerValues.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkSpaceship.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkSpaceshipBullet.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\Spawning.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\GameSettings.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\MainMenuManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\MusicManager.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\CraftingController.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\GameManager.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ItemScript.cs" />
@@ -103,30 +129,6 @@
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\PlayerSugarPickup.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
-    <Compile Include="Assets\Lobby\Scripts\DraggablePanel.cs" />
-    <Compile Include="Assets\Lobby\Scripts\EventSystemChecker.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyHook.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyManager.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerList.cs" />
-    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
-    <Compile Include="Assets\MusicManager.cs" />
-    <Compile Include="Assets\NetScript\CameraChec.cs" />
-    <Compile Include="Assets\NetScript\NetManager.cs" />
-    <Compile Include="Assets\NetScript\NetMouseLook.cs" />
-    <Compile Include="Assets\NetScript\NetMoveTest.cs" />
-    <Compile Include="Assets\NetScript\Spawning.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\NetworkAsteroid.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\NetworkGameManager.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\NetworkLobbyHook.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\NetworkPlayerValues.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\NetworkSpaceship.cs" />
-    <Compile Include="Assets\SampleScenes\Scripts\NetworkSpaceshipBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -161,9 +163,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Fonts\OpenSans\License!.txt" />
-    <None Include="Assets\Lobby\Documentation.txt" />
-    <None Include="Assets\Lobby\Instruction.txt" />
+    <None Include="Assets\Chayanne\Lobby\Documentation.txt" />
+    <None Include="Assets\Chayanne\Lobby\Instruction.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
@@ -173,6 +174,7 @@
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\NotoSans - License.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald Bold - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Fonts\OpenSans\License!.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
