@@ -28,7 +28,8 @@ public class ItemScript : MonoBehaviour {
                 switch (item)
                 {
                     case Item.Fan:
-                        Debug.Log("Used Minigun");
+                        Debug.Log("Used Fan");
+                        UseFan();
                         break;
 
                     case Item.Sword:
@@ -47,10 +48,6 @@ public class ItemScript : MonoBehaviour {
                     case Item.MagicStaff:
                         Debug.Log("Used Magic Staff");
                         UseMagicStaff();
-                        break;
-
-                    case Item.Shotgun:
-                        Debug.Log("Used Hand Cannon");
                         break;
                 }
                 break;
@@ -105,8 +102,14 @@ public class ItemScript : MonoBehaviour {
                         Debug.Log("Used Running Shoes");
                         break;
 
-                    case Item.BreezyJardons:
-                        Debug.Log("Used Breezy Jardon's");
+                    case Item.SugarTransport:
+                        Debug.Log("Used Sugar Transport");
+                        StartCoroutine(UseSugarTransport());
+                        break;
+
+                    case Item.SugarDusk:
+                        Debug.Log("Used Sugar Dusk");
+                        StartCoroutine(UseSugarDusk());
                         break;
                 }
                 break;
@@ -116,18 +119,29 @@ public class ItemScript : MonoBehaviour {
     #region Offensive Items
     // =========== OFFENSIVE ITEMS ===========
 
-    public void UseNerfGun()
+    public void UseFan()
     {
-        Debug.Log("Used Nerf Gun");
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, Vector3.one * 2, Vector3.forward, Quaternion.identity, 10f);
+        foreach(RaycastHit hit in hits)
+        {
+            if (hit.collider.tag == "Player" && hit.collider.gameObject != transform.parent.gameObject)
+            {
+                hit.collider.GetComponent<Rigidbody>().AddForce(Vector3.Normalize(transform.parent.forward - hit.collider.transform.eulerAngles) * currentItem.effectAmt, ForceMode.Impulse);
+            }
+        }
     }
 
     private IEnumerator UseSword()
     {
+        currentPlayer.usingItem = true;
+
         transform.eulerAngles = new Vector3(transform.eulerAngles.x + 90, transform.eulerAngles.y, transform.eulerAngles.z);
         itemCol.enabled = true;
         yield return new WaitForSeconds(0.5f);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x - 90, transform.eulerAngles.y, transform.eulerAngles.z);
         itemCol.enabled = false;
+
+        currentPlayer.usingItem = false;
     }
 
     public void UseGrenade()
@@ -143,7 +157,7 @@ public class ItemScript : MonoBehaviour {
     public void UseMagicStaff()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.forward, out hit, 5f))
+        if(Physics.Raycast(transform.position, Vector3.forward, out hit, 20f))
         {
             if(hit.collider.tag == "Player")
             {
@@ -160,11 +174,6 @@ public class ItemScript : MonoBehaviour {
                 }
             }
         }
-    }
-
-    public void UseShotgun()
-    {
-        Debug.Log("Used Shotgun");
     }
     #endregion
 
@@ -263,9 +272,46 @@ public class ItemScript : MonoBehaviour {
         Debug.Log("Used Running Shoes");
     }
 
-    public void UseBreezyJardons()
+    public IEnumerator UseSugarTransport()
     {
-        Debug.Log("Used Breezy Jardon's");
+        currentPlayer.usingItem = true;
+
+        float timeToWait = 5f;
+        float saveTTW = timeToWait;
+        KuoController kc = currentPlayer.playerGO.GetComponent<KuoController>();
+        kc.CraftingBar.fillAmount = 0;
+        kc.CraftingBar.gameObject.SetActive(true);
+        while (timeToWait > 0 && !currentPlayer.isStunned && currentPlayer.playerGO.GetComponent<Rigidbody>().velocity == Vector3.zero)
+        {
+            timeToWait -= Time.deltaTime;
+            kc.CraftingBar.fillAmount = Mathf.InverseLerp(0, saveTTW, saveTTW - timeToWait);
+            yield return null;
+        }
+
+        if(timeToWait <= 0)
+        {
+            int cost = currentPlayer.sugarInBackpack / (int) currentItem.effectAmt;
+            kc.psp.SugarTransport(cost);
+        }
+
+        kc.CraftingBar.gameObject.SetActive(false);
+        CheckItemUses();
+
+        currentPlayer.usingItem = false;
+    }
+
+    public IEnumerator UseSugarDusk()
+    {
+        Transform child = transform.GetChild(0);
+        child.gameObject.SetActive(true);
+        child.GetComponent<ParticleSystem>().Play();
+        currentPlayer.playerGO.layer = 8;
+        gameObject.layer = 8;
+        yield return new WaitForSeconds(currentItem.effectAmt);
+        CheckItemUses();
+        transform.GetChild(0).gameObject.SetActive(false);
+        currentPlayer.playerGO.layer = 0;
+        gameObject.layer = 0;
     }
     #endregion
 

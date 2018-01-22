@@ -85,7 +85,6 @@ public class PlayerClass {
         ItemScript IS = item.gameObject.GetComponent<ItemScript>();
         item.usesLeft--;
         Debug.Log(item.name + " used 1 time. Number of uses left is " + item.usesLeft);
-        Debug.Log(item.item);
         IS.UseItem(item.type, item.item, this);
     }
 }

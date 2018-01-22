@@ -67,6 +67,32 @@ public class PlayerSugarPickup : MonoBehaviour {
         }
     }
 
+    public void SugarTransport(int cost)
+    {
+        if (sugarInBackpack.Count > 0)
+        {
+            if (cost == 0)
+                cost = 1;
+
+            Debug.Log(cost);
+            GameObject dropoffPoint = GameManager.instance.DropoffPoints[player.playerNum];
+            for (int x = 0; x < cost; x++)
+            {
+                sugarInBackpack[0].transform.parent = null;
+                sugarInBackpack.Remove(sugarInBackpack[0]);
+                player.DropSugar();
+            }
+
+            while(sugarInBackpack.Count > 0)
+            {
+                player.DropoffSugarInStash();
+                sugarInBackpack[0].transform.parent = dropoffPoint.transform;
+                sugarInBackpack[0].transform.position = Vector3.zero;
+                sugarInBackpack.Remove(sugarInBackpack[0]);
+            }
+        }
+    }
+
     public void DropSugar()
     {
         if(sugarInBackpack.Count > 0)

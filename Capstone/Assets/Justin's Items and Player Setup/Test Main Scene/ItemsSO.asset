@@ -27,7 +27,7 @@ MonoBehaviour:
     type: 0
     item: 5
   - name: Fan
-    gameObject: {fileID: 1842027233459624, guid: f96f896ab7e9aba47b7cd12c0d729515,
+    gameObject: {fileID: 1077070124925702, guid: 6b25cf6ecc5b1e34fa462619010c8b64,
       type: 2}
     numUses: 2
     effectAmt: 20
@@ -84,3 +84,17 @@ MonoBehaviour:
     effectAmt: 3
     type: 2
     item: 14
+  - name: Sugar Transport
+    gameObject: {fileID: 1280847651785796, guid: 73fda66846d3ec349a82e3f2b2a91898,
+      type: 2}
+    numUses: 1
+    effectAmt: 4
+    type: 2
+    item: 16
+  - name: Sugar Dusk
+    gameObject: {fileID: 1236801292626134, guid: ad7e7b78841d29d45b47ee7430b8adf1,
+      type: 2}
+    numUses: 1
+    effectAmt: 10
+    type: 2
+    item: 6

@@ -17,7 +17,7 @@ public enum Item
     Grenade = 3,
     Scythe = 4,
     MagicStaff = 5,
-    Shotgun = 6,
+    SugarDusk = 6,
     Shield = 7,
     Mirror = 8,
     ChewedGum = 9,
@@ -27,7 +27,7 @@ public enum Item
     Backpack = 13,
     Magnet = 14,
     RunningShoes = 15,
-    BreezyJardons = 16,
+    SugarTransport = 16,
 }
 
 public class CraftingController : MonoBehaviour {
