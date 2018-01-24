@@ -12,6 +12,7 @@ public class PlayerClass {
     public int sugarInBackpack = 0;
     public int currentPlayerScore = 0;
     public bool isStunned = false;
+    public bool isInvulnerable = false;
     public CraftingController.CraftableItem item;
     public int itemNum;
     public bool usingItem = false;

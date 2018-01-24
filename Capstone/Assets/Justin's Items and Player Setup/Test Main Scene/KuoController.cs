@@ -134,12 +134,15 @@ public class KuoController : MonoBehaviour {
 
     private IEnumerator StunPlayerCoroutine(float duration)
     {
-        Debug.Log(gameObject.name + " is stunned!");
-        psp.StunDropSugar();
-        player.isStunned = true;
-        rb.velocity = Vector3.zero;
-        yield return new WaitForSeconds(duration);
-        player.isStunned = false;
+        if (!player.isInvulnerable)
+        {
+            Debug.Log(gameObject.name + " is stunned!");
+            psp.StunDropSugar();
+            player.isStunned = true;
+            rb.velocity = Vector3.zero;
+            yield return new WaitForSeconds(duration);
+            player.isStunned = false;
+        }
     }
 
     private IEnumerator UseBodySlam()

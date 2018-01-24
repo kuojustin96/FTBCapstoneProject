@@ -12,9 +12,9 @@ public enum ItemType
 public enum Item
 {
     Fan = 0,
-    SniperRifle = 1,
+    SugarPill = 1,
     Sword = 2,
-    Grenade = 3,
+    BaseBlocker = 3,
     Scythe = 4,
     MagicStaff = 5,
     SugarDusk = 6,
@@ -23,7 +23,7 @@ public enum Item
     ChewedGum = 9,
     MouseTrap = 10,
     LegoWall = 11,
-    GrapplingHook = 12,
+    SugarOrb = 12,
     Backpack = 13,
     Magnet = 14,
     RunningShoes = 15,

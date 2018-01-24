@@ -11,6 +11,10 @@ public class ItemScript : MonoBehaviour {
     private int currentItemNum;
     private KuoController playerKC;
 
+    private Rigidbody rb;
+    private bool waitingForHit;
+    private Vector3 contactPoint;
+
     void Start()
     {
         itemCol = GetComponent<Collider>();
@@ -35,10 +39,6 @@ public class ItemScript : MonoBehaviour {
                     case Item.Sword:
                         Debug.Log("Used Sword");
                         StartCoroutine(UseSword());
-                        break;
-
-                    case Item.Grenade:
-                        Debug.Log("Used Grenade");
                         break;
 
                     case Item.Scythe:
@@ -83,8 +83,9 @@ public class ItemScript : MonoBehaviour {
             case ItemType.Utility:
                 switch (item)
                 {
-                    case Item.GrapplingHook:
-                        Debug.Log("Used Grappling Hook");
+                    case Item.SugarOrb:
+                        Debug.Log("Used Sugar Orb");
+                        StartCoroutine(UseSugarOrb());
                         break;
 
                     case Item.Backpack:
@@ -110,6 +111,16 @@ public class ItemScript : MonoBehaviour {
                     case Item.SugarDusk:
                         Debug.Log("Used Sugar Dusk");
                         StartCoroutine(UseSugarDusk());
+                        break;
+
+                    case Item.SugarPill:
+                        Debug.Log("Used Sugar Pill");
+                        StartCoroutine(UseSugarPill()); //Needs testing
+                        break;
+
+                    case Item.BaseBlocker:
+                        Debug.Log("Used Base Blocker");
+                        StartCoroutine(UseBaseBlocker());
                         break;
                 }
                 break;
@@ -142,11 +153,6 @@ public class ItemScript : MonoBehaviour {
         itemCol.enabled = false;
 
         currentPlayer.usingItem = false;
-    }
-
-    public void UseGrenade()
-    {
-        Debug.Log("Used Grenade");
     }
 
     public void UseScythe()
@@ -250,9 +256,33 @@ public class ItemScript : MonoBehaviour {
     #region Utility Items
     // =========== UTILITY ITEMS ===========
 
-    public void UseGrapplingHook()
+    public IEnumerator UseSugarOrb()
     {
-        Debug.Log("Used Grappling Hook");
+        currentPlayer.usingItem = true;
+
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+
+        rb.isKinematic = false;
+        rb.AddForce(Vector3.forward * currentItem.effectAmt, ForceMode.Impulse);
+
+        yield return null;
+        Collider c = GetComponent<Collider>();
+        c.enabled = true;
+
+        waitingForHit = true;
+        while (waitingForHit)
+        {
+            yield return null;
+        }
+
+        currentPlayer.playerGO.transform.position = contactPoint;
+        CheckItemUses();
+        currentPlayer.usingItem = false;
+
+        c.enabled = false;
+        rb.isKinematic = true;
+        rb.velocity = Vector3.zero;
     }
 
     private IEnumerator UseMagnet()
@@ -267,12 +297,12 @@ public class ItemScript : MonoBehaviour {
         CheckItemUses();
     }
 
-    public void UseRunningShoes()
+    private void UseRunningShoes()
     {
         Debug.Log("Used Running Shoes");
     }
 
-    public IEnumerator UseSugarTransport()
+    private IEnumerator UseSugarTransport()
     {
         currentPlayer.usingItem = true;
 
@@ -300,7 +330,7 @@ public class ItemScript : MonoBehaviour {
         currentPlayer.usingItem = false;
     }
 
-    public IEnumerator UseSugarDusk()
+    private IEnumerator UseSugarDusk()
     {
         Transform child = transform.GetChild(0);
         child.gameObject.SetActive(true);
@@ -312,6 +342,36 @@ public class ItemScript : MonoBehaviour {
         transform.GetChild(0).gameObject.SetActive(false);
         currentPlayer.playerGO.layer = 0;
         gameObject.layer = 0;
+    }
+
+    private IEnumerator UseSugarPill()
+    {
+        currentPlayer.isInvulnerable = true;
+        yield return new WaitForSeconds(currentItem.effectAmt);
+        currentPlayer.isInvulnerable = false;
+        playerKC.StunPlayer(currentItem.effectAmt / 4);
+        CheckItemUses();
+    }
+
+    public IEnumerator UseBaseBlocker()
+    {
+        currentPlayer.usingItem = true;
+
+        GameObject baseBlocker = currentItem.gameObject;
+        baseBlocker.transform.parent = null;
+        baseBlocker.transform.position = GameManager.instance.DropoffPoints[currentPlayer.playerNum].transform.position;
+
+        foreach (Transform t in baseBlocker.transform)
+            t.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(currentItem.effectAmt);
+
+        foreach (Transform t in baseBlocker.transform)
+            t.gameObject.SetActive(false);
+
+        CheckItemUses(false);
+
+        currentPlayer.usingItem = false;
     }
     #endregion
 
@@ -333,13 +393,6 @@ public class ItemScript : MonoBehaviour {
                 return;
             }
 
-            //if ((currentItem.item == Item.NerfGun || currentItem.item == Item.Shotgun) && other.gameObject.tag == "RangedDefensiveShield")
-            //{
-            //    currentItem.usesLeft--;
-            //    CheckItemUses();
-            //    return;
-            //}
-
             if (other.gameObject.tag == "Player")
             {
                 //Stun player
@@ -357,7 +410,14 @@ public class ItemScript : MonoBehaviour {
         }
     }
 
-
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "Player")
+        {
+            waitingForHit = false;
+            contactPoint = collision.contacts[0].point;
+        }
+    }
 
     private void CheckItemUses(bool setItemNull = true)
     {

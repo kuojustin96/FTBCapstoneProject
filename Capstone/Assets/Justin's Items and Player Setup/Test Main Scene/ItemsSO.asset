@@ -98,3 +98,24 @@ MonoBehaviour:
     effectAmt: 10
     type: 2
     item: 6
+  - name: Sugar Orb
+    gameObject: {fileID: 1576317777737418, guid: 7a3c7b695b32dc1489f940d4f2065d43,
+      type: 2}
+    numUses: 1
+    effectAmt: 30
+    type: 2
+    item: 12
+  - name: Sugar Pill
+    gameObject: {fileID: 1847964669528328, guid: 431dda0a5803bd44ab88762691b6d007,
+      type: 2}
+    numUses: 1
+    effectAmt: 15
+    type: 2
+    item: 1
+  - name: Base Blocker
+    gameObject: {fileID: 1230435539296396, guid: 35208dc48396b864dba7442e78fb46e5,
+      type: 2}
+    numUses: 1
+    effectAmt: 15
+    type: 2
+    item: 3
