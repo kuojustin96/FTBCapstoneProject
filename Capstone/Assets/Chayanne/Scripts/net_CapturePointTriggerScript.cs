@@ -13,7 +13,7 @@ public class net_CapturePointTriggerScript : NetworkBehaviour
 
     public bool ShowInGame;
 
-	void Awake () {
+	void Start () {
 
         
         if(!ShowInGame)

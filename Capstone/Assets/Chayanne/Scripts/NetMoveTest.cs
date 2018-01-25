@@ -29,6 +29,7 @@ public class NetMoveTest : NetworkBehaviour {
     CursorLockMode lockMode;
 
     bool isPaused = false;
+    bool doVanityCam = false;
 
 	// Use this for initialization
 	void Start () {
@@ -85,14 +86,31 @@ public class NetMoveTest : NetworkBehaviour {
     void Update()
 
     {
-        if (isLocalPlayer || isSinglePlayer)
+        if (isLocalPlayer)
         {
+
+            VanityCameraUpdate();
+
             UpdateCursorLock();
             ActionUpdate();
             MouseRotation();
             MovementUpdate();
         }
 
+
+    }
+
+    void VanityCameraUpdate()
+    {
+
+        if(Input.GetMouseButton(2))
+        {
+            doVanityCam = true;
+        }
+        else
+        {
+            doVanityCam = false;
+        }
 
     }
 
@@ -148,9 +166,12 @@ public class NetMoveTest : NetworkBehaviour {
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
-        Quaternion localRotationPlayer = Quaternion.Euler(0.0f, rotY, 0.0f);
-        player.transform.rotation = localRotationPlayer;
-
+        if (!doVanityCam)
+        {
+            Quaternion localRotationPlayer = Quaternion.Euler(0.0f, rotY, 0.0f);
+            player.transform.rotation = localRotationPlayer;
+        }
+            
         Quaternion localRotationGun = Quaternion.Euler(rotX, rotY, 0.0f);
         gunObj.transform.rotation = localRotationGun;
 
