@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ckProtoyType;
 
 namespace Prototype.NetworkLobby
 {
@@ -99,9 +100,11 @@ namespace Prototype.NetworkLobby
             OnClientReady(false);
         }
 
-        public int GetTeamColorNumber()
+        public net_TeamScript.Team GetTeamColor()
         {
-            return System.Array.IndexOf(Colors, playerColor); 
+
+            return (net_TeamScript.Team)System.Array.IndexOf(Colors, playerColor);
+
         }
 
         void SetupLocalPlayer()

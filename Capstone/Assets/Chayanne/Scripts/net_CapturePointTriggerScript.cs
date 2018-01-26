@@ -3,39 +3,40 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
-[RequireComponent(typeof(MeshRenderer))]
-
-public class net_CapturePointTriggerScript : NetworkBehaviour
-{
-
-    net_CapturePointScript captureScript;
-
-    public bool ShowInGame;
-
-	void Start () {
-
-        
-        if(!ShowInGame)
-        GetComponent<MeshRenderer>().enabled = false;
-
-        captureScript = GetComponentInParent<net_CapturePointScript>();
-
-    }
-
-    void Update()
+namespace ckProtoyType {
+    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(MeshRenderer))]
+    public class net_CapturePointTriggerScript : NetworkBehaviour
     {
 
-    }
+        net_CapturePointScript captureScript;
 
-    void OnTriggerStay(Collider other)
-    {
-        captureScript.TriggerStay(other);
-    }
+        public bool ShowInGame;
 
-    public void ShowTrigger(bool val)
-    {
-        GetComponent<MeshRenderer>().enabled = val;
-    }
+        void Start() {
 
+
+            if (!ShowInGame)
+                GetComponent<MeshRenderer>().enabled = false;
+
+            captureScript = GetComponentInParent<net_CapturePointScript>();
+
+        }
+
+        void Update()
+        {
+
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            captureScript.TriggerStay(other);
+        }
+
+        public void ShowTrigger(bool val)
+        {
+            GetComponent<MeshRenderer>().enabled = val;
+        }
+
+    }
 }
