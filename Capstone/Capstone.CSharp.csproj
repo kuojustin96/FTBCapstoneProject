@@ -106,6 +106,7 @@
     <Compile Include="Assets\Chayanne\Scripts\net_CapturePointScript.cs" />
     <Compile Include="Assets\Chayanne\Scripts\net_CapturePointTriggerScript.cs" />
     <Compile Include="Assets\Chayanne\Scripts\net_SliderValueScript.cs" />
+    <Compile Include="Assets\Chayanne\Scripts\net_TeamScript.cs" />
     <Compile Include="Assets\Chayanne\Scripts\NetManager.cs" />
     <Compile Include="Assets\Chayanne\Scripts\NetMouseLook.cs" />
     <Compile Include="Assets\Chayanne\Scripts\NetMoveTest.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
+    <Compile Include="Assets\test_UseScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -164,6 +166,24 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Distance Fade.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Rainbow.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonCore.cginc" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonShadows.cginc" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Simple Gradient Sky.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Unit Shadowed.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Stage\Shader\AlphaMask.shader" />
     <None Include="Assets\Chayanne\Lobby\Documentation.txt" />
     <None Include="Assets\Chayanne\Lobby\Instruction.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
