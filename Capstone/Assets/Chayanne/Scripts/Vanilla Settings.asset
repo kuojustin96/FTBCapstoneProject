@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b7b7301e734fd418da891b33e7b82d, type: 3}
+  m_Name: Vanilla Settings
+  m_EditorClassIdentifier: 
+  Settings:
+    maxSugarLimit: 20
+    baseCraftingTime: 3
+    minSugarNeededToCraft: 3
+    baseBodySlamStunDur: 2
+    baseMoveSpeed: 50

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+//Obsolete
 public class NetMouseLook : NetworkBehaviour {
 
 	public float mouseSensitivity = 100.0f;

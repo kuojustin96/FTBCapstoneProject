@@ -44,10 +44,10 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity VRGames/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity VRGames/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,21 +63,22 @@
      <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerList.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\CameraChec.cs" />
+     <Compile Include="Assets\Chayanne\Scripts\GameSettingsSO.cs" />
+     <Compile Include="Assets\Chayanne\Scripts\MakeScriptableObject.cs" />
      <Compile Include="Assets\Chayanne\Scripts\net_CapturePointScript.cs" />
      <Compile Include="Assets\Chayanne\Scripts\net_CapturePointTriggerScript.cs" />
+     <Compile Include="Assets\Chayanne\Scripts\net_GameManager.cs" />
+     <Compile Include="Assets\Chayanne\Scripts\net_PlayerScript.cs" />
      <Compile Include="Assets\Chayanne\Scripts\net_SliderValueScript.cs" />
      <Compile Include="Assets\Chayanne\Scripts\net_TeamScript.cs" />
      <Compile Include="Assets\Chayanne\Scripts\NetManager.cs" />
      <Compile Include="Assets\Chayanne\Scripts\NetMouseLook.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\NetMoveTest.cs" />
      <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkAsteroid.cs" />
      <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkGameManager.cs" />
      <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkLobbyHook.cs" />
      <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkPlayerValues.cs" />
      <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkSpaceship.cs" />
      <Compile Include="Assets\Chayanne\Scripts\Networking Sample Scripts\Scripts\NetworkSpaceshipBullet.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\Spawning.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\GameSettings.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\MainMenuManager.cs" />
@@ -92,6 +93,7 @@
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
+     <Compile Include="Assets\MouseOrbitImproved.cs" />
      <Compile Include="Assets\test_UseScript.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -171,31 +173,31 @@
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Timeline">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
- <HintPath>C:/Program Files/Unity VRGames/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ <HintPath>C:/Program Files/Unity2017.1.0.f3/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
- <HintPath>C:/Users/blknb/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+ <HintPath>C:/Users/Shawn/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
- <HintPath>C:/Users/blknb/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
+ <HintPath>C:/Users/Shawn/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
