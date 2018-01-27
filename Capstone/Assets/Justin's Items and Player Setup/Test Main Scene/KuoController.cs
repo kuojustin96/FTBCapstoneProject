@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class KuoController : MonoBehaviour {
 
     public float speed = 0.3f;
-    //[HideInInspector]
+    public float fallThreshold = 3f;
+    [HideInInspector]
     public PlayerClass player;
     public float bodySlamStunDur = 4f;
     public Collider bodySlamCol;
@@ -33,6 +34,17 @@ public class KuoController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        float downVel = Mathf.Abs(rb.velocity.y);
+        Debug.Log("downVel " + downVel);
+        if(downVel > fallThreshold)
+        {
+            //Fall stun duration calculation
+            float rbVelHalf = downVel / 2;
+            float x = 1 + (downVel - fallThreshold);
+            float stunDur = (rbVelHalf + (downVel / x)) - fallThreshold;
+            Debug.Log(stunDur);
+        }
+
 
         if (!player.isStunned)
         {
