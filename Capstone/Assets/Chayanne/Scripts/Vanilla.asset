@@ -9,11 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85b7b7301e734fd418da891b33e7b82d, type: 3}
-  m_Name: Vanilla Settings
+  m_Name: Vanilla
   m_EditorClassIdentifier: 
   Settings:
-    maxSugarLimit: 20
+    maxSugarLimit: 3
     baseCraftingTime: 3
-    minSugarNeededToCraft: 3
-    baseBodySlamStunDur: 2
-    baseMoveSpeed: 50
+    minSugarNeededToCraft: 2
+    pBaseBodySlamStunDur: 2
+    pBaseMoveSpeed: 75
+    pBaseJumpHeight: 750
+    pBaseSneakSpeed: 25
+    pMinFallHeightVelocity: 0
+    pMaxFallHeightVelocity: 0
+    pBaseSugarPickupSize: 0
+    pBaseFootStepVolume: 0
+    pFootstepFalloff: 0

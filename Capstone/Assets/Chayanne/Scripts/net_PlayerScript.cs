@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
 
-namespace ckProtoyType
+namespace ckp
 {
     public class net_PlayerScript : NetworkBehaviour
     {
-
+        
         
         [Header("Gameobjects")]
         public GameObject projectile;
@@ -46,14 +46,13 @@ namespace ckProtoyType
         float moveSpeed;
         float jumpHeight;
 
-
         void InitializeGameSettings()
         {
 
             GameSettingsSO gs = net_GameManager.gm.GameSettings;
 
-            moveSpeed = gs.Settings.baseMoveSpeed;
-            jumpHeight = gs.Settings.baseJumpHeight;
+            moveSpeed = gs.Settings.pBaseMoveSpeed;
+            jumpHeight = gs.Settings.pBaseJumpHeight;
 
 
         }
@@ -61,7 +60,7 @@ namespace ckProtoyType
 
         void Start()
         {
-
+            InitializeGameSettings();
             rb = GetComponent<Rigidbody>();
 
             LocalCameraCheck();
@@ -75,6 +74,8 @@ namespace ckProtoyType
             //rotY = rot.y;
             //rotX = rot.x;
         }
+
+
 
         private void SetupName()
         {

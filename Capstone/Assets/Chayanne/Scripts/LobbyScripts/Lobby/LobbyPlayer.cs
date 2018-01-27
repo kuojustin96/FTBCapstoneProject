@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ckProtoyType;
+using ckp;
 
 namespace Prototype.NetworkLobby
 {

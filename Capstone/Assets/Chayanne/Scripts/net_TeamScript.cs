@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ckProtoyType
+namespace ckp
 {
     public class net_TeamScript : MonoBehaviour
     {

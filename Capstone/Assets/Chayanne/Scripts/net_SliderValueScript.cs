@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ckProtoyType
+namespace ckp
 {
     public class net_SliderValueScript : MonoBehaviour
     {

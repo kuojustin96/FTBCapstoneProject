@@ -2,18 +2,21 @@
 using System.Collections;
 using UnityEditor;
 
-public class MakeScriptableObject
+namespace ckp
 {
-    [MenuItem("Assets/Create/Game Settings")]
-    public static void CreateMyAsset()
+    public class MakeScriptableObject
     {
-        GameSettingsSO asset = ScriptableObject.CreateInstance<GameSettingsSO>();
+        [MenuItem("Assets/Create/Game Settings")]
+        public static void CreateMyAsset()
+        {
+            GameSettingsSO asset = ScriptableObject.CreateInstance<GameSettingsSO>();
 
-        AssetDatabase.CreateAsset(asset, "Assets/GameSettings.asset");
-        AssetDatabase.SaveAssets();
+            AssetDatabase.CreateAsset(asset, "Assets/GameSettings.asset");
+            AssetDatabase.SaveAssets();
 
-        EditorUtility.FocusProjectWindow();
+            EditorUtility.FocusProjectWindow();
 
-        Selection.activeObject = asset;
+            Selection.activeObject = asset;
+        }
     }
 }

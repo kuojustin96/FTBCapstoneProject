@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-namespace ckProtoyType
+namespace ckp
 {
     public class test_UseScript : NetworkBehaviour
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace ckProtoyType
+namespace ckp
 {
     public class net_CapturePointScript : MonoBehaviour
     {

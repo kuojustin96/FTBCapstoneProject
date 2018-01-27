@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-namespace ckProtoyType {
+namespace ckp {
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(MeshRenderer))]
     public class net_CapturePointTriggerScript : NetworkBehaviour
