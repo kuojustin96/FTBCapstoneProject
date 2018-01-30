@@ -2,63 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Events;
 
-public class Event_2PlayerDoorOpen : NetworkBehaviour {
+namespace ckp
+{
+    public class Event_2PlayerDoorOpen : NetworkBehaviour
+    {
 
-	public int sugarToRelease = 10;
-	public int requiredPlayers = 2;
+        //Amount how much sugar to drop
+        public int numSugarDrops = 10;
 
-//	public Event_ButtonPlayerDetection button1;
-//	public Event_ButtonPlayerDetection button2;
+        [Range(1, 4)]
+        public int minPlayers = 2;
 
-	private int numPlayersOnButton = 0;
-	private bool openingDoor = false;
-	private Coroutine co;
+        //	public Event_ButtonPlayerDetection button1;
+        //	public Event_ButtonPlayerDetection button2;
+        public bool finishedEvent = false;
 
-	public Transform doorTarget;
+        public net_PlayerTrigger[] triggers;
 
-	// Use this for initialization
-	void Start () {
 
-	}
+        public UnityEvent completionMethods;
 
-	// Update is called once per frame
-	void Update () {
 
-	}
+        // Use this for initialization
+        void Start()
+        {
 
-	public void UpdatePlayersOnButton(int num)
-	{
-		numPlayersOnButton += num;
+        }
 
-		if (numPlayersOnButton >= requiredPlayers && !openingDoor){
-			if (!isServer) {
-				return;
-			} else {
-				co = StartCoroutine (OpenDoor ());
-			}
-				}
-		if (numPlayersOnButton < requiredPlayers && co != null)
-		{
-			openingDoor = false;
-			StopCoroutine(co);
-		}
-	}
 
-	private IEnumerator OpenDoor()
-	{
+        public void UpdateButton()
+        {
+            if (isServer)
+            {
 
-		openingDoor = true;
-		Vector3 origPos = transform.position;
-	
-		while(transform.position != doorTarget.position)
-		{
-			Debug.Log (transform.position);
-			Debug.Log (doorTarget.position);
-			transform.position = Vector3.MoveTowards(transform.position,doorTarget.position, Time.fixedDeltaTime*5);
-			yield return null;
-		}
+                if (finishedEvent)
+                    return;
 
-		openingDoor = false;
-	}
+                int numTriggered = 0;
+                for(int i = 0; i < triggers.Length; i++)
+                {
+                    if(triggers[i].IsTriggered())
+                    {
+                        numTriggered++;
+                    }
+                }
+
+                if (numTriggered >= minPlayers)
+                {
+
+                    finishedEvent = true;
+                    completionMethods.Invoke();
+                }
+            }
+
+        }
+    }
+
 }

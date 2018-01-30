@@ -43,8 +43,8 @@ namespace ckp
 
 
         //Derived from singleton;
-        float moveSpeed;
-        float jumpHeight;
+        public float moveSpeed;
+        public float jumpHeight;
 
         void InitializeGameSettings()
         {
@@ -167,23 +167,24 @@ namespace ckp
         void MovementUpdate()
         {
 
+            float mSpeed = moveSpeed * moveSpeedMult;
 
 
             if (Input.GetKey(KeyCode.W))
             {
-                rb.AddForce(transform.forward * moveSpeed);
+                rb.AddForce(transform.forward * mSpeed);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                rb.AddForce(transform.right * -moveSpeed);
+                rb.AddForce(transform.right * -mSpeed);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                rb.AddForce(transform.forward * -moveSpeed);
+                rb.AddForce(transform.forward * -mSpeed);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                rb.AddForce(transform.right * moveSpeed);
+                rb.AddForce(transform.right * mSpeed    );
             }
 
         }
