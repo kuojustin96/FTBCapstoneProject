@@ -7,21 +7,17 @@ namespace ckp
 {
     
 
-    public class net_PlayerTrigger : NetworkBehaviour
+    public class net_Event_MultiplayerTrigger_Trigger : NetworkBehaviour
     {
-
-        public bool colorSpecific;
-        net_TeamScript.Team[] teamColors;
-
         public int numPlayersInTrigger = 0;
 
         bool triggered = false;
 
-        Event_2PlayerDoorOpen eventScript;
+        net_Event_MultiplayerTrigger eventScript;
 
         void Start()
         {
-            eventScript = GetComponentInParent<Event_2PlayerDoorOpen>();
+            eventScript = GetComponentInParent<net_Event_MultiplayerTrigger>();
         }
 
         public bool IsTriggered()
@@ -33,38 +29,26 @@ namespace ckp
         {
             if(isServer)    
             {
-                net_TeamScript team = other.gameObject.GetComponent<net_TeamScript>();
-                if (team && IsCorrectPlayer(team))
+                Debug.Log("Meme");
+                net_PlayerScript playerComp = other.gameObject.GetComponent<net_PlayerScript>();
+                if (playerComp)
                 {
                     numPlayersInTrigger++;
                     triggered = true;
                     eventScript.UpdateButton();
                 }
-
                     return;
             }
 
         }
 
-        bool IsCorrectPlayer(net_TeamScript team)
-        {
-            for (int i = 0; i < teamColors.Length; i++)
-            {
-                if (teamColors[i] == team.teamColor)
-                {
-                    return true;
-                }
-
-            }
-            return false;
-        }
 
         void OnTriggerExit(Collider other)
         {
-            if (!isServer)
+            if (isServer)
             {
-                net_TeamScript team = other.gameObject.GetComponent<net_TeamScript>();
-                if (team && IsCorrectPlayer(team))
+                net_PlayerScript playerComp = other.gameObject.GetComponent<net_PlayerScript>();
+                if (playerComp)
                 {
                     numPlayersInTrigger--;
 

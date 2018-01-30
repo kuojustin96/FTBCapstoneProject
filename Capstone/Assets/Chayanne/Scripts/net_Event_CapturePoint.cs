@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace ckp
 {
-    public class net_CapturePointScript : MonoBehaviour
+    public class net_Event_CapturePoint : MonoBehaviour
     {
 
         float currentProgress = 0;
@@ -72,7 +72,7 @@ namespace ckp
         {
             isActive = val;
             progressBar.gameObject.SetActive(val);
-            GetComponentInChildren<net_CapturePointTriggerScript>().ShowTrigger(val);
+            GetComponentInChildren<net_Event_CapturePoint_Trigger>().ShowTrigger(val);
         }
 
 
