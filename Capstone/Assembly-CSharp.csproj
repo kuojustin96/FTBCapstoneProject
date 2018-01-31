@@ -51,20 +51,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\DraggablePanel.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\EventSystemChecker.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyHook.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyManager.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerList.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\NetworkLobbyHook.cs" />
      <Compile Include="Assets\Chayanne\Scripts\GameSettingsSO.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\DraggablePanel.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\EventSystemChecker.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyCountdownPanel.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyHook.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyInfoPanel.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyMainMenu.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyManager.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyPlayer.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyPlayerList.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyServerEntry.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyServerList.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyTopPanel.cs" />
-     <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\NetworkLobbyHook.cs" />
      <Compile Include="Assets\Chayanne\Scripts\MakeScriptableObject.cs" />
      <Compile Include="Assets\Chayanne\Scripts\net_CapturePointScript.cs" />
      <Compile Include="Assets\Chayanne\Scripts\net_CapturePointTriggerScript.cs" />

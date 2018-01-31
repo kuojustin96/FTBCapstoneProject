@@ -15,6 +15,8 @@ namespace Prototype.NetworkLobby
         public InputField ipInput;
         public InputField matchNameInput;
 
+        public bool isHosting = false;
+
         public void OnEnable()
         {
             lobbyManager.topPanel.ToggleVisibility(true);
@@ -28,11 +30,34 @@ namespace Prototype.NetworkLobby
 
         public void OnClickHost()
         {
+            isHosting = true;
             lobbyManager.StartHost();
+        }
+
+        public void LeaveLobby()
+        {
+            Debug.Log("isHosting is " + isHosting);
+            if (isHosting)
+            {
+                Debug.Log("Stopping Server");
+                isHosting = false;
+                lobbyManager.StopHost();
+                lobbyPanel.gameObject.SetActive(false);
+                lobbyManager.mainMenuPanel.gameObject.SetActive(true);
+            }
+            else
+            {
+                lobbyManager.StopClient();
+                Debug.Log("Stopping Client");
+                lobbyPanel.gameObject.SetActive(false);
+                lobbyManager.mainMenuPanel.gameObject.SetActive(true);
+            }
+
         }
 
         public void OnClickJoin()
         {
+            
             lobbyManager.ChangeTo(lobbyPanel);
 
             lobbyManager.networkAddress = ipInput.text;
