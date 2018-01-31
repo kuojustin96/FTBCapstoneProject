@@ -6,10 +6,10 @@ using UnityEngine;
 namespace ckp {
     [RequireComponent(typeof(BoxCollider))]
     [RequireComponent(typeof(MeshRenderer))]
-    public class net_CapturePointTriggerScript : NetworkBehaviour
+    public class net_Event_CapturePoint_Trigger : NetworkBehaviour
     {
 
-        net_CapturePointScript captureScript;
+        net_Event_CapturePoint captureScript;
 
         public bool ShowInGame;
 
@@ -19,7 +19,7 @@ namespace ckp {
             if (!ShowInGame)
                 GetComponent<MeshRenderer>().enabled = false;
 
-            captureScript = GetComponentInParent<net_CapturePointScript>();
+            captureScript = GetComponentInParent<net_Event_CapturePoint>();
 
         }
 
