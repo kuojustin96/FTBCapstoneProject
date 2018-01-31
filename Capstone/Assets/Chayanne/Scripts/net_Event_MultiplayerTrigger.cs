@@ -18,7 +18,7 @@ namespace ckp
         }
         public enum net_TriggerMode
         {
-            EachTriggerNeedsAtLeastOne, TriggersTogetherNeedMinimum
+            MultipleTriggers, OneBigTrigger
         }
 
         /*
@@ -35,6 +35,10 @@ namespace ckp
         [Range(1, 4)]
         public int minPlayers = 2;
 
+        [Tooltip("Time the players have to stand on triggers for the event to activate")]
+        public float waitTime = 0f;
+        private Coroutine co;
+
         [Space(10)]
         public UnityEvent completionMethods;
 
@@ -43,14 +47,10 @@ namespace ckp
         {
             if (isServer)
             {
-
-
-
                 if (debugInfo.finishedEvent)
                     return;
 
-
-                if (mode == net_TriggerMode.EachTriggerNeedsAtLeastOne )
+                if (mode == net_TriggerMode.MultipleTriggers )
                 {
                     for (int i = 0; i < triggers.Length; i++)
                     {
@@ -59,13 +59,20 @@ namespace ckp
 
                         if (!(triggers[i].numPlayersInTrigger > 0))
                         {
+                            if (co != null)
+                            {
+                                StopCoroutine(co);
+                                co = null;
+                            }
+
                             return;
                         }
-
                     }
 
-                    RpcExectuteMethods();
-
+                    if (waitTime == 0)
+                        RpcExectuteMethods();
+                    else
+                        co = StartCoroutine(waitTimer());
                 }
                 else
                 {
@@ -80,20 +87,30 @@ namespace ckp
 
                     if (numTriggered >= minPlayers)
                     {
-                        RpcExectuteMethods();
-
+                        if (waitTime == 0)
+                            RpcExectuteMethods();
+                        else
+                            co = StartCoroutine(waitTimer());
                     }
-
+                    else
+                    {
+                        if (co != null)
+                        {
+                            StopCoroutine(co);
+                            co = null;
+                        }
+                    }
                     debugInfo.debugNumPlayers = numTriggered;
                 }
-
-
-
-
-
-
             }
 
+        }
+
+        private IEnumerator waitTimer()
+        {
+            Debug.Log("Running Wait Timer for " + waitTime + " seconds");
+            yield return new WaitForSeconds(waitTime);
+            RpcExectuteMethods();
         }
 
         public GameObject CreateTrigger()

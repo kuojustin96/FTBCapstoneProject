@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Editor\FlatLitToonInspector.cs" />
+    <Compile Include="Assets\Chayanne\Editor\EditorHelpers\Inspector_TriggerHelper.cs" />
     <Compile Include="Assets\Editor\FindMissingScriptsRecursively.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
