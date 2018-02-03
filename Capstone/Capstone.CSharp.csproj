@@ -90,23 +90,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\DraggablePanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyHook.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyServerList.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
+    <Compile Include="Assets\Chayanne\Lobby\Scripts\NetworkLobbyHook.cs" />
     <Compile Include="Assets\Chayanne\Scripts\GameSettingsSO.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\DraggablePanel.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\EventSystemChecker.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyCountdownPanel.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyHook.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyInfoPanel.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyMainMenu.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyManager.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyPlayer.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyPlayerList.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyServerEntry.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyServerList.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\Lobby\LobbyTopPanel.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\LobbyScripts\NetworkLobbyHook.cs" />
     <Compile Include="Assets\Chayanne\Scripts\MakeScriptableObject.cs" />
     <Compile Include="Assets\Chayanne\Scripts\MouseOrbitImproved.cs" />
-    <Compile Include="Assets\Chayanne\Scripts\net_Debug_Display.cs" />
     <Compile Include="Assets\Chayanne\Scripts\net_Event_CapturePoint.cs" />
     <Compile Include="Assets\Chayanne\Scripts\net_Event_CapturePoint_Trigger.cs" />
     <Compile Include="Assets\Chayanne\Scripts\net_Event_MultiplayerTrigger.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="Assets\Chayanne\Scripts\SugarMechanic\net_SugarDrop.cs" />
     <Compile Include="Assets\Chayanne\Scripts\SugarMechanic\net_SugarPickup.cs" />
     <Compile Include="Assets\ChiBaseScene\test_FallCalculation.cs" />
+    <Compile Include="Assets\Event_SlowDoor.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\GameSettings.cs" />
@@ -228,17 +228,6 @@
     <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonShadows.cginc" />
     <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Simple Gradient Sky.shader" />
     <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Unit Shadowed.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
-    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\UnityChan\Stage\Shader\AlphaMask.shader" />
     <None Include="Assets\Chayanne\Lobby\Documentation.txt" />
     <None Include="Assets\Chayanne\Lobby\Instruction.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />

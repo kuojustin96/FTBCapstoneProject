@@ -35,6 +35,11 @@ namespace ckp
         [Range(1, 4)]
         public int minPlayers = 2;
 
+        [Tooltip("Require minimum players in order to run functions")]
+        public bool RequireMinPlayers = true;
+
+        public int numTriggered { protected set; get; }
+
         [Tooltip("Time the players have to stand on triggers for the event to activate")]
         public float waitTime = 0f;
         private Coroutine co;
@@ -47,8 +52,8 @@ namespace ckp
         {
             if (isServer)
             {
-                if (debugInfo.finishedEvent)
-                    return;
+                //if (debugInfo.finishedEvent)
+                //    return;
 
                 if (mode == net_TriggerMode.MultipleTriggers )
                 {
@@ -76,31 +81,41 @@ namespace ckp
                 }
                 else
                 {
-                    int numTriggered = 0;
-                    for (int i = 0; i < triggers.Length; i++)
-                    {
-                        if (triggers[i].IsTriggered())
-                        {
-                            numTriggered++;
-                        }
-                    }
+                    numTriggered = triggers[0].numPlayersInTrigger;
+                    //for (int i = 0; i < triggers.Length; i++)
+                    //{
+                    //    if (triggers[i].IsTriggered())
+                    //    {
+                    //        numTriggered++;
+                    //    }
+                    //}
 
-                    if (numTriggered >= minPlayers)
+                    if (RequireMinPlayers)
                     {
-                        if (waitTime == 0)
-                            RpcExectuteMethods();
+                        if (numTriggered >= minPlayers)
+                        {
+                            if (waitTime == 0)
+                                RpcExectuteMethods();
+                            else
+                                co = StartCoroutine(waitTimer());
+                        }
                         else
-                            co = StartCoroutine(waitTimer());
+                        {
+                            if (co != null)
+                            {
+                                StopCoroutine(co);
+                                co = null;
+                            }
+                        }
+                        debugInfo.debugNumPlayers = numTriggered;
                     }
                     else
                     {
-                        if (co != null)
-                        {
-                            StopCoroutine(co);
-                            co = null;
-                        }
+                        RpcExectuteMethods();
                     }
-                    debugInfo.debugNumPlayers = numTriggered;
+
+
+
                 }
             }
 

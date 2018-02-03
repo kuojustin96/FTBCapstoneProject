@@ -29,7 +29,7 @@ namespace ckp
         {
             if(isServer)    
             {
-                Debug.Log("Meme");
+                Debug.Log("Player Entered Trigger");
                 net_PlayerScript playerComp = other.gameObject.GetComponent<net_PlayerScript>();
                 if (playerComp)
                 {
@@ -52,11 +52,12 @@ namespace ckp
                 {
                     numPlayersInTrigger--;
 
+                    eventScript.UpdateButton();
+
                     //Dont turn off trigger unless this is the last applicable player off.
                     if (numPlayersInTrigger < 1)
                     {
                         triggered = false;
-                        eventScript.UpdateButton();
                     }
                 }
 

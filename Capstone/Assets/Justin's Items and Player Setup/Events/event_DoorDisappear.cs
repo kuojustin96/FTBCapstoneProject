@@ -11,6 +11,7 @@ namespace jkuo
     {
         public float openSpeed = 1f;
         public GameObject door;
+        public float doorOpenY = 50f;
         private net_Event_MultiplayerTrigger eventTrigger;
 
         // Use this for initialization
@@ -26,7 +27,7 @@ namespace jkuo
 
         private IEnumerator OpenDoorCoroutine()
         {
-            Vector3 openPos = new Vector3(door.transform.position.x, door.transform.position.y + 50, door.transform.position.z);
+            Vector3 openPos = new Vector3(door.transform.position.x, door.transform.position.y + doorOpenY, door.transform.position.z);
             while(door.transform.position.y < openPos.y)
             {
                 door.transform.position = Vector3.MoveTowards(door.transform.position, openPos, Time.deltaTime * openSpeed);
