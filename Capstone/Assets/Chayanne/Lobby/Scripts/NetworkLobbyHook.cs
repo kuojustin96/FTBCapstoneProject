@@ -14,6 +14,7 @@ public class NetworkLobbyHook : LobbyHook
 
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
+        Debug.Log("Let's Go");
 
         int numPlayers = manager.numPlayers;
 

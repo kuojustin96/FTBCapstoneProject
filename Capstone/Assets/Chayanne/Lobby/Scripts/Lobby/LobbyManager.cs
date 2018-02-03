@@ -53,6 +53,12 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+        public MeshRenderer boxTopMesh;
+
+        public Animator boxTopAnimator;
+
+        public Animator sceneCameraAnimator;
+
         void Start()
         {
             s_Singleton = this;
@@ -62,7 +68,7 @@ namespace Prototype.NetworkLobby
             backButton.gameObject.SetActive(false);
             GetComponent<Canvas>().enabled = true;
 
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject.transform.parent);
 
             SetServerInfo("Offline", "None");
         }
@@ -384,7 +390,12 @@ namespace Prototype.NetworkLobby
                 }
             }
 
+            boxTopMesh.enabled = false;
+
             ServerChangeScene(playScene);
+
+
+
         }
 
         // ----------------- Client callbacks ------------------
