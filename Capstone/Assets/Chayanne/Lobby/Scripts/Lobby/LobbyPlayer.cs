@@ -89,6 +89,7 @@ namespace Prototype.NetworkLobby
 
         void SetupOtherPlayer()
         {
+            GetComponent<RectTransform>().localRotation = Quaternion.identity;
             nameInput.interactable = false;
             removePlayerButton.interactable = NetworkServer.active;
 
@@ -109,6 +110,7 @@ namespace Prototype.NetworkLobby
 
         void SetupLocalPlayer()
         {
+            GetComponent<RectTransform>().localRotation = Quaternion.identity;
             nameInput.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
