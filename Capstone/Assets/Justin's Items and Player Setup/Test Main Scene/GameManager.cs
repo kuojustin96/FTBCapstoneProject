@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public float sugarPickUpSpeed = 0.2f;
     public float dropoffDelay = 0.5f;
     public int maxSugarCarry = 10;
+	public static int curPlayers;
 
     public GameObject playerPrefab;
     public Material[] playerMats;
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour {
             g.SetActive(false);
         }
 
-        SetUpGame();
+		curPlayers = 1;
     }
 
 	// Use this for initialization
@@ -45,28 +46,22 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-    private void SetUpGame()
+	public void SetUpGame(GameObject player)
     {
-        if (GameSettings.instance != null)
-            numPlayers = GameSettings.instance.numPlayers;
-        else
-            numPlayers = 2;
-
-        for(int x = 0; x < numPlayers; x++)
-        {
+			int x = curPlayers;
             DropoffPoints[x].SetActive(true);
-            GameObject player = Instantiate(playerPrefab, new Vector3(DropoffPoints[x].transform.position.x, 
-                                                            DropoffPoints[x].transform.position.y + 1,
-                                                            DropoffPoints[x].transform.position.z), Quaternion.identity);
-            player.GetComponent<MeshRenderer>().material = playerMats[x];
+//            GameObject player = Instantiate(playerPrefab, new Vector3(DropoffPoints[x].transform.position.x, 
+//                                                            DropoffPoints[x].transform.position.y + 1,
+//                                                            DropoffPoints[x].transform.position.z), Quaternion.identity);
+//            player.GetComponent<MeshRenderer>().material = playerMats[x];
             PlayerClass ply = new PlayerClass();
             ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
-            player.GetComponent<KuoController>().player = ply;
+		player.GetComponent<playerClassAdd>().player = ply;
             playerList.Add(ply);
             playerDropOffDict.Add(DropoffPoints[x], ply);
 
             ScoreController.instance.SetUpScoreController(x);
-        }
+			curPlayers++;
     }
 
     public PlayerClass GetPlayer(int playerNum)
