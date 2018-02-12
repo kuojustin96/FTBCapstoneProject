@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114180273239490562}
   - component: {fileID: 114851560124142568}
   - component: {fileID: 114954311113464844}
+  - component: {fileID: 114462340355703272}
   m_Layer: 0
   m_Name: MultiplayerCapsule
   m_TagString: NetPlayer
@@ -64,6 +65,25 @@ GameObject:
   - component: {fileID: 23150428138131690}
   m_Layer: 0
   m_Name: pSphere11
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1254551667826046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4569063610540016}
+  - component: {fileID: 33186380937668978}
+  - component: {fileID: 135755814805563952}
+  - component: {fileID: 114677156115206054}
+  - component: {fileID: 114841307781906176}
+  m_Layer: 0
+  m_Name: SugarPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,12 +245,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1162454042834014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 561.62146, y: 260.83652, z: -582.54425}
-  m_LocalScale: {x: 5.710375, y: 5.7103734, z: 5.7103734}
+  m_LocalPosition: {x: 561.62146, y: 281.5, z: -582.54425}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4489803180374290}
   - {fileID: 4688051987890794}
   - {fileID: 224708060240383060}
+  - {fileID: 4569063610540016}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -255,7 +276,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384225928859828}
   m_LocalRotation: {x: 0.104397744, y: -0, z: -0, w: 0.9945356}
-  m_LocalPosition: {x: 1.72019, y: 5.227844, z: -2.8886678}
+  m_LocalPosition: {x: 0, y: 18.53, z: -11.39}
   m_LocalScale: {x: 0.57322955, y: 0.55503213, z: 0.16941428}
   m_Children: []
   m_Father: {fileID: 4560507918310346}
@@ -268,13 +289,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343432738655350}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.369121, y: 0, z: 2.1128387}
+  m_LocalPosition: {x: 0, y: 0, z: 2.1128387}
   m_LocalScale: {x: 1.7445014, y: 1.744502, z: 6.613016}
   m_Children:
   - {fileID: 4652441493621290}
   - {fileID: 4497564489593972}
   m_Father: {fileID: 4489803180374290}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4569063610540016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254551667826046}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.24, z: -0.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4462536852687458}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4621492272652412
 Transform:
@@ -335,8 +369,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1908541589971504}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1.013, z: 0}
-  m_LocalScale: {x: 7.3268747, y: 7.326878, z: 7.326876}
+  m_LocalPosition: {x: 0.0063474, y: -3.7348, z: 0.59184}
+  m_LocalScale: {x: 32.206894, y: 32.206882, z: 32.206882}
   m_Children:
   - {fileID: 4621492272652412}
   - {fileID: 4654238548156770}
@@ -601,6 +635,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1343432738655350}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &33186380937668978
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254551667826046}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33330503535327606
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -644,7 +685,7 @@ Rigidbody:
   m_GameObject: {fileID: 1162454042834014}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 3
+  m_Drag: 2
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -857,6 +898,30 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
+--- !u!114 &114462340355703272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162454042834014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed9986207490014aae44681019a4d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    playerNum: 0
+    playerGO: {fileID: 0}
+    dropoffPoint: {fileID: 0}
+    playerName: 
+    maxCanCarry: 10
+    sugarInBackpack: 0
+    currentPlayerScore: 0
+    isStunned: 0
+    isInvulnerable: 0
+    itemNum: 0
+    usingItem: 0
+  psp: {fileID: 114677156115206054}
 --- !u!114 &114482695893983850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -868,16 +933,16 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
+  m_TransformSyncMode: 1
   m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
+  m_SnapThreshold: 500
   m_InterpolateRotation: 2
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 2
 --- !u!114 &114623551445996016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -897,6 +962,17 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114677156115206054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254551667826046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e07afbbcad781a4a8ddaeb3db039e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114781125683810366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -908,6 +984,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e3a9855118ca041b94391b31c5bc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    playerNum: 0
+    playerGO: {fileID: 0}
+    dropoffPoint: {fileID: 0}
+    playerName: 
+    maxCanCarry: 10
+    sugarInBackpack: 0
+    currentPlayerScore: 0
+    isStunned: 0
+    isInvulnerable: 0
+    itemNum: 0
+    usingItem: 0
   projectile: {fileID: 1923577943668276, guid: b65905d2bb5aad947b5c3b1e6c56a62b, type: 2}
   gunBarrelPos: {fileID: 4489803180374290}
   gunObj: {fileID: 1362346637736746}
@@ -916,6 +1004,40 @@ MonoBehaviour:
   moveSpeedMult: 1
   jumpHeightMult: 1
   sugarCount: 0
+  moveSpeed: 500
+  jumpHeight: 7500
+--- !u!114 &114841307781906176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254551667826046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 10
+    i1: 6
+    i2: 59
+    i3: 105
+    i4: 103
+    i5: 83
+    i6: 190
+    i7: 4
+    i8: 42
+    i9: 138
+    i10: 174
+    i11: 28
+    i12: 198
+    i13: 18
+    i14: 237
+    i15: 42
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114851560124142568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -954,6 +1076,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384225928859828}
   m_Enabled: 1
+--- !u!135 &135755814805563952
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254551667826046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136171478484669014
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -963,8 +1097,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.5
+  m_Radius: 2.5
+  m_Height: 7.5
   m_Direction: 1
   m_Center: {x: 0, y: -0.25, z: -0.1}
 --- !u!222 &222900737684511322
