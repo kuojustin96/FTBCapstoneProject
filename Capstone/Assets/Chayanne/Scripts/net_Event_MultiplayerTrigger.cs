@@ -7,6 +7,9 @@ using UnityEngine.Events;
 
 namespace ckp
 {
+    //Script that runs events
+    //Knows how many players are on trigger(s) and runs events if the right number of players is reached
+
     public class net_Event_MultiplayerTrigger : NetworkBehaviour
     {
 
@@ -50,45 +53,47 @@ namespace ckp
         public DebugInfo debugInfo;
         public void UpdateButton()
         {
+
             if (isServer)
             {
-                //if (debugInfo.finishedEvent)
-                //    return;
+                if (debugInfo.finishedEvent)
+                    return;
 
                 if (mode == net_TriggerMode.MultipleTriggers )
                 {
-                    for (int i = 0; i < triggers.Length; i++)
+                    if (RequireMinPlayers)
                     {
-                        if (triggers[i] == null)
-                            continue;
-
-                        if (!(triggers[i].numPlayersInTrigger > 0))
+                        for (int i = 0; i < triggers.Length; i++)
                         {
-                            if (co != null)
-                            {
-                                StopCoroutine(co);
-                                co = null;
-                            }
+                            if (triggers[i] == null)
+                                continue;
 
-                            return;
+                            if (!(triggers[i].numPlayersInTrigger > 0))
+                            {
+                                if (co != null)
+                                {
+                                    StopCoroutine(co);
+                                    co = null;
+                                }
+
+                                return;
+                            }
                         }
+
+                        if (waitTime == 0)
+                            RpcExectuteMethods();
+                        else
+                            co = StartCoroutine(waitTimer());
+                    }
+                    else
+                    {
+                        RpcExectuteMethods();
                     }
 
-                    if (waitTime == 0)
-                        RpcExectuteMethods();
-                    else
-                        co = StartCoroutine(waitTimer());
                 }
                 else
                 {
                     numTriggered = triggers[0].numPlayersInTrigger;
-                    //for (int i = 0; i < triggers.Length; i++)
-                    //{
-                    //    if (triggers[i].IsTriggered())
-                    //    {
-                    //        numTriggered++;
-                    //    }
-                    //}
 
                     if (RequireMinPlayers)
                     {
@@ -113,9 +118,6 @@ namespace ckp
                     {
                         RpcExectuteMethods();
                     }
-
-
-
                 }
             }
 

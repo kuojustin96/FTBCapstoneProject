@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 namespace ckp
 {
-    
+    // Is on every object that is considered a trigger
+    // If a player enters or leaves a trigger, it tells net_EventMultiplayerTrigger
 
     public class net_Event_MultiplayerTrigger_Trigger : NetworkBehaviour
     {

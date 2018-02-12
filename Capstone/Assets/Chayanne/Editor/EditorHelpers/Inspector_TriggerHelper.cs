@@ -57,11 +57,11 @@ namespace ckp
 
             if(ts.mode == ckp.net_Event_MultiplayerTrigger.net_TriggerMode.MultipleTriggers)
             {
-                if(ts.triggers.Length > 4)
-                {
-                    Debug.LogError("Impossible Trigger Detected.",ts.gameObject);
-                    GUILayout.Label("Too many triggers. Will never trigger.");
-                }
+                //if(ts.triggers.Length > 4)
+                //{
+                //    Debug.LogError("Impossible Trigger Detected.",ts.gameObject);
+                //    GUILayout.Label("Too many triggers. Will never trigger.");
+                //}
                 if (ts.triggers.Length < 4)
                 {
                     if (ts.minPlayers < ts.triggers.Length - 1)
