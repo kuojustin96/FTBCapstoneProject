@@ -8,13 +8,13 @@ namespace ckp
     public class net_SliderValueScript : MonoBehaviour
     {
 
-        net_CapturePointScript cps;
+        net_Event_CapturePoint cps;
         Slider slider;
 
         void Start()
         {
             slider = GetComponent<Slider>();
-            cps = GetComponentInParent<net_CapturePointScript>();
+            cps = GetComponentInParent<net_Event_CapturePoint>();
         }
 
         // Update is called once per frame

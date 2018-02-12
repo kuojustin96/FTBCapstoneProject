@@ -34,16 +34,16 @@ public class KuoController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float downVel = Mathf.Abs(rb.velocity.y);
-        Debug.Log("downVel " + downVel);
-        if(downVel > fallThreshold)
-        {
-            //Fall stun duration calculation
-            float rbVelHalf = downVel / 2;
-            float x = 1 + (downVel - fallThreshold);
-            float stunDur = (rbVelHalf + (downVel / x)) - fallThreshold;
-            Debug.Log(stunDur);
-        }
+        //float downVel = Mathf.Abs(rb.velocity.y);
+        //Debug.Log("downVel " + downVel);
+        //if(downVel > fallThreshold)
+        //{
+        //    //Fall stun duration calculation
+        //    float rbVelHalf = downVel / 2;
+        //    float x = 1 + (downVel - fallThreshold);
+        //    float stunDur = (rbVelHalf + (downVel / x)) - fallThreshold;
+        //    Debug.Log(stunDur);
+        //}
 
 
         if (!player.isStunned)
