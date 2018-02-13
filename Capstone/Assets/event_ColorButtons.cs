@@ -42,6 +42,7 @@ namespace jkuo
         {
             if (isServer)
             {
+
                 for (int x = 0; x < eventTrigger.minPlayers; x++)
                 {
                     bool choosingButton = true;
@@ -64,18 +65,21 @@ namespace jkuo
             //}
         }
 
-
+        //Debug function
         public void AddToList()
         {
 
+            Debug.Log("TESTING");
+            buttons[0].GetComponent<MeshRenderer>().material.color = Color.cyan;
             activeButtons.Add(0);
         }
 
         public void CheckForCompletion()
         {
+            Debug.Log("checking...");
             if (isServer)
             {
-                Debug.Log("Active Buttons is " + activeButtons.Count);
+                Debug.Log("There are " + activeButtons.Count + " active buttons");
                 for (int x = 0; x < activeButtons.Count; x++)
                 {
                     Debug.Log(buttons[activeButtons[x]]);
@@ -86,7 +90,7 @@ namespace jkuo
                     }
                 }
 
-                //All correct buttons are pressed
+                //All correct buttons are pressed, remove them.
                 int listSize = activeButtons.Count;
                 for (int x = 0; x < listSize; x++)
                 {
@@ -114,18 +118,21 @@ namespace jkuo
         private void OnListChanged(SyncListInt.Operation op, int index)
         {
             Debug.Log("List Changed " + op);
+            Debug.Log("number is" +  activeButtons[index]);
+
+            int buttonToDeactivate = activeButtons[index];
 
             if (isServer)
             {
                 if (op == SyncList<int>.Operation.OP_ADD)
                 {
                     //CmdPaint(true, index);
-                    RpcChangeColor(true, index);
+                    RpcChangeColor(true, buttonToDeactivate);
                 }
                 else if (op == SyncList<int>.Operation.OP_REMOVEAT)
                 {
                     //CmdPaint(false, index);
-                    RpcChangeColor(false, index);
+                    RpcChangeColor(false, buttonToDeactivate);
                 }
             }
             //activeButtons.Dirty(index);

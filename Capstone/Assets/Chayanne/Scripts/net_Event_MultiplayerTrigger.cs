@@ -35,6 +35,8 @@ namespace ckp
         [Tooltip("Amount how much sugar to drop")]
         public int numSugarDrops = 10;
 
+        public bool isRepeatable = false;
+
         [Range(1, 4)]
         public int minPlayers = 2;
 
@@ -56,7 +58,7 @@ namespace ckp
 
             if (isServer)
             {
-                if (debugInfo.finishedEvent)
+                if (debugInfo.finishedEvent && !isRepeatable)
                     return;
 
                 if (mode == net_TriggerMode.MultipleTriggers )
