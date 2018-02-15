@@ -46,6 +46,9 @@ namespace ckp
         public float moveSpeed;
         public float jumpHeight;
 
+        public GameObject testItem;
+        private PlayerClass player;
+
         void InitializeGameSettings()
         {
 
@@ -68,7 +71,6 @@ namespace ckp
 
             //Initialize cursor lock
             lockMode = CursorLockMode.Locked;
-
             ////Init position.
             //Vector3 rot = transform.localRotation.eulerAngles;
             //rotY = rot.y;
@@ -201,6 +203,40 @@ namespace ckp
             }
         }
 
+        void OnTriggerEnter(Collider other)
+        {
+            player = GetComponent<playerClassAdd>().player;
+            Debug.Log(player.dropoffPoint);
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            //Debug.Log(player.dropoffPoint);
+            if (isLocalPlayer)
+            {
+                if (other.gameObject.tag == "Dropoff Point")
+                {
+                    if (other.gameObject == player.dropoffPoint && player.currentPlayerScore >= 3)
+                    {
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            CmdGiveItem();
+                        }
+                    }
+                }
+            }
+        }
+
+        [Command]
+        void CmdGiveItem()
+        {
+
+            //Need to do some magic bullshit to make this smooth. ie: Make the bullet simulate physics clientside from where the shot is fired.
+            GameObject clone = Instantiate(testItem, gunBarrelPos.position, Quaternion.identity, transform);
+            NetworkServer.Spawn(clone);
+            //clone.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 50000);
+        }
+
         void MouseRotation()
         {
             if (isPaused)
@@ -239,7 +275,6 @@ namespace ckp
         [Command]
         void CmdSpawnBullet()
         {
-
             //Need to do some magic bullshit to make this smooth. ie: Make the bullet simulate physics clientside from where the shot is fired.
             GameObject clone;
             clone = Instantiate(projectile, gunBarrelPos.position, gunBarrelPos.transform.rotation);
