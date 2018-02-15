@@ -131,6 +131,8 @@
      <Compile Include="Assets\PostProcessing\Editor\Utils\EditorResources.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Editor\SplineEditor.cs" />
+     <Compile Include="Assets\SplineMesh\Scripts\Editor\SplineExtrusionEditor.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity New/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

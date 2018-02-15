@@ -55,9 +55,9 @@ namespace Prototype.NetworkLobby
 
         public MeshRenderer boxTopMesh;
 
-        public Animator boxTopAnimator;
+        public GameObject lobbySpawn;
 
-        public Animator sceneCameraAnimator;
+        public LobbyAnimationScript lobbyAnims;
 
         void Start()
         {
@@ -67,6 +67,9 @@ namespace Prototype.NetworkLobby
 
             backButton.gameObject.SetActive(false);
             GetComponent<Canvas>().enabled = true;
+
+            lobbyAnims = GetComponent<LobbyAnimationScript>();
+            Debug.Assert(lobbyAnims);
 
             DontDestroyOnLoad(gameObject.transform.parent);
 
@@ -238,8 +241,10 @@ namespace Prototype.NetworkLobby
 
         //===================
 
-        public override void OnStartHost()
+        public override void OnStartHost()  
         {
+            //lobbyAnims.PlayOpenBoxAnimation();
+
             base.OnStartHost();
 
             ChangeTo(lobbyPanel);
@@ -281,6 +286,10 @@ namespace Prototype.NetworkLobby
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
+            //Create our 3D Player here
+    
+
+
             GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
 
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
@@ -391,12 +400,9 @@ namespace Prototype.NetworkLobby
             }
 
             boxTopMesh.enabled = false;
-
             ServerChangeScene(playScene);
-
-
-
         }
+    
 
         // ----------------- Client callbacks ------------------
 
@@ -428,5 +434,13 @@ namespace Prototype.NetworkLobby
             ChangeTo(mainMenuPanel);
             infoPanel.Display("Cient error : " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
         }
+
+        public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+        {
+            base.OnServerAddPlayer(conn,playerControllerId);
+                
+            Debug.Log(conn.playerControllers[0].gameObject.name);
+        }
+
     }
 }
