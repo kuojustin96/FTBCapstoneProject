@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
             playerList.Add(ply);
             playerDropOffDict.Add(DropoffPoints[x], ply);
 
-            ScoreController.instance.SetUpScoreController(x);
+//            ScoreController.instance.SetUpScoreController(x);
 			curPlayers++;
     }
 
