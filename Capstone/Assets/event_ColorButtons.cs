@@ -68,7 +68,6 @@ namespace jkuo
         //Debug function
         public void AddToList()
         {
-
             Debug.Log("TESTING");
             buttons[0].GetComponent<MeshRenderer>().material.color = Color.cyan;
             activeButtons.Add(0);

@@ -123,13 +123,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Capstone.CSharp.csproj">
-      <Project>{559A0251-2FFF-F49E-257F-57435946CB01}</Project>
-      <Name>Capstone.CSharp</Name>
-    </ProjectReference>
     <ProjectReference Include="Capstone.CSharp.Plugins.csproj">
       <Project>{E489E3F9-1507-F5E0-67B2-D5A5F74D81D4}</Project>
       <Name>Capstone.CSharp.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="Capstone.CSharp.csproj">
+      <Project>{559A0251-2FFF-F49E-257F-57435946CB01}</Project>
+      <Name>Capstone.CSharp</Name>
     </ProjectReference>
     <ProjectReference Include="Capstone.CSharp.Editor.Plugins.csproj">
       <Project>{F6E9BADC-AA34-030D-FDE1-DFC1D6EE5D58}</Project>

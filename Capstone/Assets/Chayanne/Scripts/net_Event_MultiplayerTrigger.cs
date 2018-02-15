@@ -37,8 +37,8 @@ namespace ckp
 
         public bool isRepeatable = false;
 
-        [Range(1, 4)]
-        public int minPlayers = 2;
+        [Range(0, 4)]
+        public int minPlayers = 1;
 
         [Tooltip("Require minimum players in order to run functions")]
         public bool RequireMinPlayers = true;
@@ -51,15 +51,14 @@ namespace ckp
 
         [Space(10)]
         public UnityEvent completionMethods;
-
         public DebugInfo debugInfo;
         public void UpdateButton()
         {
 
             if (isServer)
             {
-                if (debugInfo.finishedEvent && !isRepeatable)
-                    return;
+//                if (debugInfo.finishedEvent && !isRepeatable)
+//                    return;
 
                 if (mode == net_TriggerMode.MultipleTriggers )
                 {
@@ -82,8 +81,11 @@ namespace ckp
                             }
                         }
 
-                        if (waitTime == 0)
-                            RpcExectuteMethods();
+
+						if (waitTime == 0) {
+							Debug.Log ("executeCheck1");
+							RpcExectuteMethods ();
+						}
                         else
                             co = StartCoroutine(waitTimer());
                     }
@@ -150,6 +152,7 @@ namespace ckp
         [ClientRpc]
         private void RpcExectuteMethods()
         {
+			
             debugInfo.finishedEvent = true;
             completionMethods.Invoke();
         }
