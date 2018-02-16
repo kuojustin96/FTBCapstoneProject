@@ -34,11 +34,10 @@ public class SugarManager : NetworkBehaviour {
     {
         if (instance == null)
             instance = this;
-
-        SetUpSugar();
     }
 
-    private void SetUpSugar()
+    [Command]
+    private void CmdSetUpSugar()
     {
         for(int x = 0; x < numSugarPool; x++)
         {
@@ -80,10 +79,11 @@ public class SugarManager : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        CmdSetUpSugar();
+    }
 
-    public void EnableNewSugar(GameObject sugar)
+    [Command]
+    public void CmdEnableNewSugar(GameObject sugar)
     {
         foreach(SugarSpawnSpot s in activeSpots)
         {
