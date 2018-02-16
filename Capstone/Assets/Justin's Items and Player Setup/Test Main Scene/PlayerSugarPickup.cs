@@ -196,7 +196,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	private IEnumerator PickupSugarAni(GameObject sugar)
 	{
-		SugarManager.instance.EnableNewSugar(sugar);
+		SugarManager.instance.CmdEnableNewSugar(sugar);
 
 		sugar.GetComponent<SimpleRotate>().enabled = false;
 		sugar.GetComponent<BoxCollider>().enabled = false;
