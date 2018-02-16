@@ -206,7 +206,7 @@ namespace ckp
         void OnTriggerEnter(Collider other)
         {
             player = GetComponent<playerClassAdd>().player;
-            Debug.Log(player.dropoffPoint);
+//            Debug.Log(player.dropoffPoint);
         }
 
         void OnTriggerStay(Collider other)
