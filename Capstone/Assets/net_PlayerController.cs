@@ -16,18 +16,25 @@ namespace jkuo
         private CursorLockMode lockMode;
 
         //movement
-        public float speed = 20f;
+        [Header("Movement")]
+        public float speed = 50f;
         private Vector3 moveHori;
         private Vector3 moveVert;
         private Vector3 velocity = Vector3.zero;
 
         //look rotation
+        [Header("Player / Camera Rotation")]
+        public Transform cameraCube;
         public float lookSensitivity = 3f;
+        [Range(10, 80)]
+        public float yViewAngle = 30f;
         private float xRot;
         private float yRot;
         private Vector3 rotation = Vector3.zero;
+        private bool inFreeLook = false;
 
         //jump
+        [Header("Jumping")]
         public float jumpForce = 1000f;
         public float gravity = 100f;
         public LayerMask jumpMask;
@@ -54,6 +61,15 @@ namespace jkuo
 
         private void UpdateCursorLock()
         {
+#if (DEBUG_MODE)
+            if (Input.GetMouseButton(0))
+            {
+                isPaused = false;
+                Cursor.visible = false;
+                lockMode = CursorLockMode.Locked;
+            }
+#endif
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 isPaused = !isPaused;
@@ -81,55 +97,83 @@ namespace jkuo
                 UpdateCursorLock();
 
                 //Movement
-                moveHori = transform.right * Input.GetAxis("Horizontal");
-                moveVert = transform.forward * Input.GetAxis("Vertical");
-                velocity = (moveHori + moveVert) * speed;
+                Movement();
 
                 //Camera Rotation
-                yRot = Input.GetAxisRaw("Mouse X");
-                rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
-                //cam.transform.RotateAround(transform.position, Vector3.up, lookSensitivity * Time.fixedDeltaTime);
-
-                //float mouseX = Input.GetAxis("Mouse X");
-                //float mouseY = -Input.GetAxis("Mouse Y");
-
-                //xRot += mouseX * lookSensitivity * Time.deltaTime;
-                //yRot += mouseY * lookSensitivity * Time.deltaTime;
-
-                //Quaternion.Euler(xRot, yRot, 0.0f);
+                LookCamera();
 
                 //Jump
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
-                {
-                    isGrounded = true;
-                }
-                else
-                {
-                    isGrounded = false;
-                    //apply gravity
-                    rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
-                }
-
-                if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-                {
-                    _jumpForce = transform.up * (jumpForce * 1000);
-                    rb.AddForce(_jumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-                }
+                Jumping();
             }
         }
 
-        // Update is called once per frame
-        void FixedUpdate()
+        private void Movement()
         {
-            if (isLocalPlayer)
-            {
-                //Movement
-                if (velocity != Vector3.zero)
-                    rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            moveHori = transform.right * Input.GetAxis("Horizontal");
+            moveVert = transform.forward * Input.GetAxis("Vertical");
+            velocity = (moveHori + moveVert) * speed;
 
-                //Rotation
+            if (velocity != Vector3.zero)
+                rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        }
+
+        private void LookCamera()
+        {
+
+            xRot = Input.GetAxisRaw("Mouse Y");
+            yRot = Input.GetAxisRaw("Mouse X");
+
+            if (Input.GetKey(KeyCode.LeftAlt))
+                inFreeLook = true;
+
+            if (Input.GetKeyUp(KeyCode.LeftAlt) && inFreeLook)
+            {
+                inFreeLook = false;
+                cameraCube.localEulerAngles = Vector3.zero;
+            }
+
+            if (inFreeLook)
+            {
+                rotation = cameraCube.localEulerAngles + (new Vector3(-xRot, yRot, 0f) * lookSensitivity);
+            }
+            else
+            {
+                rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+            }
+
+            if (!inFreeLook)
+                rotation = cameraCube.localEulerAngles + (new Vector3(-xRot, 0f, 0f) * lookSensitivity);
+
+            float minYViewAngle = 360 - yViewAngle;
+            float halfPoint = (minYViewAngle + yViewAngle) / 2;
+
+            if(rotation.x > yViewAngle && rotation.x <= halfPoint)
+                rotation.x = yViewAngle;
+            else if(rotation.x < minYViewAngle && rotation.x > halfPoint)
+                rotation.x = -yViewAngle;
+
+            cameraCube.localEulerAngles = rotation;
+        }
+
+        private void Jumping()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded = false;
+                //apply gravity
+                rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                _jumpForce = transform.up * (jumpForce * 1000);
+                rb.AddForce(_jumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
             }
         }
     }

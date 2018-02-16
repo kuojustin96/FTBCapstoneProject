@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class SugarManager : MonoBehaviour {
+public class SugarManager : NetworkBehaviour {
 
     public static SugarManager instance = null;
 
@@ -42,6 +43,7 @@ public class SugarManager : MonoBehaviour {
         for(int x = 0; x < numSugarPool; x++)
         {
             GameObject sugar = Instantiate(sugarPrefab, Vector3.zero, Quaternion.identity, transform);
+            NetworkServer.Spawn(sugar);
             sugar.SetActive(false);
             inactiveSugar.Add(sugar);
         }
@@ -80,11 +82,6 @@ public class SugarManager : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void EnableNewSugar(GameObject sugar)
     {
@@ -110,6 +107,7 @@ public class SugarManager : MonoBehaviour {
         if (inactiveSugar.Count == 0)
         {
             GameObject sugar = Instantiate(sugarPrefab, inactiveSpots[x].spawn.position, Quaternion.identity);
+            NetworkServer.Spawn(sugar);
             activeSugar.Add(sugar);
             inactiveSpots[x].sugarBeingHeld = sugar;
             activeSpots.Add(inactiveSpots[x]);
