@@ -22,7 +22,7 @@ public class SugarManager : NetworkBehaviour {
     public class SugarSpawnSpot
     {
         public Transform spawn;
-        [HideInInspector]
+        //[HideInInspector]
         public GameObject sugarBeingHeld;
     }
 
@@ -36,15 +36,10 @@ public class SugarManager : NetworkBehaviour {
             instance = this;
     }
 
-    void Start()
-    {
-        CmdSetUpSugar();
-    }
-
     [Command]
-    public void CmdSetUpSugar()
+    private void CmdSetUpSugar()
     {
-        for (int x = 0; x < numSugarPool; x++)
+        for(int x = 0; x < numSugarPool; x++)
         {
             GameObject sugar = Instantiate(sugarPrefab, Vector3.zero, Quaternion.identity, transform);
             NetworkServer.Spawn(sugar);
@@ -80,6 +75,11 @@ public class SugarManager : NetworkBehaviour {
                 count++;
             }
         }
+    }
+
+	// Use this for initialization
+	void Start () {
+        CmdSetUpSugar();
     }
 
     [Command]

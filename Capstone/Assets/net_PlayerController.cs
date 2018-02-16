@@ -6,11 +6,12 @@ using UnityEngine.Networking;
 namespace jkuo
 {
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(playerClassAdd))]
     public class net_PlayerController : NetworkBehaviour
     {
 
         public Camera cam;
-
+        private PlayerClass player;
         private Rigidbody rb;
         private bool isPaused = false;
         private CursorLockMode lockMode;
@@ -45,6 +46,7 @@ namespace jkuo
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            player = GetComponent<playerClassAdd>().player;
             LocalCameraCheck();
             lockMode = CursorLockMode.Locked;
 
@@ -96,14 +98,17 @@ namespace jkuo
             {
                 UpdateCursorLock();
 
-                //Movement
-                Movement();
+                if (!player.isStunned)
+                {
+                    //Movement
+                    Movement();
 
-                //Camera Rotation
-                LookCamera();
+                    //Camera Rotation
+                    LookCamera();
 
-                //Jump
-                Jumping();
+                    //Jump
+                    Jumping();
+                }
             }
         }
 
@@ -175,6 +180,18 @@ namespace jkuo
                 _jumpForce = transform.up * (jumpForce * 1000);
                 rb.AddForce(_jumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
             }
+        }
+
+        public void StunPlayer(float duration)
+        {
+            StartCoroutine(StunPlayerCoroutine(duration));
+        }
+
+        private IEnumerator StunPlayerCoroutine(float duration)
+        {
+            player.isStunned = true;
+            yield return new WaitForSeconds(duration);
+            player.isStunned = false;
         }
     }
 }
