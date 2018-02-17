@@ -208,6 +208,8 @@
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
+    <Compile Include="Assets\LobbyAnimationScrip.cs" />
+    <Compile Include="Assets\LobbyAnimationScript.cs" />
     <Compile Include="Assets\net_PlayerController.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
@@ -256,6 +258,16 @@
     <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Prototype\net_list.cs" />
     <Compile Include="Assets\Prototype\playerClassAdd.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\MeshBender.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\SplineNode.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleFollowSpline.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExamplePipe.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleRailling.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\SplineExtrusion.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

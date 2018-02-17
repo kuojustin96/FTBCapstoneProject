@@ -217,8 +217,10 @@
      <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
      <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
-     <Compile Include="Assets\Prototype\net_list.cs" />
-     <Compile Include="Assets\Prototype\playerClassAdd.cs" />
+     <Compile Include="Assets\Prototype\ScriptsForPrototypes\attack.cs" />
+     <Compile Include="Assets\Prototype\ScriptsForPrototypes\attackTrigger.cs" />
+     <Compile Include="Assets\Prototype\ScriptsForPrototypes\net_list.cs" />
+     <Compile Include="Assets\Prototype\ScriptsForPrototypes\playerClassAdd.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\MeshBender.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
