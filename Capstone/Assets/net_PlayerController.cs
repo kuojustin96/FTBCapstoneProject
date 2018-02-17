@@ -189,6 +189,7 @@ namespace jkuo
 
         private IEnumerator StunPlayerCoroutine(float duration)
         {
+			Debug.Log ("stun");
             player.isStunned = true;
             yield return new WaitForSeconds(duration);
             player.isStunned = false;
