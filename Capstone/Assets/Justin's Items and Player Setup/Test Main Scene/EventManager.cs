@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EventManager : MonoBehaviour {
+public class EventManager : NetworkBehaviour {
 
     public int eventsToSpawn = 4;
     public float minWaitDuration = 10f;
@@ -15,11 +16,31 @@ public class EventManager : MonoBehaviour {
     public List<GameObject> eventSpawnSpots = new List<GameObject>();
     private List<GameObject> activeSpawnSpots = new List<GameObject>();
 
+    [System.Serializable]
+    public class Events
+    {
+        public string name;
+        public GameObject eventGO;
+        [Tooltip("Minimum players required for this event to pool")]
+        [Range(1,4)]
+        public float requiredPlayersToSpawn = 2;
+        [Tooltip("If the event can have a variable number of players to be successful")]
+        public bool randomNumPlayers = false;
+    }
+
+    public Events[] ListOfEvents;
+
 	// Use this for initialization
 	void Start () {
-        foreach(GameObject g in events)
+        //CmdSetUpEvents();
+    }
+
+    [Command]
+    private void CmdSetUpEvents()
+    {
+        foreach (Events e in ListOfEvents)
         {
-            g.SetActive(false);
+            e.eventGO.SetActive(false);
         }
 
         //Fail safe
@@ -33,7 +54,7 @@ public class EventManager : MonoBehaviour {
             eventsToSpawn = testCase;
 
 
-        for(int x = 0; x < eventsToSpawn; x++)
+        for (int x = 0; x < eventsToSpawn; x++)
         {
             int randSpot = Random.Range(0, eventSpawnSpots.Count);
             int randEvent = Random.Range(0, events.Count);
@@ -46,6 +67,12 @@ public class EventManager : MonoBehaviour {
             eventSpawnSpots.Remove(eventSpawnSpots[randSpot]);
         }
 
+        CmdactivateEvent();
+    }
+
+    [Command]
+    private void CmdactivateEvent()
+    {
         StartCoroutine(activateEvent());
     }
 
@@ -60,7 +87,7 @@ public class EventManager : MonoBehaviour {
         counter++;
 
         if (counter < eventsToSpawn)
-            StartCoroutine(activateEvent());
+            CmdactivateEvent();
         else
             Debug.Log("Finished");
     }
