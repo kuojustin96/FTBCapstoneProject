@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EventManager : MonoBehaviour {
+public class EventManager : NetworkBehaviour {
 
     public int eventsToSpawn = 4;
     public float minWaitDuration = 10f;
@@ -14,6 +15,19 @@ public class EventManager : MonoBehaviour {
 
     public List<GameObject> eventSpawnSpots = new List<GameObject>();
     private List<GameObject> activeSpawnSpots = new List<GameObject>();
+
+    [System.Serializable]
+    public class Events
+    {
+        public string name;
+        public GameObject eventGO;
+        [Tooltip("Minimum players required for this event to spawn")]
+        public float playersRequiredToSpawn;
+        [Tooltip("Randomize players required to complete event")]
+        public bool randomPlayersRequired;
+    }
+
+    public Events[] ListOfEvents;
 
 	// Use this for initialization
 	void Start () {
@@ -46,10 +60,16 @@ public class EventManager : MonoBehaviour {
             eventSpawnSpots.Remove(eventSpawnSpots[randSpot]);
         }
 
-        StartCoroutine(activateEvent());
+        activateEvent();
     }
 
-    private IEnumerator activateEvent()
+    [Command]
+    private void activateEvent()
+    {
+        StartCoroutine(activateEventCoroutine());
+    }
+
+    private IEnumerator activateEventCoroutine()
     {
         float waitTime = Random.Range(minWaitDuration, maxWaitDuration);
         yield return new WaitForSeconds(waitTime);
@@ -60,7 +80,7 @@ public class EventManager : MonoBehaviour {
         counter++;
 
         if (counter < eventsToSpawn)
-            StartCoroutine(activateEvent());
+            activateEvent();
         else
             Debug.Log("Finished");
     }
