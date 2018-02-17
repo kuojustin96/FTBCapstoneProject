@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class attackTrigger : MonoBehaviour {
+using jkuo;
+public class attackTrigger : NetworkBehaviour {
 	void Start(){
 		Debug.Log ("triggerActive");
 	}
@@ -11,7 +13,14 @@ public class attackTrigger : MonoBehaviour {
 		
 			if (other.tag == "NetPlayer"){
 			Debug.Log(other);
+			//other.GetComponent<net_PlayerController> ().StunPlayer (10f);
+
+			RpcStun (other);
 			}
 		}
+	[ClientRpc]
+	void RpcStun(Collider other){
+		other.GetComponent<net_PlayerController> ().StunPlayer (10f);
+	}
 	}
 
