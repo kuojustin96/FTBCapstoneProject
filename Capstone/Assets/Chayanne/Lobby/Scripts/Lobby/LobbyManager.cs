@@ -70,7 +70,7 @@ namespace Prototype.NetworkLobby
 
             lobbyAnims = GetComponent<LobbyAnimationScript>();
             Debug.Assert(lobbyAnims);
-
+            DontDestroyOnLoad(gameObject.transform.parent);
 
 
             SetServerInfo("Offline", "None");
@@ -362,6 +362,8 @@ namespace Prototype.NetworkLobby
 
         public override void OnLobbyServerPlayersReady()
         {
+            
+
 			bool allready = true;
 			for(int i = 0; i < lobbySlots.Length; ++i)
 			{
@@ -414,7 +416,6 @@ namespace Prototype.NetworkLobby
         {
             boxTopMesh.enabled = false;
 
-            DontDestroyOnLoad(gameObject.transform.parent);
 
             ServerChangeScene(playScene);
         }

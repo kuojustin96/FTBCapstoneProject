@@ -5,22 +5,22 @@ using UnityEngine.Networking;
 
 using jkuo;
 public class attackTrigger : NetworkBehaviour {
-	void Start(){
-		Debug.Log ("triggerActive");
-	}
+	//void Start(){
+	//	Debug.Log ("triggerActive");
+	//}
 
-	void OnTriggerEnter(Collider other){
+	//void OnTriggerEnter(Collider other){
 		
-			if (other.tag == "NetPlayer"){
-			Debug.Log(other);
-			//other.GetComponent<net_PlayerController> ().StunPlayer (10f);
+	//		if (other.tag == "NetPlayer"){
+	//		Debug.Log(other);
+	//		//other.GetComponent<net_PlayerController> ().StunPlayer (10f);
 
-			RpcStun (other);
-			}
-		}
-	[ClientRpc]
-	void RpcStun(Collider other){
-		other.GetComponent<net_PlayerController> ().StunPlayer (10f);
-	}
+	//		RpcStun (other);
+	//		}
+	//	}
+	//[ClientRpc]
+	//void RpcStun(Collider other){
+	//	other.GetComponent<net_PlayerController> ().StunPlayer (10f);
+	//}
 	}
 
