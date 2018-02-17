@@ -6,6 +6,7 @@ public class LobbyAnimationScript : MonoBehaviour {
 
     public Animator DoorAnimator;
     public Animator BoxtopAnimator;
+    public Animator CameraAnimator;
 
     // Use this for initialization
     void Start () {
@@ -25,11 +26,23 @@ public class LobbyAnimationScript : MonoBehaviour {
 
     public void PlayOpenBoxAnimation()
     {
-        //TODO: Fix Menu rigidbodies on repeat
 
         BoxtopAnimator.SetBool("isOpen", true);
 
 
+    }
+
+    public void PlayCloseBoxAnimation()
+    {
+
+        BoxtopAnimator.SetBool("isOpen", false);
+
+
+    }
+
+    public void PlayCameraZoom()
+    {
+        CameraAnimator.SetBool("DoZoom", true);
     }
 
 }

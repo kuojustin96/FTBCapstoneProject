@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Prototype.NetworkLobby
 {
@@ -36,6 +37,7 @@ namespace Prototype.NetworkLobby
 
         public void LeaveLobby()
         {
+
             Debug.Log("isHosting is " + isHosting);
             if (isHosting)
             {
@@ -53,6 +55,7 @@ namespace Prototype.NetworkLobby
                 lobbyManager.mainMenuPanel.gameObject.SetActive(true);
             }
 
+            SceneManager.LoadScene(0);
         }
 
         public void OnClickJoin()
