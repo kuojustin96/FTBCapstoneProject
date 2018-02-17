@@ -16,7 +16,7 @@ public class net_list : NetworkBehaviour {
 	void Start(){
 		eventTrigger = GetComponent<net_Event_MultiplayerTrigger> ();
 		randomizeTwo ();
-
+		Debug.Log (isServer);
 
 
 		//If you get down here, then you know all the correct buttons are pressed
