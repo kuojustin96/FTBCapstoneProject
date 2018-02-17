@@ -71,7 +71,7 @@ namespace Prototype.NetworkLobby
             lobbyAnims = GetComponent<LobbyAnimationScript>();
             Debug.Assert(lobbyAnims);
 
-            DontDestroyOnLoad(gameObject.transform.parent);
+
 
             SetServerInfo("Offline", "None");
         }
@@ -241,18 +241,26 @@ namespace Prototype.NetworkLobby
 
         //===================
 
-        public override void OnStartHost()  
+        public override void OnStartHost()
         {
             //lobbyAnims.PlayOpenBoxAnimation();
 
             base.OnStartHost();
+            TransitionToLobbyMenu();
+
 
             ChangeTo(lobbyPanel);
             backDelegate = StopHostClbk;
             SetServerInfo("Hosting", networkAddress);
         }
 
-		public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
+        private void TransitionToLobbyMenu()
+        {
+            lobbyAnims.PlayOpenBoxAnimation();
+            lobbyAnims.PlayCameraZoom();
+        }
+
+        public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
 		{
 			base.OnMatchCreate(success, extendedInfo, matchInfo);
             _currentMatchID = (System.UInt64)matchInfo.networkId;
@@ -399,16 +407,25 @@ namespace Prototype.NetworkLobby
                 }
             }
 
+            TransitionScene();
+        }
+
+        private void TransitionScene()
+        {
             boxTopMesh.enabled = false;
+
+            DontDestroyOnLoad(gameObject.transform.parent);
+
             ServerChangeScene(playScene);
         }
-    
+
 
         // ----------------- Client callbacks ------------------
 
         public override void OnClientConnect(NetworkConnection conn)
         {
             base.OnClientConnect(conn);
+            TransitionToLobbyMenu();
 
             infoPanel.gameObject.SetActive(false);
 
