@@ -181,18 +181,24 @@ namespace jkuo
                 rb.AddForce(_jumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
             }
         }
-
-        public void StunPlayer(float duration)
+		[ClientRpc]
+        public void RpcStunPlayer(float duration)
         {
-            StartCoroutine(StunPlayerCoroutine(duration));
+			Debug.Log ("cmdStunPlayer");
+            StunPlayerCoroutine(duration);
         }
 
-        private IEnumerator StunPlayerCoroutine(float duration)
+
+		public void StunPlayerCoroutine(float duration)
         {
 			Debug.Log ("stun");
             player.isStunned = true;
-            yield return new WaitForSeconds(duration);
-            player.isStunned = false;
+			Invoke ("StunWait", duration);
+            
         }
+
+		public void StunWait(){
+			player.isStunned = false;
+		}
     }
 }

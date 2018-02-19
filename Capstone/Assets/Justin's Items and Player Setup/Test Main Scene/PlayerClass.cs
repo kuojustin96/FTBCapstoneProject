@@ -15,6 +15,7 @@ public class PlayerClass {
     public bool isInvulnerable = false;
     public CraftingController.CraftableItem item;
     public int itemNum;
+	public int itemCharges;
     public bool usingItem = false;
 
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
