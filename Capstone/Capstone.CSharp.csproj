@@ -90,6 +90,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CameraShake.cs" />
     <Compile Include="Assets\Chayanne\Lobby\Scripts\DraggablePanel.cs" />
     <Compile Include="Assets\Chayanne\Lobby\Scripts\EventSystemChecker.cs" />
     <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />

@@ -34,6 +34,7 @@ namespace ckp
 
         [Tooltip("Amount how much sugar to drop")]
         public int numSugarDrops = 10;
+        public Transform sugarDropPos;
 
         public bool isRepeatable = false;
 

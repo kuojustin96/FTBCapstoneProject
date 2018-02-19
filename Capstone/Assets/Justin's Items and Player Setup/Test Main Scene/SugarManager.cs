@@ -15,6 +15,8 @@ public class SugarManager : NetworkBehaviour {
     private GameObject sugarPrefab;
     [SerializeField]
     private int numSugarInLvl = 30;
+    [SerializeField]
+    private float timeBetweenSugarDrop = 0.1f;
     private List<GameObject> inactiveSugar = new List<GameObject>();
     private List<GameObject> activeSugar = new List<GameObject>();
 
@@ -96,6 +98,59 @@ public class SugarManager : NetworkBehaviour {
                 return;
             }
         }
+    }
+
+    [Command]
+    public void CmdDropSugar(int num, Vector3 dropPosition)
+    {
+        StartCoroutine(DropSugarCoroutine(num, dropPosition));
+    }
+
+    private IEnumerator DropSugarCoroutine(int num, Vector3 dropPosition)
+    {
+        int counter = 0;
+        Vector3 topPos = new Vector3(dropPosition.x, dropPosition.y + 1, dropPosition.z);
+        while (counter < num)
+        {
+            GameObject g = inactiveSugar[0];
+            g.transform.parent = null;
+            //g.transform.localScale = Vector3.zero;
+            g.SetActive(true);
+            activeSugar.Add(g);
+            inactiveSugar.Remove(g);
+
+            Vector3 targetPos = dropPosition + (Random.onUnitSphere * 3f);
+            //StartCoroutine(DropSugarMovement(g, targetPos, topPos));
+            g.transform.position = targetPos;
+
+            counter++;
+
+            yield return new WaitForSeconds(timeBetweenSugarDrop);
+        }
+    }
+
+    private IEnumerator DropSugarMovement(GameObject sugar, Vector3 targetPos, Vector3 topPos)
+    {
+        int counter = 0;
+        while(counter < 10)
+        {
+            sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, topPos, Time.deltaTime * 2f);
+            sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.one * 15, Time.deltaTime * 1f);
+            counter++;
+            yield return null;
+        }
+
+        counter = 0;
+
+        while(counter < 10)
+        {
+            sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, targetPos, Time.deltaTime * 2f);
+            sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.one * 15, Time.deltaTime * 1f);
+            counter++;
+            yield return null;
+        }
+
+        sugar.transform.localScale = Vector3.one * 15;
     }
 
     private IEnumerator EnableNewSugarCoroutine(SugarSpawnSpot s)
