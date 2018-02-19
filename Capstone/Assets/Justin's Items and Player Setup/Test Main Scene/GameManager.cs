@@ -48,20 +48,20 @@ public class GameManager : MonoBehaviour {
 
 	public void SetUpGame(GameObject player)
     {
-			int x = curPlayers;
-            DropoffPoints[x].SetActive(true);
+		int x = curPlayers;
+        DropoffPoints[x].SetActive(true);
 //            GameObject player = Instantiate(playerPrefab, new Vector3(DropoffPoints[x].transform.position.x, 
 //                                                            DropoffPoints[x].transform.position.y + 1,
 //                                                            DropoffPoints[x].transform.position.z), Quaternion.identity);
 //            player.GetComponent<MeshRenderer>().material = playerMats[x];
-            PlayerClass ply = new PlayerClass();
-            ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
+        PlayerClass ply = new PlayerClass();
+        ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
 		player.GetComponent<playerClassAdd>().player = ply;
-            playerList.Add(ply);
-            playerDropOffDict.Add(DropoffPoints[x], ply);
+        playerList.Add(ply);
+        playerDropOffDict.Add(DropoffPoints[x], ply);
 
 //            ScoreController.instance.SetUpScoreController(x);
-			curPlayers++;
+	    curPlayers++;
     }
 
     public PlayerClass GetPlayer(int playerNum)

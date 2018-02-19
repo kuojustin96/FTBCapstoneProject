@@ -11,7 +11,7 @@ public class EventManager : NetworkBehaviour {
     private int counter = 0;
 
     public List<GameObject> events = new List<GameObject>();
-    private List<GameObject> activeEvents = new List<GameObject>();
+    private List<GameObject> activeEvents2 = new List<GameObject>();
 
     public List<GameObject> eventSpawnSpots = new List<GameObject>();
     private List<GameObject> activeSpawnSpots = new List<GameObject>();
@@ -24,11 +24,11 @@ public class EventManager : NetworkBehaviour {
         [Tooltip("Minimum players required for this event to pool")]
         [Range(1,4)]
         public float requiredPlayersToSpawn = 2;
-        [Tooltip("If the event can have a variable number of players to be successful")]
-        public bool randomNumPlayers = false;
     }
 
     public Events[] ListOfEvents;
+    private List<Events> inactiveEvents = new List<Events>();
+    private List<Events> activeEvents = new List<Events>();
 
 	// Use this for initialization
 	void Start () {
@@ -41,30 +41,56 @@ public class EventManager : NetworkBehaviour {
         foreach (Events e in ListOfEvents)
         {
             e.eventGO.SetActive(false);
+            inactiveEvents.Add(e);
         }
 
         //Fail safe
         int testCase;
-        if (events.Count < eventSpawnSpots.Count)
-            testCase = events.Count;
+        if (ListOfEvents.Length < eventSpawnSpots.Count)
+            testCase = ListOfEvents.Length;
         else
             testCase = eventSpawnSpots.Count;
 
         if (eventsToSpawn > testCase)
             eventsToSpawn = testCase;
 
+        int numPlayers = GameManager.curPlayers;
 
         for (int x = 0; x < eventsToSpawn; x++)
         {
-            int randSpot = Random.Range(0, eventSpawnSpots.Count);
-            int randEvent = Random.Range(0, events.Count);
+            bool choosingEvent = true;
+            int failSafeCount = 0;
 
-            events[randEvent].transform.position = eventSpawnSpots[randSpot].transform.position;
-            events[randEvent].SetActive(true);
-            activeEvents.Add(events[randEvent]);
-            events.Remove(events[randEvent]);
-            activeSpawnSpots.Add(eventSpawnSpots[randSpot]);
-            eventSpawnSpots.Remove(eventSpawnSpots[randSpot]);
+            while(choosingEvent || failSafeCount < 5)
+            {
+                int randSpot = Random.Range(0, eventSpawnSpots.Count);
+                int randEvent = Random.Range(0, inactiveEvents.Count);
+
+                if(ListOfEvents[randEvent].requiredPlayersToSpawn >= numPlayers)
+                {
+                    ListOfEvents[randEvent].eventGO.transform.position = eventSpawnSpots[randSpot].transform.position;
+                    ListOfEvents[randEvent].eventGO.SetActive(true);
+
+                    activeEvents.Add(ListOfEvents[randEvent]);
+                    inactiveEvents.Remove(ListOfEvents[randEvent]);
+
+                    activeSpawnSpots.Add(eventSpawnSpots[randSpot]);
+                    eventSpawnSpots.Remove(eventSpawnSpots[randSpot]);
+
+                    choosingEvent = false;
+                    failSafeCount = 0;
+                } else
+                {
+                    failSafeCount++;
+                }
+            }
+
+            //events[randEvent].transform.position = eventSpawnSpots[randSpot].transform.position;
+            //events[randEvent].SetActive(true);
+            //activeEvents.Add(events[randEvent]);
+            //events.Remove(events[randEvent]);
+            //activeSpawnSpots.Add(eventSpawnSpots[randSpot]);
+            //eventSpawnSpots.Remove(eventSpawnSpots[randSpot]);
         }
 
         CmdactivateEvent();
