@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 140
+  controlID: 83
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 350
     width: 903
     height: 365
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -114,7 +114,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: 221 Layout
+  m_LastLoadedLayoutName: 
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 263
+  controlID: 82
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -178,8 +178,8 @@ MonoBehaviour:
     y: 0
     width: 903
     height: 350
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 185
+  controlID: 23
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -371,7 +371,7 @@ MonoBehaviour:
     width: 336
     height: 266
   m_SearchFilter:
-    m_NameFilter: network
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -382,19 +382,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Justin's Items and Player Setup/Events/Prefabs
+    - Assets/Justin's Items and Player Setup/Events
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Justin's Items and Player Setup/Events/Prefabs
+  - Assets/Justin's Items and Player Setup/Events
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Program Files (x86)\Unity 2017.1.0f3\FTBCapstoneProject\Capstone
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 327}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 00000000be430000d2430000644500006c4700007e4700003e480000f448000044490000de490000d44c000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 255}
+    m_SelectedIDs: 6e2f0000
+    m_LastClickedID: 12142
+    m_ExpandedIDs: 00000000722a0000882a0000e82c0000382e00006e2f00002a3100002e320000b0320000a63300000038000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -422,7 +422,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000be430000d2430000644500007e4700003e480000f448000044490000d44c000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000722a0000882a0000e82c00006e2f00008a2f00002a3100002e320000b0320000a633000000380000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -461,7 +461,7 @@ MonoBehaviour:
         y: 0
         width: 0
         height: 0
-      m_UserData: 19624
+      m_UserData: 14254
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -580,14 +580,14 @@ MonoBehaviour:
     width: 901
     height: 329
   m_SceneLighting: 1
-  lastFramingTime: 7071.489268337935
+  lastFramingTime: 236.1044041046816
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 14.092275, y: 1.3440018, z: 335.61057}
+    m_Target: {x: 357.22864, y: 12.359871, z: 290.95862}
     speed: 2
-    m_Value: {x: 14.092275, y: 1.3440018, z: 335.61057}
+    m_Value: {x: 357.22864, y: 12.359871, z: 290.95862}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -610,13 +610,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.12264822, y: 0.7407205, z: -0.14077362, w: -0.64534795}
+    m_Target: {x: -0.011655949, y: 0.7204528, z: -0.012111177, w: -0.6933041}
     speed: 2
-    m_Value: {x: -0.12264817, y: 0.7407203, z: -0.14077358, w: -0.6453477}
+    m_Value: {x: -0.011655918, y: 0.7204509, z: -0.012111145, w: -0.6933023}
   m_Size:
-    m_Target: 111.82352
+    m_Target: 301.45596
     speed: 2
-    m_Value: 111.82352
+    m_Value: 301.45596
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -655,20 +655,20 @@ MonoBehaviour:
     height: 407
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: c461faff6a62faffe867faff3c6bfaff9a6bfaff0a36fbff5c3efbff023ffbff8044fbffd447fbff3248fbffdc61fbff506afbfff66afbff7470fbffc873fbff2674fbfff688fbff8a9afbff5ac6fbff86defbffccf0fbffcafcfbff74fdfbfff202fcff4606fcffa406fcff8c24fcffd6c2fcffecd2fcff1a0efdffea1ffdff6442fdffaaa8ffff2cfcffff00000000e05000003cf800007ef90000b00a010002310100f2330100e86101000a620100de6a0100
+    m_SelectedIDs: 00e0ffff
+    m_LastClickedID: -8192
+    m_ExpandedIDs: 3ae0ffff18fcffff000000006a3c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Sugar Cube(Clone)
-      m_OriginalName: Sugar Cube(Clone)
+      m_Name: DisappearDoorTest
+      m_OriginalName: DisappearDoorTest
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -315206
+      m_UserData: -8192
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -676,7 +676,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 
   m_ExpandedScenes:
-  - NetworkLobby
+  - sugarPickupPrototype
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
