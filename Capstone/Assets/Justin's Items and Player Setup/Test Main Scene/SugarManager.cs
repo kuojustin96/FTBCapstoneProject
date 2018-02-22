@@ -24,13 +24,13 @@ public class SugarManager : NetworkBehaviour {
     public class SugarSpawnSpot
     {
         public Transform spawn;
-        //[HideInInspector]
+        [HideInInspector]
         public GameObject sugarBeingHeld;
     }
 
     public SugarSpawnSpot[] spawnSpots;
-    public List<SugarSpawnSpot> inactiveSpots = new List<SugarSpawnSpot>();
-    public List<SugarSpawnSpot> activeSpots = new List<SugarSpawnSpot>();
+    private List<SugarSpawnSpot> inactiveSpots = new List<SugarSpawnSpot>();
+    private List<SugarSpawnSpot> activeSpots = new List<SugarSpawnSpot>();
 
     void Awake()
     {
