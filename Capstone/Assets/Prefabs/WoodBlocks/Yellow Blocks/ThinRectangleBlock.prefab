@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4175706190586830}
   - component: {fileID: 33950712460680224}
   - component: {fileID: 23393319374061354}
-  - component: {fileID: 95174922280787682}
+  - component: {fileID: 65034284248372016}
   m_Layer: 0
   m_Name: ThinRectangleBlock
   m_TagString: Untagged
@@ -81,20 +81,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802487230930972}
   m_Mesh: {fileID: 4300000, guid: 92602fdcb12bd9147ab44a8453eee988, type: 3}
---- !u!95 &95174922280787682
-Animator:
-  serializedVersion: 3
+--- !u!65 &65034284248372016
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802487230930972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 92602fdcb12bd9147ab44a8453eee988, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9653906, y: 11.720376, z: 5.860188}
+  m_Center: {x: 0, y: 0, z: 0}

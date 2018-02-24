@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4101628029384402}
   - component: {fileID: 33363177885031096}
   - component: {fileID: 23527062727229686}
-  - component: {fileID: 95946811079507046}
+  - component: {fileID: 65659614186116230}
   m_Layer: 0
   m_Name: CubeBlock
   m_TagString: Untagged
@@ -81,20 +81,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983725737071808}
   m_Mesh: {fileID: 4300000, guid: b822c3cb80b11c741a0cd7a65295cea3, type: 3}
---- !u!95 &95946811079507046
-Animator:
-  serializedVersion: 3
+--- !u!65 &65659614186116230
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983725737071808}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b822c3cb80b11c741a0cd7a65295cea3, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Size: {x: 5.860188, y: 5.8543606, z: 5.860188}
+  m_Center: {x: 0, y: 0, z: 0}

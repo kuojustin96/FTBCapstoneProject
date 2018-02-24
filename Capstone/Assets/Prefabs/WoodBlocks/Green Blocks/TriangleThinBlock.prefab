@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4999601526451268}
   - component: {fileID: 33311655436560622}
   - component: {fileID: 23352342535138090}
-  - component: {fileID: 95711937704987942}
+  - component: {fileID: 64271822695157706}
   m_Layer: 0
   m_Name: TriangleThinBlock
   m_TagString: Untagged
@@ -81,20 +81,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111670548745676}
   m_Mesh: {fileID: 4300000, guid: a9825071d3d0c9a47a67071c2267ca91, type: 3}
---- !u!95 &95711937704987942
-Animator:
-  serializedVersion: 3
+--- !u!64 &64271822695157706
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111670548745676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a9825071d3d0c9a47a67071c2267ca91, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a9825071d3d0c9a47a67071c2267ca91, type: 3}
