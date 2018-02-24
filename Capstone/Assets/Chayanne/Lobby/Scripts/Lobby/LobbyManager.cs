@@ -202,7 +202,7 @@ namespace Prototype.NetworkLobby
                 StopHost();
             }
 
-            
+
             ChangeTo(mainMenuPanel);
         }
 

@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\CameraShake.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyBoxTop.cs" />
+     <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyOnSceneChange.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DraggablePanel.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\EventSystemChecker.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
@@ -172,7 +174,6 @@
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
-     <Compile Include="Assets\LobbyAnimationScrip.cs" />
      <Compile Include="Assets\LobbyAnimationScript.cs" />
      <Compile Include="Assets\net_PlayerController.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
