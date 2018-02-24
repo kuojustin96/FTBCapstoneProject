@@ -71,7 +71,7 @@ public class CraftingController : MonoBehaviour {
             instance = this;
         }
 
-        GetItemsFromSOandPool();
+        //GetItemsFromSOandPool();
     }
 
 	// Use this for initialization

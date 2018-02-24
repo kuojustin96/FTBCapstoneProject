@@ -12,15 +12,15 @@ public class ScoreController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        //if (instance == null)
+        //{
+        //    instance = this;
+        //}
 
-        foreach(TextMeshProUGUI t in playerScores)
-        {
-            t.gameObject.SetActive(false);
-        }
+        //foreach(TextMeshProUGUI t in playerScores)
+        //{
+        //    t.gameObject.SetActive(false);
+        //}
     }
 
     // Use this for initialization
