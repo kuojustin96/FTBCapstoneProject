@@ -57,9 +57,6 @@ namespace Prototype.NetworkLobby
                 lobbyPanel.gameObject.SetActive(false);
                 lobbyManager.mainMenuPanel.gameObject.SetActive(true);
             }
-
-            Debug.Log("Let's goo"); 
-            //SceneManager.LoadScene(0);
         }
 
         public void OnClickJoin()

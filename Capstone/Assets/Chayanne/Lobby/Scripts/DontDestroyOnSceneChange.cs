@@ -6,9 +6,8 @@ public class DontDestroyOnSceneChange : MonoBehaviour {
 
     static bool exists = false;
 
-	// Use this for initialization
-	void Awake () {
-
+    //If the item is already there, Destroy this.
+    void Awake () {
         if(exists)
         {
             Destroy(gameObject);
