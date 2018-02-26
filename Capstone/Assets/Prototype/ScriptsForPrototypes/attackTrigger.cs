@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 using jkuo;
 public class attackTrigger : NetworkBehaviour {
+	PlayerClass player;
 		void Start(){
 			Debug.Log ("triggerActive");
 		}
@@ -20,7 +21,8 @@ public class attackTrigger : NetworkBehaviour {
 			}
 		
 		public void stun(GameObject other){
-			other.GetComponent<net_PlayerController> ().RpcStunPlayer (10f);
+		
+		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(10f);
 			Debug.Log ("stunCall");
 		}
 }

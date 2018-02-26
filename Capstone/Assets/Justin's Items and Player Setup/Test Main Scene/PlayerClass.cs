@@ -18,6 +18,8 @@ public class PlayerClass {
 	public int itemCharges;
     public bool usingItem = false;
 	public bool crafttingMenuActive = false;
+	public GameObject currentItem;
+	public string currentItemString;
 
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
     {

@@ -184,17 +184,37 @@ namespace jkuo
 		[ClientRpc]
         public void RpcStunPlayer(float duration)
         {
-			Debug.Log ("cmdStunPlayer");
-            StunPlayerCoroutine(duration);
+
+			if (player.currentItem == null) {
+				Debug.Log ("PlayerHasNoItem");
+				player.isStunned = true;
+				Invoke ("StunWait", duration);
+			} 
+			else {
+				if (player.currentItem.name  == "buttonHolder") {
+					Debug.Log ("buttonHolder");
+					player.itemCharges--;
+					player.currentItem.SetActive (false);
+					player.currentItem = null;
+				}
+				else{
+					Debug.Log ("PlayerHasNoItem");
+					player.isStunned = true;
+					Invoke ("StunWait", duration);
+				}
+				
+			}
         }
+		[Command]
+		public void CmdStunPlayer(float duration)
+		{
+			RpcStunPlayer (duration);
 
-
+		}
+			
 		public void StunPlayerCoroutine(float duration)
         {
-			Debug.Log ("stun");
-            player.isStunned = true;
-			Invoke ("StunWait", duration);
-            
+			CmdStunPlayer (duration);
         }
 
 		public void StunWait(){
