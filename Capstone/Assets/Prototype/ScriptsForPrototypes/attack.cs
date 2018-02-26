@@ -9,7 +9,7 @@ public class attack : NetworkBehaviour {
 	public NetworkAnimator keyAnim;
 	public bool attacking;
 	private PlayerClass player;
-
+	public GameObject key;
 	// Use this for initialization
 	void Start () {
 		 player = GetComponent<playerClassAdd>().player;
@@ -20,24 +20,28 @@ public class attack : NetworkBehaviour {
 	if (!isLocalPlayer)
 		return;
 		if (Input.GetButtonDown ("Fire1")) {
-			CmdAttacking ();
-
+			if (player.currentItem == null)
+				return;
+			if (player.currentItem.name == "keyHolder") {
+				CmdAttacking ();
+				Debug.Log (player.currentItem.name);
+			}
 		}
 	}
 	[Command]
 	//send attack to the server specifically
 	//rpc isnt used here, because then rpc would need to be called twice, and rpc is less efficient than a cmd.
 	public void CmdAttacking(){
+		
 		if(keyAnim.animator.GetCurrentAnimatorStateInfo(0).IsName("idle")&& !player.isStunned ){
 		attackTrigger.SetActive (true);
-		Invoke ("CmdStopAttacking", .4f);
+		Invoke ("CmdStopAttacking", .5f);
 		RpcAnimSend ();
 			}
 		 
 	}
 	[Command]
 	public void CmdStopAttacking(){
-
 		RpcAnimStop ();
 
 	}
@@ -52,5 +56,22 @@ public class attack : NetworkBehaviour {
 	public void RpcAnimStop(){
 		attackTrigger.SetActive (false);
 		keyAnim.animator.SetInteger ("keyAttack", 0);
+		player.itemCharges--;
+		if (player.currentItem != null && player.itemCharges == 0) {
+
+			CmdobjectTurnoff ();
+		}
+	}
+
+
+	[Command]
+	public void CmdobjectTurnoff(){
+		RpcobjectTurnoff ();
+	}
+	[ClientRpc]
+	public void RpcobjectTurnoff(){
+		player.currentItem.SetActive (false);
+		player.currentItem = null;
+
 	}
 }
