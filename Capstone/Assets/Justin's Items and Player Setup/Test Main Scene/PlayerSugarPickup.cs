@@ -40,7 +40,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 		{
 			player.crafttingMenuActive = true;
 			runAnimation = true;
-			if (player.dropoffPoint == other.gameObject) //If player owns this dropoff point
+			if (player.dropoffPoint == other.gameObject.transform.parent.gameObject) //If player owns this dropoff point
 			{
 				//Debug.Log(sugarInBackpack.Count);
 				if (sugarInBackpack.Count > 0)
@@ -51,6 +51,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 				return;
 			} else //If player does not own this dropoff point
 			{
+				Debug.Log (other.transform.parent.gameObject);
 				StartCoroutine(StealSugarAni(other.gameObject));
 			}
 		}

@@ -33,27 +33,27 @@ public class PlayerClass {
     public void PickupSugar()
     {
         sugarInBackpack++;
-        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+//        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
     }
 
     public void DropoffSugarInStash()
     {
         currentPlayerScore++;
         sugarInBackpack--;
-        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
-        ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
+//        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+//        ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
     }
 
     public void LoseSugar(int amount)
     {
         currentPlayerScore -= amount;
-        ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
+  //      ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
     }
 
     public void DropSugar()
     {
         sugarInBackpack--;
-        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+   //     ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
     }
 
     public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum)
