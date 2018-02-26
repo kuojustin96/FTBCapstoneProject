@@ -35,6 +35,7 @@ namespace jkuo
             }
 
             Debug.Log("Door open, drop sugar");
+            SugarManager.instance.CmdDropSugar(eventTrigger.numSugarDrops, eventTrigger.sugarDropPos.position);
         }
     }
 }

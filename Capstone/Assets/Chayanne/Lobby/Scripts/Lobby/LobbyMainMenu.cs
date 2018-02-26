@@ -38,6 +38,9 @@ namespace Prototype.NetworkLobby
         public void LeaveLobby()
         {
 
+            lobbyManager.lobbyAnims.PlayCloseBoxAnimation();
+            lobbyManager.lobbyAnims.PlayCameraZoomOut();
+
             Debug.Log("isHosting is " + isHosting);
             if (isHosting)
             {
@@ -54,8 +57,6 @@ namespace Prototype.NetworkLobby
                 lobbyPanel.gameObject.SetActive(false);
                 lobbyManager.mainMenuPanel.gameObject.SetActive(true);
             }
-
-            SceneManager.LoadScene(0);
         }
 
         public void OnClickJoin()

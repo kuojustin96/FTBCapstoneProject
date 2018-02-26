@@ -57,6 +57,9 @@ namespace jkuo
             }
 
             co = null;
+
+            if (door.transform.position == doorOpenPos)
+                SugarManager.instance.CmdDropSugar(eventTrigger.numSugarDrops, eventTrigger.sugarDropPos.position);
         }
     }
 }

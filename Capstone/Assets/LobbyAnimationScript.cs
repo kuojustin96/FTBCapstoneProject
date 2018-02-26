@@ -45,4 +45,10 @@ public class LobbyAnimationScript : MonoBehaviour {
         CameraAnimator.SetBool("DoZoom", true);
     }
 
+
+    public void PlayCameraZoomOut()
+    {
+        CameraAnimator.SetBool("DoZoom", false);
+    }
+
 }

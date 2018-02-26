@@ -10,7 +10,7 @@ public class EventManager : NetworkBehaviour {
     public float maxWaitDuration = 20f;
     private int counter = 0;
 
-    public List<GameObject> events = new List<GameObject>();
+    //public List<GameObject> events = new List<GameObject>();
     private List<GameObject> activeEvents2 = new List<GameObject>();
 
     public List<GameObject> eventSpawnSpots = new List<GameObject>();
@@ -23,7 +23,7 @@ public class EventManager : NetworkBehaviour {
         public GameObject eventGO;
         [Tooltip("Minimum players required for this event to pool")]
         [Range(1,4)]
-        public float requiredPlayersToSpawn = 2;
+        public int requiredPlayersToSpawn = 2;
     }
 
     public Events[] ListOfEvents;

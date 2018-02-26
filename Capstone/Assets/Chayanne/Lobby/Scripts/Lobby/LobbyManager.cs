@@ -58,6 +58,23 @@ namespace Prototype.NetworkLobby
         public GameObject lobbySpawn;
 
         public LobbyAnimationScript lobbyAnims;
+        
+        bool inGame = false;
+
+        void OnLevelWasLoaded()
+        {
+            if (inGame)
+            {
+                boxTopMesh.enabled = false;
+            }
+        }
+
+
+        //TODO: Please call this when we make out in game menu so that the box top mesh can be unloaded properly
+        public void SetInGame(bool val)
+        {
+            inGame = val;
+        }
 
         void Start()
         {
@@ -202,7 +219,7 @@ namespace Prototype.NetworkLobby
                 StopHost();
             }
 
-            
+
             ChangeTo(mainMenuPanel);
         }
 
@@ -414,9 +431,7 @@ namespace Prototype.NetworkLobby
 
         private void TransitionScene()
         {
-            boxTopMesh.enabled = false;
-
-
+            SetInGame(true);
             ServerChangeScene(playScene);
         }
 
