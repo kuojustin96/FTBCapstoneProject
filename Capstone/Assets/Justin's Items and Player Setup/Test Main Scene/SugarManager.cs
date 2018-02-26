@@ -163,13 +163,23 @@ public class SugarManager : NetworkBehaviour {
         {
             GameObject sugar = Instantiate(sugarPrefab, inactiveSpots[x].spawn.position, Quaternion.identity);
             NetworkServer.Spawn(sugar);
+
+            //sugar.transform.parent = inactiveSpots[x].spawn;
+            //sugar.transform.position = Vector3.zero;
+            //sugar.transform.parent = transform;
+
             activeSugar.Add(sugar);
             inactiveSpots[x].sugarBeingHeld = sugar;
             activeSpots.Add(inactiveSpots[x]);
             inactiveSpots.Remove(inactiveSpots[x]);
         } else
         {
+            //inactiveSugar[0].transform.parent = inactiveSpots[x].spawn;
+            //inactiveSugar[0].transform.position = Vector3.zero;
+            //inactiveSugar[0].transform.parent = transform;
+
             inactiveSugar[0].transform.position = inactiveSpots[x].spawn.position;
+
             inactiveSpots[x].sugarBeingHeld = inactiveSugar[0];
             inactiveSugar[0].SetActive(true);
             activeSugar.Add(inactiveSugar[0]);
