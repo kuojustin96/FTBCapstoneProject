@@ -8,7 +8,9 @@ namespace ckp
     {
         public static GameSettingsSO.net_Settings gs;
 
-        public static net_GameManager gm;
+        public static net_GameManager netgm;
+
+        public static GameManager gm;
 
         [Header("Spawns")]
         public Transform yellowSpawn;
@@ -21,12 +23,12 @@ namespace ckp
 
         void Awake()
         {
-            if (gm == null)
-                gm = this;
-            else if (gm != this)
+            if (netgm == null)
+                netgm = this;
+            else if (netgm != this)
                 Destroy(gameObject);
 
-            gs = gm.GameSettings.Settings;
+            gs = netgm.GameSettings.Settings;
             //Sets this to not be destroyed when reloading scene
             DontDestroyOnLoad(gameObject);
         }

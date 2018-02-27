@@ -79,7 +79,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 				cost = 1;
 
 			Debug.Log(cost);
-			GameObject dropoffPoint = GameManager.instance.DropoffPoints[player.playerNum];
+			GameObject dropoffPoint = GameManager.instance.DropoffPoints[player.playerNum].dropoffGO;
 			for (int x = 0; x < cost; x++)
 			{
 				SugarManager.instance.DisableSugar(sugarInBackpack[0]);

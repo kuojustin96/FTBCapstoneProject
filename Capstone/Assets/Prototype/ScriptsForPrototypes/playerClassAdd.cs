@@ -7,6 +7,6 @@ public class playerClassAdd : MonoBehaviour {
 	public PlayerSugarPickup psp;
 	// Use this for initialization
 	void Start () {
-		GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject);
+		//GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject);
 	}
 }

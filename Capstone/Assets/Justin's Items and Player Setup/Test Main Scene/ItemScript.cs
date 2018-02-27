@@ -359,7 +359,7 @@ public class ItemScript : MonoBehaviour {
 
         GameObject baseBlocker = currentItem.gameObject;
         baseBlocker.transform.parent = null;
-        baseBlocker.transform.position = GameManager.instance.DropoffPoints[currentPlayer.playerNum].transform.position;
+        baseBlocker.transform.position = GameManager.instance.DropoffPoints[currentPlayer.playerNum].dropoffGO.transform.position;
 
         foreach (Transform t in baseBlocker.transform)
             t.gameObject.SetActive(true);

@@ -57,11 +57,12 @@ namespace Prototype.NetworkLobby
                 lobbyPanel.gameObject.SetActive(false);
                 lobbyManager.mainMenuPanel.gameObject.SetActive(true);
             }
+            Debug.Log("HJSDHDSAODD");
         }
 
         public void OnClickJoin()
         {
-            
+            Debug.Log("IOIOIOIOIO");
             lobbyManager.ChangeTo(lobbyPanel);
 
             lobbyManager.networkAddress = ipInput.text;

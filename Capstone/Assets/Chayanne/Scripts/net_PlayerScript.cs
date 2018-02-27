@@ -52,7 +52,7 @@ namespace ckp
         void InitializeGameSettings()
         {
 
-            GameSettingsSO gs = net_GameManager.gm.GameSettings;
+            GameSettingsSO gs = net_GameManager.netgm.GameSettings;
 
             moveSpeed = gs.Settings.pBaseMoveSpeed;
             jumpHeight = gs.Settings.pBaseJumpHeight;

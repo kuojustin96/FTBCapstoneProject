@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using Prototype.NetworkLobby;
+using ckp;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : NetworkBehaviour {
 
     public static GameManager instance = null;
 
@@ -13,9 +16,20 @@ public class GameManager : MonoBehaviour {
 
     public GameObject playerPrefab;
     public Material[] playerMats;
-    public List<GameObject> DropoffPoints = new List<GameObject>();
+    //public List<GameObject> DropoffPoints = new List<GameObject>();
+
+    [System.Serializable]
+    public class DropoffPointsClass
+    {
+        public string name;
+        public GameObject dropoffGO;
+        public net_TeamScript.Team teamColor;
+    }
+
+    public DropoffPointsClass[] DropoffPoints;
     public List<PlayerClass> playerList = new List<PlayerClass>();
 
+    private Dictionary<string, GameObject> colorDropOffDict = new Dictionary<string, GameObject>();
     public Dictionary<GameObject, PlayerClass> playerDropOffDict = new Dictionary<GameObject, PlayerClass>();
 
     [HideInInspector]
@@ -28,9 +42,9 @@ public class GameManager : MonoBehaviour {
             instance = this;
         }
 
-        foreach(GameObject g in DropoffPoints)
+        foreach(DropoffPointsClass d in DropoffPoints)
         {
-            g.SetActive(false);
+            d.dropoffGO.SetActive(false);
         }
 
 		curPlayers = 1;
@@ -38,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        numPlayers = GameObject.Find("LobbyManager").GetComponent<LobbyManager>()._playerNumber;
 	}
 	
 	// Update is called once per frame
@@ -46,22 +60,25 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-	public void SetUpGame(GameObject player)
+	public void SetUpGame(GameObject player, net_TeamScript.Team team)
     {
-		int x = curPlayers;
-        DropoffPoints[x].SetActive(true);
-//            GameObject player = Instantiate(playerPrefab, new Vector3(DropoffPoints[x].transform.position.x, 
-//                                                            DropoffPoints[x].transform.position.y + 1,
-//                                                            DropoffPoints[x].transform.position.z), Quaternion.identity);
-//            player.GetComponent<MeshRenderer>().material = playerMats[x];
-        PlayerClass ply = new PlayerClass();
-        ply.SetUpPlayer(x, maxSugarCarry, player, DropoffPoints[x], "Player " + x);
-		player.GetComponent<playerClassAdd>().player = ply;
-        playerList.Add(ply);
-        playerDropOffDict.Add(DropoffPoints[x], ply);
+        foreach(DropoffPointsClass d in DropoffPoints)
+        {
+            if(team == d.teamColor)
+            {
+                int x = curPlayers + 1;
+                d.dropoffGO.SetActive(true);
+                PlayerClass ply = new PlayerClass();
+                ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + x);
+                player.GetComponent<playerClassAdd>().player = ply;
+                playerList.Add(ply);
+                playerDropOffDict.Add(d.dropoffGO, ply);
 
-//            ScoreController.instance.SetUpScoreController(x);
-	    curPlayers++;
+                //      ScoreController.instance.SetUpScoreController(x);
+                curPlayers++;
+                Debug.Log("DSADSA");
+            }
+        }
     }
 
     public PlayerClass GetPlayer(int playerNum)

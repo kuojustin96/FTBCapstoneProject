@@ -674,7 +674,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966527
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -825,7 +825,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -841,7 +840,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1572,7 +1570,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189846312776972}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fed9986207490014aae44681019a4d6b, type: 3}
   m_Name: 
@@ -1591,6 +1589,8 @@ MonoBehaviour:
     itemCharges: 0
     usingItem: 0
     crafttingMenuActive: 0
+    currentItem: {fileID: 0}
+    currentItemString: 
   psp: {fileID: 114726637079279308}
 --- !u!114 &114590547103741036
 MonoBehaviour:
@@ -1952,6 +1952,7 @@ MonoBehaviour:
   attackTrigger: {fileID: 1113453668009774}
   keyAnim: {fileID: 114600119496725936}
   attacking: 0
+  key: {fileID: 0}
 --- !u!114 &114853710619885748
 MonoBehaviour:
   m_ObjectHideFlags: 1
