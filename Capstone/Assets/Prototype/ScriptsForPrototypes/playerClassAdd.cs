@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ckp;
 public class playerClassAdd : MonoBehaviour {
 	public PlayerClass player;
 	public PlayerSugarPickup psp;
+	public GameObject Hood;
+	public GameObject Cloak;
 	// Use this for initialization
 	void Start () {
-		//GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject);
+		GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject, gameObject.GetComponent<net_TeamScript>().teamColor);
+
 	}
 }

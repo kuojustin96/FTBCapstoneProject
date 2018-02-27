@@ -92,7 +92,7 @@ namespace jkuo
             Cursor.lockState = lockMode;
         }
 
-        void FixedUpdate()
+        void Update()
         {
             if (isLocalPlayer)
             {
@@ -214,6 +214,8 @@ namespace jkuo
 			
 		public void StunPlayerCoroutine(float duration)
         {
+			if (!isLocalPlayer)
+				return;
 			CmdStunPlayer (duration);
         }
 

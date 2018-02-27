@@ -47,7 +47,7 @@ public class GameManager : NetworkBehaviour {
             d.dropoffGO.SetActive(false);
         }
 
-		curPlayers = 1;
+		curPlayers = 0;
     }
 
 	// Use this for initialization
@@ -62,23 +62,43 @@ public class GameManager : NetworkBehaviour {
 
 	public void SetUpGame(GameObject player, net_TeamScript.Team team)
     {
-        foreach(DropoffPointsClass d in DropoffPoints)
-        {
-            if(team == d.teamColor)
-            {
-                int x = curPlayers + 1;
-                d.dropoffGO.SetActive(true);
-                PlayerClass ply = new PlayerClass();
-                ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + x);
-                player.GetComponent<playerClassAdd>().player = ply;
-                playerList.Add(ply);
-                playerDropOffDict.Add(d.dropoffGO, ply);
+		// Not working color change 
+//        foreach(DropoffPointsClass d in DropoffPoints)
+//        {
+//            if(team == d.teamColor)
+//            {
+//                int x = curPlayers + 1;
+//                d.dropoffGO.SetActive(true);
+//				Debug.Log (d.dropoffGO);
+//                PlayerClass ply = new PlayerClass();
+//                ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + x);
+//                player.GetComponent<playerClassAdd>().player = ply;
+//                playerList.Add(ply);
+//                playerDropOffDict.Add(d.dropoffGO, ply);
+//
+//                //      ScoreController.instance.SetUpScoreController(x);
+//                curPlayers++;
+//                Debug.Log("DSADSA");
+//            }
+//        }
+		int x = curPlayers ;
+//		                d.dropoffGO.SetActive(true);
+//						Debug.Log (d.dropoffGO);
+		DropoffPointsClass d = DropoffPoints[x];
+		d.dropoffGO.SetActive (true);
+        PlayerClass ply = new PlayerClass();
+		ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + x);
+        player.GetComponent<playerClassAdd>().player = ply;
+        playerList.Add(ply);
+        playerDropOffDict.Add(d.dropoffGO, ply);
 
-                //      ScoreController.instance.SetUpScoreController(x);
-                curPlayers++;
-                Debug.Log("DSADSA");
-            }
-        }
+		//temporary position and color
+		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
+		player.GetComponent<playerClassAdd> ().Hood.GetComponent<Renderer> ().material = playerMats [x];
+		player.GetComponent<playerClassAdd> ().Cloak.GetComponent<Renderer> ().material = playerMats [x];
+		                //      ScoreController.instance.SetUpScoreController(x);
+		                curPlayers++;
+		                Debug.Log("DSADSA");
     }
 
     public PlayerClass GetPlayer(int playerNum)

@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Networking;
+using Prototype.NetworkLobby;
 namespace ckp
 {
-    public class net_TeamScript : MonoBehaviour
+    public class net_TeamScript : NetworkBehaviour
     {
 
         public enum Team
@@ -16,17 +17,33 @@ namespace ckp
         };
 
         public Team teamColor;
-
+		void Start(){
+			//SetTeam ();
+			
+		}
 
         public void SetTeam(int team)
         {
 
             teamColor = (Team)team;
-
+			//GameManager.instance.SetUpGame(gameObject, teamColor);
             Debug.Log("Assigned to the " + teamColor.ToString() + " team!");
+			//CmdSetTeam ();
 
         }
-
-
+//
+//		[Command]
+//		public void CmdSetTeam(){
+//
+//			GameManager.instance.SetUpGame (gameObject, teamColor);
+//			Debug.Log ("Assigned to the " + teamColor.ToString () + " team!");
+//			RpcSetTeam ();
+//		}
+//		[ClientRpc]
+//		public void RpcSetTeam(){
+//
+//			GameManager.instance.SetUpGame (gameObject, teamColor);
+//			Debug.Log ("Assigned to the " + teamColor.ToString () + " team!");
+//		}
     }
 }
