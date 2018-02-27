@@ -92,7 +92,7 @@ namespace jkuo
             Cursor.lockState = lockMode;
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (isLocalPlayer)
             {

@@ -52,7 +52,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 			} else //If player does not own this dropoff point
 			{
 				Debug.Log (other.transform.parent.gameObject);
-				StartCoroutine(StealSugarAni(other.gameObject));
+				StartCoroutine(StealSugarAni(other.transform.parent.gameObject));
 			}
 		}
 	}
