@@ -39,11 +39,13 @@ public class craftingInput : NetworkBehaviour {
 			return;
 		if (player.currentItem != null)
 			return;
-		int randomRange = Random.Range (0,attackItems.Count);
-		CmdCraftAttack (randomRange);
-		player.itemCharges = attackCharges [randomRange];
-		player.currentItem = attackItems [randomRange];
-		player.currentItemString = player.currentItem.ToString();
+		if (player.currentPlayerScore > 0) {
+			int randomRange = Random.Range (0, attackItems.Count);
+			CmdCraftAttack (randomRange);
+			player.itemCharges = attackCharges [randomRange];
+			player.currentItem = attackItems [randomRange];
+			player.currentItemString = player.currentItem.ToString ();
+		}
 	}
 
 	[Command]
@@ -52,12 +54,14 @@ public class craftingInput : NetworkBehaviour {
 		attackItems [randomRange].SetActive (true);
 		player.currentItem = attackItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
+
 	}
 	[ClientRpc]
 	public void RpcCraftAttack (int randomRange){
 		attackItems [randomRange].SetActive (true);
 		player.currentItem = attackItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
+		player.currentPlayerScore -= 1;
 	}
 
 	public void craftDefense(){
@@ -65,11 +69,13 @@ public class craftingInput : NetworkBehaviour {
 			return;
 		if (player.currentItem != null)
 			return;
-		int randomRange = Random.Range (0,defenseItems.Count);
-		CmdCraftDefense (randomRange);
-		player.itemCharges = defenseCharges [randomRange];
-		player.currentItem = defenseItems [randomRange];
-		player.currentItemString = player.currentItem.ToString();
+		if (player.currentPlayerScore > 0) {
+			int randomRange = Random.Range (0, defenseItems.Count);
+			CmdCraftDefense (randomRange);
+			player.itemCharges = defenseCharges [randomRange];
+			player.currentItem = defenseItems [randomRange];
+			player.currentItemString = player.currentItem.ToString ();
+		}
 	}
 	[Command]
 	public void CmdCraftDefense(int randomRange){
@@ -83,6 +89,7 @@ public class craftingInput : NetworkBehaviour {
 		defenseItems [randomRange].SetActive (true);
 		player.currentItem = defenseItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
+		player.currentPlayerScore--;
 	}
 
 }
