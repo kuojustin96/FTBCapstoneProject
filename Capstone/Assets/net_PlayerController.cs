@@ -9,6 +9,7 @@ namespace jkuo
     [RequireComponent(typeof(playerClassAdd))]
     public class net_PlayerController : NetworkBehaviour
     {
+		private Net_Hud_SugarCounter nhs;
 
         public Camera cam;
         private PlayerClass player;
@@ -53,6 +54,10 @@ namespace jkuo
             LocalCameraCheck();
             lockMode = CursorLockMode.Locked;
 
+			if (isLocalPlayer) {
+				nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
+				nhs.player = player;
+			}
         }
 
         private void LocalCameraCheck()
@@ -227,6 +232,6 @@ namespace jkuo
 		public void StunWait(){
 			player.isStunned = false;
 			stun.SetActive (false);
-		}
+		}	
     }
 }

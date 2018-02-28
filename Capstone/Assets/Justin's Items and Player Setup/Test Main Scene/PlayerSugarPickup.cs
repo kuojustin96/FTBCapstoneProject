@@ -11,6 +11,9 @@ public class PlayerSugarPickup : MonoBehaviour {
 	private List<GameObject> sugarInBackpack = new List<GameObject>();
 	private bool runAnimation = false;
 
+//	//PROTOTYPE HUD
+	public Net_Hud_SugarCounter hudCount;
+
 	// Use this for initialization
 	void Start () {
 		player = GetComponentInParent<playerClassAdd>().player;
@@ -209,6 +212,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 		sugar.GetComponent<BoxCollider>().enabled = false;
 		player.PickupSugar();
 		sugarInBackpack.Add(sugar);
+
 		sugar.transform.parent = transform;
 		Vector3 saveScale = sugar.transform.localScale;
 
