@@ -22,7 +22,7 @@ public class attackTrigger : NetworkBehaviour {
 		
 		public void stun(GameObject other){
 		
-		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(10f);
+		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(4f);
 			Debug.Log ("stunCall");
 		}
 }

@@ -47,6 +47,7 @@ public class SugarManager : NetworkBehaviour {
             NetworkServer.Spawn(sugar);
             sugar.SetActive(false);
             inactiveSugar.Add(sugar);
+
         }
 
         foreach(SugarSpawnSpot s in spawnSpots)
@@ -73,12 +74,12 @@ public class SugarManager : NetworkBehaviour {
                 inactiveSpots.Remove(spawnSpots[x]);
 
                 inactiveSugar.Remove(inactiveSugar[0]);
-
+				//RpcSugarAdd (inactiveSugar [0]);
                 count++;
             }
         }
     }
-
+		
 	// Use this for initialization
 	void Start () {
         CmdSetUpSugar();
@@ -188,6 +189,11 @@ public class SugarManager : NetworkBehaviour {
             inactiveSpots.Remove(inactiveSpots[x]);
         }
     }
+
+	[Command]
+	public void CmdSugarAdd(int x){
+		//inactiveSugar[0].SetActive(true);
+	}
 
     public void DisableSugar(GameObject sugar)
     {

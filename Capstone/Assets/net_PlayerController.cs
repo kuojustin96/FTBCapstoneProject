@@ -42,6 +42,9 @@ namespace jkuo
         private bool isGrounded;
         private Vector3 _jumpForce = Vector3.zero;
 
+		//Particles
+		public GameObject stun;
+
         // Use this for initialization
         void Start()
         {
@@ -189,6 +192,7 @@ namespace jkuo
 				Debug.Log ("PlayerHasNoItem");
 				player.isStunned = true;
 				Invoke ("StunWait", duration);
+				stun.SetActive (true);
 			} 
 			else {
 				if (player.currentItem.name  == "buttonHolder") {
@@ -201,6 +205,7 @@ namespace jkuo
 					Debug.Log ("PlayerHasNoItem");
 					player.isStunned = true;
 					Invoke ("StunWait", duration);
+					stun.SetActive (true);
 				}
 				
 			}
@@ -221,6 +226,7 @@ namespace jkuo
 
 		public void StunWait(){
 			player.isStunned = false;
+			stun.SetActive (false);
 		}
     }
 }

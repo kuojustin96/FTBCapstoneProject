@@ -84,7 +84,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 			GameObject dropoffPoint = GameManager.instance.DropoffPoints[player.playerNum].dropoffGO;
 			for (int x = 0; x < cost; x++)
 			{
-				SugarManager.instance.DisableSugar(sugarInBackpack[0]);
+				//SugarManager.instance.DisableSugar(sugarInBackpack[0]);
 				sugarInBackpack.Remove(sugarInBackpack[0]);
 				player.DropSugar();
 			}
@@ -203,7 +203,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	private IEnumerator PickupSugarAni(GameObject sugar)
 	{
-		SugarManager.instance.CmdEnableNewSugar(sugar);
+		//SugarManager.instance.CmdEnableNewSugar(sugar);
 
 		sugar.GetComponent<SimpleRotate>().enabled = false;
 		sugar.GetComponent<BoxCollider>().enabled = false;
@@ -221,6 +221,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 		sugar.SetActive(false);
 		sugar.transform.localScale = saveScale;
+
 	}
 
 	private IEnumerator DropoffSugarAni(GameObject dropoffPoint)
