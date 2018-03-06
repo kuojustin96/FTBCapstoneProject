@@ -23,37 +23,39 @@ public class attack : NetworkBehaviour {
 			if (player.currentItem == null)
 				return;
 			if (player.currentItem.name == "keyHolder") {
-				CmdAttacking ();
+				CmdKeyAttacking ();
 				Debug.Log (player.currentItem.name);
 			}
 		}
 	}
+
+	//KEY
 	[Command]
 	//send attack to the server specifically
 	//rpc isnt used here, because then rpc would need to be called twice, and rpc is less efficient than a cmd.
-	public void CmdAttacking(){
+	public void CmdKeyAttacking(){
 		
 		if(keyAnim.animator.GetCurrentAnimatorStateInfo(0).IsName("idle")&& !player.isStunned ){
 		attackTrigger.SetActive (true);
-		Invoke ("CmdStopAttacking", .5f);
-		RpcAnimSend ();
+		Invoke ("CmdKeyStopAttacking", .5f);
+		RpcKeyAnimSend ();
 			}
 		 
 	}
 	[Command]
-	public void CmdStopAttacking(){
-		RpcAnimStop ();
+	public void CmdKeyStopAttacking(){
+		RpcKeyAnimStop ();
 
 	}
 	[ClientRpc]
 	//send anim to all clients
-	public void RpcAnimSend(){
+	public void RpcKeyAnimSend(){
 		attackTrigger.SetActive (true);
 		keyAnim.animator.SetInteger ("keyAttack",1);
 	}
 
 	[ClientRpc]
-	public void RpcAnimStop(){
+	public void RpcKeyAnimStop(){
 		attackTrigger.SetActive (false);
 		keyAnim.animator.SetInteger ("keyAttack", 0);
 		player.itemCharges--;
@@ -62,6 +64,12 @@ public class attack : NetworkBehaviour {
 			CmdobjectTurnoff ();
 		}
 	}
+	//Key
+
+
+
+
+
 
 
 	[Command]

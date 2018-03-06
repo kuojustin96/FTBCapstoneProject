@@ -82,7 +82,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1120011003989590
 GameObject:
   m_ObjectHideFlags: 1
@@ -1247,8 +1247,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3839022, y: 0.9999999, z: 1.2444631}
+  m_Center: {x: 0.027701583, y: 0, z: 0.12223116}
 --- !u!81 &81833347943320182
 AudioListener:
   m_ObjectHideFlags: 1
@@ -1335,7 +1335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.05
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -2089,6 +2089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e07afbbcad781a4a8ddaeb3db039e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hudCount: {fileID: 0}
 --- !u!114 &114762055117848036
 MonoBehaviour:
   m_ObjectHideFlags: 1

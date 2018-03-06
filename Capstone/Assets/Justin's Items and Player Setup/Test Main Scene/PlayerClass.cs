@@ -21,7 +21,6 @@ public class PlayerClass {
 	public GameObject currentItem;
 	public string currentItemString;
 
-	public 
 
 
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
