@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.EventSystems;
 
 public class UIController : MonoBehaviour {
 
     private PlayerClass player;
+
+    public float CraftTime = 3f;
+    private bool giveItem = false;
 
     public CanvasGroup OpenCraftingUI;
     public CanvasGroup CraftingUI;
@@ -18,6 +22,8 @@ public class UIController : MonoBehaviour {
     private RectTransform IngameItemUIRect;
     public RawImage CraftingItemUI;
     private RectTransform CraftingItemUIRect;
+    public Image CraftingItemBackgroundFill;
+    public TextMeshProUGUI CraftingItemFillPercentage;
 
     public float UIShiftTime = 1f;
     public float UIShiftSpeed = 10f;
@@ -34,10 +40,25 @@ public class UIController : MonoBehaviour {
     private Image lastHoveredImage;
     private Color saveButtonColor;
 
+    [System.Serializable]
+    public class ItemTexture
+    {
+        public string name;
+        public Texture texture;
+    }
+    public ItemTexture[] ItemTextures;
+
+    private Dictionary<string, Texture> TextureDict = new Dictionary<string, Texture>();
+
 	// Use this for initialization
 	void Start () {
-        player = GetComponent<playerClassAdd>().player;
-        ci = GetComponent<craftingInput>();
+        //player = GetComponent<playerClassAdd>().player;
+    }
+
+    public void SetUpUIController(PlayerClass player)
+    {
+        this.player = player;
+        ci = player.playerGO.GetComponent<craftingInput>();
 
         origIngameUIPos = IngameItemBackgroundUI.transform.position;
 
@@ -53,16 +74,31 @@ public class UIController : MonoBehaviour {
 
         CraftingItemUIRect = CraftingItemUI.GetComponent<RectTransform>();
 
+        CraftingItemBackgroundFill.fillAmount = 0f;
+        CraftingItemFillPercentage.text = "0%";
+        CraftingItemBackgroundFill.gameObject.SetActive(false);
+
+        foreach (ItemTexture it in ItemTextures)
+        {
+            TextureDict.Add(it.name, it.texture);
+        }
+
         CanvasOFF(OpenCraftingUI);
         CanvasOFF(CraftingUI);
         CanvasON(IngameItemBackgroundUI, false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        //if (!isLocalPlayer)
+        //    return;
+
+        if (player == null)
+            return;
 
         //Probably want to move this to OnTriggerEnter in sugar pickup
         if (player.showCraftingUI && !player.craftingUIOpen)
@@ -183,29 +219,63 @@ public class UIController : MonoBehaviour {
 
     public void ClickAttackButton()
     {
-        ci.craftAttack();
-        player.craftingUIOpen = false;
-        CanvasOFF(CraftingUI);
-        CanvasON(OpenCraftingUI);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        StartCoroutine(CraftItemWaitTime("Attack"));
     }
 
     public void ClickDefenseButton()
     {
-        ci.craftDefense();
-        player.craftingUIOpen = false;
-        CanvasOFF(CraftingUI);
-        CanvasON(OpenCraftingUI);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        StartCoroutine(CraftItemWaitTime("Defense"));
     }
 
     public void ClickUtilityButton()
     {
-        Debug.Log("Craft Utility Item (Need To Implement)");
+        StartCoroutine(CraftItemWaitTime("Utility"));
+    }
+
+    private IEnumerator CraftItemWaitTime(string itemType)
+    {
+        CraftingItemBackgroundFill.gameObject.SetActive(true);
+
+        float time = Time.time;
+        while(Time.time < time + CraftTime)
+        {
+            CraftingItemBackgroundFill.fillAmount += Time.deltaTime / CraftTime;
+            CraftingItemFillPercentage.text = Mathf.RoundToInt(CraftingItemBackgroundFill.fillAmount * 100) + "%";
+            yield return null;
+        }
+
+        switch (itemType)
+        {
+            case "Attack":
+                ci.craftAttack();
+                break;
+
+            case "Defense":
+                ci.craftDefense();
+                break;
+
+            case "Utility":
+                Debug.Log("Craft Utility Item (Need To Implement)");
+                break;
+        }
+
+        yield return new WaitForEndOfFrame();
+
+        CraftingItemBackgroundFill.gameObject.SetActive(false);
+
+        string s = "";
+        foreach(ItemTexture it in ItemTextures)
+        {
+            if (it.name == player.currentItemString)
+            {
+                IngameItemUI.texture = it.texture;
+                CraftingItemUI.texture = it.texture;
+                Debug.Log("Found item!");
+            }
+        }
+
+        //Need to update textures when items run out of uses
+
         player.craftingUIOpen = false;
         CanvasOFF(CraftingUI);
         CanvasON(OpenCraftingUI);

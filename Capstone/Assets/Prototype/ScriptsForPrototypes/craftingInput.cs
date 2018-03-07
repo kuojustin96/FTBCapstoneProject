@@ -34,6 +34,8 @@ public class craftingInput : NetworkBehaviour {
 		//	CraftingUI.SetActive (true);
 		//}
 	}
+
+    //Local
 	public void craftAttack(){
 		if (!isLocalPlayer)
 			return;
@@ -48,6 +50,7 @@ public class craftingInput : NetworkBehaviour {
 		}
 	}
 
+    //Server
 	[Command]
 	public void CmdCraftAttack(int randomRange){
 		RpcCraftAttack (randomRange);
@@ -56,6 +59,8 @@ public class craftingInput : NetworkBehaviour {
 		player.currentItemString = player.currentItem.ToString();
 
 	}
+
+    //Every other player
 	[ClientRpc]
 	public void RpcCraftAttack (int randomRange){
 		attackItems [randomRange].SetActive (true);
@@ -77,6 +82,7 @@ public class craftingInput : NetworkBehaviour {
 			player.currentItemString = player.currentItem.ToString ();
 		}
 	}
+
 	[Command]
 	public void CmdCraftDefense(int randomRange){
 		RpcCraftDefense (randomRange);
@@ -84,6 +90,7 @@ public class craftingInput : NetworkBehaviour {
 		player.currentItem = defenseItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
 	}
+
 	[ClientRpc]
 	public void RpcCraftDefense(int randomRange){
 		defenseItems [randomRange].SetActive (true);
