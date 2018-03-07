@@ -90,6 +90,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AlphaRaycastFilter.cs" />
     <Compile Include="Assets\CameraShake.cs" />
     <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyBoxTop.cs" />
     <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyOnSceneChange.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
     <Compile Include="Assets\LobbyAnimationScript.cs" />
+    <Compile Include="Assets\Net_Hud_SugarCounter.cs" />
     <Compile Include="Assets\net_PlayerController.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
@@ -278,6 +280,7 @@
     <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Example\SplineExtrusion.cs" />
+    <Compile Include="Assets\test_HoverButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -310,6 +313,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\UIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Distance Fade.shader" />
