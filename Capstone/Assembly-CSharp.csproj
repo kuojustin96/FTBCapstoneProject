@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AlphaRaycastFilter.cs" />
      <Compile Include="Assets\CameraShake.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyBoxTop.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyOnSceneChange.cs" />
@@ -240,6 +241,7 @@
      <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Example\SplineExtrusion.cs" />
+     <Compile Include="Assets\test_HoverButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -272,6 +274,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\UIController.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonCore.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

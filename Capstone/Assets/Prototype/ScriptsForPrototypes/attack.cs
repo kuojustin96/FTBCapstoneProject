@@ -10,6 +10,7 @@ public class attack : NetworkBehaviour {
 	public bool attacking;
 	private PlayerClass player;
 	public GameObject key;
+	public GameObject firePrefab;
 	// Use this for initialization
 	void Start () {
 		 player = GetComponent<playerClassAdd>().player;
@@ -25,6 +26,9 @@ public class attack : NetworkBehaviour {
 			if (player.currentItem.name == "keyHolder") {
 				CmdKeyAttacking ();
 				Debug.Log (player.currentItem.name);
+			}
+			if (player.currentItem.name == "matchHolder") {
+				CmdMatchAttacking ();
 			}
 		}
 	}
@@ -66,8 +70,20 @@ public class attack : NetworkBehaviour {
 	}
 	//Key
 
+	//Matchstick
+	[Command]
+	public void CmdMatchAttacking(){
 
 
+		CmdMatchFire ();
+	}
+	[Command]
+	public void CmdMatchFire(){
+
+		GameObject fire = Instantiate(firePrefab, this.transform.position, Quaternion.identity);
+		NetworkServer.Spawn (fire);
+
+	}
 
 
 
