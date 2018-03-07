@@ -17,7 +17,8 @@ public class PlayerClass {
     public int itemNum;
 	public int itemCharges;
     public bool usingItem = false;
-	public bool crafttingMenuActive = false;
+	public bool showCraftingUI = false;
+    public bool craftingUIOpen = false;
 	public GameObject currentItem;
 	public string currentItemString;
 

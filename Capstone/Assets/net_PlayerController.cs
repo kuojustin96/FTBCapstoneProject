@@ -52,11 +52,11 @@ namespace jkuo
             rb = GetComponent<Rigidbody>();
             player = GetComponent<playerClassAdd>().player;
             LocalCameraCheck();
-            lockMode = CursorLockMode.Locked;
+            //lockMode = CursorLockMode.Locked;
 
 			if (isLocalPlayer) {
-				nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
-				nhs.player = player;
+				//nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
+				//nhs.player = player;
 			}
         }
 
@@ -104,7 +104,7 @@ namespace jkuo
         {
             if (isLocalPlayer)
             {
-                UpdateCursorLock();
+                //UpdateCursorLock();
 
                 if (!player.isStunned)
                 {
@@ -112,7 +112,8 @@ namespace jkuo
                     Movement();
 
                     //Camera Rotation
-                    LookCamera();
+                    if(!player.craftingUIOpen)
+                        LookCamera();
 
                     //Jump
                     Jumping();
