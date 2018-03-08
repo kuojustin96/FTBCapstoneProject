@@ -11,12 +11,16 @@ public class PlayerSugarPickup : MonoBehaviour {
 	private List<GameObject> sugarInBackpack = new List<GameObject>();
 	private bool runAnimation = false;
 
-//	//PROTOTYPE HUD
-	public Net_Hud_SugarCounter hudCount;
+    //	//PROTOTYPE HUD
+    //public Net_Hud_SugarCounter hudCount;
+
+    private UIController uiController;
 
 	// Use this for initialization
 	void Start () {
 		player = GetComponentInParent<playerClassAdd>().player;
+        uiController = GameObject.Find("Player UI Canvas").GetComponent<UIController>();
+        uiController.SetUpVariables(player);
 		sugarPickupSpeed = GameManager.instance.sugarPickUpSpeed;
 		dropoffDelay = GameManager.instance.dropoffDelay;
 	}

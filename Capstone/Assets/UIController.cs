@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class UIController : MonoBehaviour {
 
     private PlayerClass player;
+    public float CraftItemTime = 3f;
 
     public CanvasGroup OpenCraftingUI;
     public CanvasGroup CraftingUI;
@@ -29,15 +31,33 @@ public class UIController : MonoBehaviour {
     private Vector2 origIngameItemUIPos;
     private Vector2 origIngameItemUIScale;
 
+    public Image CraftingItemFill;
+    public TextMeshProUGUI CraftingItemPercentage;
+
     private craftingInput ci;
     private RectTransform lastHoveredButton;
     private Image lastHoveredImage;
     private Color saveButtonColor;
 
+    [System.Serializable]
+    public class ItemTexture
+    {
+        public string name;
+        public Texture texture;
+    }
+
+    public ItemTexture[] ItemTextures;
+    private Dictionary<string, Texture> TextureDict = new Dictionary<string, Texture>();
+
 	// Use this for initialization
 	void Start () {
-        player = GetComponent<playerClassAdd>().player;
-        ci = GetComponent<craftingInput>();
+	}
+
+    public void SetUpVariables(PlayerClass player)
+    {
+        //player = GetComponent<playerClassAdd>().player;
+        this.player = player;
+        ci = player.playerGO.GetComponent<craftingInput>();
 
         origIngameUIPos = IngameItemBackgroundUI.transform.position;
 
@@ -53,16 +73,27 @@ public class UIController : MonoBehaviour {
 
         CraftingItemUIRect = CraftingItemUI.GetComponent<RectTransform>();
 
+        CraftingItemFill.fillAmount = 0f;
+        CraftingItemPercentage.text = "0%";
+        CraftingItemFill.gameObject.SetActive(false);
+
+        foreach(ItemTexture it in ItemTextures)
+        {
+            TextureDict.Add(it.name, it.texture);
+        }
+
         CanvasOFF(OpenCraftingUI);
         CanvasOFF(CraftingUI);
         CanvasON(IngameItemBackgroundUI, false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        if (player == null)
+            return;
 
         //Probably want to move this to OnTriggerEnter in sugar pickup
         if (player.showCraftingUI && !player.craftingUIOpen)
@@ -183,35 +214,57 @@ public class UIController : MonoBehaviour {
 
     public void ClickAttackButton()
     {
-        ci.craftAttack();
-        player.craftingUIOpen = false;
-        CanvasOFF(CraftingUI);
-        CanvasON(OpenCraftingUI);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        StartCoroutine(CraftItemWaitTime("Attack"));
     }
 
     public void ClickDefenseButton()
     {
-        ci.craftDefense();
-        player.craftingUIOpen = false;
-        CanvasOFF(CraftingUI);
-        CanvasON(OpenCraftingUI);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        StartCoroutine(CraftItemWaitTime("Defense"));
     }
 
     public void ClickUtilityButton()
     {
-        Debug.Log("Craft Utility Item (Need To Implement)");
-        player.craftingUIOpen = false;
-        CanvasOFF(CraftingUI);
-        CanvasON(OpenCraftingUI);
+        StartCoroutine(CraftItemWaitTime("Utility"));
+    }
 
+    private IEnumerator CraftItemWaitTime(string itemType)
+    {
+        CraftingItemFill.gameObject.SetActive(true);
+
+        float time = Time.time;
+        while(Time.time < time + CraftItemTime)
+        {
+            CraftingItemFill.fillAmount += Time.deltaTime / CraftItemTime;
+            CraftingItemPercentage.text = Mathf.RoundToInt(CraftingItemFill.fillAmount * 100) + "%";
+            yield return null;
+        }
+
+        switch (itemType)
+        {
+            case "Attack":
+                ci.craftAttack();
+                break;
+
+            case "Defense":
+                ci.craftDefense();
+                break;
+
+            case "Utility":
+                Debug.Log("Craft Utility Item (Need To Implement)");
+                break;
+        }
+
+        IngameItemUI.texture = TextureDict[player.currentItem.name];
+        CraftingItemUI.texture = TextureDict[player.currentItem.name];
+
+        player.craftingUIOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        yield return new WaitForSeconds(1f);
+
+        CanvasOFF(CraftingUI);
+        StartCoroutine(HideCraftingUI());
     }
 
 
