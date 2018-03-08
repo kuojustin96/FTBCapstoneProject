@@ -121,6 +121,7 @@ public class UIController : MonoBehaviour {
         }
     }
 
+    #region Enable/Disable Crafting UI
     private void ToggleCraftingUI()
     {
         if (CraftingUI.alpha == 0f)
@@ -188,6 +189,7 @@ public class UIController : MonoBehaviour {
         IngameItemUIRect.sizeDelta = origIngameItemUIScale;
         CanvasON(OpenCraftingUI);
     }
+    #endregion
 
     public void EnterHoverButton(BaseEventData data)
     {
@@ -261,7 +263,7 @@ public class UIController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         CanvasOFF(CraftingUI);
         StartCoroutine(HideCraftingUI());
