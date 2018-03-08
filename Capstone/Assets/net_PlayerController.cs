@@ -108,15 +108,18 @@ namespace jkuo
 
                 if (!player.isStunned)
                 {
-                    //Movement
-                    Movement();
+                    if (!player.craftingUIOpen)
+                    {
+                        //Movement
+                        Movement();
 
-                    //Camera Rotation
-                    if(!player.craftingUIOpen)
+                        //Camera Rotation
+
                         LookCamera();
 
-                    //Jump
-                    Jumping();
+                        //Jump
+                        Jumping();
+                    }
                 }
             }
         }
