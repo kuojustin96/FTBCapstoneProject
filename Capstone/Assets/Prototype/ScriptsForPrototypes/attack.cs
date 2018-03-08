@@ -7,9 +7,11 @@ using jkuo;
 public class attack : NetworkBehaviour {
 	public GameObject attackTrigger;
 	public NetworkAnimator keyAnim;
+	public NetworkAnimator matchAnim;
 	public bool attacking;
 	private PlayerClass player;
-	public GameObject key;
+
+
 	// Use this for initialization
 	void Start () {
 		 player = GetComponent<playerClassAdd>().player;
@@ -24,6 +26,10 @@ public class attack : NetworkBehaviour {
 				return;
 			if (player.currentItem.name == "keyHolder") {
 				CmdKeyAttacking ();
+				Debug.Log (player.currentItem.name);
+			}
+			if (player.currentItem.name == "matchHolder") {
+				CmdMatchAttacking ();
 				Debug.Log (player.currentItem.name);
 			}
 		}
@@ -66,10 +72,33 @@ public class attack : NetworkBehaviour {
 	}
 	//Key
 
+	//Match
+	[Command]
+	public void CmdMatchAttacking(){
 
+		Invoke ("CmdMatchStopAttacking", .5f);
+	}
 
+	[Command]
+	public void CmdMatchStopAttacking(){
+		RpcMatchAnimStop ();
+	}
+	[ClientRpc]
+	//send anim to all clients
+	public void RpcMatchAnimSend(){
+		matchAnim.animator.SetInteger ("matchAttack",1);
+	}
+	[ClientRpc]
+	public void RpcMatchAnimStop (){
+		matchAnim.animator.SetInteger ("matchAttack", 0);
+		player.itemCharges--;
+		if (player.currentItem != null && player.itemCharges == 0) {
 
+			CmdobjectTurnoff ();
+		}
+	}
 
+	//Match
 
 
 	[Command]
