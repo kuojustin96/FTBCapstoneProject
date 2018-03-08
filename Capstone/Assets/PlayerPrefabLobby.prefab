@@ -27,8 +27,8 @@ GameObject:
   - component: {fileID: 114806823933991766}
   - component: {fileID: 114214191685074766}
   - component: {fileID: 114590754073093010}
-  - component: {fileID: 114377413478998062}
   - component: {fileID: 114133859285117594}
+  - component: {fileID: 114278063237749606}
   m_Layer: 10
   m_Name: PlayerPrefabLobby
   m_TagString: LobbyPlayer
@@ -772,7 +772,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
---- !u!114 &114377413478998062
+--- !u!114 &114278063237749606
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1189846312776972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d633bbde54e3bc4c88769cf93438a1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bb32ffacb172be4da75e08bc1540a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 0}
@@ -799,22 +799,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 133
-    i1: 61
-    i2: 136
-    i3: 150
-    i4: 120
-    i5: 154
-    i6: 71
-    i7: 180
-    i8: 107
-    i9: 169
-    i10: 119
-    i11: 191
-    i12: 101
-    i13: 53
-    i14: 104
-    i15: 31
+    i0: 172
+    i1: 223
+    i2: 155
+    i3: 219
+    i4: 207
+    i5: 148
+    i6: 111
+    i7: 100
+    i8: 138
+    i9: 140
+    i10: 131
+    i11: 225
+    i12: 228
+    i13: 203
+    i14: 191
+    i15: 173
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114398893327591300
