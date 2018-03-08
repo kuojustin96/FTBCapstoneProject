@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 namespace jkuo
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(playerClassAdd))]
     public class net_PlayerController : NetworkBehaviour
     {
 		private Net_Hud_SugarCounter nhs;
