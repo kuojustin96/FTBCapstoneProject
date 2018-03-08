@@ -368,10 +368,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0, b: 0.39607847, a: 1}
-    m_HighlightedColor: {r: 1, g: 0, b: 0.39607847, a: 1}
-    m_PressedColor: {r: 1, g: 0, b: 0.39607847, a: 1}
-    m_DisabledColor: {r: 1, g: 0, b: 0.39607847, a: 0.5019608}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
+    m_HighlightedColor: {r: 0, g: 0, b: 0, a: 0}
+    m_PressedColor: {r: 0, g: 0, b: 0, a: 0}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.2
   m_SpriteState:
@@ -383,7 +383,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 11473722}
   m_OnClick:
     m_PersistentCalls:
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8, b: 0.8, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -708,7 +708,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: JOIN
+  m_Text: READY
 --- !u!114 &11454254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 11486682}
   m_TextComponent: {fileID: 11444142}
   m_Placeholder: {fileID: 11441744}
@@ -1111,7 +1111,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 11454254}
   m_OnClick:
     m_PersistentCalls:

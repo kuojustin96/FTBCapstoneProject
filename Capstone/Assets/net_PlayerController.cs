@@ -54,10 +54,10 @@ namespace jkuo
             LocalCameraCheck();
             //lockMode = CursorLockMode.Locked;
 
-			if (isLocalPlayer) {
-				//nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
-				//nhs.player = player;
-			}
+			//if (isLocalPlayer) {
+			//	//nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
+			//	//nhs.player = player;
+			//}
         }
 
         private void LocalCameraCheck()

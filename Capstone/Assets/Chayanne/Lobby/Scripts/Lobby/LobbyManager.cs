@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace Prototype.NetworkLobby
 {
-    public class LobbyManager : NetworkLobbyManager 
+    public class LobbyManager : NetworkLobbyManager
     {
         static short MsgKicked = MsgType.Highest + 1;
 
@@ -48,7 +48,7 @@ namespace Prototype.NetworkLobby
         public bool _isMatchmaking = false;
 
         protected bool _disconnectServer = false;
-        
+
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
@@ -58,8 +58,10 @@ namespace Prototype.NetworkLobby
         public GameObject lobbySpawn;
 
         public LobbyAnimationScript lobbyAnims;
-        
+
         bool inGame = false;
+
+        public Transform spawnPointLobby;
 
         void OnLevelWasLoaded()
         {
@@ -187,7 +189,7 @@ namespace Prototype.NetworkLobby
         public void GoBackButton()
         {
             backDelegate();
-			topPanel.isInGame = false;
+            topPanel.isInGame = false;
         }
 
         // ----------------- Server management
@@ -206,13 +208,13 @@ namespace Prototype.NetworkLobby
         {
             ChangeTo(mainMenuPanel);
         }
-                 
+
         public void StopHostClbk()
         {
             if (_isMatchmaking)
             {
-				matchMaker.DestroyMatch((NetworkID)_currentMatchID, 0, OnDestroyMatch);
-				_disconnectServer = true;
+                matchMaker.DestroyMatch((NetworkID)_currentMatchID, 0, OnDestroyMatch);
+                _disconnectServer = true;
             }
             else
             {
@@ -278,15 +280,15 @@ namespace Prototype.NetworkLobby
         }
 
         public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
-		{
-			base.OnMatchCreate(success, extendedInfo, matchInfo);
+        {
+            base.OnMatchCreate(success, extendedInfo, matchInfo);
             _currentMatchID = (System.UInt64)matchInfo.networkId;
-		}
+        }
 
-		public override void OnDestroyMatch(bool success, string extendedInfo)
-		{
-			base.OnDestroyMatch(success, extendedInfo);
-			if (_disconnectServer)
+        public override void OnDestroyMatch(bool success, string extendedInfo)
+        {
+            base.OnDestroyMatch(success, extendedInfo);
+            if (_disconnectServer)
             {
                 StopMatchMaker();
                 StopHost();
@@ -312,10 +314,11 @@ namespace Prototype.NetworkLobby
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
             //Create our 3D Player here
-    
 
 
-            GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
+
+            GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject, spawnPointLobby.transform.position, spawnPointLobby.transform.rotation) as GameObject;
+
 
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
@@ -331,9 +334,19 @@ namespace Prototype.NetworkLobby
                     p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
                 }
             }
+            obj.transform.parent = null;
 
             return obj;
         }
+
+        //private void CreateLobbyGamePlayer()
+        //{
+        //    GameObject gameobj = Instantiate(gamePlayerPrefab.gameObject, spawnPointLobby.transform.position, spawnPointLobby.rotation) as GameObject;
+        //    jkuo.net_PlayerController player = gameobj.GetComponent<jkuo.net_PlayerController>();
+        //    Camera.main.enabled = false;
+        //    NetworkServer.Spawn(gameobj);
+
+        //}
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
         {
@@ -379,17 +392,17 @@ namespace Prototype.NetworkLobby
 
         public override void OnLobbyServerPlayersReady()
         {
-            
 
-			bool allready = true;
-			for(int i = 0; i < lobbySlots.Length; ++i)
-			{
-				if(lobbySlots[i] != null)
-					allready &= lobbySlots[i].readyToBegin;
-			}
 
-			if(allready)
-				StartCoroutine(ServerCountdownCoroutine());
+            bool allready = true;
+            for (int i = 0; i < lobbySlots.Length; ++i)
+            {
+                if (lobbySlots[i] != null)
+                    allready &= lobbySlots[i].readyToBegin;
+            }
+
+            if (allready)
+                StartCoroutine(ServerCountdownCoroutine());
         }
 
         public IEnumerator ServerCountdownCoroutine()
@@ -433,6 +446,9 @@ namespace Prototype.NetworkLobby
         {
             SetInGame(true);
             ServerChangeScene(playScene);
+
+
+
         }
 
 
@@ -470,8 +486,8 @@ namespace Prototype.NetworkLobby
 
         public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
         {
-            base.OnServerAddPlayer(conn,playerControllerId);
-                
+            base.OnServerAddPlayer(conn, playerControllerId);
+
             Debug.Log(conn.playerControllers[0].gameObject.name);
         }
 
