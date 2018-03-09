@@ -6,6 +6,8 @@ using jkuo;
 
 public class attack : NetworkBehaviour {
 	public GameObject attackTrigger;
+	public GameObject fireballSpawn;
+	public GameObject fireballPrefab;
 	public NetworkAnimator keyAnim;
 	public NetworkAnimator matchAnim;
 	public bool attacking;
@@ -75,7 +77,12 @@ public class attack : NetworkBehaviour {
 	//Match
 	[Command]
 	public void CmdMatchAttacking(){
-
+		if (keyAnim.animator.GetCurrentAnimatorStateInfo (0).IsName ("idle") && !player.isStunned) {
+			GameObject fireball = Instantiate (fireballPrefab, fireballSpawn.transform.position, fireballSpawn.transform.rotation);
+			NetworkServer.Spawn (fireball);
+			fireball.GetComponent<Rigidbody> ().AddForce (0, 500, 0);
+		}
+		RpcMatchAnimSend ();
 		Invoke ("CmdMatchStopAttacking", .5f);
 	}
 
