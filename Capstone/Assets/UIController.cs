@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour {
     private PlayerClass player;
     public float CraftItemTime = 3f;
 
+    public Texture NoItemTexture;
+
     public CanvasGroup OpenCraftingUI;
     public CanvasGroup CraftingUI;
     private RectTransform CraftingUIRect;
@@ -114,9 +116,6 @@ public class UIController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.F) && player.showCraftingUI)
         {
-            //FToCraft.SetActive(false);
-            //CraftingUI.SetActive(true);
-
             ToggleCraftingUI();
         }
     }
@@ -191,6 +190,7 @@ public class UIController : MonoBehaviour {
     }
     #endregion
 
+    #region Button Behaviors
     public void EnterHoverButton(BaseEventData data)
     {
         PointerEventData pointerData = data as PointerEventData;
@@ -268,7 +268,13 @@ public class UIController : MonoBehaviour {
         CanvasOFF(CraftingUI);
         StartCoroutine(HideCraftingUI());
     }
+    #endregion
 
+    public void ResetUIItemTexture()
+    {
+        IngameItemUI.texture = NoItemTexture;
+        CraftingItemUI.texture = NoItemTexture;
+    }
 
     #region Canvas Control
     private IEnumerator FadeIn(CanvasGroup c, float timeToFade, float targetAlpha = 1f)
