@@ -77,7 +77,8 @@ public class attack : NetworkBehaviour {
 	//Match
 	[Command]
 	public void CmdMatchAttacking(){
-		if (keyAnim.animator.GetCurrentAnimatorStateInfo (0).IsName ("idle") && !player.isStunned) {
+		if (matchAnim.animator.GetCurrentAnimatorStateInfo (0).IsName ("idle") && !player.isStunned) {
+			Debug.Log ("fireball");
 			GameObject fireball = Instantiate (fireballPrefab, fireballSpawn.transform.position, fireballSpawn.transform.rotation);
 			NetworkServer.Spawn (fireball);
 			fireball.GetComponent<Rigidbody> ().AddForce (0, 500, 0);
