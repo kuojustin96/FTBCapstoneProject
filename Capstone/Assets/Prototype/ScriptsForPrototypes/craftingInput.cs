@@ -46,7 +46,7 @@ public class craftingInput : NetworkBehaviour {
 			player.currentItem = attackItems [randomRange];
 			player.currentItemString = player.currentItem.ToString ();
 		}
-	}
+	}	
 
 	[Command]
 	public void CmdCraftAttack(int randomRange){
