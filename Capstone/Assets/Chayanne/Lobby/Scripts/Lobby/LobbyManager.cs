@@ -27,6 +27,7 @@ namespace Prototype.NetworkLobby
         public RectTransform mainMenuPanel;
         public RectTransform lobbyPanel;
 
+        public LobbyCameraScript lcs;
         public LobbyInfoPanel infoPanel;
         public LobbyCountdownPanel countdownPanel;
         public GameObject addPlayerButton;
@@ -80,6 +81,7 @@ namespace Prototype.NetworkLobby
 
         void Start()
         {
+            lcs = GetComponent<LobbyCameraScript>();
             s_Singleton = this;
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
@@ -313,12 +315,9 @@ namespace Prototype.NetworkLobby
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
+            
             //Create our 3D Player here
-
-
-
             GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject, spawnPointLobby.transform.position, spawnPointLobby.transform.rotation) as GameObject;
-
 
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);

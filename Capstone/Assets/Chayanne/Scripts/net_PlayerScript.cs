@@ -7,6 +7,7 @@ using TMPro;
 
 namespace ckp
 {
+    //DEPRECATED PLEASE DELETE THIS
     public class net_PlayerScript : NetworkBehaviour
     {
         
@@ -65,7 +66,7 @@ namespace ckp
         {
             InitializeGameSettings();
             rb = GetComponent<Rigidbody>();
-
+            
             LocalCameraCheck();
             SetupName();
 

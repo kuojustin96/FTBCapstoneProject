@@ -19,7 +19,7 @@ public class NetworkLobbyHook : LobbyHook
         int numPlayers = manager.numPlayers;
 
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
-        net_PlayerScript player = gamePlayer.GetComponent<net_PlayerScript>();
+        jkuo.net_PlayerController player = gamePlayer.GetComponent<jkuo.net_PlayerController>();
 
         SyncName(lobbyPlayer, gamePlayer);
 
@@ -54,10 +54,11 @@ public class NetworkLobbyHook : LobbyHook
 
     private static void SyncName(GameObject lobbyPlayer, GameObject gamePlayer)
     {
-        LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
-        net_PlayerScript player = gamePlayer.GetComponent<net_PlayerScript>();
+        Debug.Log("Need to finish this!");
+        //LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
+        //net_PlayerScript player = gamePlayer.GetComponent<net_PlayerScript>();
 
-        player.SetName(lobby.playerName);
+        //player.SetName(lobby.playerName);
     }
 
 

@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ckp;
+using Cinemachine;
 
 namespace Prototype.NetworkLobby
 {
@@ -42,6 +43,7 @@ namespace Prototype.NetworkLobby
         //static Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         //static Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
+        public net_PlayerCameraScript cameraScript;
 
         public override void OnClientEnterLobby()
         {
@@ -89,14 +91,14 @@ namespace Prototype.NetworkLobby
 
         void SetupOtherPlayer()
         {
-            GetComponent<RectTransform>().localRotation = Quaternion.identity;
-            nameInput.interactable = false;
-            removePlayerButton.interactable = NetworkServer.active;
+            //GetComponent<RectTransform>().localRotation = Quaternion.identity;
+            //nameInput.interactable = false;
+            //removePlayerButton.interactable = NetworkServer.active;
 
-            ChangeReadyButtonColor(NotReadyColor);
+            //ChangeReadyButtonColor(NotReadyColor);
 
-            readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
-            readyButton.interactable = false;
+            //readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
+            //readyButton.interactable = false;
 
             OnClientReady(false);
         }
@@ -110,37 +112,45 @@ namespace Prototype.NetworkLobby
 
         void SetupLocalPlayer()
         {
-            GetComponent<RectTransform>().localRotation = Quaternion.identity;
-            nameInput.interactable = true;
-            remoteIcone.gameObject.SetActive(false);
-            localIcone.gameObject.SetActive(true);
+            Debug.Log("Setting up!");
+            CinemachineVirtualCamera playerCamera = GameObject.FindGameObjectWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+            CinemachineVirtualCamera lobbyCam = GameObject.FindGameObjectWithTag("LobbyCamera").GetComponent<CinemachineVirtualCamera>();
+            //CinemachineVirtualCamera transitionCamera = GameObject.FindGameObjectWithTag("TransitionCamera").GetComponent<CinemachineVirtualCamera>();
+            Debug.Assert(playerCamera, "You LITERALLY fucked up");
+            lobbyCam.enabled = false;
+            cameraScript.SwitchToCameraLocal(playerCamera);
 
-            CheckRemoveButton();
+            //GetComponent<RectTransform>().localRotation = Quaternion.identity;
+            //nameInput.interactable = true;
+            //remoteIcone.gameObject.SetActive(false);
+            //localIcone.gameObject.SetActive(true);
+
+            //CheckRemoveButton();
 
             if (playerColor == Color.white)
                 CmdColorChange();
 
-            ChangeReadyButtonColor(JoinColor);
+            //ChangeReadyButtonColor(JoinColor);
 
-            readyButton.transform.GetChild(0).GetComponent<Text>().text = "JOIN";
-            readyButton.interactable = true;
+            //readyButton.transform.GetChild(0).GetComponent<Text>().text = "JOIN";
+            //readyButton.interactable = true;
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
             if (playerName == "")
                 CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount-1));
 
-            //we switch from simple name display to name input
-            colorButton.interactable = true;
-            nameInput.interactable = true;
+            ////we switch from simple name display to name input
+            //colorButton.interactable = true;
+            //nameInput.interactable = true;
 
-            nameInput.onEndEdit.RemoveAllListeners();
-            nameInput.onEndEdit.AddListener(OnNameChanged);
+            //nameInput.onEndEdit.RemoveAllListeners();
+            //nameInput.onEndEdit.AddListener(OnNameChanged);
 
-            colorButton.onClick.RemoveAllListeners();
-            colorButton.onClick.AddListener(OnColorClicked);
+            //colorButton.onClick.RemoveAllListeners();
+            //colorButton.onClick.AddListener(OnColorClicked);
 
-            readyButton.onClick.RemoveAllListeners();
-            readyButton.onClick.AddListener(OnReadyClicked);
+            //readyButton.onClick.RemoveAllListeners();
+            //readyButton.onClick.AddListener(OnReadyClicked);
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
@@ -188,7 +198,7 @@ namespace Prototype.NetworkLobby
 
         public void OnPlayerListChanged(int idx)
         { 
-            GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;
+            //GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;
         }
 
         ///===== callback from sync var

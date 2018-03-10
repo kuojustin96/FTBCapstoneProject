@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114590754073093010}
   - component: {fileID: 114133859285117594}
   - component: {fileID: 114278063237749606}
+  - component: {fileID: 114682149163699830}
   m_Layer: 10
   m_Name: PlayerPrefabLobby
   m_TagString: LobbyPlayer
@@ -213,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189846312776972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.66488, y: 3.1645155, z: 4.0120583}
+  m_LocalPosition: {x: -13.108458, y: 6.5355463, z: -6.5093117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4094756739695056}
@@ -293,7 +294,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1548944110814704}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -884,6 +885,21 @@ MonoBehaviour:
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   OddRowColor: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
   EvenRowColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  cameraScript: {fileID: 114682149163699830}
+--- !u!114 &114682149163699830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189846312776972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8e4636a3ac3c94cade82a40d09427c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  lobbyCamera: {fileID: 0}
+  transitionCamera: {fileID: 0}
 --- !u!114 &114806823933991766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -895,6 +911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5567aa07cdf72b4886d1d8d2cfcd86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCam: {fileID: 0}
+  offlineTesting: 0
   cam: {fileID: 20857830863445306}
   speed: 20
   cameraCube: {fileID: 4094756739695056}
