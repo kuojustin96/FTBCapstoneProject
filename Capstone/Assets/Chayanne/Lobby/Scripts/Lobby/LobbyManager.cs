@@ -318,6 +318,8 @@ namespace Prototype.NetworkLobby
             
             //Create our 3D Player here
             GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject, spawnPointLobby.transform.position, spawnPointLobby.transform.rotation) as GameObject;
+            Debug.Log("Poof!");
+
 
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);

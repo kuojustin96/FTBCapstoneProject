@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 114397950423037572}
   - component: {fileID: 114502909754769026}
   - component: {fileID: 114806823933991766}
-  - component: {fileID: 114214191685074766}
   - component: {fileID: 114590754073093010}
   - component: {fileID: 114133859285117594}
   - component: {fileID: 114278063237749606}
@@ -639,28 +638,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114214191685074766
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1189846312776972}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e3a9855118ca041b94391b31c5bc58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  gunBarrelPos: {fileID: 0}
-  gunObj: {fileID: 0}
-  playerName: 
-  mouseSensitivity: 500
-  moveSpeedMult: 1
-  jumpHeightMult: 1
-  sugarCount: 0
-  moveSpeed: 0
-  jumpHeight: 0
-  testItem: {fileID: 0}
 --- !u!114 &114274432964429718
 MonoBehaviour:
   m_ObjectHideFlags: 1
