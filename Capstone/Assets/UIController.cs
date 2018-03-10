@@ -49,7 +49,7 @@ public class UIController : NetworkBehaviour {
 
     private int currentSugar = 0;
     private int maxBackpackScore = 10;
-    private int lineDiviser;
+    private int lineDiviser =2 ;
 
     [Header("Transition Between UIs")]
     public float UIShiftTime = 1f;

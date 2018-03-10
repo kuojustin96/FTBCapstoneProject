@@ -66,7 +66,7 @@ namespace jkuo
                 //nhs.player = player;
             }
 
-            playerUI.GetComponent<UIController>().SetUpVariables(player);
+            GetComponent<UIController>().SetUpVariables(player);
 
             GameObject virtualCamObj = GameObject.FindGameObjectWithTag("VirtualCamera");
 

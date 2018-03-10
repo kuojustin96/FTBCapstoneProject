@@ -18,7 +18,8 @@ public class PlayerSugarPickup : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GetComponentInParent<playerClassAdd>().player;
-        uiController = GameObject.Find("Player UI Canvas").GetComponent<UIController>();
+        //uiController = GameObject.Find("Player UI Canvas").GetComponent<UIController>();
+		uiController = GetComponentInParent<UIController>();
 
         //uiController.SetUpVariables(player);
 
