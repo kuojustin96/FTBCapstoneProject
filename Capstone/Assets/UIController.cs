@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Networking;
 
-public class UIController : MonoBehaviour {
+public class UIController : NetworkBehaviour {
 
-    private PlayerClass player;
+    public PlayerClass player;
 
     [System.Serializable]
     public class ItemTexture
@@ -69,6 +69,9 @@ public class UIController : MonoBehaviour {
 
     public void SetUpVariables(PlayerClass player)
     {
+        //if (player != null)
+        //    return;
+
         //player = GetComponent<playerClassAdd>().player;
         this.player = player;
         ci = player.playerGO.GetComponent<craftingInput>();
@@ -107,7 +110,7 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (player == null)
+        if (player == null || !isLocalPlayer)
             return;
 
         //Probably want to move this to OnTriggerEnter in sugar pickup
@@ -179,6 +182,8 @@ public class UIController : MonoBehaviour {
         CanvasOFF(CraftingUI);
         CanvasON(IngameItemBackgroundUI);
 
+        CraftingItemFill.gameObject.SetActive(false);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -244,6 +249,9 @@ public class UIController : MonoBehaviour {
 
     private IEnumerator CraftItemWaitTime(string itemType)
     {
+        IngameItemUI.texture = NoItemTexture;
+        CraftingItemUI.texture = NoItemTexture;
+        CraftingItemFill.fillAmount = 0f;
         CraftingItemFill.gameObject.SetActive(true);
 
         float time = Time.time;
@@ -272,7 +280,7 @@ public class UIController : MonoBehaviour {
         IngameItemUI.texture = TextureDict[player.currentItem.name];
         CraftingItemUI.texture = TextureDict[player.currentItem.name];
 
-        player.craftingUIOpen = false;
+        //player.craftingUIOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 

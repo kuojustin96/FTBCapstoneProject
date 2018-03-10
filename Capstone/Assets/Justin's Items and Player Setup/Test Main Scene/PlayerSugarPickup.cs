@@ -20,9 +20,9 @@ public class PlayerSugarPickup : MonoBehaviour {
 		player = GetComponentInParent<playerClassAdd>().player;
         uiController = GameObject.Find("Player UI Canvas").GetComponent<UIController>();
 
-        uiController.SetUpVariables(player);
+        //uiController.SetUpVariables(player);
 
-        player.SetUIController(uiController);
+        //player.SetUIController(uiController);
 		sugarPickupSpeed = GameManager.instance.sugarPickUpSpeed;
 		dropoffDelay = GameManager.instance.dropoffDelay;
 	}
@@ -137,7 +137,8 @@ public class PlayerSugarPickup : MonoBehaviour {
 	private IEnumerator DropSugarAni()
 	{
 		player.DropSugar();
-		int count = 0;
+        uiController.UpdateBackpackScore(player.sugarInBackpack);
+        int count = 0;
 		GameObject sugar = sugarInBackpack[0];
 		sugar.SetActive(true);
 		sugarInBackpack.Remove(sugarInBackpack[0]);
@@ -177,8 +178,9 @@ public class PlayerSugarPickup : MonoBehaviour {
 			GameObject sugar = otherPlayer.dropoffPoint.transform.parent.GetChild(1).gameObject;
 			sugarInBackpack.Add(sugar);
 			otherPlayer.LoseSugar(1);
-			player.PickupSugar();
-			Vector3 topPos = new Vector3(dropoffPoint.transform.position.x, dropoffPoint.transform.position.y + 2, dropoffPoint.transform.position.z);
+            player.PickupSugar();
+            uiController.UpdateBackpackScore(player.sugarInBackpack);
+            Vector3 topPos = new Vector3(dropoffPoint.transform.position.x, dropoffPoint.transform.position.y + 2, dropoffPoint.transform.position.z);
 			sugar.transform.parent = null;
 			sugar.SetActive(true);
 			Vector3 saveScale = sugar.transform.localScale;
@@ -218,8 +220,9 @@ public class PlayerSugarPickup : MonoBehaviour {
 		sugar.GetComponent<BoxCollider>().enabled = false;
 		player.PickupSugar();
 		sugarInBackpack.Add(sugar);
+        uiController.UpdateBackpackScore(player.sugarInBackpack);
 
-		sugar.transform.parent = transform;
+        sugar.transform.parent = transform;
 		Vector3 saveScale = sugar.transform.localScale;
 
 		while (sugar.transform.position != transform.position)
@@ -243,6 +246,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 		sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
 		player.DropoffSugarInStash();
+        uiController.UpdateBackpackScore(player.sugarInBackpack);
 		sugar.SetActive(true);
 
 		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 10, sugar.transform.position.z);

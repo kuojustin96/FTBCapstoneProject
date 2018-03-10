@@ -17,6 +17,7 @@ namespace jkuo
 		private Net_Hud_SugarCounter nhs;
 
         public Camera cam;
+        public GameObject playerUI;
         private PlayerClass player;
         private Rigidbody rb;
         private bool isPaused = false;
@@ -55,16 +56,17 @@ namespace jkuo
         void Start()
         {
 
-
             rb = GetComponent<Rigidbody>();
             player = GetComponent<playerClassAdd>().player;
             LocalCameraCheck();
             lockMode = CursorLockMode.Locked;
 
 			if (isLocalPlayer) {
-				//nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
-				//nhs.player = player;
-			}
+                //nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
+                //nhs.player = player;
+            }
+
+            playerUI.GetComponent<UIController>().SetUpVariables(player);
 
             GameObject virtualCamObj = GameObject.FindGameObjectWithTag("VirtualCamera");
 
@@ -80,6 +82,7 @@ namespace jkuo
             {
                 cam.GetComponent<Camera>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
+                playerUI.SetActive(false);
             }
         }
 
@@ -118,11 +121,11 @@ namespace jkuo
         {
             if (isLocalPlayer || offlineTesting)
             {
-                UpdateCursorLock();
+                //UpdateCursorLock();
 
                 if (!player.isStunned)
                 {
-                    if (!player.craftingUIOpen && !isPaused)
+                    if (!player.craftingUIOpen)
                     {
 
 
