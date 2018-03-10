@@ -22,7 +22,7 @@ public class PlayerClass {
 	public GameObject currentItem;
 	public string currentItemString;
 
-
+    private UIController uiController;
 
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
     {
@@ -33,9 +33,19 @@ public class PlayerClass {
         this.playerName = playerName;
     }
 
+    public void SetUIController(UIController uiController)
+    {
+        if (this.uiController == null)
+        {
+            this.uiController = uiController;
+            uiController.UpdateMaxBackpackScore(maxCanCarry);
+        }
+    }
+
     public void PickupSugar()
     {
         sugarInBackpack++;
+        uiController.UpdateBackpackScore(sugarInBackpack);
 //        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
     }
 
@@ -43,20 +53,22 @@ public class PlayerClass {
     {
         currentPlayerScore++;
         sugarInBackpack--;
-//        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
-//        ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
+        uiController.UpdateBackpackScore(sugarInBackpack);
+        //        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+        //        ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
     }
 
     public void LoseSugar(int amount)
     {
         currentPlayerScore -= amount;
-  //      ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
+        //      ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
     }
 
     public void DropSugar()
     {
         sugarInBackpack--;
-   //     ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+        uiController.UpdateBackpackScore(sugarInBackpack);
+        //     ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
     }
 
     public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum)

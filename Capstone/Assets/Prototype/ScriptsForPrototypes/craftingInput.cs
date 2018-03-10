@@ -37,16 +37,15 @@ public class craftingInput : NetworkBehaviour {
 	public void craftAttack(){
 		if (!isLocalPlayer)
 			return;
-//		if (player.currentItem != null)
-//			return;
+
 		if (player.currentPlayerScore > 0) {
-			int randomRange = Random.Range (0, attackItems.Count);
+			int randomRange = Random.Range (1, attackItems.Count);
 			CmdCraftAttack (randomRange);
 			player.itemCharges = attackCharges [randomRange];
 			player.currentItem = attackItems [randomRange];
 			player.currentItemString = player.currentItem.ToString ();
 		}
-	}
+	}	
 
 	[Command]
 	public void CmdCraftAttack(int randomRange){

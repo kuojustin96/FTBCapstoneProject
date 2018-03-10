@@ -4,42 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.Networking;
 
 public class UIController : MonoBehaviour {
 
     private PlayerClass player;
-    public float CraftItemTime = 3f;
-
-    public Texture NoItemTexture;
-
-    public CanvasGroup OpenCraftingUI;
-    public CanvasGroup CraftingUI;
-    private RectTransform CraftingUIRect;
-    public CanvasGroup IngameItemBackgroundUI;
-    private RectTransform IngameItemRect;
-
-    public RawImage IngameItemUI;
-    private RectTransform IngameItemUIRect;
-    public RawImage CraftingItemUI;
-    private RectTransform CraftingItemUIRect;
-
-    public float UIShiftTime = 1f;
-    public float UIShiftSpeed = 10f;
-    public float UIScaleSpeed = 0.1f;
-    public float UIItemShiftSpeed = 1f;
-
-    private Vector2 origIngameUIPos;
-    private Vector2 origIngameUIScale;
-    private Vector2 origIngameItemUIPos;
-    private Vector2 origIngameItemUIScale;
-
-    public Image CraftingItemFill;
-    public TextMeshProUGUI CraftingItemPercentage;
-
-    private craftingInput ci;
-    private RectTransform lastHoveredButton;
-    private Image lastHoveredImage;
-    private Color saveButtonColor;
 
     [System.Serializable]
     public class ItemTexture
@@ -48,8 +17,51 @@ public class UIController : MonoBehaviour {
         public Texture texture;
     }
 
+    [Header("Crafting UI")]
     public ItemTexture[] ItemTextures;
     private Dictionary<string, Texture> TextureDict = new Dictionary<string, Texture>();
+
+    public RawImage[] bagLines;
+
+    public float CraftItemTime = 3f;
+
+    public Texture NoItemTexture;
+    public CanvasGroup OpenCraftingUI;
+    public CanvasGroup CraftingUI;
+    private RectTransform CraftingUIRect;
+    public RawImage CraftingItemUI;
+    private RectTransform CraftingItemUIRect;
+    public Image CraftingItemFill;
+    public TextMeshProUGUI CraftingItemPercentage;
+
+
+    [Header("Ingame UI")]
+    public CanvasGroup IngameItemBackgroundUI;
+    private RectTransform IngameItemRect;
+    public RawImage IngameItemUI;
+    private RectTransform IngameItemUIRect;
+    public TextMeshProUGUI BackpackScore;
+
+    private Vector2 origIngameUIPos;
+    private Vector2 origIngameUIScale;
+    private Vector2 origIngameItemUIPos;
+    private Vector2 origIngameItemUIScale;
+
+    private int currentSugar = 0;
+    private int maxBackpackScore = 10;
+    private int lineDiviser;
+
+    [Header("Transition Between UIs")]
+    public float UIShiftTime = 1f;
+    public float UIShiftSpeed = 10f;
+    public float UIScaleSpeed = 0.1f;
+    public float UIItemShiftSpeed = 1f;
+
+
+    private craftingInput ci;
+    private RectTransform lastHoveredButton;
+    private Image lastHoveredImage;
+    private Color saveButtonColor;
 
 	// Use this for initialization
 	void Start () {
@@ -81,7 +93,8 @@ public class UIController : MonoBehaviour {
 
         foreach(ItemTexture it in ItemTextures)
         {
-            TextureDict.Add(it.name, it.texture);
+            if(!TextureDict.ContainsKey(it.name))
+                TextureDict.Add(it.name, it.texture);
         }
 
         CanvasOFF(OpenCraftingUI);
@@ -270,11 +283,49 @@ public class UIController : MonoBehaviour {
     }
     #endregion
 
+
+    #region Sugar Score Updates
+    public void UpdateBackpackScore(int numSugar)
+    {
+        currentSugar = numSugar;
+        BackpackScore.text = currentSugar + " / " + maxBackpackScore;
+
+        UpdateBagUI(false);
+    }
+
+    public void UpdateMaxBackpackScore(int maxSugar)
+    {
+        maxBackpackScore = maxSugar;
+        BackpackScore.text = currentSugar + " / " + maxBackpackScore;
+
+        UpdateBagUI(true);
+    }
+
+    private void UpdateBagUI(bool newMax)
+    {
+        if (newMax)
+            lineDiviser = maxBackpackScore / 5;
+
+        int numLines = currentSugar / lineDiviser;
+        int counter = 0;
+
+        for (int x = 0; x < bagLines.Length; x++)
+        {
+            if (counter < numLines)
+                bagLines[x].gameObject.SetActive(true);
+            else
+                bagLines[x].gameObject.SetActive(false);
+
+            counter++;
+        }
+    }
+
     public void ResetUIItemTexture()
     {
         IngameItemUI.texture = NoItemTexture;
         CraftingItemUI.texture = NoItemTexture;
     }
+    #endregion
 
     #region Canvas Control
     private IEnumerator FadeIn(CanvasGroup c, float timeToFade, float targetAlpha = 1f)

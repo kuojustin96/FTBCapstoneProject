@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerSugarPickup : MonoBehaviour {
 
 	private PlayerClass player;
@@ -20,7 +19,10 @@ public class PlayerSugarPickup : MonoBehaviour {
 	void Start () {
 		player = GetComponentInParent<playerClassAdd>().player;
         uiController = GameObject.Find("Player UI Canvas").GetComponent<UIController>();
+
         uiController.SetUpVariables(player);
+
+        player.SetUIController(uiController);
 		sugarPickupSpeed = GameManager.instance.sugarPickUpSpeed;
 		dropoffDelay = GameManager.instance.dropoffDelay;
 	}
