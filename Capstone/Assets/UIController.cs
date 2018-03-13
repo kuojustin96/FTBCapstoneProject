@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 public class UIController : NetworkBehaviour {
 
-    public PlayerClass player;
+    private PlayerClass player;
 
     [System.Serializable]
     public class ItemTexture
@@ -41,6 +41,7 @@ public class UIController : NetworkBehaviour {
     public RawImage IngameItemUI;
     private RectTransform IngameItemUIRect;
     public TextMeshProUGUI BackpackScore;
+    public TextMeshProUGUI StashScore;
 
     private Vector2 origIngameUIPos;
     private Vector2 origIngameUIScale;
@@ -49,7 +50,7 @@ public class UIController : NetworkBehaviour {
 
     private int currentSugar = 0;
     private int maxBackpackScore = 10;
-    private int lineDiviser =2 ;
+    private int lineDiviser = 2;
 
     [Header("Transition Between UIs")]
     public float UIShiftTime = 1f;
@@ -103,6 +104,8 @@ public class UIController : NetworkBehaviour {
         CanvasOFF(OpenCraftingUI);
         CanvasOFF(CraftingUI);
         CanvasON(IngameItemBackgroundUI, false);
+
+        UpdateMaxBackpackScore(maxBackpackScore);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -326,6 +329,11 @@ public class UIController : NetworkBehaviour {
 
             counter++;
         }
+    }
+
+    public void UpdateStashUI(int score)
+    {
+        StashScore.text = score.ToString();
     }
 
     public void ResetUIItemTexture()

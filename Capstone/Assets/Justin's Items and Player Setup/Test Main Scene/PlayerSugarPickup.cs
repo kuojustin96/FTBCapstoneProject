@@ -137,6 +137,8 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	private IEnumerator DropSugarAni()
 	{
+        //Drop sugar on the ground
+
 		player.DropSugar();
         uiController.UpdateBackpackScore(player.sugarInBackpack);
         int count = 0;
@@ -153,8 +155,8 @@ public class PlayerSugarPickup : MonoBehaviour {
 			yield return null;
 		}
 
-		Vector3 randomDropLoc = Random.onUnitSphere * 1.5f;
-		randomDropLoc.y = 1f;
+		Vector3 randomDropLoc = transform.parent.position + Random.onUnitSphere * 15f;
+		randomDropLoc.y = transform.parent.position.y;
 		count = 0;
 
 		while(sugar.transform.position != randomDropLoc)
@@ -170,6 +172,8 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	private IEnumerator StealSugarAni(GameObject dropoffPoint)
 	{
+        //Steal sugar from enemy stash
+
 		int count = 0;
 
 		PlayerClass otherPlayer = GameManager.instance.GetPlayerFromDropoff(dropoffPoint);
@@ -180,7 +184,10 @@ public class PlayerSugarPickup : MonoBehaviour {
 			sugarInBackpack.Add(sugar);
 			otherPlayer.LoseSugar(1);
             player.PickupSugar();
+
             uiController.UpdateBackpackScore(player.sugarInBackpack);
+            otherPlayer.playerGO.GetComponent<UIController>().UpdateStashUI(otherPlayer.currentPlayerScore);
+
             Vector3 topPos = new Vector3(dropoffPoint.transform.position.x, dropoffPoint.transform.position.y + 2, dropoffPoint.transform.position.z);
 			sugar.transform.parent = null;
 			sugar.SetActive(true);
@@ -207,14 +214,18 @@ public class PlayerSugarPickup : MonoBehaviour {
 			sugar.transform.parent = transform;
 			sugar.transform.position = transform.position;
 
-			if (otherPlayer.currentPlayerScore > 0 && runAnimation)
-				Debug.Log (runAnimation);
-				StartCoroutine(StealSugarAni(dropoffPoint));
+            if (otherPlayer.currentPlayerScore > 0 && runAnimation)
+            {
+                yield return new WaitForSeconds(2f);
+                StartCoroutine(StealSugarAni(dropoffPoint));
+            }
 		}
 	}
 
 	private IEnumerator PickupSugarAni(GameObject sugar)
 	{
+        //Pick up sugar from the ground
+
 		//SugarManager.instance.CmdEnableNewSugar(sugar);
 
 		sugar.GetComponent<SimpleRotate>().enabled = false;
@@ -240,6 +251,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	private IEnumerator DropoffSugarAni(GameObject dropoffPoint)
 	{
+        //Drop off sugar in the player's stash
 		int count = 0;
 
 		Vector3 saveScale = sugarInBackpack[0].transform.localScale;
@@ -247,7 +259,10 @@ public class PlayerSugarPickup : MonoBehaviour {
 		sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
 		player.DropoffSugarInStash();
+
         uiController.UpdateBackpackScore(player.sugarInBackpack);
+        uiController.UpdateStashUI(player.currentPlayerScore);
+
 		sugar.SetActive(true);
 
 		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 10, sugar.transform.position.z);
