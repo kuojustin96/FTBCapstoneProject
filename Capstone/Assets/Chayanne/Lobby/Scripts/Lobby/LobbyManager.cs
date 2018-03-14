@@ -27,7 +27,6 @@ namespace Prototype.NetworkLobby
         public RectTransform mainMenuPanel;
         public RectTransform lobbyPanel;
 
-        public LobbyCameraScript lcs;
         public LobbyInfoPanel infoPanel;
         public LobbyCountdownPanel countdownPanel;
         public GameObject addPlayerButton;
@@ -81,7 +80,6 @@ namespace Prototype.NetworkLobby
 
         void Start()
         {
-            lcs = GetComponent<LobbyCameraScript>();
             s_Singleton = this;
             _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
             currentPanel = mainMenuPanel;
@@ -411,6 +409,8 @@ namespace Prototype.NetworkLobby
             float remainingTime = prematchCountdown;
             int floorTime = Mathf.FloorToInt(remainingTime);
 
+
+
             while (remainingTime > 0)
             {
                 yield return null;
@@ -447,8 +447,6 @@ namespace Prototype.NetworkLobby
         {
             SetInGame(true);
             ServerChangeScene(playScene);
-
-
 
         }
 

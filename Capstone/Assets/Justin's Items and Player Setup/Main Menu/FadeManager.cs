@@ -11,6 +11,7 @@ public class FadeManager : MonoBehaviour
         {
             instance = this;
         }
+
     }
 
     public void FadeIn(CanvasGroup c, float _time, float _alpha = 1f)

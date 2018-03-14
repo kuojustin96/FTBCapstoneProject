@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 
 public class Lobby_Player_Setup : NetworkBehaviour  {
@@ -9,6 +10,10 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
     public Transform spawnPoint;
 
     public Transform playerListTransform;
+
+    public float fadeTime = 1.0f;
+
+    bool isReady = false;
 
     void Start()
     {
@@ -37,11 +42,14 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
         if (!isLocalPlayer)
             return;
 
-        if(Input.GetKeyDown(KeyCode.G))
+        if(! isReady && Input.GetKeyDown(KeyCode.G))
         {
+            isReady = true;
+
             GetComponent<Prototype.NetworkLobby.LobbyPlayer>().OnReadyClicked();
             //The worst hack i've ever done.
             transform.parent = playerListTransform;
+
         }
 
         if (Input.GetKeyDown(KeyCode.H))
@@ -50,6 +58,8 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
         }
 
     }
+
+
 
 }
 
