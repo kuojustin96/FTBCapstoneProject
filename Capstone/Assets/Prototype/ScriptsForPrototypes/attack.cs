@@ -12,6 +12,7 @@ public class attack : NetworkBehaviour {
 	public NetworkAnimator matchAnim;
 	public bool attacking;
 	private PlayerClass player;
+	public GameObject cameraCube;
 
 
 	// Use this for initialization
@@ -89,7 +90,12 @@ public class attack : NetworkBehaviour {
 		Debug.Log ("fireball");
 		GameObject fireball = Instantiate (fireballPrefab, fireballSpawn.transform.position, fireballSpawn.transform.rotation);
 		NetworkServer.Spawn (fireball);
-		fireball.GetComponent<Rigidbody> ().AddForce(fireballSpawn.transform.up * 2000);
+		RpcFireball (fireball);
+	}
+	[ClientRpc]
+	public void RpcFireball(GameObject Fireball){
+		Fireball.GetComponent<Rigidbody> ().AddForce(cameraCube.transform.forward * 3000);
+
 	}
 
 	[Command]

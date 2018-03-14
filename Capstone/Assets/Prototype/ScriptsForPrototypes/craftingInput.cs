@@ -61,6 +61,7 @@ public class craftingInput : NetworkBehaviour {
 		player.currentItem = attackItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
 		player.currentPlayerScore -= 1;
+		GetComponent<UIController> ().UpdateStashUI (player.currentPlayerScore);
 	}
 
 	public void craftDefense(){

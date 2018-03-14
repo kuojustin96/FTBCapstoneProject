@@ -64,6 +64,8 @@ public class UIController : NetworkBehaviour {
     private Image lastHoveredImage;
     private Color saveButtonColor;
 
+	private bool craftingItem = false;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -237,21 +239,25 @@ public class UIController : NetworkBehaviour {
 
     public void ClickAttackButton()
     {
+		if(player.currentPlayerScore>0 && craftingItem == false)
         StartCoroutine(CraftItemWaitTime("Attack"));
     }
 
     public void ClickDefenseButton()
     {
+		if(player.currentPlayerScore>0 && craftingItem == false)
         StartCoroutine(CraftItemWaitTime("Defense"));
     }
 
     public void ClickUtilityButton()
     {
+		if(player.currentPlayerScore>0 && craftingItem == false)
         StartCoroutine(CraftItemWaitTime("Utility"));
     }
 
     private IEnumerator CraftItemWaitTime(string itemType)
     {
+		craftingItem = true;
         IngameItemUI.texture = NoItemTexture;
         CraftingItemUI.texture = NoItemTexture;
         CraftingItemFill.fillAmount = 0f;
@@ -291,6 +297,7 @@ public class UIController : NetworkBehaviour {
 
         CanvasOFF(CraftingUI);
         StartCoroutine(HideCraftingUI());
+		craftingItem = false;
     }
     #endregion
 
