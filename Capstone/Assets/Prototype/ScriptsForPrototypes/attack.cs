@@ -14,6 +14,7 @@ public class attack : NetworkBehaviour {
 	private PlayerClass player;
 	public GameObject cameraCube;
 
+	public GameObject magnetSize;
 
 	// Use this for initialization
 	void Start () {
@@ -82,7 +83,7 @@ public class attack : NetworkBehaviour {
 			Invoke ("CmdFireball", 1.5f);
 		}
 		RpcMatchAnimSend ();
-		Invoke ("CmdMatchStopAttacking", 2.5f);
+		Invoke ("CmdMatchStopAttacking", 2.458f);
 	}
 
 	[Command]
@@ -120,6 +121,19 @@ public class attack : NetworkBehaviour {
 	//Match
 
 
+	//Magnet
+
+	public void MagnetTurnOn(){
+
+		magnetSize.GetComponent<SphereCollider> ().radius = 30;
+		Invoke("MagnetTurnOff",40);
+	}
+	public void MagnetTurnOff(){
+
+		magnetSize.GetComponent<SphereCollider> ().radius = 5;
+		CmdobjectTurnoff ();
+	}
+
 	[Command]
 	public void CmdobjectTurnoff(){
 		RpcobjectTurnoff ();
@@ -130,4 +144,6 @@ public class attack : NetworkBehaviour {
 		player.currentItem = null;
 
 	}
+
+
 }

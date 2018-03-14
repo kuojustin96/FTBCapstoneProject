@@ -48,11 +48,11 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 		if (other.tag == "Dropoff Point")
 		{
-//			player.crafttingMenuActive = true;
+			//			player.crafttingMenuActive = true;
 			runAnimation = true;
 			if (player.dropoffPoint == other.gameObject) //If player owns this dropoff point
 			{
-				player.showCraftingUI = true;
+				//player.showCraftingUI = true;
 				runAnimation = true;
 				//Debug.Log(sugarInBackpack.Count);
 				if (sugarInBackpack.Count > 0)
@@ -73,7 +73,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 	{
 		if (other.tag == "Dropoff Point")
 		{
-			player.showCraftingUI = false;
+			//player.showCraftingUI = false;
 			runAnimation = false;
 			//if (player.dropoffPoint == other.gameObject)
 			//{

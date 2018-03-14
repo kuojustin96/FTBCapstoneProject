@@ -281,8 +281,8 @@ public class UIController : NetworkBehaviour {
                 ci.craftDefense();
                 break;
 
-            case "Utility":
-                Debug.Log("Craft Utility Item (Need To Implement)");
+			case "Utility":
+				ci.craftUtility ();
                 break;
         }
 

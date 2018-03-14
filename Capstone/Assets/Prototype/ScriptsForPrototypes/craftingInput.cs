@@ -10,9 +10,12 @@ public class craftingInput : NetworkBehaviour {
 	public GameObject FullCraftingUI;
 	public List<GameObject> attackItems = new List<GameObject>();
 	public List<GameObject> defenseItems = new List<GameObject>();
+	public List<GameObject> utilityItems = new List<GameObject> ();
+
 
 	public List<int> attackCharges = new List<int>();
 	public List<int> defenseCharges = new List<int>();
+	public List<int> utilityCharges = new List<int> ();
 
 	
 
@@ -67,8 +70,6 @@ public class craftingInput : NetworkBehaviour {
 	public void craftDefense(){
 		if (!isLocalPlayer)
 			return;
-		if (player.currentItem != null)
-			return;
 		if (player.currentPlayerScore > 0) {
 			int randomRange = Random.Range (0, defenseItems.Count);
 			CmdCraftDefense (randomRange);
@@ -90,6 +91,35 @@ public class craftingInput : NetworkBehaviour {
 		player.currentItem = defenseItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
 		player.currentPlayerScore--;
+		GetComponent<UIController> ().UpdateStashUI (player.currentPlayerScore);
 	}
+
+	public void craftUtility(){
+		if (!isLocalPlayer)
+			return;
+		if (player.currentPlayerScore > 0) {
+			int randomRange = Random.Range (0, utilityItems.Count);
+			CmdCraftUtility (randomRange);
+			player.itemCharges = utilityCharges [randomRange];
+			player.currentItem = utilityItems [randomRange];
+			player.currentItemString = player.currentItem.ToString ();
+		}
+	}
+	[Command]
+	public void CmdCraftUtility(int randomRange){
+		RpcCraftUtility (randomRange);
+		utilityItems [randomRange].SetActive (true);
+		player.currentItem = utilityItems [randomRange];
+		player.currentItemString = player.currentItem.ToString();
+	}
+	[ClientRpc]
+	public void RpcCraftUtility(int randomRange){
+		utilityItems [randomRange].SetActive (true);
+		player.currentItem = utilityItems [randomRange];
+		player.currentItemString = player.currentItem.ToString();
+		player.currentPlayerScore--;
+		GetComponent<UIController> ().UpdateStashUI (player.currentPlayerScore);
+	}
+
 
 }
