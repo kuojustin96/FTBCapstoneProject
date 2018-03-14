@@ -204,6 +204,7 @@
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateTimeline.cs" />
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ExampleHelpWindow.cs" />
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
+    <Compile Include="Assets\DontBlockMyScreen.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\Event_SlowDoor.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
+    <Compile Include="Assets\LobbySingleton.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -270,10 +272,12 @@
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\attackTrigger.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\BadScoreManager.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\craftingInput.cs" />
+    <Compile Include="Assets\Prototype\ScriptsForPrototypes\Magnet.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\net_list.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\playerClassAdd.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\rotate.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\sugarSpawning.cs" />
+    <Compile Include="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\MeshBender.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />

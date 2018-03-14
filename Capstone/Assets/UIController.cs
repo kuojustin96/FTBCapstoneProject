@@ -9,6 +9,8 @@ using UnityEngine.Networking;
 public class UIController : NetworkBehaviour {
 
     private PlayerClass player;
+    public Texture2D cursorTexture;
+    public CanvasGroup FaderPanel;
 
     [System.Serializable]
     public class ItemTexture
@@ -110,7 +112,12 @@ public class UIController : NetworkBehaviour {
         UpdateMaxBackpackScore(maxBackpackScore);
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Vector2 hotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.ForceSoftware);
+        Cursor.visible = true;
+
+        FaderPanel.alpha = 1f;
+        FadeManager.instance.FadeOut(FaderPanel, 1f);
     }
 	
 	// Update is called once per frame
@@ -178,7 +185,7 @@ public class UIController : NetworkBehaviour {
         CanvasON(CraftingUI);
 
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.visible = true;
     }
 
     private IEnumerator HideCraftingUI()
@@ -190,7 +197,7 @@ public class UIController : NetworkBehaviour {
         CraftingItemFill.gameObject.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         float counter = 0;
         while (counter < UIShiftTime)
@@ -291,7 +298,7 @@ public class UIController : NetworkBehaviour {
 
         //player.craftingUIOpen = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         yield return new WaitForSeconds(0.5f);
 
