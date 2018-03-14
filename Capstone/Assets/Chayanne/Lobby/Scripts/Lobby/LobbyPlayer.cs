@@ -20,11 +20,14 @@ namespace Prototype.NetworkLobby
         public Button colorButton;
         public InputField nameInput;
         public Button readyButton;
+        public GameObject readyObject;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
 
         public GameObject localIcone;
         public GameObject remoteIcone;
+
+        bool countDownStart = false;
 
         //OnMyName function will be invoked on clients when server change the value of playerName
         [SyncVar(hook = "OnMyName")]
@@ -112,9 +115,11 @@ namespace Prototype.NetworkLobby
 
         void SetupLocalPlayer()
         {
+
+
             Debug.Log("Setting up!");
-            CinemachineVirtualCamera playerCamera = GameObject.FindGameObjectWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
-            CinemachineVirtualCamera lobbyCam = GameObject.FindGameObjectWithTag("LobbyCamera").GetComponent<CinemachineVirtualCamera>();
+            CinemachineVirtualCamera playerCamera = LobbySingleton.instance.PlayerCam;
+            CinemachineVirtualCamera lobbyCam = LobbySingleton.instance.LobbyCam;
             //CinemachineVirtualCamera transitionCamera = GameObject.FindGameObjectWithTag("TransitionCamera").GetComponent<CinemachineVirtualCamera>();
             Debug.Assert(playerCamera, "You LITERALLY fucked up");
             lobbyCam.enabled = false;
@@ -182,6 +187,9 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = false;
                 colorButton.interactable = false;
                 nameInput.interactable = false;
+
+                readyObject.SetActive(true);
+                LobbySingleton.instance.getReadyUpText().SetActive(false);
             }
             else
             {
@@ -193,6 +201,10 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = isLocalPlayer;
                 colorButton.interactable = isLocalPlayer;
                 nameInput.interactable = isLocalPlayer;
+
+                readyObject.SetActive(false);
+
+                LobbySingleton.instance.getReadyUpText().SetActive(true);
             }
         }
 
@@ -254,9 +266,26 @@ namespace Prototype.NetworkLobby
         [ClientRpc]
         public void RpcUpdateCountdown(int countdown)
         {
+
+            //BAD code!
+
+            if(!countDownStart)
+            {
+                countDownStart = true;
+                LobbySingleton.instance.TransitionCam.gameObject.SetActive(true);
+                LobbyManager.s_Singleton.GetComponent<LobbyAnimationScript>().PlayOpenDoorAnimation();
+
+
+                //start fade
+                LobbySingleton.instance.FadeIn();
+
+            }
+
             LobbyManager.s_Singleton.countdownPanel.UIText.text = "Match Starting in " + countdown;
             LobbyManager.s_Singleton.countdownPanel.gameObject.SetActive(countdown != 0);
         }
+
+
 
         [ClientRpc]
         public void RpcUpdateRemoveButton()
@@ -303,6 +332,8 @@ namespace Prototype.NetworkLobby
             }
 
             playerColor = Colors[idx];
+
+
         }
 
         [Command]
