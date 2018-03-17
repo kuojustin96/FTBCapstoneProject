@@ -59,7 +59,7 @@ namespace jkuo
             rb = GetComponent<Rigidbody>();
             player = GetComponent<playerClassAdd>().player;
             LocalCameraCheck();
-            lockMode = CursorLockMode.Locked;
+			Cursor.lockState = CursorLockMode.Locked;
 
 			if (isLocalPlayer) {
                 //nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();

@@ -42,7 +42,11 @@ public class craftingInput : NetworkBehaviour {
 			return;
 
 		if (player.currentPlayerScore > 0) {
-			int randomRange = Random.Range (1, attackItems.Count);
+			if (player.currentItem != null)
+				player.currentItem.SetActive (false);
+			
+			player.currentItem = null;
+			int randomRange = Random.Range (0, attackItems.Count);
 			CmdCraftAttack (randomRange);
 			player.itemCharges = attackCharges [randomRange];
 			player.currentItem = attackItems [randomRange];
@@ -52,6 +56,10 @@ public class craftingInput : NetworkBehaviour {
 
 	[Command]
 	public void CmdCraftAttack(int randomRange){
+		if (player.currentItem != null)
+			player.currentItem.SetActive (false);
+		
+		player.currentItem = null;
 		RpcCraftAttack (randomRange);
 		attackItems [randomRange].SetActive (true);
 		player.currentItem = attackItems [randomRange];
@@ -60,6 +68,10 @@ public class craftingInput : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void RpcCraftAttack (int randomRange){
+		if (player.currentItem != null)
+			player.currentItem.SetActive (false);
+		
+		player.currentItem = null;
 		attackItems [randomRange].SetActive (true);
 		player.currentItem = attackItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
@@ -71,6 +83,10 @@ public class craftingInput : NetworkBehaviour {
 		if (!isLocalPlayer)
 			return;
 		if (player.currentPlayerScore > 0) {
+			if (player.currentItem != null)
+				player.currentItem.SetActive (false);
+			
+			player.currentItem = null;
 			int randomRange = Random.Range (0, defenseItems.Count);
 			CmdCraftDefense (randomRange);
 			player.itemCharges = defenseCharges [randomRange];
@@ -80,6 +96,10 @@ public class craftingInput : NetworkBehaviour {
 	}
 	[Command]
 	public void CmdCraftDefense(int randomRange){
+		if (player.currentItem != null)
+			player.currentItem.SetActive (false);
+		
+		player.currentItem = null;
 		RpcCraftDefense (randomRange);
 		defenseItems [randomRange].SetActive (true);
 		player.currentItem = defenseItems [randomRange];
@@ -87,6 +107,10 @@ public class craftingInput : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void RpcCraftDefense(int randomRange){
+		if (player.currentItem != null)
+			player.currentItem.SetActive (false);
+		
+		player.currentItem = null;
 		defenseItems [randomRange].SetActive (true);
 		player.currentItem = defenseItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
@@ -98,6 +122,10 @@ public class craftingInput : NetworkBehaviour {
 		if (!isLocalPlayer)
 			return;
 		if (player.currentPlayerScore > 0) {
+			if (player.currentItem != null)
+				player.currentItem.SetActive (false);
+			
+			player.currentItem = null;
 			int randomRange = Random.Range (0, utilityItems.Count);
 			CmdCraftUtility (randomRange);
 			player.itemCharges = utilityCharges [randomRange];
@@ -107,6 +135,10 @@ public class craftingInput : NetworkBehaviour {
 	}
 	[Command]
 	public void CmdCraftUtility(int randomRange){
+		if (player.currentItem != null)
+			player.currentItem.SetActive (false);
+		
+		player.currentItem = null;
 		RpcCraftUtility (randomRange);
 		utilityItems [randomRange].SetActive (true);
 		player.currentItem = utilityItems [randomRange];
@@ -114,6 +146,10 @@ public class craftingInput : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void RpcCraftUtility(int randomRange){
+		if (player.currentItem != null)
+			player.currentItem.SetActive (false);
+		
+		player.currentItem = null;
 		utilityItems [randomRange].SetActive (true);
 		player.currentItem = utilityItems [randomRange];
 		player.currentItemString = player.currentItem.ToString();
