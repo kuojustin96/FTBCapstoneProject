@@ -129,9 +129,16 @@
     <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Distance Fade.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Rainbow.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonCore.cginc" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonShadows.cginc" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Simple Gradient Sky.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Unit Shadowed.shader" />
+    <None Include="Assets\Chayanne\Lobby\Documentation.txt" />
+    <None Include="Assets\Chayanne\Lobby\Instruction.txt" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
-    <None Include="Assets\Lobby\Documentation.txt" />
-    <None Include="Assets\Lobby\Instruction.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />
