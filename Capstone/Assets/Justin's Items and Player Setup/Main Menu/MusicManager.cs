@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Music
+public enum MusicMainTrack
 {
     AxhomFissionInstrumental = 0,
     AxhomOrbitInstrumental = 1,
@@ -20,7 +20,7 @@ public class MusicManager : MonoBehaviour {
 
     public static MusicManager instance = null;
 
-	public Music music;
+	public MusicMainTrack music;
 
     public List<AudioClip> SFXList = new List<AudioClip>();
 
@@ -46,13 +46,8 @@ public class MusicManager : MonoBehaviour {
 
 		playMusic (music, 0.5f, true);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void playMusic(Music music, float volume = 0.5f, bool loop = false)
+    public void playMusic(MusicMainTrack music, float volume = 0.5f, bool loop = false)
     {
         auds.volume = volume;
         auds.loop = loop;
@@ -91,7 +86,7 @@ public class MusicManager : MonoBehaviour {
 		auds.volume = targetVolume;
 	}
 
-    public void stopMusic(Music music)
+    public void stopMusic(MusicMainTrack music)
     {
         foreach (AudioSource a in gameObject.GetComponents<AudioSource>())
         {
