@@ -16,7 +16,7 @@ public class LobbySingleton : MonoBehaviour
     CinemachineVirtualCameraBase lobbyCam;
 
     [SerializeField]
-    CinemachineFreeLook playerCam;
+    CinemachineVirtualCameraBase playerCam;
 
     [SerializeField]
     CinemachineVirtualCameraBase transitionCam;
@@ -39,7 +39,7 @@ public class LobbySingleton : MonoBehaviour
         }
     }
 
-    public CinemachineFreeLook PlayerCam
+    public CinemachineVirtualCameraBase PlayerCam
     {
         get
         {

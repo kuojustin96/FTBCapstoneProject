@@ -118,7 +118,7 @@ namespace Prototype.NetworkLobby
 
 
             Debug.Log("Setting up!");
-            CinemachineFreeLook playerCamera = LobbySingleton.instance.PlayerCam;
+            CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
             //CinemachineVirtualCamera transitionCamera = GameObject.FindGameObjectWithTag("TransitionCamera").GetComponent<CinemachineVirtualCamera>();
             Debug.Log("doing this!");

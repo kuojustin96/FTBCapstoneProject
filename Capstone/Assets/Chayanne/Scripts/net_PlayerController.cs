@@ -56,7 +56,7 @@ namespace jkuo
         public float downwardAcceleration = 1f;
         public LayerMask jumpMask;
         private bool isGrounded;
-        private bool canJump = true;
+        public bool canJump = true;
         private Vector3 _jumpForce = Vector3.zero;
 
         public float fatigueSpeed = 1f;

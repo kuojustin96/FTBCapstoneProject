@@ -6,14 +6,14 @@ using UnityEngine.Networking;
 
 public class net_PlayerCameraScript : NetworkBehaviour {
 
-    public CinemachineVirtualCamera playerCamera;
-    public CinemachineVirtualCamera lobbyCamera;
-    public CinemachineVirtualCamera transitionCamera;
+    public CinemachineVirtualCameraBase playerCamera;
+    public CinemachineVirtualCameraBase lobbyCamera;
+    public CinemachineVirtualCameraBase transitionCamera;
 
-    public void SwitchToCameraLocal(CinemachineVirtualCamera cam)
+    public void SwitchToCameraLocal(CinemachineVirtualCameraBase cam)
     {
             Debug.Log("Switching!");
-            GetComponent<jkuo.net_PlayerController>().virtualCam = cam;
+            GetComponent<Lobby_Player_Movement>().mainCam = cam;
             cam.LookAt = gameObject.transform;
             cam.Follow = gameObject.transform;
             
