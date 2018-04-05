@@ -18,9 +18,9 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
     void Start()
     {
 
-        playerListTransform = GameObject.FindGameObjectWithTag("PlayerList").transform;
         //VERY bad!
         spawnPoint = GameObject.FindGameObjectWithTag("Spawn").transform;
+        playerListTransform = GameObject.FindGameObjectWithTag("PlayerList").transform;
 
         LobbyPlayerInit();
     }
@@ -33,7 +33,7 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
         transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         transform.position = spawnPoint.position;
 
-        GetComponent<jkuo.net_PlayerController>().speed = 5;
+        GetComponent<Lobby_Player_Movement>().speed = 5;
 
     }
 
