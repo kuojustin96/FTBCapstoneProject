@@ -41,6 +41,7 @@ public class UIController : NetworkBehaviour {
     public CanvasGroup IngameItemBackgroundUI;
     private RectTransform IngameItemRect;
     public RawImage IngameItemUI;
+    private Texture lastItemCrafted;
     private RectTransform IngameItemUIRect;
     public TextMeshProUGUI BackpackScore;
     public TextMeshProUGUI StashScore;
@@ -62,6 +63,7 @@ public class UIController : NetworkBehaviour {
 
 
     private craftingInput ci;
+    private Coroutine craftingCoroutine;
     private RectTransform lastHoveredButton;
     private Image lastHoveredImage;
     private Color saveButtonColor;
@@ -218,6 +220,17 @@ public class UIController : NetworkBehaviour {
         IngameItemUIRect.sizeDelta = origIngameItemUIScale;
         CanvasON(OpenCraftingUI);
     }
+
+    public void CancelCrafting()
+    {
+        if(craftingCoroutine != null)
+        {
+            IngameItemUI.texture = lastItemCrafted;
+            StopCoroutine(craftingCoroutine);
+            StartCoroutine(HideCraftingUI());
+            craftingCoroutine = null;
+        }
+    }
     #endregion
 
     #region Button Behaviors
@@ -247,24 +260,25 @@ public class UIController : NetworkBehaviour {
     public void ClickAttackButton()
     {
 		if(player.currentPlayerScore>0 && craftingItem == false)
-        StartCoroutine(CraftItemWaitTime("Attack"));
+            craftingCoroutine = StartCoroutine(CraftItemWaitTime("Attack"));
     }
 
     public void ClickDefenseButton()
     {
 		if(player.currentPlayerScore>0 && craftingItem == false)
-        StartCoroutine(CraftItemWaitTime("Defense"));
+            craftingCoroutine = StartCoroutine(CraftItemWaitTime("Defense"));
     }
 
     public void ClickUtilityButton()
     {
 		if(player.currentPlayerScore>0 && craftingItem == false)
-        StartCoroutine(CraftItemWaitTime("Utility"));
+            craftingCoroutine = StartCoroutine(CraftItemWaitTime("Utility"));
     }
 
     private IEnumerator CraftItemWaitTime(string itemType)
     {
 		craftingItem = true;
+        lastItemCrafted = IngameItemUI.texture;
         IngameItemUI.texture = NoItemTexture;
         CraftingItemUI.texture = NoItemTexture;
         CraftingItemFill.fillAmount = 0f;

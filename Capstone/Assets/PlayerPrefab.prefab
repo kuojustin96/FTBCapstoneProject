@@ -260,7 +260,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4193536533043676}
   - component: {fileID: 33205590534182018}
-  - component: {fileID: 136293218275135566}
   - component: {fileID: 54709675610865516}
   - component: {fileID: 114397950423037572}
   - component: {fileID: 114129190187978766}
@@ -275,6 +274,7 @@ GameObject:
   - component: {fileID: 114776723599901772}
   - component: {fileID: 114468662868430618}
   - component: {fileID: 114775809299161900}
+  - component: {fileID: 136787672453668478}
   m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: NetPlayer
@@ -5625,7 +5625,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136293218275135566
+--- !u!136 &136787672453668478
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
