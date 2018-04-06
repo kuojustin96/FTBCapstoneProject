@@ -1,9 +1,9 @@
-﻿<Properties StartupItem="Capstone.CSharp.csproj">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Prototype\ScriptsForPrototypes\attack.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainMenu.cs">
     <Files>
       <File FileName="Assets\Prototype\ScriptsForPrototypes\net_list.cs" Line="1" Column="1" />
-      <File FileName="Assets\Prototype\ScriptsForPrototypes\attackTrigger.cs" Line="21" Column="4" />
+      <File FileName="Assets\Prototype\ScriptsForPrototypes\attackTrigger.cs" Line="1" Column="1" />
       <File FileName="Assets\Justin's Items and Player Setup\Test Main Scene\GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Justin's Items and Player Setup\Test Main Scene\SugarManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Prototype\ScriptsForPrototypes\sugarSpawning.cs" Line="1" Column="1" />
@@ -12,13 +12,20 @@
       <File FileName="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Prototype\ScriptsForPrototypes\playerClassAdd.cs" Line="1" Column="1" />
       <File FileName="Assets\Chayanne\Lobby\Scripts\NetworkLobbyHook.cs" Line="1" Column="1" />
-      <File FileName="Assets\Prototype\ScriptsForPrototypes\Magnet.cs" Line="12" Column="1" />
-      <File FileName="Assets\Prototype\ScriptsForPrototypes\attack.cs" Line="72" Column="25" />
-      <File FileName="Assets\Prototype\ScriptsForPrototypes\craftingInput.cs" Line="21" Column="2" />
+      <File FileName="Assets\Prototype\ScriptsForPrototypes\Magnet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prototype\ScriptsForPrototypes\attack.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prototype\ScriptsForPrototypes\craftingInput.cs" Line="1" Column="1" />
       <File FileName="Assets\Chayanne\Scripts\net_PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Prototype\ScriptsForPrototypes\BadScoreManager.cs" Line="45" Column="67" />
-      <File FileName="Assets\Justin's Items and Player Setup\Test Main Scene\PlayerSugarPickup.cs" Line="76" Column="6" />
-      <File FileName="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" Line="34" Column="1" />
+      <File FileName="Assets\Prototype\ScriptsForPrototypes\BadScoreManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Justin's Items and Player Setup\Test Main Scene\PlayerSugarPickup.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Chayanne\Scripts\net_TeamScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Chayanne\Scripts\net_PlayerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Chayanne\Scripts\net_GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Chayanne\Scripts\Lobby_Player_Setup.cs" Line="1" Column="1" />
+      <File FileName="Assets\Chayanne\Lobby\Scripts\Lobby\LobbyPlayer.cs" Line="1" Column="1" />
+      <File FileName="Assets\DontBlockMyScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\MainMenu.cs" Line="11" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
