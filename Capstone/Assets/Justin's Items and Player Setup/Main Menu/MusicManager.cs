@@ -92,20 +92,12 @@ public class MusicManager : MonoBehaviour {
         }
     }
 
-    public void StopMainTrack(string mainTrackName, float fadeTime)
+    public void StopMainTrack(float fadeTime)
     {
-        foreach (MusicTracks m in Music)
-        {
-            if (m.musicName == mainTrackName)
-            {
-                if (fadeTime != 0)
-                    StartCoroutine(c_FadeMainTrack(0, fadeTime, false));
-                else
-                    mainTrackAuds.Stop();
-
-                return;
-            }
-        }
+        if (fadeTime != 0)
+            StartCoroutine(c_FadeMainTrack(0, fadeTime, false));
+        else
+            mainTrackAuds.Stop();
     }
 
     private IEnumerator c_FadeMainTrack(float targetVol, float fadeTime, bool playMusic)
@@ -125,6 +117,31 @@ public class MusicManager : MonoBehaviour {
 
         if (!playMusic)
             mainTrackAuds.Stop();
+    }
+
+    public void SwapMainTracks(string newMainTrackName, float targetVol, float fadeTime)
+    {
+        foreach(MusicTracks m in Music)
+        {
+            if(newMainTrackName == m.musicName)
+            {
+                StartCoroutine(c_SwapMainTracks(m.musicComponents["MainTrack"], targetVol, fadeTime));
+                return;
+            }
+        }
+    }
+
+    private IEnumerator c_SwapMainTracks(AudioClip newMainTrack, float targetVol, float fadeTime)
+    {
+        StartCoroutine(c_FadeMainTrack(0, fadeTime / 2, false));
+
+        float saveTime = Time.time;
+        while (Time.time < saveTime + (fadeTime / 2))
+            yield return null;
+
+        mainTrackAuds.clip = newMainTrack;
+
+        StartCoroutine(c_FadeMainTrack(targetVol, fadeTime, true));
     }
 
 

@@ -20,6 +20,9 @@ namespace jkuo
         public Camera cam;
         public GameObject playerUI;
         public Slider staminaSlider;
+        public ParticleSystem[] Emotes;
+        private bool emoteMenuOpen = false;
+        private bool playingEmote = false;
         private PlayerClass player;
         private Rigidbody rb;
         private bool isPaused = false;
@@ -151,17 +154,17 @@ namespace jkuo
                 {
                     if (!player.craftingUIOpen)
                     {
-
-
                         //Movement
                         Movement();
 
                         //Camera Rotation
-
                         LookCamera();
 
                         //Jump
                         Jumping();
+
+                        //Emotes
+                        UseEmotes();
                     }
                 }
             }
@@ -306,26 +309,89 @@ namespace jkuo
             }
         }
 
+        #region Play Emotes
+        private void UseEmotes()
+        {
+            if (emoteMenuOpen && !playingEmote)
+            {
+                if (!isLocalPlayer)
+                    return;
 
-		[ClientRpc]
+                if (Input.GetKeyDown(KeyCode.C))
+                    emoteMenuOpen = false;
+
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                    CmdEmote(0);
+
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                    CmdEmote(1);
+
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                    CmdEmote(2);
+
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                    CmdEmote(3);
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+                emoteMenuOpen = true;
+        }
+
+        [ClientRpc]
+        private void RpcEmote(int emoteNum)
+        {
+            Emotes[emoteNum].Play();
+            emoteMenuOpen = false;
+            playingEmote = true;
+
+            if (!isLocalPlayer)
+            {
+                Vector3 temp = Emotes[emoteNum].transform.localScale;
+                temp.x = -1;
+                Emotes[emoteNum].transform.localScale = temp;
+            }
+            else
+            {
+                StartCoroutine(c_EmoteCooldown(emoteNum));
+            }
+        }
+
+        [Command]
+        private void CmdEmote(int emoteNum)
+        {
+            RpcEmote(emoteNum);
+        }
+
+        private IEnumerator c_EmoteCooldown(int emoteNum)
+        {
+            float saveTime = Time.time;
+            float psDuration = Emotes[emoteNum].main.duration;
+            while (Time.time < saveTime + psDuration)
+                yield return null;
+
+            playingEmote = false;
+        }
+        #endregion
+
+        #region Stun Player
+        [ClientRpc]
         public void RpcStunPlayer(float duration)
         {
-
 			if (player.currentItem == null) {
-				Debug.Log ("PlayerHasNoItem");
+				//Debug.Log ("PlayerHasNoItem");
 				player.isStunned = true;
 				Invoke ("StunWait", duration);
 				stun.SetActive (true);
 			} 
 			else {
 				if (player.currentItem.name  == "buttonHolder") {
-					Debug.Log ("buttonHolder");
+					//Debug.Log ("buttonHolder");
 					player.itemCharges--;
 					player.currentItem.SetActive (false);
 					player.currentItem = null;
 				}
 				else{
-					Debug.Log ("PlayerHasNoItem");
+					//Debug.Log ("PlayerHasNoItem");
 					player.isStunned = true;
 					Invoke ("StunWait", duration);
 					stun.SetActive (true);
@@ -337,7 +403,6 @@ namespace jkuo
 		public void CmdStunPlayer(float duration)
 		{
 			RpcStunPlayer (duration);
-
 		}
 			
 		public void StunPlayerCoroutine(float duration)
@@ -352,4 +417,5 @@ namespace jkuo
 			stun.SetActive (false);
 		}	
     }
+    #endregion
 }
