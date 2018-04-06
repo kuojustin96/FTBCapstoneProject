@@ -13,20 +13,20 @@ public class LobbySingleton : MonoBehaviour
     GameObject readyUpText;
 
     [SerializeField]
-    CinemachineVirtualCamera lobbyCam;
+    CinemachineVirtualCameraBase lobbyCam;
 
     [SerializeField]
-    CinemachineVirtualCamera playerCam;
+    CinemachineVirtualCameraBase playerCam;
 
     [SerializeField]
-    CinemachineVirtualCamera transitionCam;
+    CinemachineVirtualCameraBase transitionCam;
 
     [SerializeField]
     CanvasGroup fader;
 
     public float fadeTime = 1.0f;
 
-    public CinemachineVirtualCamera TransitionCam
+    public CinemachineVirtualCameraBase TransitionCam
     {
         get
         {
@@ -39,7 +39,7 @@ public class LobbySingleton : MonoBehaviour
         }
     }
 
-    public CinemachineVirtualCamera PlayerCam
+    public CinemachineVirtualCameraBase PlayerCam
     {
         get
         {
@@ -52,7 +52,7 @@ public class LobbySingleton : MonoBehaviour
         }
     }
 
-    public CinemachineVirtualCamera LobbyCam
+    public CinemachineVirtualCameraBase LobbyCam
     {
         get
         {

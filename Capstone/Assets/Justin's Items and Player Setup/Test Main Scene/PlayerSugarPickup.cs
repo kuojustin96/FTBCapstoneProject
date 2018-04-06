@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using jkuo;
 
 public class PlayerSugarPickup : MonoBehaviour {
 
@@ -75,6 +76,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 		{
 			//player.showCraftingUI = false;
 			runAnimation = false;
+            uiController.CancelCrafting();
 			//if (player.dropoffPoint == other.gameObject)
 			//{
 			//    runAnimation = false;

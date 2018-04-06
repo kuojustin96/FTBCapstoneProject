@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using Cinemachine;
 
@@ -18,6 +19,10 @@ namespace jkuo
 
         public Camera cam;
         public GameObject playerUI;
+        public Slider staminaSlider;
+        public ParticleSystem[] Emotes;
+        private bool emoteMenuOpen = false;
+        private bool playingEmote = false;
         private PlayerClass player;
         private Rigidbody rb;
         private bool isPaused = false;
@@ -26,6 +31,12 @@ namespace jkuo
         //movement
         [Header("Movement")]
         public float speed = 50f;
+        public float inAirDamping = 5f;
+        public float staminaRegenSpeed = 2f;
+        public float staminaRegenDelay = 1f;
+        private Coroutine staminaResetCoroutine;
+        [Range(5, 95)]
+        public int maxJumpStamina = 75;
         private Vector3 moveHori;
         private Vector3 moveVert;
         private Vector3 velocity = Vector3.zero;
@@ -45,17 +56,29 @@ namespace jkuo
         [Header("Jumping")]
         public float jumpForce = 1000f;
         public float gravity = 100f;
+        public float downwardAcceleration = 1f;
         public LayerMask jumpMask;
         private bool isGrounded;
+        public bool canJump = true;
         private Vector3 _jumpForce = Vector3.zero;
 
-		//Particles
-		public GameObject stun;
+        public float fatigueSpeed = 1f;
+        private float stamina = 100f;
+        private float currentStamina = 100f;
+
+        //gliding
+        [Header("Gliding")]
+        private bool isGliding = false;
+        public float gravityDivisor = 20f;
+        public float glideFatigueSpeed = 0.25f;
+
+        //Particles
+        public GameObject stun;
 
         // Use this for initialization
         void Start()
         {
-
+            staminaSlider.value = staminaSlider.maxValue;
             rb = GetComponent<Rigidbody>();
             player = GetComponent<playerClassAdd>().player;
             LocalCameraCheck();
@@ -131,17 +154,17 @@ namespace jkuo
                 {
                     if (!player.craftingUIOpen)
                     {
-
-
                         //Movement
                         Movement();
 
                         //Camera Rotation
-
                         LookCamera();
 
                         //Jump
                         Jumping();
+
+                        //Emotes
+                        UseEmotes();
                     }
                 }
             }
@@ -151,6 +174,8 @@ namespace jkuo
         {
             moveHori = transform.right * Input.GetAxis("Horizontal");
             moveVert = transform.forward * Input.GetAxis("Vertical");
+                
+
             velocity = (moveHori + moveVert) * speed;
 
             if (velocity != Vector3.zero)
@@ -212,40 +237,161 @@ namespace jkuo
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
             {
+                if (!isGrounded)
+                    staminaResetCoroutine = StartCoroutine(RegenStamina());
+
                 isGrounded = true;
+                canJump = true;
+                isGliding = false;
             }
             else
             {
+                if(isGrounded && staminaResetCoroutine != null)
+                {
+                    StopCoroutine(staminaResetCoroutine);
+                    staminaResetCoroutine = null;
+                }
+
                 isGrounded = false;
                 //apply gravity
-                rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
+
+                if (isGliding && currentStamina > 0)
+                {
+                    rb.AddForce(new Vector3(0f, -(gravity / gravityDivisor), 0f), ForceMode.Force);
+                    currentStamina -= glideFatigueSpeed;
+                    staminaSlider.value = currentStamina;
+
+                    if (currentStamina <= 0)
+                        isGliding = false;
+                }
+                else
+                {
+                    rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
+                    rb.AddForce(Vector3.down * downwardAcceleration, ForceMode.Impulse);
+                }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            if (Input.GetKey(KeyCode.Space) && canJump)
             {
-                _jumpForce = transform.up * (jumpForce * 1000);
-                rb.AddForce(_jumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
+                if (currentStamina > stamina - maxJumpStamina)
+                {
+                    _jumpForce = transform.up * (jumpForce * 1000);
+                    rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+
+                    currentStamina -= fatigueSpeed;
+                    staminaSlider.value = currentStamina;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
+                isGliding = true;
+
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                canJump = false;
+
+                if (isGliding)
+                    isGliding = false;
             }
         }
-		[ClientRpc]
+
+        private IEnumerator RegenStamina()
+        {
+            yield return new WaitForSeconds(staminaRegenDelay);
+
+            while(currentStamina < 100)
+            {
+                currentStamina += staminaRegenSpeed;
+                staminaSlider.value = currentStamina;
+
+                yield return null;
+            }
+        }
+
+        #region Play Emotes
+        private void UseEmotes()
+        {
+            if (emoteMenuOpen && !playingEmote)
+            {
+                if (!isLocalPlayer)
+                    return;
+
+                if (Input.GetKeyDown(KeyCode.C))
+                    emoteMenuOpen = false;
+
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                    CmdEmote(0);
+
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                    CmdEmote(1);
+
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                    CmdEmote(2);
+
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                    CmdEmote(3);
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+                emoteMenuOpen = true;
+        }
+
+        [ClientRpc]
+        private void RpcEmote(int emoteNum)
+        {
+            Emotes[emoteNum].Play();
+            emoteMenuOpen = false;
+            playingEmote = true;
+
+            if (!isLocalPlayer)
+            {
+                Vector3 temp = Emotes[emoteNum].transform.localScale;
+                temp.x = -1;
+                Emotes[emoteNum].transform.localScale = temp;
+            }
+            else
+            {
+                StartCoroutine(c_EmoteCooldown(emoteNum));
+            }
+        }
+
+        [Command]
+        private void CmdEmote(int emoteNum)
+        {
+            RpcEmote(emoteNum);
+        }
+
+        private IEnumerator c_EmoteCooldown(int emoteNum)
+        {
+            float saveTime = Time.time;
+            float psDuration = Emotes[emoteNum].main.duration;
+            while (Time.time < saveTime + psDuration)
+                yield return null;
+
+            playingEmote = false;
+        }
+        #endregion
+
+        #region Stun Player
+        [ClientRpc]
         public void RpcStunPlayer(float duration)
         {
-
 			if (player.currentItem == null) {
-				Debug.Log ("PlayerHasNoItem");
+				//Debug.Log ("PlayerHasNoItem");
 				player.isStunned = true;
 				Invoke ("StunWait", duration);
 				stun.SetActive (true);
 			} 
 			else {
 				if (player.currentItem.name  == "buttonHolder") {
-					Debug.Log ("buttonHolder");
+					//Debug.Log ("buttonHolder");
 					player.itemCharges--;
 					player.currentItem.SetActive (false);
 					player.currentItem = null;
 				}
 				else{
-					Debug.Log ("PlayerHasNoItem");
+					//Debug.Log ("PlayerHasNoItem");
 					player.isStunned = true;
 					Invoke ("StunWait", duration);
 					stun.SetActive (true);
@@ -257,7 +403,6 @@ namespace jkuo
 		public void CmdStunPlayer(float duration)
 		{
 			RpcStunPlayer (duration);
-
 		}
 			
 		public void StunPlayerCoroutine(float duration)
@@ -272,4 +417,5 @@ namespace jkuo
 			stun.SetActive (false);
 		}	
     }
+    #endregion
 }

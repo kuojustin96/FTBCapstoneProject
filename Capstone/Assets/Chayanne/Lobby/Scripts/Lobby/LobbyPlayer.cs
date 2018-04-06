@@ -118,13 +118,14 @@ namespace Prototype.NetworkLobby
 
 
             Debug.Log("Setting up!");
-            CinemachineVirtualCamera playerCamera = LobbySingleton.instance.PlayerCam;
-            CinemachineVirtualCamera lobbyCam = LobbySingleton.instance.LobbyCam;
+            CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
+            CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
             //CinemachineVirtualCamera transitionCamera = GameObject.FindGameObjectWithTag("TransitionCamera").GetComponent<CinemachineVirtualCamera>();
+            Debug.Log("doing this!");
             Debug.Assert(playerCamera, "You LITERALLY fucked up");
             lobbyCam.enabled = false;
             cameraScript.SwitchToCameraLocal(playerCamera);
-
+            Debug.Log("did this!");
             //GetComponent<RectTransform>().localRotation = Quaternion.identity;
             //nameInput.interactable = true;
             //remoteIcone.gameObject.SetActive(false);
