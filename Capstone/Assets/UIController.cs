@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.Networking;
+using DG.Tweening;
 
 public class UIController : NetworkBehaviour {
 
@@ -46,6 +47,12 @@ public class UIController : NetworkBehaviour {
     public TextMeshProUGUI BackpackScore;
     public TextMeshProUGUI StashScore;
 
+    public RawImage tickerBackgroud;
+    public float tickerLerpTime = 0.5f;
+    private Vector2 tickerEnabledPos;
+    private Vector2 tickerDisabledPos;
+    public bool tickerEnabled { get; protected set; }
+
     private Vector2 origIngameUIPos;
     private Vector2 origIngameUIScale;
     private Vector2 origIngameItemUIPos;
@@ -57,10 +64,6 @@ public class UIController : NetworkBehaviour {
 
     [Header("Transition Between UIs")]
     public float UIShiftTime = 1f;
-    public float UIShiftSpeed = 10f;
-    public float UIScaleSpeed = 0.1f;
-    public float UIItemShiftSpeed = 1f;
-
 
     private craftingInput ci;
     private Coroutine craftingCoroutine;
@@ -72,14 +75,12 @@ public class UIController : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        DOTween.Init();
+        SetUpTicker();
 	}
 
     public void SetUpVariables(PlayerClass player)
     {
-        //if (player != null)
-        //    return;
-
-        //player = GetComponent<playerClassAdd>().player;
         this.player = player;
         ci = player.playerGO.GetComponent<craftingInput>();
 
@@ -91,11 +92,11 @@ public class UIController : NetworkBehaviour {
 
         CraftingUIRect = CraftingUI.GetComponent<RectTransform>();
 
-        IngameItemUIRect = IngameItemUI.GetComponent<RectTransform>();
-        origIngameItemUIPos = IngameItemUIRect.position;
+        IngameItemUIRect = IngameItemUI.rectTransform;
+        origIngameItemUIPos = IngameItemUIRect.localPosition;
         origIngameItemUIScale = IngameItemUIRect.sizeDelta;
 
-        CraftingItemUIRect = CraftingItemUI.GetComponent<RectTransform>();
+        CraftingItemUIRect = CraftingItemUI.rectTransform;
 
         CraftingItemFill.fillAmount = 0f;
         CraftingItemPercentage.text = "0%";
@@ -148,6 +149,12 @@ public class UIController : NetworkBehaviour {
         {
             ToggleCraftingUI();
         }
+
+        if (Input.GetKeyDown(KeyCode.O))
+            ShowTicker();
+
+        if (Input.GetKeyDown(KeyCode.P))
+            HideTicker();
     }
 
     #region Enable/Disable Crafting UI
@@ -164,25 +171,14 @@ public class UIController : NetworkBehaviour {
         player.craftingUIOpen = true;
         CanvasOFF(OpenCraftingUI);
 
-        Vector2 targetPos = new Vector2(Screen.width / 2, Screen.height / 2);
+        IngameItemBackgroundUI.transform.DOMove(CraftingUI.transform.position, UIShiftTime);
+        IngameItemUIRect.DOSizeDelta(CraftingItemUI.rectTransform.sizeDelta, UIShiftTime);
+        IngameItemUIRect.DOAnchorPos(Vector2.zero, UIShiftTime);
 
-        float counter = 0;
-        while(counter < UIShiftTime)
-        {
-            IngameItemBackgroundUI.transform.position = Vector2.MoveTowards(IngameItemBackgroundUI.transform.position, targetPos, Time.deltaTime * (UIShiftSpeed * 10));
-            IngameItemRect.sizeDelta = Vector2.Lerp(IngameItemRect.sizeDelta, CraftingUIRect.sizeDelta, Time.deltaTime * (UIShiftSpeed * UIScaleSpeed));
-
-            IngameItemUIRect.position = Vector2.Lerp(IngameItemUIRect.position, CraftingItemUIRect.position, Time.deltaTime * UIItemShiftSpeed);
-            IngameItemUIRect.sizeDelta = Vector2.Lerp(IngameItemUIRect.sizeDelta, CraftingItemUIRect.sizeDelta, Time.deltaTime * UIItemShiftSpeed);
-
-            counter += Time.deltaTime;
+        float saveTime = Time.time;
+        while (Time.time < saveTime + UIShiftTime)
             yield return null;
-        }
 
-        IngameItemBackgroundUI.transform.position = targetPos;
-        IngameItemRect.sizeDelta = CraftingUIRect.sizeDelta;
-        IngameItemUIRect.position = CraftingItemUIRect.position;
-        IngameItemUIRect.sizeDelta = CraftingItemUIRect.sizeDelta;
         CanvasOFF(IngameItemBackgroundUI);
         CanvasON(CraftingUI);
 
@@ -201,23 +197,14 @@ public class UIController : NetworkBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
 
-        float counter = 0;
-        while (counter < UIShiftTime)
-        {
-            IngameItemBackgroundUI.transform.position = Vector2.MoveTowards(IngameItemBackgroundUI.transform.position, origIngameUIPos, Time.deltaTime * (UIShiftSpeed * 10));
-            IngameItemRect.sizeDelta = Vector2.Lerp(IngameItemRect.sizeDelta, origIngameUIScale, Time.deltaTime * (UIShiftSpeed * UIScaleSpeed));
+        IngameItemBackgroundUI.transform.DOMove(origIngameUIPos, UIShiftTime);
+        IngameItemUIRect.DOSizeDelta(origIngameItemUIScale, UIShiftTime);
+        IngameItemUIRect.DOAnchorPos(origIngameItemUIPos, UIShiftTime);
 
-            IngameItemUIRect.position = Vector2.Lerp(IngameItemUIRect.position, origIngameItemUIPos, Time.deltaTime * UIItemShiftSpeed);
-            IngameItemUIRect.sizeDelta = Vector2.Lerp(IngameItemUIRect.sizeDelta, origIngameItemUIScale, Time.deltaTime * UIItemShiftSpeed);
-
-            counter += Time.deltaTime;
+        float saveTime = Time.time;
+        while (Time.time < saveTime + UIShiftTime)
             yield return null;
-        }
 
-        IngameItemBackgroundUI.transform.position = origIngameUIPos;
-        IngameItemRect.sizeDelta = origIngameUIScale;
-        IngameItemUIRect.position = origIngameItemUIPos;
-        IngameItemUIRect.sizeDelta = origIngameItemUIScale;
         CanvasON(OpenCraftingUI);
     }
 
@@ -322,6 +309,51 @@ public class UIController : NetworkBehaviour {
     }
     #endregion
 
+    #region Ticker Background Control
+    private void SetUpTicker()
+    {
+        tickerEnabledPos = tickerBackgroud.rectTransform.anchoredPosition;
+        tickerDisabledPos = new Vector2(tickerEnabledPos.x, tickerEnabledPos.y - (tickerBackgroud.rectTransform.rect.height / 2));
+        tickerBackgroud.rectTransform.anchoredPosition = tickerDisabledPos;
+        tickerEnabled = false;
+    }
+
+    public void ShowTicker()
+    {
+        if (!tickerEnabled)
+            StartCoroutine(ToggleTicker(true));
+    }
+
+    public void HideTicker()
+    {
+        if (tickerEnabled)
+            StartCoroutine(ToggleTicker(false));
+    }
+
+    private IEnumerator ToggleTicker(bool showTicker)
+    {
+        if (showTicker)
+        {
+            tickerBackgroud.rectTransform.DOAnchorPosY(tickerEnabledPos.y, tickerLerpTime).SetEase(Ease.OutBack);
+
+            float saveTime = Time.time;
+            while (Time.time < saveTime + tickerLerpTime)
+                yield return null;
+
+            tickerEnabled = true;
+        }
+        else
+        {
+            tickerBackgroud.rectTransform.DOAnchorPosY(tickerDisabledPos.y, tickerLerpTime).SetEase(Ease.OutBack);
+
+            float saveTime = Time.time;
+            while (Time.time < saveTime + tickerLerpTime)
+                yield return null;
+
+            tickerEnabled = false;
+        }
+    }
+    #endregion
 
     #region Sugar Score Updates
     public void UpdateBackpackScore(int numSugar)

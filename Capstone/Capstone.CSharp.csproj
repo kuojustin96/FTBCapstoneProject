@@ -82,6 +82,18 @@
     <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
       <HintPath>Assets\TextMesh Pro\Plugins\Editor DLL\TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>Assets\Demigiant\DOTween\DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets\Demigiant\DOTween\DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets\Demigiant\DOTween\DOTween46.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Capstone.CSharp.Plugins.csproj">
@@ -204,6 +216,8 @@
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ActivateTimeline.cs" />
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\ExampleHelpWindow.cs" />
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
     <Compile Include="Assets\DontBlockMyScreen.cs" />
     <Compile Include="Assets\JumpPad.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
@@ -226,6 +240,7 @@
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
     <Compile Include="Assets\Lobby_Player_Movement.cs" />
     <Compile Include="Assets\LobbySingleton.cs" />
+    <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -338,6 +353,12 @@
     <None Include="Assets\Chayanne\Lobby\Documentation.txt" />
     <None Include="Assets\Chayanne\Lobby\Instruction.txt" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
+    <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
+    <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
+    <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
+    <None Include="Assets\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\HistogramRender.shader" />
     <None Include="Assets\PostProcessing\Editor Resources\Monitors\ParadeRender.shader" />

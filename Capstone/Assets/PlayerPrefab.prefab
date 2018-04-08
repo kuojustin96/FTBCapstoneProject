@@ -4892,6 +4892,7 @@ MonoBehaviour:
   IngameItemUI: {fileID: 114402914584663084}
   BackpackScore: {fileID: 114667087459172872}
   StashScore: {fileID: 114012397714592784}
+  tickerBackgroud: {fileID: 114927737925820022}
   UIShiftTime: 0.2
   UIShiftSpeed: 200
   UIScaleSpeed: 0.05
@@ -26032,8 +26033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 1920, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224133542653571810
 RectTransform:
