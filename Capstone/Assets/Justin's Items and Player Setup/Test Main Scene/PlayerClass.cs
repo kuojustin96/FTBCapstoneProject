@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using jkuo;
 
 [System.Serializable]
 public class PlayerClass {
     public int playerNum;
     public GameObject playerGO;
     public GameObject dropoffPoint;
+    public bool inBase = false;
     public string playerName;
     public int maxCanCarry = 10;
     public int sugarInBackpack = 0;
@@ -22,8 +24,11 @@ public class PlayerClass {
 	public GameObject currentItem;
 	public string currentItemString;
 
-    //private UIController uiController;
+    private net_PlayerController npc;
+    private float minSpeed;
+    private float speedPerSugar;
 
+    //Basically acts as the Start() function
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
     {
         this.playerNum = playerNum;
@@ -31,44 +36,36 @@ public class PlayerClass {
         this.playerGO = playerGO;
         this.dropoffPoint = dropoffPoint;
         this.playerName = playerName;
-    }
 
-    //public void SetUIController(UIController uiController)
-    //{
-    //    if (this.uiController == null)
-    //    {
-    //        this.uiController = uiController;
-    //        uiController.UpdateMaxBackpackScore(maxCanCarry);
-    //    }
-    //}
+        npc = playerGO.GetComponent<net_PlayerController>();
+        minSpeed = GameManager.instance.minSpeed;
+        speedPerSugar = GameManager.instance.speedPerSugar;
+    }
 
     public void PickupSugar()
     {
         sugarInBackpack++;
-        //uiController.UpdateBackpackScore(sugarInBackpack);
-//        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
+
+        if (npc.speed > minSpeed)
+            npc.speed -= speedPerSugar;
     }
 
     public void DropoffSugarInStash()
     {
         currentPlayerScore++;
         sugarInBackpack--;
-        //uiController.UpdateBackpackScore(sugarInBackpack);
-        //        ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
-        //        ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
+        npc.speed += speedPerSugar;
     }
 
     public void LoseSugar(int amount)
     {
         currentPlayerScore -= amount;
-        //      ScoreController.instance.UpdateScore(playerNum, currentPlayerScore);
+        npc.speed += speedPerSugar;
     }
 
     public void DropSugar()
     {
         sugarInBackpack--;
-        //uiController.UpdateBackpackScore(sugarInBackpack);
-        //     ScoreController.instance.UpdateBackpackScore(playerNum, sugarInBackpack);
     }
 
     public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum)
@@ -97,7 +94,7 @@ public class PlayerClass {
         }
     }
 
-    public void UseItem()
+    public void UseItem() //Deprecated
     {
         if(item.item == Item.Mirror || item.item == Item.Shield)
             return;

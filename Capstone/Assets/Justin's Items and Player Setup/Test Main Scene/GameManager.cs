@@ -9,14 +9,16 @@ public class GameManager : NetworkBehaviour {
 
     public static GameManager instance = null;
 
-    public float sugarPickUpSpeed = 0.2f;
+    public float sugarPickupTime = 0.5f;
     public float dropoffDelay = 0.5f;
     public int maxSugarCarry = 10;
+    [Tooltip("Amount of speed gained/lost when dropping/picking up sugar")]
+    public float speedPerSugar = 0.5f;
+    public float minSpeed = 20f;
 	public static int curPlayers;
 
     public GameObject playerPrefab;
     public Material[] playerMats;
-    //public List<GameObject> DropoffPoints = new List<GameObject>();
 
     [System.Serializable]
     public class DropoffPointsClass
@@ -54,36 +56,10 @@ public class GameManager : NetworkBehaviour {
 	void Start () {
         numPlayers = GameObject.Find("LobbyManager").GetComponent<LobbyManager>()._playerNumber;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void SetUpGame(GameObject player, net_TeamScript.Team team)
     {
-		// Not working color change 
-//        foreach(DropoffPointsClass d in DropoffPoints)
-//        {
-//            if(team == d.teamColor)
-//            {
-//                int x = curPlayers + 1;
-//                d.dropoffGO.SetActive(true);
-//				Debug.Log (d.dropoffGO);
-//                PlayerClass ply = new PlayerClass();
-//                ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + x);
-//                player.GetComponent<playerClassAdd>().player = ply;
-//                playerList.Add(ply);
-//                playerDropOffDict.Add(d.dropoffGO, ply);
-//
-//                //      ScoreController.instance.SetUpScoreController(x);
-//                curPlayers++;
-//                Debug.Log("DSADSA");
-//            }
-//        }
 		int x = curPlayers ;
-//		                d.dropoffGO.SetActive(true);
-//						Debug.Log (d.dropoffGO);
 		DropoffPointsClass d = DropoffPoints[x];
 		d.dropoffGO.SetActive (true);
         PlayerClass ply = new PlayerClass();
@@ -96,9 +72,7 @@ public class GameManager : NetworkBehaviour {
 		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
 		player.GetComponent<playerClassAdd> ().Hood.GetComponent<Renderer> ().material = playerMats [x];
 		player.GetComponent<playerClassAdd> ().Cloak.GetComponent<Renderer> ().material = playerMats [x];
-		                //      ScoreController.instance.SetUpScoreController(x);
-		                curPlayers++;
-		                Debug.Log("DSADSA");
+		curPlayers++;
     }
 
     public PlayerClass GetPlayer(int playerNum)

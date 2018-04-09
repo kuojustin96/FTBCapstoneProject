@@ -47,6 +47,9 @@ public class UIController : NetworkBehaviour {
     public TextMeshProUGUI BackpackScore;
     public TextMeshProUGUI StashScore;
 
+    public RectTransform[] ItemButtons;
+    private Vector2 itemButtonSize;
+
     public RawImage tickerBackgroud;
     public float tickerLerpTime = 0.5f;
     private Vector2 tickerEnabledPos;
@@ -107,6 +110,10 @@ public class UIController : NetworkBehaviour {
             if(!TextureDict.ContainsKey(it.name))
                 TextureDict.Add(it.name, it.texture);
         }
+
+        itemButtonSize = ItemButtons[0].sizeDelta;
+        foreach (RectTransform rt in ItemButtons)
+            rt.sizeDelta = Vector2.zero;
 
         CanvasOFF(OpenCraftingUI);
         CanvasOFF(CraftingUI);
@@ -179,6 +186,13 @@ public class UIController : NetworkBehaviour {
         while (Time.time < saveTime + UIShiftTime)
             yield return null;
 
+        foreach (RectTransform rt in ItemButtons)
+            rt.DOSizeDelta(itemButtonSize, UIShiftTime / 2);
+
+        saveTime = Time.time;
+        while (Time.time < saveTime + (UIShiftTime / 2))
+            yield return null;
+
         CanvasOFF(IngameItemBackgroundUI);
         CanvasON(CraftingUI);
 
@@ -197,11 +211,18 @@ public class UIController : NetworkBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
 
+        foreach (RectTransform rt in ItemButtons)
+            rt.DOSizeDelta(Vector2.zero, UIShiftTime);
+
+        float saveTime = Time.time;
+        while (Time.time < saveTime + UIShiftTime)
+            yield return null;
+
         IngameItemBackgroundUI.transform.DOMove(origIngameUIPos, UIShiftTime);
         IngameItemUIRect.DOSizeDelta(origIngameItemUIScale, UIShiftTime);
         IngameItemUIRect.DOAnchorPos(origIngameItemUIPos, UIShiftTime);
 
-        float saveTime = Time.time;
+        saveTime = Time.time;
         while (Time.time < saveTime + UIShiftTime)
             yield return null;
 

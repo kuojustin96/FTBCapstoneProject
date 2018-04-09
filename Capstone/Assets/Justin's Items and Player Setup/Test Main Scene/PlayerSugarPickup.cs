@@ -2,30 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using jkuo;
+using DG.Tweening;
 
 public class PlayerSugarPickup : MonoBehaviour {
 
 	private PlayerClass player;
-	private float sugarPickupSpeed;
+    private float sugarPickupTime;
 	private float dropoffDelay;
 	private List<GameObject> sugarInBackpack = new List<GameObject>();
 	private bool runAnimation = false;
-
-    //	//PROTOTYPE HUD
-    //public Net_Hud_SugarCounter hudCount;
 
     private UIController uiController;
 
 	// Use this for initialization
 	void Start () {
+        DOTween.Init();
 		player = GetComponentInParent<playerClassAdd>().player;
-        //uiController = GameObject.Find("Player UI Canvas").GetComponent<UIController>();
 		uiController = GetComponentInParent<UIController>();
 
-        //uiController.SetUpVariables(player);
-
-        //player.SetUIController(uiController);
-		sugarPickupSpeed = GameManager.instance.sugarPickUpSpeed;
+        sugarPickupTime = GameManager.instance.sugarPickupTime;
 		dropoffDelay = GameManager.instance.dropoffDelay;
 	}
 
@@ -49,23 +44,23 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 		if (other.tag == "Dropoff Point")
 		{
-			//			player.crafttingMenuActive = true;
 			runAnimation = true;
 			if (player.dropoffPoint == other.gameObject) //If player owns this dropoff point
 			{
-				//player.showCraftingUI = true;
 				runAnimation = true;
-				//Debug.Log(sugarInBackpack.Count);
+                player.inBase = true;
+
 				if (sugarInBackpack.Count > 0)
-				{
-					//runAnimation = true;
 					StartCoroutine(DropoffSugarAni(other.gameObject));
-				}
+
 				return;
-			} else //If player does not own this dropoff point
+			}
+            else //If player does not own this dropoff point
 			{
-				Debug.Log (other.transform.parent.gameObject);
-				StartCoroutine(StealSugarAni(other.gameObject));
+                PlayerClass otherPlayer = GameManager.instance.GetPlayerFromDropoff(other.gameObject);
+
+                if(!otherPlayer.inBase)
+				    StartCoroutine(StealSugarAni(other.gameObject, otherPlayer));
 			}
 		}
 	}
@@ -74,25 +69,19 @@ public class PlayerSugarPickup : MonoBehaviour {
 	{
 		if (other.tag == "Dropoff Point")
 		{
-			//player.showCraftingUI = false;
 			runAnimation = false;
             uiController.CancelCrafting();
-			//if (player.dropoffPoint == other.gameObject)
-			//{
-			//    runAnimation = false;
-			//    return;
-			//}
+            player.inBase = false;
 		}
 	}
 
-	public void SugarTransport(int cost)
+	public void SugarTransport(int cost) //Not being used, however still being called by ItemScript
 	{
 		if (sugarInBackpack.Count > 0)
 		{
 			if (cost == 0)
 				cost = 1;
 
-			Debug.Log(cost);
 			GameObject dropoffPoint = GameManager.instance.DropoffPoints[player.playerNum].dropoffGO;
 			for (int x = 0; x < cost; x++)
 			{
@@ -120,7 +109,7 @@ public class PlayerSugarPickup : MonoBehaviour {
 		}
 	}
 
-	public void StunDropSugar()
+	public void StunDropSugar() //When stunned, drop sugar
 	{
 		if (sugarInBackpack.Count > 0)
 		{
@@ -140,46 +129,34 @@ public class PlayerSugarPickup : MonoBehaviour {
 	private IEnumerator DropSugarAni()
 	{
         //Drop sugar on the ground
-
 		player.DropSugar();
         uiController.UpdateBackpackScore(player.sugarInBackpack);
-        int count = 0;
 		GameObject sugar = sugarInBackpack[0];
 		sugar.SetActive(true);
 		sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
-		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 1, sugar.transform.position.z);
+		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 1f, sugar.transform.position.z);
 
-		while (count < 10)
-		{
-			count++;
-			sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, topPos, sugarPickupSpeed);
-			yield return null;
-		}
+        sugar.transform.DOMove(topPos, sugarPickupTime / 2);
+        float saveTime = Time.time;
+        while (Time.time < saveTime + (sugarPickupTime / 2))
+            yield return null;
 
 		Vector3 randomDropLoc = transform.parent.position + Random.onUnitSphere * 15f;
 		randomDropLoc.y = transform.parent.position.y;
-		count = 0;
 
-		while(sugar.transform.position != randomDropLoc)
-		{
-			count++;
-			sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, randomDropLoc, sugarPickupSpeed * 2);
-			yield return null;
-		}
+        sugar.transform.DOMove(randomDropLoc, sugarPickupTime / 2);
+        saveTime = Time.time;
+        while (Time.time < saveTime + (sugarPickupTime / 2))
+            yield return null;
 
-		sugar.GetComponent<SimpleRotate>().enabled = true;
+        sugar.GetComponent<SimpleRotate>().enabled = true;
 		sugar.GetComponent<BoxCollider>().enabled = true;
 	}
 
-	private IEnumerator StealSugarAni(GameObject dropoffPoint)
+	private IEnumerator StealSugarAni(GameObject dropoffPoint, PlayerClass otherPlayer)
 	{
         //Steal sugar from enemy stash
-
-		int count = 0;
-
-		PlayerClass otherPlayer = GameManager.instance.GetPlayerFromDropoff(dropoffPoint);
-
 		if (otherPlayer.currentPlayerScore > 0)
 		{
 			GameObject sugar = otherPlayer.dropoffPoint.transform.parent.GetChild(1).gameObject;
@@ -194,24 +171,15 @@ public class PlayerSugarPickup : MonoBehaviour {
 			sugar.transform.parent = null;
 			sugar.SetActive(true);
 			Vector3 saveScale = sugar.transform.localScale;
-//			while (count < 20)
-//			{
-//				count++;
-//				sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, topPos, sugarPickupSpeed);
-//				yield return null;
-//			}
-//
-//			count = 0;
 
-			while (count < 20)
-			{
-				count++;
-				sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.zero, sugarPickupSpeed);
-				sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, transform.position, sugarPickupSpeed);
-				yield return new WaitForFixedUpdate ();
-			}
+            sugar.transform.DOScale(Vector3.zero, sugarPickupTime);
+            sugar.transform.DOMove(transform.position, sugarPickupTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + (sugarPickupTime / 2))
+                yield return null;
 
-			sugar.SetActive(false);
+
+            sugar.SetActive(false);
 			sugar.transform.localScale = saveScale; //Reset sugar scale, might need to change later
 			sugar.transform.parent = transform;
 			sugar.transform.position = transform.position;
@@ -219,7 +187,7 @@ public class PlayerSugarPickup : MonoBehaviour {
             if (otherPlayer.currentPlayerScore > 0 && runAnimation)
             {
                 yield return new WaitForSeconds(2f);
-                StartCoroutine(StealSugarAni(dropoffPoint));
+                StartCoroutine(StealSugarAni(dropoffPoint, otherPlayer));
             }
 		}
 	}
@@ -227,9 +195,6 @@ public class PlayerSugarPickup : MonoBehaviour {
 	private IEnumerator PickupSugarAni(GameObject sugar)
 	{
         //Pick up sugar from the ground
-
-		//SugarManager.instance.CmdEnableNewSugar(sugar);
-
 		sugar.GetComponent<SimpleRotate>().enabled = false;
 		sugar.GetComponent<BoxCollider>().enabled = false;
 		player.PickupSugar();
@@ -239,14 +204,13 @@ public class PlayerSugarPickup : MonoBehaviour {
         sugar.transform.parent = transform;
 		Vector3 saveScale = sugar.transform.localScale;
 
-		while (sugar.transform.position != transform.position)
-		{
-			sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.zero, sugarPickupSpeed);
-			sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, transform.position, sugarPickupSpeed);
-			yield return null;
-		}
+        sugar.transform.DOScale(Vector3.zero, sugarPickupTime / 2);
+        sugar.transform.DOMove(transform.position, sugarPickupTime / 2);
+        float saveTime = Time.time;
+        while (Time.time < saveTime + (sugarPickupTime / 2))
+            yield return null;
 
-		sugar.SetActive(false);
+        sugar.SetActive(false);
 		sugar.transform.localScale = saveScale;
 
 	}
@@ -254,8 +218,6 @@ public class PlayerSugarPickup : MonoBehaviour {
 	private IEnumerator DropoffSugarAni(GameObject dropoffPoint)
 	{
         //Drop off sugar in the player's stash
-		int count = 0;
-
 		Vector3 saveScale = sugarInBackpack[0].transform.localScale;
 		GameObject sugar = sugarInBackpack[0];
 		sugarInBackpack.Remove(sugarInBackpack[0]);
@@ -267,26 +229,20 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 		sugar.SetActive(true);
 
-		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 10, sugar.transform.position.z);
+		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 5, sugar.transform.position.z);
 
-		while(count < 10)
-		{
-			count++;
-			sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, topPos, sugarPickupSpeed*10);
-			yield return new WaitForFixedUpdate ();
-		}
+        sugar.transform.DOMove(topPos, sugarPickupTime / 2);
+        float saveTime = Time.time;
+        while (Time.time < saveTime + (sugarPickupTime / 2))
+            yield return null;
 
-		count = 0;
+        sugar.transform.DOMove(new Vector3(dropoffPoint.transform.position.x, dropoffPoint.transform.position.y, dropoffPoint.transform.position.z), sugarPickupTime / 2);
+        sugar.transform.DOScale(Vector3.zero, sugarPickupTime / 2);
+        saveTime = Time.time;
+        while (Time.time < saveTime + (sugarPickupTime / 2))
+            yield return null;
 
-		while (count < 10)
-		{
-			count++;
-			sugar.transform.localScale = Vector3.MoveTowards(sugar.transform.localScale, Vector3.zero, sugarPickupSpeed);
-			sugar.transform.position = Vector3.MoveTowards(sugar.transform.position, new Vector3( dropoffPoint.transform.position.x, dropoffPoint.transform.position.y+50, dropoffPoint.transform.position.z) , sugarPickupSpeed);
-			yield return new WaitForFixedUpdate ();
-		}
-
-		sugar.SetActive(false);
+        sugar.SetActive(false);
 		sugar.transform.localScale = saveScale;
 		sugar.transform.parent = dropoffPoint.transform.parent;
 		sugar.transform.position = new Vector3 (dropoffPoint.transform.position.x, dropoffPoint.transform.position.y + 50, dropoffPoint.transform.position.z);
