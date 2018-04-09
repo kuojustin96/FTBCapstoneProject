@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 129
+  controlID: 34
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 115
+  controlID: 127
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 68
+  controlID: 104
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -398,7 +398,7 @@ MonoBehaviour:
     width: 336
     height: 266
   m_SearchFilter:
-    m_NameFilter: gamema
+    m_NameFilter: uicon
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -409,19 +409,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Chayanne/Scenes
+    - Assets/Justin's Items and Player Setup/Test Main Scene
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Chayanne/Scenes
+  - Assets/Justin's Items and Player Setup/Test Main Scene
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Program Files (x86)\Unity 2017.1.0f3\FTBCapstoneProject\Capstone
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 135}
+    scrollPos: {x: 0, y: 487}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa2a00005a2f000048300000ec300000143100003c33000072340000da340000344a000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000ca2a0000d22d00002a2f000018300000bc300000e43000000c33000042340000aa3400001a4a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -449,7 +449,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa2a00005a2f000048300000ec300000143100003c33000072340000da340000344a0000
+    m_ExpandedIDs: 00000000ca2a00002a2f000018300000bc300000e43000000c33000042340000aa3400001a4a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,18 +480,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 84220000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: PlayerClass
+      m_OriginalName: PlayerClass
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 1546
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 12}
     m_CreateAssetUtility:
@@ -607,14 +607,14 @@ MonoBehaviour:
     width: 900
     height: 329
   m_SceneLighting: 1
-  lastFramingTime: 4936.648885032565
+  lastFramingTime: 5681.444830339968
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 544.6875, y: 34.89323, z: 0}
+    m_Target: {x: 0, y: 19.48, z: -0.099999905}
     speed: 2
-    m_Value: {x: 544.6875, y: 34.89323, z: 0}
+    m_Value: {x: 0, y: 19.48, z: -0.099999905}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -637,13 +637,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.16443291, y: 0.03845376, z: -0.00641533, w: 0.9856186}
+    m_Target: {x: 0.008968731, y: 0.84564614, z: -0.01421619, w: 0.5334835}
     speed: 2
-    m_Value: {x: -0.16443291, y: -0.038453765, z: 0.0064153303, w: -0.98561865}
+    m_Value: {x: 0.008968711, y: 0.84564424, z: -0.014216158, w: 0.5334823}
   m_Size:
-    m_Target: 129.13034
+    m_Target: 17.00781
     speed: 2
-    m_Value: 129.13034
+    m_Value: 17.00781
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -682,23 +682,23 @@ MonoBehaviour:
     height: 407
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1e0b0000
+    m_SelectedIDs: c4090000
     m_LastClickedID: 0
-    m_ExpandedIDs: 16fcffff00000000
+    m_ExpandedIDs: 9213fdff6a1efdffee61fdff52effdff704cfefff455feff18fcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: PlayerPrefab
+      m_OriginalName: PlayerPrefab
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -111504
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 

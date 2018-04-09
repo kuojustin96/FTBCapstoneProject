@@ -66,6 +66,7 @@ public class PlayerClass {
     public void DropSugar()
     {
         sugarInBackpack--;
+        npc.speed += speedPerSugar;
     }
 
     public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum)
