@@ -84,8 +84,7 @@ public class UIController : NetworkBehaviour {
 
     public void SetUpVariables(PlayerClass player)
     {
-        this.player = player;
-        ci = player.playerGO.GetComponent<craftingInput>();
+
 
         origIngameUIPos = IngameItemBackgroundUI.transform.position;
 
@@ -128,6 +127,9 @@ public class UIController : NetworkBehaviour {
 
         FaderPanel.alpha = 1f;
         FadeManager.instance.FadeOut(FaderPanel, 1f);
+
+        this.player = player;
+        ci = player.playerGO.GetComponent<craftingInput>();
     }
 	
 	// Update is called once per frame

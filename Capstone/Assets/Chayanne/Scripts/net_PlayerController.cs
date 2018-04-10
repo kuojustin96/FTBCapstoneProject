@@ -41,16 +41,8 @@ namespace jkuo
         private Vector3 moveVert;
         private Vector3 velocity = Vector3.zero;
 
-        //look rotation
-        [Header("Player / Camera Rotation")]
-        public Transform cameraCube;
-        public float lookSensitivity = 3f;
-        [Range(10, 80)]
-        public float yViewAngle = 30f;
-        private float xRot;
-        private float yRot;
-        private Vector3 rotation = Vector3.zero;
-        private bool inFreeLook = false;
+        bool inFreeLook = false;
+        float lookSensitivity = 3.0f;
 
         //jump
         [Header("Jumping")]
@@ -90,11 +82,14 @@ namespace jkuo
             }
 
 
-            GameObject virtualCamObj = GameObject.FindGameObjectWithTag("VirtualCamera");
-
-            if (virtualCamObj)
+            if (isLocalPlayer)
             {
-                virtualCam = virtualCamObj.GetComponent<CinemachineVirtualCamera>();
+                GameObject virtualCamObj = GameObject.FindGameObjectWithTag("VirtualCamera");
+
+                if (virtualCamObj)
+                {
+                    virtualCam = virtualCamObj.GetComponent<CinemachineVirtualCamera>();
+                }
             }
 
             if (GetComponent<UIController>())
@@ -107,41 +102,39 @@ namespace jkuo
         {
             if (!GetComponent<net_PlayerController>().isLocalPlayer)
             {
-                cam.GetComponent<Camera>().enabled = false;
-                cam.GetComponent<AudioListener>().enabled = false;
                 playerUI.SetActive(false);
             }
         }
 
         private void UpdateCursorLock()
         {
-#if (DEBUG_MODE)
-            if (Input.GetMouseButton(0))
-            {
-                isPaused = false;
-                Cursor.visible = false;
-                lockMode = CursorLockMode.Locked;
-            }
-#endif
+//#if (DEBUG_MODE)
+//            if (Input.GetMouseButton(0))
+//            {
+//                isPaused = false;
+//                Cursor.visible = false;
+//                lockMode = CursorLockMode.Locked;
+//            }
+//#endif
 
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                isPaused = !isPaused;
+            //if (Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    isPaused = !isPaused;
 
-                if (isPaused)
-                {
-                    lockMode = CursorLockMode.None;
-                    Cursor.visible = true;
-                }
-                else
-                {
-                    Cursor.visible = false;
-                    lockMode = CursorLockMode.Locked;
-                }
-            }
+            //    if (isPaused)
+            //    {
+            //        lockMode = CursorLockMode.None;
+            //        Cursor.visible = true;
+            //    }
+            //    else
+            //    {
+            //        Cursor.visible = false;
+            //        lockMode = CursorLockMode.Locked;
+            //    }
+            //}
 
 
-            Cursor.lockState = lockMode;
+            //Cursor.lockState = lockMode;
         }
 
         void Update()
@@ -158,7 +151,17 @@ namespace jkuo
                         Movement();
 
                         //Camera Rotation
-                        LookCamera();
+                        Rotation();
+
+                        if (Input.GetKeyDown(KeyCode.LeftAlt))
+                        {
+                            ToggleCameraMode();
+                        }
+
+                        if (Input.GetKeyUp(KeyCode.LeftAlt))
+                        {
+                            ToggleCameraMode();
+                        }
 
                         //Jump
                         Jumping();
@@ -167,6 +170,46 @@ namespace jkuo
                         UseEmotes();
                     }
                 }
+            }
+        }
+
+        void ToggleCameraMode()
+        {
+            inFreeLook = !inFreeLook;
+
+            CinemachineVirtualCameraBase cam = Net_Camera_Singleton.instance.GetCamera();
+
+            CinemachineFreeLook freeLook = cam.gameObject.GetComponent<CinemachineFreeLook>();
+
+            if(!freeLook)
+            {
+                Debug.LogError("THIS IS BROKEN q_q");
+            }
+
+            if (inFreeLook)
+            {
+                freeLook.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
+                freeLook.m_XAxis.m_InputAxisName = "Mouse X";
+            }
+            else
+            {
+                freeLook.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
+                freeLook.m_XAxis.m_InputAxisName = "";
+            }
+        }
+
+
+        private void Rotation()
+        {
+            float xRot;
+            float yRot;
+            xRot = Input.GetAxisRaw("Mouse Y");
+            yRot = Input.GetAxisRaw("Mouse X");
+
+            if (!inFreeLook)
+            {
+                Vector3 rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
+                rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
             }
         }
 
@@ -182,56 +225,7 @@ namespace jkuo
                 rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
 
-        private void LookCamera()
-        {
-
-            xRot = Input.GetAxisRaw("Mouse Y");
-            yRot = Input.GetAxisRaw("Mouse X");
-
-            if (Input.GetKey(KeyCode.LeftAlt))
-                inFreeLook = true;
-
-            if (Input.GetKeyUp(KeyCode.LeftAlt) && inFreeLook)
-            {
-                inFreeLook = false;
-                cameraCube.localEulerAngles = Vector3.zero;
-            }
-
-            if (inFreeLook)
-            {
-                if (virtualCam)
-                {
-                    virtualCam.Follow = cameraCube;
-                    virtualCam.LookAt = cameraCube;
-                }
-
-                rotation = cameraCube.localEulerAngles + (new Vector3(-xRot, yRot, 0f) * lookSensitivity);
-            }
-            else
-            {
-                if (virtualCam)
-                {
-                    virtualCam.Follow = gameObject.transform;
-                    virtualCam.LookAt = gameObject.transform;
-                }
-                rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
-                rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
-            }
-
-            if (!inFreeLook)
-                rotation = cameraCube.localEulerAngles + (new Vector3(-xRot, 0f, 0f) * lookSensitivity);
-
-            float minYViewAngle = 360 - yViewAngle;
-            float halfPoint = (minYViewAngle + yViewAngle) / 2;
-
-            if(rotation.x > yViewAngle && rotation.x <= halfPoint)
-                rotation.x = yViewAngle;
-            else if(rotation.x < minYViewAngle && rotation.x > halfPoint)
-                rotation.x = -yViewAngle;
-
-            cameraCube.localEulerAngles = rotation;
-        }
-
+      
         private void Jumping()
         {
             RaycastHit hit;
