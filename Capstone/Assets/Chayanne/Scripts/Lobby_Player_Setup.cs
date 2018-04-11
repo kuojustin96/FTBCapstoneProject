@@ -17,24 +17,10 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
     void Start()
     {
-
-        //VERY bad!
-        spawnPoint = GameObject.FindGameObjectWithTag("Spawn").transform;
-        playerListTransform = GameObject.FindGameObjectWithTag("PlayerList").transform;
-
-        LobbyPlayerInit();
-    }
-
-    private void LobbyPlayerInit()
-    {
-        
         transform.parent = null;
-        transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.Euler(new Vector3(0, spawnPoint.rotation.eulerAngles.y, 0));
         transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         transform.position = spawnPoint.position;
-
-        GetComponent<Lobby_Player_Movement>().speed = 5;
-
     }
 
     void Update()

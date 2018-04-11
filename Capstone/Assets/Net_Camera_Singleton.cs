@@ -15,6 +15,7 @@ public class Net_Camera_Singleton : MonoBehaviour {
         {
             instance = this;
             playerCam = localCamera;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -29,7 +30,7 @@ public class Net_Camera_Singleton : MonoBehaviour {
     CinemachineVirtualCameraBase localCamera;
 
 
-    public void RpcSetupCamera(GameObject player)
+    public void SetupCamera(GameObject player)
     {
         Debug.Log("Setting camera for " + player.name);
         playerCam.LookAt = player.transform;

@@ -8,15 +8,8 @@ public class PlayerAttachCamera : NetworkBehaviour {
     {
         if(isLocalPlayer)
         {
-            if (Net_Camera_Singleton.instance)
-            {
-                NetworkServer.Spawn(Net_Camera_Singleton.instance.gameObject);
-                Net_Camera_Singleton.instance.RpcSetupCamera(gameObject);
-            }
-            else
-            {
-                Debug.LogError("Have fun without a camera manager!");
-            }
+                Net_Camera_Singleton.instance.SetupCamera(gameObject);
+            //  Debug.LogError("Have fun without a camera manager!");
         }
     }
 }
