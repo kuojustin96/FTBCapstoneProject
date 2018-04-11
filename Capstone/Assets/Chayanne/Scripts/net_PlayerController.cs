@@ -67,9 +67,14 @@ namespace jkuo
         //Particles
         public GameObject stun;
 
+        CinemachineVirtualCameraBase vCam;
+        CinemachineFreeLook freeLook;
         // Use this for initialization
         void Start()
         {
+            vCam = Net_Camera_Singleton.instance.GetCamera();
+            freeLook = vCam.gameObject.GetComponent<CinemachineFreeLook>();
+
             staminaSlider.value = staminaSlider.maxValue;
             rb = GetComponent<Rigidbody>();
             player = GetComponent<playerClassAdd>().player;
@@ -153,15 +158,7 @@ namespace jkuo
                         //Camera Rotation
                         Rotation();
 
-                        if (Input.GetKeyDown(KeyCode.LeftAlt))
-                        {
-                            ToggleCameraMode();
-                        }
-
-                        if (Input.GetKeyUp(KeyCode.LeftAlt))
-                        {
-                            ToggleCameraMode();
-                        }
+                        FreeCam();
 
                         //Jump
                         Jumping();
@@ -173,26 +170,17 @@ namespace jkuo
             }
         }
 
-        void ToggleCameraMode()
+        void FreeCam()
         {
-            inFreeLook = !inFreeLook;
-
-            CinemachineVirtualCameraBase cam = Net_Camera_Singleton.instance.GetCamera();
-
-            CinemachineFreeLook freeLook = cam.gameObject.GetComponent<CinemachineFreeLook>();
-
-            if(!freeLook)
+            if (Input.GetKey(KeyCode.LeftAlt))
             {
-                Debug.LogError("THIS IS BROKEN q_q");
-            }
-
-            if (inFreeLook)
-            {
+                inFreeLook = true;
                 freeLook.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
                 freeLook.m_XAxis.m_InputAxisName = "Mouse X";
             }
             else
             {
+                inFreeLook = false;
                 freeLook.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
                 freeLook.m_XAxis.m_InputAxisName = "";
             }
