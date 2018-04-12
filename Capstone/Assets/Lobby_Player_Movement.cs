@@ -46,17 +46,6 @@ public class Lobby_Player_Movement : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
 
-        if (isLocalPlayer)
-        {
-
-
-
-        }
-
-        //GameObject mainCam = GameObject.FindGameObjectWithTag("VirtualCamera");
-        //GameObject freeCam = GameObject.FindGameObjectWithTag("VirtualCamera");
-
-
     }
 
     private void LocalCameraCheck()
@@ -145,7 +134,10 @@ public class Lobby_Player_Movement : NetworkBehaviour
         velocity = (moveHori + moveVert) * speed;
 
         if (velocity != Vector3.zero)
-            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+        {
+            Debug.Log("moving!");
+            rb.velocity = velocity;
+        }
     }
 
 

@@ -15,30 +15,34 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
     bool isReady = false;
 
+    bool detatched = false;
+
     void Start()
     {
 
-        //VERY bad!
-        spawnPoint = GameObject.FindGameObjectWithTag("Spawn").transform;
-        playerListTransform = GameObject.FindGameObjectWithTag("PlayerList").transform;
 
-        LobbyPlayerInit();
     }
 
-    private void LobbyPlayerInit()
+    public void SetupPosition()
     {
-        
-        transform.parent = null;
-        transform.rotation = Quaternion.identity;
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        transform.position = spawnPoint.position;
-
-        GetComponent<Lobby_Player_Movement>().speed = 5;
-
     }
 
     void Update()
     {
+
+        if (!detatched)
+        {
+            detatched = true;
+            transform.parent = null;
+            transform.rotation = Quaternion.Euler(new Vector3(0, spawnPoint.rotation.eulerAngles.y, 0));
+            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            transform.position = spawnPoint.position;
+        }
+
+        //Detatches from the lobby prefab.
+        //Never gonna change so why not. 
+
+
         if (!isLocalPlayer)
             return;
 

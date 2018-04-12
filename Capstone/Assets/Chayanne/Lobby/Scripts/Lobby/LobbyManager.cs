@@ -61,7 +61,11 @@ namespace Prototype.NetworkLobby
 
         bool inGame = false;
 
-        public Transform spawnPointLobby;
+        [SerializeField]
+        Transform spawnPointLobby;
+
+        [SerializeField]
+        Transform playerListTransform;
 
         void OnLevelWasLoaded()
         {
@@ -313,13 +317,9 @@ namespace Prototype.NetworkLobby
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
         {
-            
-            //Create our 3D Player here
-            GameObject obj = Instantiate(lobbyPlayerPrefab.gameObject, spawnPointLobby.transform.position, spawnPointLobby.transform.rotation) as GameObject;
-            Debug.Log("Poof!");
+            GameObject playerObj = CreateAndSetupPlayer();
 
-
-            LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
+            LobbyPlayer newPlayer = playerObj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
 
@@ -333,9 +333,25 @@ namespace Prototype.NetworkLobby
                     p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
                 }
             }
-            obj.transform.parent = null;
+            playerObj.transform.parent = null;
 
-            return obj;
+            return playerObj;
+        }
+
+        private GameObject CreateAndSetupPlayer()
+        {
+
+            //Create our 3D Player here
+            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
+
+            Lobby_Player_Setup setup = playerObj.GetComponent<Lobby_Player_Setup>();
+            setup.playerListTransform = playerListTransform;
+            setup.spawnPoint = spawnPointLobby;
+            setup.SetupPosition();
+
+
+            Debug.Log("Poof!");
+            return playerObj;
         }
 
         //private void CreateLobbyGamePlayer()
