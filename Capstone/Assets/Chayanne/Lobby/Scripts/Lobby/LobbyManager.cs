@@ -342,12 +342,13 @@ namespace Prototype.NetworkLobby
         {
 
             //Create our 3D Player here
-            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject,null) as GameObject;
+            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
 
             Lobby_Player_Setup setup = playerObj.GetComponent<Lobby_Player_Setup>();
-
             setup.playerListTransform = playerListTransform;
             setup.spawnPoint = spawnPointLobby;
+            setup.SetupPosition();
+
 
             Debug.Log("Poof!");
             return playerObj;
