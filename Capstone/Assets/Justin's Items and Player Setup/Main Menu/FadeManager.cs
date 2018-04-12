@@ -79,10 +79,24 @@ public class FadeManager : MonoBehaviour
         if (a) c.alpha = 0;
     }
 
+    public void CanvasGroupOFF(CanvasGroup c, bool interactable, bool blocksRaycasts)
+    {
+        c.interactable = interactable;
+        c.blocksRaycasts = blocksRaycasts;
+        c.alpha = 0;
+    }
+
     public void CanvasGroupON(CanvasGroup c, bool a)
     {
         c.interactable = true;
         c.blocksRaycasts = true;
         if (a) c.alpha = 1;
+    }
+
+    public void CanvasGroupON(CanvasGroup c, bool interactable, bool blocksRaycasts)
+    {
+        c.interactable = interactable;
+        c.blocksRaycasts = blocksRaycasts;
+        c.alpha = 1;
     }
 }

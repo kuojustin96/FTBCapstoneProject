@@ -15,6 +15,11 @@ public class MusicManager : MonoBehaviour {
         public Dictionary<string, AudioSource> componentsPlaying = new Dictionary<string, AudioSource>();
     }
 
+    [HideInInspector]
+    public MusicTriggerBox currentMusicTrigger;
+    public float defaultFadeTime = 1f;
+    public string defaultTrackName;
+
     public MusicTracks[] Music;
 
     private AudioSource mainTrackAuds;
@@ -59,13 +64,6 @@ public class MusicManager : MonoBehaviour {
                     m.musicComponents.Add("MainTrack", (AudioClip)m.musicList[x]);
             }
         }
-
-        //Debug Code
-        //foreach (string s in Music[0].musicComponents.Keys)
-        //    Debug.Log(s);
-
-        //foreach (AudioClip ac in Music[0].musicComponents.Values)
-        //    Debug.Log(ac.name);
     }
 
 
