@@ -59,6 +59,7 @@ public class attack : NetworkBehaviour {
 		attackTrigger.SetActive (true);
 		Invoke ("CmdKeyStopAttacking", .5f);
 		RpcKeyAnimSend ();
+			Debug.Log ("keyaattack");
 			}
 		 
 	}
@@ -151,7 +152,7 @@ public class attack : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcobjectTurnoff(){
 		player.currentItem.SetActive (false);
-		player.currentItem = null;
+		//player.currentItem = null;
 		GetComponent<UIController> ().ResetUIItemTexture ();
 
 	}

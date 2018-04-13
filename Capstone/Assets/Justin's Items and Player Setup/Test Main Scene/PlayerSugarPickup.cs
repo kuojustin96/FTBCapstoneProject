@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using jkuo;
 using DG.Tweening;
+using UnityEngine.Networking;
 
-public class PlayerSugarPickup : MonoBehaviour {
+
+public class PlayerSugarPickup : NetworkBehaviour {
 
 	private PlayerClass player;
     private float sugarPickupTime;
 	private float dropoffDelay;
 	private List<GameObject> sugarInBackpack = new List<GameObject>();
 	private bool runAnimation = false;
+	public bool dropping = false;
+	public networkCallback callback;
 
     private UIController uiController;
 
@@ -26,10 +30,12 @@ public class PlayerSugarPickup : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		if (!player.isStunned)
 		{
-			if (Input.GetKeyDown(KeyCode.Q))
-				DropSugar();
+			if (Input.GetKeyDown (KeyCode.Q)&& !dropping) {
+					DropSugar ();
+			}
 		}
 	}
 
@@ -37,8 +43,10 @@ public class PlayerSugarPickup : MonoBehaviour {
 	{
 		if (other.tag == "SugarCube")
 		{
-			if(player.sugarInBackpack < player.maxCanCarry)
-				StartCoroutine(PickupSugarAni(other.gameObject));
+			if (player.sugarInBackpack < player.maxCanCarry) {
+				//StartCoroutine(PickupSugarAni(other.gameObject));
+				callback.CmdSugarPickup (other.gameObject);
+			}
 			return;
 		}
 
@@ -105,7 +113,8 @@ public class PlayerSugarPickup : MonoBehaviour {
 		if(sugarInBackpack.Count > 0)
 		{
 			//Breaks if you spam the drop button
-			StartCoroutine(DropSugarAni());
+
+			callback.sugarCall ();
 		}
 	}
 
@@ -126,33 +135,46 @@ public class PlayerSugarPickup : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator DropSugarAni()
+	public	 IEnumerator DropSugarAni()
 	{
-        //Drop sugar on the ground
-		player.DropSugar();
-        uiController.UpdateBackpackScore(player.sugarInBackpack);
+
+		dropping = true;
+
 		GameObject sugar = sugarInBackpack[0];
 		sugar.SetActive(true);
 		sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
-		Vector3 topPos = new Vector3(sugar.transform.position.x, sugar.transform.position.y + 1f, sugar.transform.position.z);
+		float saveTime = Time.time;
+//		Vector3 randomDropLoc = transform.parent.position + transform.forward * -15f;
+//
+//			sugar.transform.DOMove (randomDropLoc, sugarPickupTime / 2);
+//			saveTime = Time.time;
+//			while (Time.time < saveTime + (sugarPickupTime / 2))
+//				yield return null;
+//			sugar.transform.position = randomDropLoc;
+//
 
-        sugar.transform.DOMove(topPos, sugarPickupTime / 2);
-        float saveTime = Time.time;
-        while (Time.time < saveTime + (sugarPickupTime / 2))
-            yield return null;
 
-		Vector3 randomDropLoc = transform.parent.position + Random.onUnitSphere * 15f;
-		randomDropLoc.y = transform.parent.position.y;
-
-        sugar.transform.DOMove(randomDropLoc, sugarPickupTime / 2);
-        saveTime = Time.time;
-        while (Time.time < saveTime + (sugarPickupTime / 2))
-            yield return null;
-
-        sugar.GetComponent<SimpleRotate>().enabled = true;
-		sugar.GetComponent<BoxCollider>().enabled = true;
+        //sugar.GetComponent<SimpleRotate>().enabled = true;
+		//	sugar.GetComponent<BoxCollider>().enabled = true;
+		dropping = false;
+		player.DropSugar();
+		uiController.UpdateBackpackScore(player.sugarInBackpack);
+		yield return null;
 	}
+	public IEnumerator DropSugarMovement(){
+		GameObject sugar = sugarInBackpack[0];
+		float saveTime = Time.time;
+		Vector3 randomDropLoc = transform.parent.position + transform.forward * -15f;
+		sugar.transform.DOMove (randomDropLoc, sugarPickupTime / 2);
+		saveTime = Time.time;
+		while (Time.time < saveTime + (sugarPickupTime / 2))
+			yield return null;
+		sugar.transform.position = randomDropLoc;
+	}
+
+
+
 
 	private IEnumerator StealSugarAni(GameObject dropoffPoint, PlayerClass otherPlayer)
 	{
@@ -191,15 +213,17 @@ public class PlayerSugarPickup : MonoBehaviour {
             }
 		}
 	}
-
-	private IEnumerator PickupSugarAni(GameObject sugar)
+	public void PickupSugarVoid(GameObject other){
+		StartCoroutine(PickupSugarAni(other.gameObject));
+	}
+	public IEnumerator PickupSugarAni(GameObject sugar)
 	{
         //Pick up sugar from the ground
-		sugar.GetComponent<SimpleRotate>().enabled = false;
+		//sugar.GetComponent<SimpleRotate>().enabled = false;
+		dropping = true;
 		sugar.GetComponent<BoxCollider>().enabled = false;
-		player.PickupSugar();
-		sugarInBackpack.Add(sugar);
-        uiController.UpdateBackpackScore(player.sugarInBackpack);
+
+
 
         sugar.transform.parent = transform;
 		Vector3 saveScale = sugar.transform.localScale;
@@ -212,6 +236,10 @@ public class PlayerSugarPickup : MonoBehaviour {
 
         sugar.SetActive(false);
 		sugar.transform.localScale = saveScale;
+		dropping = false;
+		player.PickupSugar();
+		sugarInBackpack.Add(sugar);
+		uiController.UpdateBackpackScore(player.sugarInBackpack);
 
 	}
 
