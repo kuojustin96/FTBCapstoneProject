@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class MusicManager : MonoBehaviour {
         public Dictionary<string, AudioSource> componentsPlaying = new Dictionary<string, AudioSource>();
     }
 
+    public AudioMixer audMixer;
     [HideInInspector]
     public MusicTriggerBox currentMusicTrigger;
     public float defaultFadeTime = 1f;
@@ -47,6 +49,7 @@ public class MusicManager : MonoBehaviour {
     {
         mainTrackAuds.loop = true;
         mainTrackAuds.playOnAwake = false;
+        mainTrackAuds.outputAudioMixerGroup = audMixer.FindMatchingGroups("Music")[0];
     }
 
     private void LoadMusicLibrary()
