@@ -7,6 +7,13 @@ using TMPro;
 using UnityEngine.Networking;
 using DG.Tweening;
 
+public enum TickerBehaviors
+{
+    None = 0,
+    Emotes = 1,
+    TickerText = 2,
+}
+
 public class UIController : NetworkBehaviour {
 
     private PlayerClass player;
@@ -52,6 +59,8 @@ public class UIController : NetworkBehaviour {
 
     public RawImage tickerBackgroud;
     public float tickerLerpTime = 0.5f;
+    public GameObject emoteUI;
+    public GameObject tickerTextUI;
     private Vector2 tickerEnabledPos;
     private Vector2 tickerDisabledPos;
     public bool tickerEnabled { get; protected set; }
@@ -159,11 +168,11 @@ public class UIController : NetworkBehaviour {
             ToggleCraftingUI();
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
-            ShowTicker();
+        //if (Input.GetKeyDown(KeyCode.O))
+        //    ShowTicker();
 
-        if (Input.GetKeyDown(KeyCode.P))
-            HideTicker();
+        //if (Input.GetKeyDown(KeyCode.P))
+        //    HideTicker();
     }
 
     #region Enable/Disable Crafting UI
@@ -341,10 +350,11 @@ public class UIController : NetworkBehaviour {
         tickerEnabled = false;
     }
 
-    public void ShowTicker()
+    public void ShowTicker(TickerBehaviors tb)
     {
+        //Checks if ticker is already enabled, add something that shows emotes when ticker text is playing
         if (!tickerEnabled)
-            StartCoroutine(ToggleTicker(true));
+            StartCoroutine(ToggleTicker(true, tb));
     }
 
     public void HideTicker()
@@ -353,15 +363,35 @@ public class UIController : NetworkBehaviour {
             StartCoroutine(ToggleTicker(false));
     }
 
-    private IEnumerator ToggleTicker(bool showTicker)
+    private IEnumerator ToggleTicker(bool showTicker, TickerBehaviors tb = TickerBehaviors.None)
     {
         if (showTicker)
         {
+            bool startTicker = false;
+            switch (tb)
+            {
+                case TickerBehaviors.Emotes:
+                    emoteUI.SetActive(true);
+                    break;
+
+                case TickerBehaviors.TickerText:
+                    startTicker = true;
+                    tickerTextUI.SetActive(true);
+                    break;
+
+                default:
+                    Debug.Log("Ticker Behaviors defaulted, you messed up somewhere");
+                    break;
+            }
+
             tickerBackgroud.rectTransform.DOAnchorPosY(tickerEnabledPos.y, tickerLerpTime).SetEase(Ease.OutBack);
 
             float saveTime = Time.time;
             while (Time.time < saveTime + tickerLerpTime)
                 yield return null;
+
+            if (startTicker)
+                Debug.Log("Start the ticker");
 
             tickerEnabled = true;
         }
@@ -372,6 +402,9 @@ public class UIController : NetworkBehaviour {
             float saveTime = Time.time;
             while (Time.time < saveTime + tickerLerpTime)
                 yield return null;
+
+            emoteUI.SetActive(false);
+            tickerTextUI.SetActive(false);
 
             tickerEnabled = false;
         }

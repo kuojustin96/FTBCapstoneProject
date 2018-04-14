@@ -10,7 +10,7 @@ namespace jkuo
     [RequireComponent(typeof(Rigidbody))]
     public class net_PlayerController : NetworkBehaviour
     {
-
+        private UIController uic;
         public CinemachineVirtualCamera virtualCam;
 
         public bool offlineTesting = false;
@@ -21,7 +21,7 @@ namespace jkuo
         public GameObject playerUI;
         public Slider staminaSlider;
         public ParticleSystem[] Emotes;
-        private bool emoteMenuOpen = false;
+        public bool emoteMenuOpen { get; protected set; }
         private bool playingEmote = false;
         private PlayerClass player;
         private Rigidbody rb;
@@ -74,6 +74,9 @@ namespace jkuo
         {
             vCam = Net_Camera_Singleton.instance.GetCamera();
             freeLook = vCam.gameObject.GetComponent<CinemachineFreeLook>();
+
+            emoteMenuOpen = false;
+            uic = GetComponent<UIController>();
 
             staminaSlider.value = staminaSlider.maxValue;
             rb = GetComponent<Rigidbody>();
@@ -300,7 +303,10 @@ namespace jkuo
                     return;
 
                 if (Input.GetKeyDown(KeyCode.C))
+                {
                     emoteMenuOpen = false;
+                    uic.ShowTicker(TickerBehaviors.Emotes);
+                }
 
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                     CmdEmote(0);
@@ -316,7 +322,10 @@ namespace jkuo
             }
 
             if (Input.GetKeyDown(KeyCode.C))
+            {
                 emoteMenuOpen = true;
+                uic.HideTicker();
+            }
         }
 
         [ClientRpc]
