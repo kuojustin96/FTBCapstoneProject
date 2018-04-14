@@ -293,10 +293,14 @@
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\attackTrigger.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\BadScoreManager.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\craftingInput.cs" />
+    <Compile Include="Assets\Prototype\ScriptsForPrototypes\fireAttackTrigger.cs" />
+    <Compile Include="Assets\Prototype\ScriptsForPrototypes\fireProjectileTrigger.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\Magnet.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\net_list.cs" />
+    <Compile Include="Assets\Prototype\ScriptsForPrototypes\networkCallback.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\playerClassAdd.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\rotate.cs" />
+    <Compile Include="Assets\Prototype\ScriptsForPrototypes\sugarPickupable.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\sugarSpawning.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
