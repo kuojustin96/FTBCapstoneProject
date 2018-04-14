@@ -408,6 +408,24 @@
  <HintPath>C:/Program Files/Unity2017/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
+<<<<<<< HEAD
+ <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
+ <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
+ <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
+=======
  <HintPath>C:/Users/Christopher/Desktop/FTB2/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
@@ -436,6 +454,7 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Christopher/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
+>>>>>>> a80ed17da6d1816a6af7c638925190aca31b7398
  </Reference>
   </ItemGroup>
   <ItemGroup>
