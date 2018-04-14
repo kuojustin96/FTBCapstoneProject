@@ -46,7 +46,9 @@ public class craftingInput : NetworkBehaviour {
 				player.currentItem.SetActive (false);
 			
 			player.currentItem = null;
-			int randomRange = Random.Range (0, attackItems.Count);
+			//int randomRange = Random.Range (0, attackItems.Count);
+			int randomRange = Random.Range (0, 1);
+
 			CmdCraftAttack (randomRange);
 			player.itemCharges = attackCharges [randomRange];
 			player.currentItem = attackItems [randomRange];

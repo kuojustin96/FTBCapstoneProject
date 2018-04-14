@@ -6,6 +6,7 @@ public class UI_Trigger : MonoBehaviour {
 	private PlayerClass player;
 	private float sugarPickupSpeed;
 	// Use this for initialization
+    //Probaby want to move this to PlayerSugarPickup
 	void Start () {
 		player = GetComponentInParent<playerClassAdd>().player;
 	}

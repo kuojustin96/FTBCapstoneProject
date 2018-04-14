@@ -15,7 +15,7 @@ public class sugarSpawning : NetworkBehaviour {
 		SpawnTime = 5;
 	}
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		if (!isServer)
 			return;
 		if (curTime > SpawnTime) {
@@ -25,6 +25,7 @@ public class sugarSpawning : NetworkBehaviour {
 		}
 		if(!Alive)
 		curTime += Time.deltaTime;
+
 	}
 	[Command]
 	public void CmdSpawn(){
@@ -33,6 +34,7 @@ public class sugarSpawning : NetworkBehaviour {
 		curTime = 0;
 		Alive = true;
 	}
+
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "sugarPickup")
 			Alive = false;

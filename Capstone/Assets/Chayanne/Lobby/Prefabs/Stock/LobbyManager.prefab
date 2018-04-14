@@ -3185,8 +3185,9 @@ MonoBehaviour:
   _playerNumber: 0
   _isMatchmaking: 0
   boxTopMesh: {fileID: 0}
-  boxTopAnimator: {fileID: 0}
-  sceneCameraAnimator: {fileID: 0}
+  lobbySpawn: {fileID: 0}
+  lobbyAnims: {fileID: 0}
+  spawnPointLobby: {fileID: 0}
 --- !u!114 &11476426
 MonoBehaviour:
   m_ObjectHideFlags: 1

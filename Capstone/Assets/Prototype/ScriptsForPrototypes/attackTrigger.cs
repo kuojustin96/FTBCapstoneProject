@@ -8,7 +8,7 @@ public class attackTrigger : NetworkBehaviour {
 	PlayerClass player;
 		void Start(){
 			Debug.Log ("triggerActive");
-		Invoke ("lateDestroy", 5);
+		//Invoke ("lateDestroy", 5);
 		}
 	
 		void OnTriggerEnter(Collider other){
@@ -19,7 +19,7 @@ public class attackTrigger : NetworkBehaviour {
 				GameObject x = other.gameObject;
 				stun (x);
 
-			Destroy (gameObject);
+			//Destroy (gameObject);
 				}
 			}
 		
@@ -30,7 +30,7 @@ public class attackTrigger : NetworkBehaviour {
 		}
 	public void lateDestroy(){
 
-		Destroy (gameObject);
+		//Destroy (gameObject);
 	}
 }
 

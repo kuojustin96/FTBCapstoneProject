@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class SimpleRotate : MonoBehaviour {
+public class SimpleRotate : NetworkBehaviour {
 
     private float origYPos;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
         origYPos = transform.position.y;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(Vector3.up);
-        transform.position = new Vector3(transform.position.x, origYPos + Mathf.PingPong(Time.time, 1f), transform.position.z);
+		//if (isServer) {
+			transform.Rotate (Vector3.up);
+			transform.position = new Vector3 (transform.position.x, origYPos + Mathf.PingPong (Time.time, 1f), transform.position.z);
+		//}
 	}
 }
