@@ -130,7 +130,8 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
 			for (int x = 0; x < dropAmount; x++)
 			{
-				StartCoroutine(DropSugarAni());
+				//StartCoroutine(DropSugarAni());
+				callback.sugarCall ();
 			}
 		}
 	}
