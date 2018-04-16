@@ -58,9 +58,13 @@ public class UIController : NetworkBehaviour {
     private Vector2 itemButtonSize;
 
     public RawImage tickerBackgroud;
-    public float tickerLerpTime = 0.5f;
+    public float tickerLerpTime = 10f;
+    public float tickerTextLerpTime = 10f;
     public GameObject emoteUI;
-    public GameObject tickerTextUI;
+    private CanvasGroup emoteUICG;
+    public RectTransform tickerTextUI;
+    private CanvasGroup tickerTextUICG;
+    public TextMeshProUGUI tickerText;
     private Vector2 tickerEnabledPos;
     private Vector2 tickerDisabledPos;
     public bool tickerEnabled { get; protected set; }
@@ -89,11 +93,17 @@ public class UIController : NetworkBehaviour {
 	void Start () {
         DOTween.Init();
         SetUpTicker();
-	}
+
+        emoteUICG = emoteUI.GetComponent<CanvasGroup>();
+        tickerTextUICG = tickerTextUI.GetComponent<CanvasGroup>();
+        emoteUICG.alpha = 0f;
+        tickerTextUICG.alpha = 0f;
+        tickerTextUI.anchoredPosition = new Vector2(2000, tickerTextUI.anchoredPosition.y);
+    }
 
     public void SetUpVariables(PlayerClass player)
     {
-
+        StatManager.instance.SetUIController(this);
 
         origIngameUIPos = IngameItemBackgroundUI.transform.position;
 
@@ -167,12 +177,6 @@ public class UIController : NetworkBehaviour {
         {
             ToggleCraftingUI();
         }
-
-        //if (Input.GetKeyDown(KeyCode.O))
-        //    ShowTicker();
-
-        //if (Input.GetKeyDown(KeyCode.P))
-        //    HideTicker();
     }
 
     #region Enable/Disable Crafting UI
@@ -350,11 +354,11 @@ public class UIController : NetworkBehaviour {
         tickerEnabled = false;
     }
 
-    public void ShowTicker(TickerBehaviors tb)
+    public void ShowTicker(TickerBehaviors tb, string message = null)
     {
         //Checks if ticker is already enabled, add something that shows emotes when ticker text is playing
         if (!tickerEnabled)
-            StartCoroutine(ToggleTicker(true, tb));
+            StartCoroutine(ToggleTicker(true, tb, message));
     }
 
     public void HideTicker()
@@ -363,7 +367,7 @@ public class UIController : NetworkBehaviour {
             StartCoroutine(ToggleTicker(false));
     }
 
-    private IEnumerator ToggleTicker(bool showTicker, TickerBehaviors tb = TickerBehaviors.None)
+    private IEnumerator ToggleTicker(bool showTicker, TickerBehaviors tb = TickerBehaviors.None, string message = null)
     {
         if (showTicker)
         {
@@ -371,12 +375,14 @@ public class UIController : NetworkBehaviour {
             switch (tb)
             {
                 case TickerBehaviors.Emotes:
-                    emoteUI.SetActive(true);
+                    emoteUICG.alpha = 1f;
                     break;
 
                 case TickerBehaviors.TickerText:
                     startTicker = true;
-                    tickerTextUI.SetActive(true);
+
+                    if(emoteUICG.alpha != 1f)
+                        tickerTextUICG.alpha = 1f;
                     break;
 
                 default:
@@ -391,7 +397,7 @@ public class UIController : NetworkBehaviour {
                 yield return null;
 
             if (startTicker)
-                Debug.Log("Start the ticker");
+                SetTickerMessage(message);
 
             tickerEnabled = true;
         }
@@ -403,11 +409,36 @@ public class UIController : NetworkBehaviour {
             while (Time.time < saveTime + tickerLerpTime)
                 yield return null;
 
-            emoteUI.SetActive(false);
-            tickerTextUI.SetActive(false);
+            emoteUICG.alpha = 0f;
+            tickerTextUICG.alpha = 0f;
 
             tickerEnabled = false;
         }
+    }
+
+    private void SetTickerMessage(string message)
+    {
+        tickerText.text = message;
+        StartCoroutine(ShowTickerMessage());
+    }
+
+    private IEnumerator ShowTickerMessage()
+    {
+        //Turn on text, turn on emoji, keep showing ticker if emoji menu is closed
+        //Need to update toggle ticker
+        tickerTextUI.anchoredPosition = new Vector2(2000, tickerTextUI.anchoredPosition.y);
+
+        tickerTextUI.DOAnchorPosX(-2500, tickerTextLerpTime).SetEase(Ease.Linear);
+
+        float saveTime = Time.time;
+        while (Time.time < saveTime + tickerTextLerpTime)
+            yield return null;
+
+        //if emote menu is not open
+        if(emoteUICG.alpha != 1f)
+            StartCoroutine(ToggleTicker(false));
+
+        StatManager.instance.ResetTickerTimer();
     }
     #endregion
 

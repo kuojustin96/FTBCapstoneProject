@@ -7,7 +7,7 @@ public class FadeManager : MonoBehaviour
 
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }

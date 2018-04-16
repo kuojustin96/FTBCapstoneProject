@@ -9,6 +9,7 @@ public class GameManager : NetworkBehaviour {
 
     public static GameManager instance = null;
 
+    public int numSugarToWin = 50;
     public float sugarPickupTime = 0.5f;
     public float dropoffDelay = 0.5f;
     public int maxSugarCarry = 10;
