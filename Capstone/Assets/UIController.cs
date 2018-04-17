@@ -57,6 +57,7 @@ public class UIController : NetworkBehaviour {
     public RectTransform[] ItemButtons;
     private Vector2 itemButtonSize;
 
+    [Header("Ticker")]
     public RawImage tickerBackgroud;
     public float tickerLerpTime = 10f;
     public float tickerTextLerpTime = 10f;
@@ -68,6 +69,7 @@ public class UIController : NetworkBehaviour {
     private Vector2 tickerEnabledPos;
     private Vector2 tickerDisabledPos;
     public bool tickerEnabled { get; protected set; }
+    private bool tickerTextPlaying = false;
 
     private Vector2 origIngameUIPos;
     private Vector2 origIngameUIScale;
@@ -354,17 +356,41 @@ public class UIController : NetworkBehaviour {
         tickerEnabled = false;
     }
 
-    public void ShowTicker(TickerBehaviors tb, string message = null)
+    public void ShowTicker(TickerBehaviors tb, string message = null, bool isPriority = false)
     {
-        //Checks if ticker is already enabled, add something that shows emotes when ticker text is playing
-        if (!tickerEnabled)
+        if (!tickerEnabled) { //if ticker is not open and emote menu is not open
             StartCoroutine(ToggleTicker(true, tb, message));
+        }
+        else if(tickerEnabled && !tickerTextPlaying) //if ticker is not already playing but the emote menu is open
+        {
+            tickerTextPlaying = true;
+            if (isPriority)
+                FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
+
+            SetTickerMessage(message);
+        }
+        else //ticker already playing and player switches between cgs
+        {
+            if (emoteUICG.alpha == 1f)
+            {
+                FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
+            }
+            else if (tickerTextUICG.alpha == 1f)
+                FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
+        }
     }
 
     public void HideTicker()
     {
         if (tickerEnabled)
-            StartCoroutine(ToggleTicker(false));
+        {
+            if (tickerTextPlaying && emoteUICG.alpha != 0f)
+                FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
+            else if(tickerTextPlaying && tickerTextUICG.alpha != 0)
+                FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
+            else
+                StartCoroutine(ToggleTicker(false));
+        }
     }
 
     private IEnumerator ToggleTicker(bool showTicker, TickerBehaviors tb = TickerBehaviors.None, string message = null)
@@ -380,9 +406,12 @@ public class UIController : NetworkBehaviour {
 
                 case TickerBehaviors.TickerText:
                     startTicker = true;
+                    tickerTextPlaying = true;
 
-                    if(emoteUICG.alpha != 1f)
+                    if (emoteUICG.alpha != 1f)
+                    { //override this if the ticker message is priority
                         tickerTextUICG.alpha = 1f;
+                    }
                     break;
 
                 default:
@@ -438,6 +467,7 @@ public class UIController : NetworkBehaviour {
         if(emoteUICG.alpha != 1f)
             StartCoroutine(ToggleTicker(false));
 
+        tickerTextPlaying = false;
         StatManager.instance.ResetTickerTimer();
     }
     #endregion
@@ -493,7 +523,7 @@ public class UIController : NetworkBehaviour {
     #region Canvas Control
     private IEnumerator FadeIn(CanvasGroup c, float timeToFade, float targetAlpha = 1f)
     {
-        while(c.alpha < targetAlpha)
+        while (c.alpha < targetAlpha)
         {
             c.alpha += Time.deltaTime / timeToFade;
             yield return null;

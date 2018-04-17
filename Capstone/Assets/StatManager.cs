@@ -133,7 +133,7 @@ public class StatManager : NetworkBehaviour {
             message = NonPriorityTickerTextTypes[tmt.ToString()].GetRandomText();
         }
 
-        message = message.Replace("/player", "Player " + player.playerNum)
+        message = message.Replace("/player", "Player " + (player.playerNum + 1))
             .Replace("/numLeft", (numSugarToWin - player.currentPlayerScore).ToString())
             .Replace("/numHave", player.currentPlayerScore.ToString());
 

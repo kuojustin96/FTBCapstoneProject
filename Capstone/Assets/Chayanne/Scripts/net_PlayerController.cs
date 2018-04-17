@@ -305,8 +305,7 @@ namespace jkuo
                 if (Input.GetKeyDown(KeyCode.C))
                 {
                     emoteMenuOpen = false;
-                    uic.ShowTicker(TickerBehaviors.Emotes);
-                    Debug.Log("SHOW EMOTES KID");
+                    uic.HideTicker();
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -324,9 +323,8 @@ namespace jkuo
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                Debug.Log("HIDE EMOTES CHILD");
                 emoteMenuOpen = true;
-                uic.HideTicker();
+                uic.ShowTicker(TickerBehaviors.Emotes);
             }
         }
 
