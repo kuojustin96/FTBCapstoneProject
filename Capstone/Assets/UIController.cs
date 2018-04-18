@@ -70,8 +70,6 @@ public class UIController : NetworkBehaviour {
     private Vector2 tickerDisabledPos;
     public bool tickerEnabled { get; protected set; }
     private bool tickerTextPlaying = false;
-    private Coroutine tickerCoroutine;
-    private Tweener tickerTween;
 
     private Vector2 origIngameUIPos;
     private Vector2 origIngameUIScale;
@@ -181,12 +179,6 @@ public class UIController : NetworkBehaviour {
         {
             ToggleCraftingUI();
         }
-
-        //TESTING
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    StatManager.instance.CallTickerMessage(TickerMessageType.Win, true);
-        //}
     }
 
     #region Enable/Disable Crafting UI
@@ -364,51 +356,27 @@ public class UIController : NetworkBehaviour {
         tickerEnabled = false;
     }
 
-    //Add a check to see if a ticker message is already playing and override it with a priority one
     public void ShowTicker(TickerBehaviors tb, string message = null, bool isPriority = false)
     {
-        if (!isPriority)
-        {
-            if (!tickerEnabled)
-            { //if ticker is not open and emote menu is not open
-                StartCoroutine(ToggleTicker(true, tb, message));
-            }
-            else if (tickerEnabled && !tickerTextPlaying) //if ticker is not already playing but the emote menu is open
-            {
-                tickerTextPlaying = true;
-                if (isPriority)
-                    FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
-
-                SetTickerMessage(message);
-            }
-            else //ticker already playing and player switches between cgs
-            {
-                if (emoteUICG.alpha != 0f)
-                    FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
-                else if (tickerTextUICG.alpha != 0f)
-                    FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
-            }
+        if (!tickerEnabled) { //if ticker is not open and emote menu is not open
+            StartCoroutine(ToggleTicker(true, tb, message));
         }
-        else //is a priority message
+        else if(tickerEnabled && !tickerTextPlaying) //if ticker is not already playing but the emote menu is open
         {
-            if (!tickerEnabled)
-            { //if ticker is not open and emote menu is not open
-                StartCoroutine(ToggleTicker(true, tb, message));
-            }
-            else
-            {
-                if (emoteUICG.alpha != 0f)
-                {
-                    FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
-                }
-                else if (tickerTextUICG.alpha != 0f)
-                {
-                    StopCoroutine(tickerCoroutine);
-                    tickerTween.Kill();
-                }
+            tickerTextPlaying = true;
+            if (isPriority)
+                FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
 
-                SetTickerMessage(message);
+            SetTickerMessage(message);
+        }
+        else //ticker already playing and player switches between cgs
+        {
+            if (emoteUICG.alpha == 1f)
+            {
+                FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
             }
+            else if (tickerTextUICG.alpha == 1f)
+                FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
         }
     }
 
@@ -439,10 +407,11 @@ public class UIController : NetworkBehaviour {
                 case TickerBehaviors.TickerText:
                     startTicker = true;
                     tickerTextPlaying = true;
-                    tickerTextUICG.alpha = 1f;
 
-                    if (emoteUICG.alpha != 0f)
-                        emoteUICG.alpha = 1f;
+                    if (emoteUICG.alpha != 1f)
+                    { //override this if the ticker message is priority
+                        tickerTextUICG.alpha = 1f;
+                    }
                     break;
 
                 default:
@@ -479,21 +448,23 @@ public class UIController : NetworkBehaviour {
     private void SetTickerMessage(string message)
     {
         tickerText.text = message;
-        tickerCoroutine = StartCoroutine(ShowTickerMessage());
+        StartCoroutine(ShowTickerMessage());
     }
 
     private IEnumerator ShowTickerMessage()
     {
+        //Turn on text, turn on emoji, keep showing ticker if emoji menu is closed
+        //Need to update toggle ticker
         tickerTextUI.anchoredPosition = new Vector2(2000, tickerTextUI.anchoredPosition.y);
 
-        tickerTween = tickerTextUI.DOAnchorPosX(-2500, tickerTextLerpTime).SetEase(Ease.Linear);
+        tickerTextUI.DOAnchorPosX(-2500, tickerTextLerpTime).SetEase(Ease.Linear);
 
         float saveTime = Time.time;
         while (Time.time < saveTime + tickerTextLerpTime)
             yield return null;
 
         //if emote menu is not open
-        if (emoteUICG.alpha != 1f)
+        if(emoteUICG.alpha != 1f)
             StartCoroutine(ToggleTicker(false));
 
         tickerTextPlaying = false;

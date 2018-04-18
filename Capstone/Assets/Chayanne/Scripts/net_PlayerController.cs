@@ -108,7 +108,7 @@ namespace jkuo
 
         private void LocalCameraCheck()
         {
-            if (!isLocalPlayer)
+            if (!GetComponent<net_PlayerController>().isLocalPlayer)
             {
                 playerUI.SetActive(false);
             }

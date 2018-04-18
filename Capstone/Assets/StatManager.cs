@@ -58,10 +58,7 @@ public class StatManager : NetworkBehaviour {
     // Use this for initialization
     void Awake () {
         if (instance == null)
-        {
             instance = this;
-            DontDestroyOnLoad(this);
-        }
 
         statTracker = new Dictionary<Stats, int>();
     }
@@ -148,7 +145,6 @@ public class StatManager : NetworkBehaviour {
         statTracker[stat] += 1;
     }
 
-    #region Ticker Control
     public void SetUIController(UIController uic)
     {
         this.uic.Add(uic);
@@ -179,37 +175,13 @@ public class StatManager : NetworkBehaviour {
             yield return null;
 
         tickerMessage = GetTickerMessage(TickerMessageType.NonPriority, GameManager.instance.playerList[randNum]);
-
-        if (isServer)
-            RpcEnableTickerMessages(tickerMessage, false);
-        else
-            CmdEnableTickerMessages(tickerMessage, false);
-    }
-
-    public void CallTickerMessage(TickerMessageType tmt, bool isPriority)
-    {
-        if (isPriority)
-            StopCoroutine(tickerTimeCoroutine);
-
-        tickerMessage = GetTickerMessage(tmt, GameManager.instance.playerList[randNum]);
-
-        if(isServer)
-            RpcEnableTickerMessages(tickerMessage, isPriority);
-        else
-            CmdEnableTickerMessages(tickerMessage, isPriority);
-    }
-
-    [Command]
-    private void CmdEnableTickerMessages(string message, bool isPriority)
-    {
-        RpcEnableTickerMessages(tickerMessage, isPriority);
+        RpcEnableTickerMessages(tickerMessage);
     }
 
     [ClientRpc]
-    private void RpcEnableTickerMessages(string message, bool isPriority)
+    private void RpcEnableTickerMessages(string message)
     {
         foreach (UIController u in uic)
-            u.ShowTicker(TickerBehaviors.TickerText, message, isPriority);
+            u.ShowTicker(TickerBehaviors.TickerText, message);
     }
-    #endregion
 }
