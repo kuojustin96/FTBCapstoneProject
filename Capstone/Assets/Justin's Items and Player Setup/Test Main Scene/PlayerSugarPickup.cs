@@ -251,7 +251,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		GameObject sugar = sugarInBackpack[0];
 		sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
-		player.DropoffSugarInStash();
+		player.DropoffSugarInStash(); 
 
         uiController.UpdateBackpackScore(player.sugarInBackpack);
         uiController.UpdateStashUI(player.currentPlayerScore);
