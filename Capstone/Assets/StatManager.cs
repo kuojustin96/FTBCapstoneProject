@@ -58,7 +58,10 @@ public class StatManager : NetworkBehaviour {
     // Use this for initialization
     void Awake () {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(this);
+        }
 
         statTracker = new Dictionary<Stats, int>();
     }
@@ -78,6 +81,11 @@ public class StatManager : NetworkBehaviour {
         //PlayerClass ply = new PlayerClass();
         //ply.currentPlayerScore = 10;
         //Debug.Log(GetTickerMessage(TickerMessageType.NonPriority, ply));
+    }
+
+    public void UpdateStat(Stats stat)
+    {
+        statTracker[stat] += 1;
     }
 
     private void ReadAndOrganizeTextFile(TextAsset textAsset, bool isPriority)
@@ -118,6 +126,7 @@ public class StatManager : NetworkBehaviour {
         }
     }
 
+    #region Ticker Control
     public string GetTickerMessage(TickerMessageType tmt, PlayerClass player)
     {
         if (!isServer) return null;
@@ -140,11 +149,6 @@ public class StatManager : NetworkBehaviour {
         return message;
     }
 
-    public void UpdateStat(Stats stat)
-    {
-        statTracker[stat] += 1;
-    }
-
     public void SetUIController(UIController uic)
     {
         this.uic.Add(uic);
@@ -156,7 +160,11 @@ public class StatManager : NetworkBehaviour {
 
         timeUntilTicker = Random.Range(minTickerTime, maxTickerTime);
         randNum = Random.Range(0, GameManager.instance.playerList.Count);
-        RpcResetTickerTimer(timeUntilTicker, randNum);
+
+        if (isServer)
+            RpcEnableTickerMessages(tickerMessage, false);
+        else
+            CmdEnableTickerMessages(tickerMessage, false);
     }
 
     [ClientRpc]
@@ -175,13 +183,38 @@ public class StatManager : NetworkBehaviour {
             yield return null;
 
         tickerMessage = GetTickerMessage(TickerMessageType.NonPriority, GameManager.instance.playerList[randNum]);
-        RpcEnableTickerMessages(tickerMessage);
+
+        if (isServer)
+            RpcEnableTickerMessages(tickerMessage, false);
+        else
+            CmdEnableTickerMessages(tickerMessage, false);
+    }
+
+    public void CallTickerMessage(TickerMessageType tmt, bool isPriority)
+    {
+        if (isPriority)
+            StopCoroutine(tickerTimeCoroutine);
+
+        tickerMessage = GetTickerMessage(tmt, GameManager.instance.playerList[randNum]);
+
+        if (isServer)
+            RpcEnableTickerMessages(tickerMessage, isPriority);
+        else
+            CmdEnableTickerMessages(tickerMessage, isPriority);
+    }
+
+
+    [Command]
+    private void CmdEnableTickerMessages(string message, bool isPriority)
+    {
+        RpcEnableTickerMessages(tickerMessage, isPriority);
     }
 
     [ClientRpc]
-    private void RpcEnableTickerMessages(string message)
+    private void RpcEnableTickerMessages(string message, bool isPriority)
     {
         foreach (UIController u in uic)
-            u.ShowTicker(TickerBehaviors.TickerText, message);
+            u.ShowTicker(TickerBehaviors.TickerText, message, isPriority);
     }
+    #endregion
 }
