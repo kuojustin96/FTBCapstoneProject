@@ -54,11 +54,7 @@ public class NetworkLobbyHook : LobbyHook
 
     private static void SyncName(GameObject lobbyPlayer, GameObject gamePlayer)
     {
-        Debug.Log("Need to finish this!");
-        //LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
-        //net_PlayerScript player = gamePlayer.GetComponent<net_PlayerScript>();
-
-        //player.SetName(lobby.playerName);
+        Debug.Log(lobbyPlayer.GetComponent<LobbyPlayer>().playerName + "Joined the game");
     }
 
 

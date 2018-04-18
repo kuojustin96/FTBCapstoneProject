@@ -30,8 +30,7 @@ namespace Prototype.NetworkLobby
         bool countDownStart = false;
 
         //OnMyName function will be invoked on clients when server change the value of playerName
-        [SyncVar(hook = "OnMyName")]
-        public string playerName = "";
+        public string playerName = "NOTSET";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
 
@@ -50,12 +49,10 @@ namespace Prototype.NetworkLobby
 
         public override void OnClientEnterLobby()
         {
+
+            //client, NOT server!
             base.OnClientEnterLobby();
 
-            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
-
-            LobbyPlayerList._instance.AddPlayer(this);
-            LobbyPlayerList._instance.DisplayDirectServerWarning(isServer && LobbyManager.s_Singleton.matchMaker == null);
 
             if (isLocalPlayer)
             {
@@ -64,11 +61,20 @@ namespace Prototype.NetworkLobby
             else
             {
                 SetupOtherPlayer();
+
             }
 
+            if (!isServer)
+            {
+                Debug.Log(playerName);
+                if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
+
+                LobbyPlayerList._instance.AddPlayer(this);
+                LobbyPlayerList._instance.DisplayDirectServerWarning(isServer && LobbyManager.s_Singleton.matchMaker == null);
+            }
             //setup the player data on UI. The value are SyncVar so the player
             //will be created with the right value currently on server
-            OnMyName(playerName);
+            //OnMyName(playerName);
             OnMyColor(playerColor);
         }
 
@@ -78,8 +84,10 @@ namespace Prototype.NetworkLobby
 
             //if we return from a game, color of text can still be the one for "Ready"
             readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-
-           SetupLocalPlayer();
+            string hostName = LobbyManager.s_Singleton.nameField.text;
+            playerName = hostName;
+            LobbyPlayerList._instance.AddPlayer(this);
+            SetupLocalPlayer();
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -94,6 +102,12 @@ namespace Prototype.NetworkLobby
 
         void SetupOtherPlayer()
         {
+            Debug.Log("Setting up other player");
+
+            Debug.Log(playerName);
+            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
+
+            LobbyPlayerList._instance.AddPlayer(this);
             //GetComponent<RectTransform>().localRotation = Quaternion.identity;
             //nameInput.interactable = false;
             //removePlayerButton.interactable = NetworkServer.active;
@@ -117,15 +131,13 @@ namespace Prototype.NetworkLobby
         {
 
 
-            Debug.Log("Setting up!");
+            Debug.Log("Setting local player!");
             CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
             //CinemachineVirtualCamera transitionCamera = GameObject.FindGameObjectWithTag("TransitionCamera").GetComponent<CinemachineVirtualCamera>();
-            Debug.Log("doing this!");
-            Debug.Assert(playerCamera, "You LITERALLY fucked up");
+            Debug.Assert(playerCamera, "Player Camera not set");
             lobbyCam.enabled = false;
             cameraScript.SwitchToCameraLocal(playerCamera);
-            Debug.Log("did this!");
             //GetComponent<RectTransform>().localRotation = Quaternion.identity;
             //nameInput.interactable = true;
             //remoteIcone.gameObject.SetActive(false);
@@ -142,8 +154,10 @@ namespace Prototype.NetworkLobby
             //readyButton.interactable = true;
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
-            if (playerName == "")
-                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount-1));
+            string pName = LobbyManager.s_Singleton.nameField.text;
+            CmdNameChanged(pName);
+
+            Debug.Log("Local player name is " + pName + ". Value is " + playerName);
 
             ////we switch from simple name display to name input
             //colorButton.interactable = true;
@@ -346,6 +360,7 @@ namespace Prototype.NetworkLobby
         //Cleanup thing when get destroy (which happen when client kick or disconnect)
         public void OnDestroy()
         {
+            //My instance is in this list!~
             LobbyPlayerList._instance.RemovePlayer(this);
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
 

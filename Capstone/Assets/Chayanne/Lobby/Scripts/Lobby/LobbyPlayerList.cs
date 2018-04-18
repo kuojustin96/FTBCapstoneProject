@@ -15,7 +15,9 @@ namespace Prototype.NetworkLobby
         public Transform addButtonRow;
 
         protected VerticalLayoutGroup _layout;
-        protected List<LobbyPlayer> _players = new List<LobbyPlayer>();
+        protected Dictionary<LobbyPlayer,LobbyListName> _players = new Dictionary<LobbyPlayer, LobbyListName>();
+
+        public LobbyBetterPlayerList theList;
 
         public void OnEnable()
         {
@@ -40,13 +42,19 @@ namespace Prototype.NetworkLobby
 
         public void AddPlayer(LobbyPlayer player)
         {
-            if (_players.Contains(player))
+
+            Debug.Log("Adding to player list: " + player.playerName); 
+            string theName = player.playerName;
+
+            if (_players.ContainsKey(player))
                 return;
 
-            _players.Add(player);
+            _players.Add(player,theList.CreateName(theName));
 
-            player.transform.SetParent(playerListContentTransform, false);
-            addButtonRow.transform.SetAsLastSibling();
+
+
+            //player.transform.SetParent(playerListContentTransform, false);
+            //addButtonRow.transform.SetAsLastSibling();
 
             PlayerListModified();
         }
@@ -60,9 +68,9 @@ namespace Prototype.NetworkLobby
         public void PlayerListModified()
         {
             int i = 0;
-            foreach (LobbyPlayer p in _players)
+            foreach (KeyValuePair<LobbyPlayer, LobbyListName> p in _players)
             {
-                p.OnPlayerListChanged(i);
+                p.Key.OnPlayerListChanged(i);
                 ++i;
             }
         }

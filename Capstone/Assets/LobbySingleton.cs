@@ -80,7 +80,7 @@ public class LobbySingleton : MonoBehaviour
 
     public GameObject getReadyUpText()
     {
-        Debug.Log("haha");
+        //Debug.Log("haha");
         return readyUpText;
     }
 
