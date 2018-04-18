@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-
+using Prototype.NetworkLobby;
 
 public class Lobby_Player_Setup : NetworkBehaviour  {
 
-    public Transform spawnPoint;
-
-    public Transform playerListTransform;
 
     public float fadeTime = 1.0f;
 
@@ -23,20 +20,19 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
     }
 
-    public void SetupPosition()
-    {
-    }
-
     void Update()
     {
 
         if (!detatched)
         {
             detatched = true;
-            transform.parent = null;
-            transform.rotation = Quaternion.Euler(new Vector3(0, spawnPoint.rotation.eulerAngles.y, 0));
+            //transform.parent = null;
+
+            //Transform spawn = Prototype.NetworkLobby.LobbyManager.s_Singleton.lobbySpawn.transform;
+
+            //transform.rotation = Quaternion.Euler(new Vector3(0, spawn.eulerAngles.y, 0));
             transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            transform.position = spawnPoint.position;
+            //transform.position = spawn.position;
         }
 
         //Detatches from the lobby prefab.
@@ -52,7 +48,7 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
             GetComponent<Prototype.NetworkLobby.LobbyPlayer>().OnReadyClicked();
             //The worst hack i've ever done.
-            transform.parent = playerListTransform;
+            transform.parent = LobbyManager.s_Singleton.playerListTransform;
 
         }
 

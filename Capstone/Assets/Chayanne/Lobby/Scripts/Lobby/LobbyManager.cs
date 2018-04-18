@@ -9,6 +9,9 @@ using System.Collections;
 
 namespace Prototype.NetworkLobby
 {
+
+    //This is our singleton. Please use it.
+    
     public class LobbyManager : NetworkLobbyManager
     {
         static short MsgKicked = MsgType.Highest + 1;
@@ -61,11 +64,9 @@ namespace Prototype.NetworkLobby
 
         bool inGame = false;
 
-        [SerializeField]
-        Transform spawnPointLobby;
+        public Text nameField;
 
-        [SerializeField]
-        Transform playerListTransform;
+        public Transform playerListTransform;
 
         void OnLevelWasLoaded()
         {
@@ -333,7 +334,6 @@ namespace Prototype.NetworkLobby
                     p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
                 }
             }
-            playerObj.transform.parent = null;
 
             return playerObj;
         }
@@ -341,13 +341,13 @@ namespace Prototype.NetworkLobby
         private GameObject CreateAndSetupPlayer()
         {
 
-            //Create our 3D Player here
-            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject) as GameObject;
+            Transform spawn = GetStartPosition();
 
-            Lobby_Player_Setup setup = playerObj.GetComponent<Lobby_Player_Setup>();
-            setup.playerListTransform = playerListTransform;
-            setup.spawnPoint = spawnPointLobby;
-            setup.SetupPosition();
+            //Create our 3D Player here
+            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject,spawn.position,spawn.rotation) as GameObject;
+
+            //Lobby_Player_Setup setup = playerObj.GetComponent<Lobby_Player_Setup>();
+            //setup.SetupPosition();
 
 
             Debug.Log("Poof!");

@@ -13,4 +13,9 @@ public class playerClassAdd : MonoBehaviour {
 			GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject, gameObject.GetComponent<net_TeamScript> ().teamColor);
 		}
 	}
+
+    public void SetName(string name)
+    {
+
+    }
 }
