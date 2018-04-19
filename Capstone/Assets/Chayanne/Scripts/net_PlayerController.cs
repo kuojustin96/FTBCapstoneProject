@@ -69,6 +69,8 @@ namespace jkuo
 
         CinemachineVirtualCameraBase vCam;
         CinemachineFreeLook freeLook;
+
+		public PlayerSugarPickup sugarPickup;
         // Use this for initialization
         void Start()
         {
@@ -373,6 +375,7 @@ namespace jkuo
 				player.isStunned = true;
 				Invoke ("StunWait", duration);
 				stun.SetActive (true);
+				sugarPickup.StunDropSugar ();
 			} 
 			else {
 				if (player.currentItem.name  == "buttonHolder") {
@@ -386,6 +389,7 @@ namespace jkuo
 					player.isStunned = true;
 					Invoke ("StunWait", duration);
 					stun.SetActive (true);
+					sugarPickup.StunDropSugar ();
 				}
 				
 			}

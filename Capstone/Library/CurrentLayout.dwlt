@@ -19,8 +19,18 @@ MonoBehaviour:
     height: 1007
   m_ShowMode: 4
   m_Title: 
+<<<<<<< HEAD
   m_RootView: {fileID: 4}
   m_MinSize: {x: 950, y: 521}
+=======
+<<<<<<< HEAD
+  m_RootView: {fileID: 4}
+  m_MinSize: {x: 950, y: 542}
+=======
+  m_RootView: {fileID: 6}
+  m_MinSize: {x: 950, y: 300}
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,8 +55,18 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 175
 --- !u!114 &3
+=======
+<<<<<<< HEAD
+  controlID: 10
+--- !u!114 &3
+=======
+  controlID: 158
+--- !u!114 &5
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -90,9 +110,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1904
     height: 1007
   m_MinSize: {x: 950, y: 521}
+=======
+<<<<<<< HEAD
+    width: 1427
+    height: 707
+  m_MinSize: {x: 950, y: 542}
+=======
+    width: 1920
+    height: 1007
+  m_MinSize: {x: 950, y: 300}
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &5
 MonoBehaviour:
@@ -134,13 +166,32 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
     width: 1904
+=======
+<<<<<<< HEAD
+    width: 1427
+    height: 657
+  m_MinSize: {x: 713, y: 492}
+  m_MaxSize: {x: 18008, y: 14042}
+  vertical: 0
+  controlID: 147
+--- !u!114 &7
+=======
+    width: 1920
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
     height: 957
   m_MinSize: {x: 713, y: 471}
   m_MaxSize: {x: 18008, y: 14021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 174
 --- !u!114 &7
+=======
+  controlID: 15022
+--- !u!114 &9
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -210,8 +261,18 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 471}
   m_MaxSize: {x: 10004, y: 14021}
   vertical: 1
+<<<<<<< HEAD
   controlID: 22
 --- !u!114 &10
+=======
+<<<<<<< HEAD
+  controlID: 94
+--- !u!114 &10
+=======
+  controlID: 77
+--- !u!114 &12
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -227,8 +288,26 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1391
     y: 0
+<<<<<<< HEAD
     width: 513
     height: 957
+=======
+<<<<<<< HEAD
+    width: 277
+    height: 657
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 16}
+  m_Panes:
+  - {fileID: 16}
+  - {fileID: 15}
+  m_Selected: 0
+  m_LastSelected: 1
+--- !u!114 &11
+=======
+    width: 517
+    height: 622
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
@@ -236,8 +315,14 @@ MonoBehaviour:
   - {fileID: 16}
   - {fileID: 13}
   m_Selected: 0
+<<<<<<< HEAD
   m_LastSelected: 1
 --- !u!114 &11
+=======
+  m_LastSelected: 0
+--- !u!114 &13
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -517,7 +602,11 @@ MonoBehaviour:
     width: 338
     height: 399
   m_SearchFilter:
+<<<<<<< HEAD
+    m_NameFilter: uicon
+=======
     m_NameFilter: 
+>>>>>>> origin/master
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -528,19 +617,49 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
+<<<<<<< HEAD
     - Assets
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
   - Assets
+=======
+<<<<<<< HEAD
+    - Assets
+  m_ViewMode: 1
+  m_StartGridSize: 16
+  m_LastFolders:
+  - Assets
+=======
+    - Assets/Chayanne/Lobby
+  m_ViewMode: 1
+  m_StartGridSize: 16
+  m_LastFolders:
+  - Assets/Chayanne/Lobby
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\ckhan3\Documents\GitHub\FTBCapstoneProject\Capstone
   m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 486}
     m_SelectedIDs: 362b0000
     m_LastClickedID: 11062
     m_ExpandedIDs: 00000000362b0000522e00006c31000094330000d234000000ca9a3bffffff7f
+=======
+<<<<<<< HEAD
+    scrollPos: {x: 0, y: 111}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 00000000142b00002a2e0000842f0000902f0000982f000072300000163100003e31000086310000463300006233000096340000d0340000d8340000fe3400009e3a0000e274000000ca9a3bffffff7f
+=======
+    scrollPos: {x: 0, y: 300}
+    m_SelectedIDs: 68810000
+    m_LastClickedID: 33128
+    m_ExpandedIDs: 00000000667c0000787c0000b480000068810000268200005682000000ca9a3bffffff7f
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -568,7 +687,15 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000362b00006c31000094330000d2340000
+=======
+<<<<<<< HEAD
+    m_ExpandedIDs: 00000000142b00002a2e0000842f0000902f0000982f000072300000163100003e31000086310000463300006233000096340000d0340000d8340000fe3400009e3a0000e2740000
+=======
+    m_ExpandedIDs: 00000000667c0000b4800000688100002682000056820000
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -801,9 +928,21 @@ MonoBehaviour:
     height: 516
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 04b40200
     m_LastClickedID: 177156
     m_ExpandedIDs: dca5f7ff0ca7f7ff9ed8f7ffa6d8f7ff78fdf7ffd6fdf7ffdecaf9ffc8cbf9ff5afdf9ff62fdf9ff3422faff9222faff065dfdfff45dfdff868ffdff8e8ffdff62b4fdffc0b4fdff30f2fdff1af3fdffac24feffb424feff8849feffe649feffb6d6feff90d7feff2209ffff2a09fffffe2dffff5c2effff16fcfffff4ffffff000000000e4000009e420000ca43000060f50000bef50000def50000e6f60000eef6000044f80000b8f800000ef9000082f9000018fa0000e0800100fc8001006e82010086820100ec82010034830100fc8301005285010060850100c6850100d08501001c8601009086010026870100744e0200fc4f0200ce5102002e5302001eb1020078b40200d8b50200
+=======
+<<<<<<< HEAD
+    m_SelectedIDs: d8090000
+    m_LastClickedID: 0
+    m_ExpandedIDs: caf9ffff0000000002460000
+=======
+    m_SelectedIDs: 3a93edff
+    m_LastClickedID: -1207494
+    m_ExpandedIDs: 469fedff18a0edffb8d1edffc0d1edff90f6edfffcf6edffe219eeffb21aeeff524ceeff5a4ceeff2a71eeff9671eeff7aa1f3ff56d1f3ff64d6f3ffcc37f5ff9038f5ff306af5ff386af5ff0a8ff5ff768ff5ffacaef7ffc6aef7ff08bdf8ff22bdf8ff5e44fbff2245fbffc476fbffcc76fbff9e9bfbff0a9cfbff0632fcffca32fcff6c64fcff7464fcff4689fcffb289fcff5cebfcff76ebfcff2272fdff3c72fdff48ccfeffdc0ffffff4ffffff00000000988600003c870000ec87000042880000d0880000a8890000b4890000348a00004e8a0000a08a0000d6d2000000fa0000cefb00000cfc0000eefd0000fcfd00004cff000016a00100f6a1010034a2010016a4010024a4010074a5010056870200708a0200f88b0200a4b70200beba020046bc0200
+>>>>>>> origin/master
+>>>>>>> dca993163077b8424d41980794b6eb120ed96a26
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: PlayerList
@@ -822,7 +961,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 11}
     m_SearchString: 
   m_ExpandedScenes:
-  - NetworkLobby
+  - 2.28.18 JacobBuild
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting

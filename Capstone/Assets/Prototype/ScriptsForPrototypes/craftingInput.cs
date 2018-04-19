@@ -26,16 +26,7 @@ public class craftingInput : NetworkBehaviour {
 	void Update () {
 		if (!isLocalPlayer)
 			return;
-		//if (player.crafttingMenuActive)
-		//	FullCraftingUI.SetActive (true);
 
-		//if (!player.crafttingMenuActive)
-		//	FullCraftingUI.SetActive (false);
-
-		//if (Input.GetKeyDown (KeyCode.F) && player.crafttingMenuActive) {
-		//	FToCraft.SetActive (false);
-		//	CraftingUI.SetActive (true);
-		//}
 	}
 	public void craftAttack(){
 		if (!isLocalPlayer)
@@ -65,6 +56,7 @@ public class craftingInput : NetworkBehaviour {
 		RpcCraftAttack (randomRange);
 		attackItems [randomRange].SetActive (true);
 		player.currentItem = attackItems [randomRange];
+		player.itemCharges = attackCharges [randomRange];
 		player.currentItemString = player.currentItem.ToString();
 
 	}
@@ -76,6 +68,7 @@ public class craftingInput : NetworkBehaviour {
 		player.currentItem = null;
 		attackItems [randomRange].SetActive (true);
 		player.currentItem = attackItems [randomRange];
+		player.itemCharges = attackCharges [randomRange];
 		player.currentItemString = player.currentItem.ToString();
 		player.currentPlayerScore -= 1;
 		GetComponent<UIController> ().UpdateStashUI (player.currentPlayerScore);
