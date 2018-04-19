@@ -40,6 +40,11 @@ namespace Prototype.NetworkLobby
                 _layout.childAlignment = Time.frameCount%2 == 0 ? TextAnchor.UpperCenter : TextAnchor.UpperLeft;
         }
 
+        public void AddName(string name)
+        {
+            theList.RpcCreateName(name + "Test");
+        }
+
         public void AddPlayer(LobbyPlayer player)
         {
 
@@ -47,14 +52,18 @@ namespace Prototype.NetworkLobby
             string theName = player.playerName;
 
             if (_players.ContainsKey(player))
+            {
+                Debug.Log("Lobby player is already in the list!");
                 return;
+            }
 
-            _players.Add(player,theList.CreateName(theName));
+            //_players.Add(player,theList.RpcCreateName(theName));
 
 
 
             //player.transform.SetParent(playerListContentTransform, false);
             //addButtonRow.transform.SetAsLastSibling();
+
 
             PlayerListModified();
         }

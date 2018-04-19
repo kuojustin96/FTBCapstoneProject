@@ -5,7 +5,7 @@ using Prototype.NetworkLobby;
 using UnityEngine.Networking;
 public class FindBullshit : MonoBehaviour {
 
-    public NetworkStartPosition[] memes;
+    public LobbyPlayer[] memes;
 
     // Use this for initialization
     void Start () {
@@ -17,6 +17,6 @@ public class FindBullshit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        memes = GameObject.FindObjectsOfType<NetworkStartPosition>();
+        memes = GameObject.FindObjectsOfType<LobbyPlayer>();
     }
 }

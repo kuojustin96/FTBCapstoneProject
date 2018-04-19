@@ -30,6 +30,7 @@ namespace Prototype.NetworkLobby
         bool countDownStart = false;
 
         //OnMyName function will be invoked on clients when server change the value of playerName
+        [SyncVar(hook = "OnMyName")]
         public string playerName = "NOTSET";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
@@ -47,47 +48,68 @@ namespace Prototype.NetworkLobby
 
         public net_PlayerCameraScript cameraScript;
 
+        public override void OnStartClient()
+        {
+            Debug.Log("=========OnStartClient=========");
+            base.OnStartClient();
+            Debug.Log("=========OnClientEnterLobby=========");
+
+        }
+
         public override void OnClientEnterLobby()
         {
-
+            Debug.Log("=========OnClientEnterLobby=========");
+            Debug.Log("Local:" + isLocalPlayer);
+            Debug.Log("Sever:" + isServer);
+            Debug.Log("=========OnClientEnterLobby=========");
             //client, NOT server!
             base.OnClientEnterLobby();
 
-
-            if (isLocalPlayer)
+            if(isLocalPlayer && !isServer)
             {
-                SetupLocalPlayer();
+                OnMyName(LobbyManager.s_Singleton.GetLocalPlayerName());
+            }
+
+            //How will we get other players' names?
+            
+            if (isServer)
+            {
+                return;
             }
             else
             {
-                SetupOtherPlayer();
 
-            }
+                if (isLocalPlayer)
+                {
+                    SetupLocalPlayer();
+                }
+                else
+                {
+                    SetupOtherPlayer();
+                }
 
-            if (!isServer)
-            {
-                Debug.Log(playerName);
-                if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
-
-                LobbyPlayerList._instance.AddPlayer(this);
-                LobbyPlayerList._instance.DisplayDirectServerWarning(isServer && LobbyManager.s_Singleton.matchMaker == null);
             }
             //setup the player data on UI. The value are SyncVar so the player
             //will be created with the right value currently on server
-            //OnMyName(playerName);
-            OnMyColor(playerColor);
+           //AddLobbyPlayer();
+
+
+        }
+
+        private void AddLobbyPlayer()
+        {
+            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
+            LobbyPlayerList._instance.AddPlayer(this);
         }
 
         public override void OnStartAuthority()
         {
+            Debug.Log("OnStartAuthority");
             base.OnStartAuthority();
 
             //if we return from a game, color of text can still be the one for "Ready"
-            readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-            string hostName = LobbyManager.s_Singleton.nameField.text;
-            playerName = hostName;
-            LobbyPlayerList._instance.AddPlayer(this);
             SetupLocalPlayer();
+            //AddLobbyPlayer();
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -102,21 +124,6 @@ namespace Prototype.NetworkLobby
 
         void SetupOtherPlayer()
         {
-            Debug.Log("Setting up other player");
-
-            Debug.Log(playerName);
-            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
-
-            LobbyPlayerList._instance.AddPlayer(this);
-            //GetComponent<RectTransform>().localRotation = Quaternion.identity;
-            //nameInput.interactable = false;
-            //removePlayerButton.interactable = NetworkServer.active;
-
-            //ChangeReadyButtonColor(NotReadyColor);
-
-            //readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
-            //readyButton.interactable = false;
-
             OnClientReady(false);
         }
 
@@ -134,43 +141,15 @@ namespace Prototype.NetworkLobby
             Debug.Log("Setting local player!");
             CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
-            //CinemachineVirtualCamera transitionCamera = GameObject.FindGameObjectWithTag("TransitionCamera").GetComponent<CinemachineVirtualCamera>();
             Debug.Assert(playerCamera, "Player Camera not set");
             lobbyCam.enabled = false;
             cameraScript.SwitchToCameraLocal(playerCamera);
-            //GetComponent<RectTransform>().localRotation = Quaternion.identity;
-            //nameInput.interactable = true;
-            //remoteIcone.gameObject.SetActive(false);
-            //localIcone.gameObject.SetActive(true);
-
-            //CheckRemoveButton();
 
             if (playerColor == Color.white)
                 CmdColorChange();
 
-            //ChangeReadyButtonColor(JoinColor);
+            CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
 
-            //readyButton.transform.GetChild(0).GetComponent<Text>().text = "JOIN";
-            //readyButton.interactable = true;
-
-            //have to use child count of player prefab already setup as "this.slot" is not set yet
-            string pName = LobbyManager.s_Singleton.nameField.text;
-            CmdNameChanged(pName);
-
-            Debug.Log("Local player name is " + pName + ". Value is " + playerName);
-
-            ////we switch from simple name display to name input
-            //colorButton.interactable = true;
-            //nameInput.interactable = true;
-
-            //nameInput.onEndEdit.RemoveAllListeners();
-            //nameInput.onEndEdit.AddListener(OnNameChanged);
-
-            //colorButton.onClick.RemoveAllListeners();
-            //colorButton.onClick.AddListener(OnColorClicked);
-
-            //readyButton.onClick.RemoveAllListeners();
-            //readyButton.onClick.AddListener(OnReadyClicked);
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
@@ -232,8 +211,8 @@ namespace Prototype.NetworkLobby
 
         public void OnMyName(string newName)
         {
+            Debug.Log("OnMyName");
             playerName = newName;
-            nameInput.text = playerName;
         }
 
         public void OnMyColor(Color newColor)

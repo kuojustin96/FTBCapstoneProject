@@ -64,7 +64,8 @@ namespace Prototype.NetworkLobby
 
         bool inGame = false;
 
-        public Text nameField;
+        [SerializeField]
+        Text nameField;
 
         public Transform playerListTransform;
 
@@ -74,6 +75,11 @@ namespace Prototype.NetworkLobby
             {
                 boxTopMesh.enabled = false;
             }
+        }
+
+        public string GetLocalPlayerName()
+        {
+            return nameField.text;
         }
 
 
@@ -324,6 +330,8 @@ namespace Prototype.NetworkLobby
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
 
+
+
             for (int i = 0; i < lobbySlots.Length; ++i)
             {
                 LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
@@ -478,14 +486,24 @@ namespace Prototype.NetworkLobby
 
             conn.RegisterHandler(MsgKicked, KickedMessageHandler);
 
+
+            Debug.Log("Client Connected!");
+            
+            
+
             if (!NetworkServer.active)
             {//only to do on pure client (not self hosting client)
+                Debug.Log("Pure client");
                 ChangeTo(lobbyPanel);
                 backDelegate = StopClientClbk;
                 SetServerInfo("Client", networkAddress);
             }
         }
 
+        void AddPlayerToList(string name)
+        {
+            LobbyPlayerList._instance.AddName(name);
+        }
 
         public override void OnClientDisconnect(NetworkConnection conn)
         {
@@ -502,8 +520,27 @@ namespace Prototype.NetworkLobby
         public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
         {
             base.OnServerAddPlayer(conn, playerControllerId);
+            //for(int i = 0; i < s_Singleton.lobbySlots.Length; i++)
+            //{
+            //    if (s_Singleton.lobbySlots[i])
+            //    {
+            //        NetworkLobbyPlayer obj = s_Singleton.lobbySlots[i];
+            //        Debug.Log("Player: " + obj.gameObject.name);
 
-            Debug.Log(conn.playerControllers[0].gameObject.name);
+            //        GameObject go = obj.gameObject;
+            //        LobbyPlayer lp = go.GetComponent<LobbyPlayer>();
+
+            //        Debug.Assert(obj.GetComponent<LobbyPlayer>());
+            //    }
+            //}
+            //Debug.Log(LobbyPlayerList._instance);
+            //Debug.Log(LobbyPlayerList._instance.theList);
+            LobbyBetterPlayerList list = LobbyPlayerList._instance.theList;
+            //Debug.Assert(list);
+            list.RpcRegenerateList(); 
+
+
+            Debug.Log("OnServerAddPlayer: " + conn.playerControllers[0].gameObject.name);
         }
 
     }

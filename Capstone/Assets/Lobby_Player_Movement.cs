@@ -135,7 +135,6 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
         if (velocity != Vector3.zero)
         {
-            Debug.Log("moving!");
             rb.velocity = velocity;
         }
     }

@@ -62,11 +62,12 @@ namespace Prototype.NetworkLobby
 
         public void OnClickJoin()
         {
-            Debug.Log("IOIOIOIOIO");
+            Debug.Log("Joining!");
             lobbyManager.ChangeTo(lobbyPanel);
 
             lobbyManager.networkAddress = ipInput.text;
             lobbyManager.StartClient();
+            
 
             lobbyManager.backDelegate = lobbyManager.StopClientClbk;
             lobbyManager.DisplayIsConnecting();
