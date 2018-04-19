@@ -57,6 +57,8 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
             GetComponent<Prototype.NetworkLobby.LobbyPlayer>().OnColorClicked();
         }
 
+
+
     }
 
 

@@ -86,7 +86,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer || offlineTesting)
+        if (isLocalPlayer)// || offlineTesting)
         {
             //UpdateCursorLock();
 
@@ -105,6 +105,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
                 ToggleCameraMode();
             }
 
+            RefreshList();
 
             //Jump
             Jumping();
@@ -180,6 +181,22 @@ public class Lobby_Player_Movement : NetworkBehaviour
         {
             _jumpForce = transform.up * (jumpForce * 1000);
             rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+        }
+    }
+
+    public void RefreshList()
+    {
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log(isLocalPlayer);
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log(isLocalPlayer);
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
         }
     }
 }

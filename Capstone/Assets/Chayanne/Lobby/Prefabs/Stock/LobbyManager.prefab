@@ -3187,7 +3187,8 @@ MonoBehaviour:
   boxTopMesh: {fileID: 0}
   lobbySpawn: {fileID: 0}
   lobbyAnims: {fileID: 0}
-  spawnPointLobby: {fileID: 0}
+  nameField: {fileID: 0}
+  playerListTransform: {fileID: 0}
 --- !u!114 &11476426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3893,6 +3894,7 @@ MonoBehaviour:
   playerListContentTransform: {fileID: 22401550}
   warningDirectPlayServer: {fileID: 199766}
   addButtonRow: {fileID: 22432700}
+  theList: {fileID: 0}
 --- !u!222 &22203258
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -5594,7 +5596,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -5610,7 +5611,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

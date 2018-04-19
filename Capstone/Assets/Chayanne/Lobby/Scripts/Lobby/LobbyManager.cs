@@ -330,7 +330,7 @@ namespace Prototype.NetworkLobby
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
 
-
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
 
             for (int i = 0; i < lobbySlots.Length; ++i)
             {
@@ -387,16 +387,8 @@ namespace Prototype.NetworkLobby
 
         public override void OnLobbyServerDisconnect(NetworkConnection conn)
         {
-            for (int i = 0; i < lobbySlots.Length; ++i)
-            {
-                LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
 
-                if (p != null)
-                {
-                    p.RpcUpdateRemoveButton();
-                    p.ToggleJoinButton(numPlayers >= minPlayers);
-                }
-            }
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
 
         }
 
@@ -509,6 +501,8 @@ namespace Prototype.NetworkLobby
         {
             base.OnClientDisconnect(conn);
             ChangeTo(mainMenuPanel);
+
+
         }
 
         public override void OnClientError(NetworkConnection conn, int errorCode)
@@ -535,9 +529,9 @@ namespace Prototype.NetworkLobby
             //}
             //Debug.Log(LobbyPlayerList._instance);
             //Debug.Log(LobbyPlayerList._instance.theList);
-            LobbyBetterPlayerList list = LobbyPlayerList._instance.theList;
+            //LobbyBetterPlayerList list = LobbyPlayerList._instance.theList;
             //Debug.Assert(list);
-            list.RpcRegenerateList(); 
+            //list.RpcRegenerateList(); 
 
 
             Debug.Log("OnServerAddPlayer: " + conn.playerControllers[0].gameObject.name);

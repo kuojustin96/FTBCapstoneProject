@@ -30,7 +30,7 @@ namespace Prototype.NetworkLobby
         bool countDownStart = false;
 
         //OnMyName function will be invoked on clients when server change the value of playerName
-        [SyncVar(hook = "OnMyName")]
+        [SyncVar]
         public string playerName = "NOTSET";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
@@ -56,6 +56,7 @@ namespace Prototype.NetworkLobby
 
         }
 
+
         public override void OnClientEnterLobby()
         {
             Debug.Log("=========OnClientEnterLobby=========");
@@ -64,16 +65,17 @@ namespace Prototype.NetworkLobby
             Debug.Log("=========OnClientEnterLobby=========");
             //client, NOT server!
             base.OnClientEnterLobby();
-
+                    
             if(isLocalPlayer && !isServer)
             {
-                OnMyName(LobbyManager.s_Singleton.GetLocalPlayerName());
+                CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
             }
 
             //How will we get other players' names?
             
             if (isServer)
             {
+                Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
                 return;
             }
             else
@@ -208,7 +210,7 @@ namespace Prototype.NetworkLobby
         }
 
         ///===== callback from sync var
-
+        
         public void OnMyName(string newName)
         {
             Debug.Log("OnMyName");
