@@ -75,7 +75,9 @@ namespace Prototype.NetworkLobby
             
             if (isServer)
             {
-                Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
+
+                //Debug.Log("Regening from cliententer!");
+                //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
                 return;
             }
             else

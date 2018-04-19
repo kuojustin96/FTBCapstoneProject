@@ -69,6 +69,9 @@ namespace Prototype.NetworkLobby
 
         public Transform playerListTransform;
 
+        public LobbyPlayer host;
+
+        bool madeHost = false;
         void OnLevelWasLoaded()
         {
             if (inGame)
@@ -278,6 +281,7 @@ namespace Prototype.NetworkLobby
             base.OnStartHost();
             TransitionToLobbyMenu();
 
+            
 
             ChangeTo(lobbyPanel);
             backDelegate = StopHostClbk;
@@ -329,7 +333,15 @@ namespace Prototype.NetworkLobby
             LobbyPlayer newPlayer = playerObj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
+            if(!madeHost)
+            {
+                host = newPlayer;
+                host.gameObject.AddComponent<PlayerListUpdater>();
+                madeHost = true;
+            }
 
+
+            Debug.Log("Regening!");
             Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
 
             for (int i = 0; i < lobbySlots.Length; ++i)
@@ -532,8 +544,6 @@ namespace Prototype.NetworkLobby
             //LobbyBetterPlayerList list = LobbyPlayerList._instance.theList;
             //Debug.Assert(list);
             //list.RpcRegenerateList(); 
-
-
             Debug.Log("OnServerAddPlayer: " + conn.playerControllers[0].gameObject.name);
         }
 
