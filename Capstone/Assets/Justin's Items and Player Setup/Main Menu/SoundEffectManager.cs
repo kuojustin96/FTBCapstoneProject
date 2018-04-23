@@ -1,22 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundEffectManager : MonoBehaviour {
 
     public static SoundEffectManager instance = null;
+    public AudioMixer audMixer;
 
-    //[HideInInspector]
-    public Object[] SFXList;
+    [System.Serializable]
+    public class SoundEffectCategories
+    {
+        public string name;
+        public List<AudioClip> SFXList = new List<AudioClip>();
 
-    private Dictionary<string, AudioClip> SFXDict = new Dictionary<string, AudioClip>();
+        public AudioClip GetRandomClip()
+        {
+            int rand = Random.Range(0, SFXList.Count);
+            return SFXList[rand];
+        }
+    }
+
+    public SoundEffectCategories[] sfxCats;
+
+    private Dictionary<string, AudioSource> SFXPlaying = new Dictionary<string, AudioSource>();
 
 	// Use this for initialization
 	void Awake () {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,38 +40,93 @@ public class SoundEffectManager : MonoBehaviour {
         LoadSoundEffects();
     }
 
-    public void LoadSoundEffects()
+    private void LoadSoundEffects()
     {
-        SFXList = Resources.LoadAll("Sound Effects", typeof(AudioClip));
-
-        foreach (Object o in SFXList)
-            SFXDict.Add(o.name, (AudioClip)o);
-
-        //Debug Code
-        //foreach (string s in SFXDict.Keys)
-        //    Debug.Log(s);
-
-        //foreach (AudioClip ac in SFXDict.Values)
-        //    Debug.Log(ac.name);
+        Object[] temp;
+        foreach (SoundEffectCategories seo in sfxCats)
+        {
+            temp = Resources.LoadAll("Sound Effects/" + seo.name, typeof(AudioClip));
+            foreach (AudioClip ac in temp)
+                seo.SFXList.Add(ac);
+        }
     }
 
-    public void PlaySFX(string sfxName, float volume = 1f)
+    public void PlaySFX(string sfxTypeName, float volume = 1f, bool canHaveMultiple = false)
     {
-        AudioSource auds = gameObject.AddComponent<AudioSource>();
-        auds.clip = SFXDict[sfxName];
-        auds.volume = volume;
-        auds.Play();
+        if (!canHaveMultiple)
+        {
+            if (SFXPlaying.ContainsKey(sfxTypeName))
+                return;
+        }
 
-        StartCoroutine(c_StopSFX(auds));
+        AudioSource auds = null;
+
+        foreach(SoundEffectCategories seo in sfxCats)
+        {
+            if(sfxTypeName == seo.name)
+            {
+                auds = gameObject.AddComponent<AudioSource>();
+                auds.clip = seo.GetRandomClip();
+                break;
+            }
+        }
+
+        if (auds)
+        {
+            DefaultAudioSettings(auds);
+
+            auds.volume = volume;
+            auds.Play();
+
+            if (!canHaveMultiple)
+            {
+                if (!SFXPlaying.ContainsKey(sfxTypeName))
+                    SFXPlaying.Add(sfxTypeName, auds);
+            }
+
+            StartCoroutine(c_StopSFX(auds, sfxTypeName));
+        }
     }
 
-    private IEnumerator c_StopSFX(AudioSource auds)
+    private void DefaultAudioSettings(AudioSource aud)
+    {
+        aud.loop = false;
+        aud.playOnAwake = false;
+        aud.outputAudioMixerGroup = audMixer.FindMatchingGroups("Sound Effects")[0];
+    }
+
+    //Only works if canHaveMultiple was set to false
+    public void StopSFX(string sfxTypeName)
+    {
+        if (SFXPlaying.ContainsKey(sfxTypeName))
+        {
+            AudioSource temp = SFXPlaying[sfxTypeName];
+            temp.Stop();
+            SFXPlaying.Remove(sfxTypeName);
+            Destroy(temp);
+        }
+    }
+
+    private IEnumerator c_StopSFX(AudioSource auds, string sfxTypeName)
     {
         float startTime = Time.time;
-        while (Time.time < startTime + auds.clip.length)
-            yield return null;
+        float clipLength = auds.clip.length;
+        while (Time.time < startTime + clipLength)
+        {
+            if (auds == null)
+                break;
 
-        auds.Stop();
-        Destroy(auds);
+            yield return null;
+        }
+
+        if (auds)
+        {
+            auds.Stop();
+
+            if (SFXPlaying.ContainsKey(sfxTypeName))
+                SFXPlaying.Remove(sfxTypeName);
+
+            Destroy(auds);
+        }
     }
 }

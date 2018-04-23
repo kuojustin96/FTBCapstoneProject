@@ -18,7 +18,7 @@ public class MusicTriggerBox : MonoBehaviour {
     //OnTriggerEnter has a higher priority call than OnTriggerExit
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "NetPlayer")
+        if (other.tag == "NetPlayer" || other.tag == "LobbyPlayer")
         {
             if (mm.currentMusicTrigger == null)
             {

@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8782f703672c4c459bc99a3bd05a023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audMixer: {fileID: 0}
+  audMixer: {fileID: 24100000, guid: 0c8b3983c24b1d842a52e1243d0ef4c8, type: 2}
   currentMusicTrigger: {fileID: 0}
   defaultFadeTime: 1
   defaultTrackName: AllStar
@@ -376,6 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663447097}
   - component: {fileID: 1663447096}
+  - component: {fileID: 1663447098}
   m_Layer: 0
   m_Name: SFX Manager
   m_TagString: Untagged
@@ -394,7 +395,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236a12406136ff24ca3e8983973d9e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXList: []
+  audMixer: {fileID: 0}
+  sfxCats:
+  - name: (Footsteps) Carpet
+    SFXList: []
+  - name: (Footsteps) Metal
+    SFXList: []
+  - name: (Footsteps) Wood
+    SFXList: []
+  - name: Crafting
+    SFXList: []
+  - name: Fireball Interactions
+    SFXList: []
+  - name: Gliding
+    SFXList: []
+  - name: Sugar Pickup
+    SFXList: []
+  - name: Sword Interactions
+    SFXList: []
 --- !u!4 &1663447097
 Transform:
   m_ObjectHideFlags: 0
@@ -408,3 +426,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1663447098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1663447095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db530b47d4b12b488488704e2388fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0

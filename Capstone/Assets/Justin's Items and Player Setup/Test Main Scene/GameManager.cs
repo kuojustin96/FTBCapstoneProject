@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using Prototype.NetworkLobby;
 using ckp;
 
-public class GameManager : NetworkBehaviour {
+public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
@@ -43,24 +44,47 @@ public class GameManager : NetworkBehaviour {
         if(instance == null)
         {
             instance = this;
+            //DontDestroyOnLoad(this);
         }
 
-        foreach(DropoffPointsClass d in DropoffPoints)
-        {
-            d.dropoffGO.SetActive(false);
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
 		curPlayers = 0;
+        foreach (DropoffPointsClass d in DropoffPoints)
+            d.dropoffGO.SetActive(false);
     }
 
-	// Use this for initialization
-	void Start () {
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+        //{
+        //    GameObject[] temp = GameObject.FindGameObjectsWithTag("Dropoff Point");
+        //    GameObject red = GameObject.Find("Red");
+
+        //    Debug.Log("RED" + red);
+ 
+        //    Debug.Log("YOOOOOOOOOOOO " + temp.Length);
+
+        //    for (int x = 0; x < 4; x++)
+        //    {
+        //        DropoffPointsClass dpc = new DropoffPointsClass();
+        //        dpc.name = temp[x].name;
+        //        dpc.dropoffGO = temp[x];
+        //        dpc.teamColor = (net_TeamScript.Team)x;
+
+        //        temp[x].SetActive(false);
+        //    }
+        //}
+    }
+
+    // Use this for initialization
+    void Start () {
         numPlayers = GameObject.Find("LobbyManager").GetComponent<LobbyManager>()._playerNumber;
 	}
 
 	public void SetUpGame(GameObject player, net_TeamScript.Team team)
     {
-		int x = curPlayers ;
+		int x = curPlayers;
 		DropoffPointsClass d = DropoffPoints[x];
 		d.dropoffGO.SetActive (true);
         PlayerClass ply = new PlayerClass();

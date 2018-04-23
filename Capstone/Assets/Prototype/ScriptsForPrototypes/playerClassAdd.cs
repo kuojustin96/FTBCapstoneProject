@@ -10,7 +10,8 @@ public class playerClassAdd : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (gameObject.tag != "LobbyPlayer") {
-			GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject, gameObject.GetComponent<net_TeamScript> ().teamColor);
+            //GameObject.Find ("PlayerClassController").GetComponent<GameManager> ().SetUpGame (this.gameObject, gameObject.GetComponent<net_TeamScript> ().teamColor);
+            GameManager.instance.SetUpGame(this.gameObject, gameObject.GetComponent<net_TeamScript>().teamColor);
 		}
 	}
 

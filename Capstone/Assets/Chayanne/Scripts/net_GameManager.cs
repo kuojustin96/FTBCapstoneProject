@@ -30,7 +30,7 @@ namespace ckp
 
             gs = netgm.GameSettings.Settings;
             //Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
     }
 

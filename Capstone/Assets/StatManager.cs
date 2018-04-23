@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public enum TickerMessageType
 {
@@ -63,7 +64,15 @@ public class StatManager : NetworkBehaviour {
             DontDestroyOnLoad(this);
         }
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         statTracker = new Dictionary<Stats, int>();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //if(scene.name == SceneManager.)
+        //    ResetTickerTimer();
     }
 
     void Start()
@@ -73,7 +82,6 @@ public class StatManager : NetworkBehaviour {
         else
             numSugarToWin = GameManager.instance.numSugarToWin;
 
-        ResetTickerTimer();
         ReadAndOrganizeTextFile(priorityText, true);
         ReadAndOrganizeTextFile(nonpriorityText, false);
 
@@ -81,6 +89,15 @@ public class StatManager : NetworkBehaviour {
         //PlayerClass ply = new PlayerClass();
         //ply.currentPlayerScore = 10;
         //Debug.Log(GetTickerMessage(TickerMessageType.NonPriority, ply));
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 3)
+        { //Current Jacob Scene
+            //Debug.Log("ON LEVEL LOADED");
+            ResetTickerTimer();
+        }
     }
 
     public void UpdateStat(Stats stat)
@@ -156,20 +173,37 @@ public class StatManager : NetworkBehaviour {
 
     public void ResetTickerTimer()
     {
-        if (!isServer) return;
-
+        //if (!isServer) return;
+        
         timeUntilTicker = Random.Range(minTickerTime, maxTickerTime);
         randNum = Random.Range(0, GameManager.instance.playerList.Count);
 
         if (isServer)
-            RpcEnableTickerMessages(tickerMessage, false);
-        else
-            CmdEnableTickerMessages(tickerMessage, false);
+            CmdResetTickerTimer(timeUntilTicker, randNum);
+
+        //if (isServer)
+        //    RpcEnableTickerMessages(tickerMessage, false);
+        //else
+        //    CmdEnableTickerMessages(tickerMessage, false);
+    }
+
+    [Command]
+    private void CmdResetTickerTimer(float timeUntilTicker, int rand)
+    {
+        //Debug.Log("CMD RESET TICKER TIMER HERE");
+        //RpcResetTickerTimer(timeUntilTicker, randNum);
+        if (tickerTimeCoroutine != null)
+            StopCoroutine(tickerTimeCoroutine);
+
+        tickerTimeCoroutine = StartCoroutine(TickerTimer(timeUntilTicker, rand));
     }
 
     [ClientRpc]
-    private void RpcResetTickerTimer(float timeUntilTicker, int rand)
+    public void RpcResetTickerTimer(float timeUntilTicker, int rand)
     {
+        //This function isn't being called for some reason
+        //Debug.Log("RPC RESET TICKER TIMER");
+
         if (tickerTimeCoroutine != null)
             StopCoroutine(tickerTimeCoroutine);
 
@@ -178,16 +212,22 @@ public class StatManager : NetworkBehaviour {
 
     private IEnumerator TickerTimer(float timeUntilTicker, int randNum)
     {
+        //Debug.Log("HAHAHAHAHAHA HEY");
+
         float saveTime = Time.time;
         while (Time.time < saveTime + timeUntilTicker)
             yield return null;
 
+        //Debug.Log("OH LOOK I FINISHED");
+
         tickerMessage = GetTickerMessage(TickerMessageType.NonPriority, GameManager.instance.playerList[randNum]);
 
-        if (isServer)
-            RpcEnableTickerMessages(tickerMessage, false);
-        else
-            CmdEnableTickerMessages(tickerMessage, false);
+        RpcEnableTickerMessages(tickerMessage, false);
+
+        //if (isServer)
+        //    RpcEnableTickerMessages(tickerMessage, false);
+        //else
+        //    CmdEnableTickerMessages(tickerMessage, false);
     }
 
     public void CallTickerMessage(TickerMessageType tmt, bool isPriority)
@@ -197,10 +237,12 @@ public class StatManager : NetworkBehaviour {
 
         tickerMessage = GetTickerMessage(tmt, GameManager.instance.playerList[randNum]);
 
-        if (isServer)
-            RpcEnableTickerMessages(tickerMessage, isPriority);
-        else
-            CmdEnableTickerMessages(tickerMessage, isPriority);
+        RpcEnableTickerMessages(tickerMessage, isPriority);
+
+        //if (isServer)
+        //    RpcEnableTickerMessages(tickerMessage, isPriority);
+        //else
+        //    CmdEnableTickerMessages(tickerMessage, isPriority);
     }
 
 

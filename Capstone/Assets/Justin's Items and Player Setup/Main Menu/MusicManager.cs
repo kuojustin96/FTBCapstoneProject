@@ -30,7 +30,7 @@ public class MusicManager : MonoBehaviour {
     void Awake () {
 		if (instance == null) {
 			instance = this;
-			DontDestroyOnLoad (gameObject);
+			//DontDestroyOnLoad (gameObject);
 		} else {
 			Destroy (this.gameObject);
 		}
@@ -64,7 +64,12 @@ public class MusicManager : MonoBehaviour {
                 if (splitString.Length > 1)
                     m.musicComponents.Add(splitString[1], (AudioClip)m.musicList[x]);
                 else
-                    m.musicComponents.Add("MainTrack", (AudioClip)m.musicList[x]);
+                {
+                    if (!m.musicComponents.ContainsKey("MainTrack"))
+                        m.musicComponents.Add("MainTrack", (AudioClip)m.musicList[x]);
+                    else
+                        m.musicComponents["MainTrack"] = (AudioClip)m.musicList[x];
+                }
             }
         }
     }
@@ -91,6 +96,8 @@ public class MusicManager : MonoBehaviour {
                 return;
             }
         }
+
+        Debug.Log("DIDN'T FIND THE SONG");
     }
 
     public void StopMainTrack(float fadeTime)
@@ -134,11 +141,16 @@ public class MusicManager : MonoBehaviour {
 
     private IEnumerator c_SwapMainTracks(AudioClip newMainTrack, float targetVol, float fadeTime)
     {
-        StartCoroutine(c_FadeMainTrack(0, fadeTime / 2, false));
+        //Check if there actually is a main track playing
+        if (mainTrackAuds.clip != null)
+        {
+            StartCoroutine(c_FadeMainTrack(0, fadeTime / 2, false));
 
-        float saveTime = Time.time;
-        while (Time.time < saveTime + (fadeTime / 2))
-            yield return null;
+            float saveTime = Time.time;
+            while (Time.time < saveTime + (fadeTime / 2))
+                yield return null;
+
+        }
 
         mainTrackAuds.clip = newMainTrack;
 
