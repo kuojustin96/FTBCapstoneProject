@@ -96,7 +96,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
                 Movement();
 
                 Rotation();
-
+                RefreshList();
 
                 Camera();
 
@@ -194,19 +194,31 @@ public class Lobby_Player_Movement : NetworkBehaviour
         }
     }
 
-    //public void RefreshList()
-    //{
+    public void RefreshList()
+    {
 
-    //    if(Input.GetKeyDown(KeyCode.T))
-    //    {
-    //        Debug.Log(isLocalPlayer);
-    //        Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
-    //    }
 
-    //    if (Input.GetKeyDown(KeyCode.Y))
-    //    {
-    //        Debug.Log(isLocalPlayer);
-    //        Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
-    //    }
-    //}
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (!Network.isServer)
+            {
+                Debug.Log("sorry you're a client");
+                return;
+            }
+            Debug.Log(isLocalPlayer);
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            if (!Network.isServer)
+            {
+                Debug.Log("sorry you're a client");
+                return;
+            }
+            Debug.Log(isLocalPlayer);
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
+        }
+    }
 }
