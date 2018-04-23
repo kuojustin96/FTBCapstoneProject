@@ -16,7 +16,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     public Camera cam;
     private Rigidbody rb;
-    private bool isPaused = false;
+    private bool isFocused = false;
     private CursorLockMode lockMode;
 
     //movement
@@ -45,6 +45,8 @@ public class Lobby_Player_Movement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        isFocused = true;
+        Cursor.visible = false;
 
     }
 
@@ -55,29 +57,26 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     private void UpdateCursorLock()
     {
-#if (DEBUG_MODE)
-            if (Input.GetMouseButton(0))
-            {
-                isPaused = false;
-                Cursor.visible = false;
-                lockMode = CursorLockMode.Locked;
-            }
-#endif
-
+        if (Input.GetMouseButton(0))
+        {
+            isFocused = true;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isPaused = !isPaused;
+            isFocused = false;
+        }
 
-            if (isPaused)
-            {
-                lockMode = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.visible = false;
-                lockMode = CursorLockMode.Locked;
-            }
+        if (isFocused)
+        {
+            mainCam.gameObject.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Mouse Y";
+            lockMode = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            mainCam.gameObject.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "";
+            Cursor.visible = true;
+            lockMode = CursorLockMode.None;
         }
 
 
@@ -86,28 +85,38 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer || offlineTesting)
+        if (isLocalPlayer)// || offlineTesting)
         {
-            //UpdateCursorLock();
+            UpdateCursorLock();
 
             //Movement
-            Movement();
 
-            Rotation();
-
-            if(Input.GetKeyDown(KeyCode.LeftAlt))
+            if (isFocused)
             {
-                ToggleCameraMode();
+                Movement();
+
+                Rotation();
+                RefreshList();
+
+                Camera();
+
+
+
+                if (Input.GetKey(KeyCode.LeftAlt))
+                {
+                    inFreeLook = true;
+
+                }
+                else
+                {
+
+                    inFreeLook = false;
+                }
             }
-
-            if (Input.GetKeyUp(KeyCode.LeftAlt))
-            {
-                ToggleCameraMode();
-            }
-
-
             //Jump
             Jumping();
+
+
         }
     }
 
@@ -140,9 +149,8 @@ public class Lobby_Player_Movement : NetworkBehaviour
     }
 
 
-    void ToggleCameraMode()
+    void Camera()
     {
-        inFreeLook = !inFreeLook;
 
         if (inFreeLook)
         {
@@ -176,10 +184,41 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.Space) && canJump)
+        if (isFocused)
         {
-            _jumpForce = transform.up * (jumpForce * 1000);
-            rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                _jumpForce = transform.up * (jumpForce * 10000);
+                rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+            }
+        }
+    }
+
+    public void RefreshList()
+    {
+
+
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (!Network.isServer)
+            {
+                Debug.Log("sorry you're a client");
+                return;
+            }
+            Debug.Log(isLocalPlayer);
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            if (!Network.isServer)
+            {
+                Debug.Log("sorry you're a client");
+                return;
+            }
+            Debug.Log(isLocalPlayer);
+            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
         }
     }
 }

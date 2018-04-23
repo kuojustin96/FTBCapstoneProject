@@ -7,9 +7,13 @@ public class LobbyBetterPlayerList : NetworkBehaviour {
 
     public GameObject nameObject;
 
-    [ClientRpc]
     public void RpcCreateName(string name)
     {
+
+        if (name == "")
+        {
+            return;
+        }
 
         GameObject obj = Instantiate(nameObject, transform);
 
@@ -20,36 +24,58 @@ public class LobbyBetterPlayerList : NetworkBehaviour {
         theListName.SetName(name);
         theListName.gameObject.name = name;
 
-        NetworkServer.Spawn(obj);
+        if (NetworkServer.active)
+        {
+            //NetworkServer.Spawn(obj);
+        }
 
     }
+
     [ClientRpc]
     public void RpcRegenerateList()
     {
-        Debug.Log("wow");
         NetworkLobbyPlayer[] players = LobbyManager.s_Singleton.lobbySlots;
 
         foreach (Transform obj in transform)
         {
-            if (obj != transform.gameObject && obj.GetComponent<NetworkIdentity>())
-            {   
-                NetworkServer.Destroy(obj.gameObject);
-            }
+            NetworkServer.Destroy(obj.gameObject);
         }
 
+        int num = 0;
+
+        
+        //Debug.Log("there are " + LobbyManager.s_Singleton.numPlayers + " players");
         foreach (NetworkLobbyPlayer player in players)
         {
+
             if (player)
             {
+                num++;
                 Debug.Assert(player);
                 Debug.Assert(player.gameObject);
                 string playerName = player.gameObject.GetComponent<LobbyPlayer>().playerName;
 
+                //Debug.Log("creating " + playerName);
                 RpcCreateName(playerName);
+
             }
 
         }
 
     }
 
+
+    [Command]
+    public void CmdRegenerateList()
+    {
+
+
+    }
+
+    [Command]
+    public void CmdCreateName(string name)
+    {
+
+
+    }
 }

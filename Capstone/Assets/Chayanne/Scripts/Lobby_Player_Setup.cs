@@ -14,6 +14,8 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
     bool detatched = false;
 
+    bool doUpdate = false;
+
     void Start()
     {
 
@@ -22,6 +24,9 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
     void Update()
     {
+
+
+
 
         if (!detatched)
         {
@@ -57,7 +62,11 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
             GetComponent<Prototype.NetworkLobby.LobbyPlayer>().OnColorClicked();
         }
 
+
+
     }
+
+
 
 
 
