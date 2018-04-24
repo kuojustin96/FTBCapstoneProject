@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -224,26 +222,26 @@
     <Compile Include="Assets\DontBlockMyScreen.cs" />
     <Compile Include="Assets\FindBullshit.cs" />
     <Compile Include="Assets\JumpPad.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Events\event_DoorDisappear.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Events\Event_SlowDoor.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\FadeManager.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\GameSettings.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\MainMenuManager.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\MusicManager.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\SFXOverrideTrigger.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\SFXWalkController.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Main Menu\SoundEffectManager.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\CraftingController.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\EventManager.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\GameManager.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\ItemScript.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\ItemsScriptableObject.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\KuoController.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\PlayerClass.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\PlayerSugarPickup.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\ScoreController.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
-    <Compile Include="Assets\Justin's Items and Player Setup\Test Main Scene\SugarManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\Event_SlowDoor.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\GameSettings.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\MainMenuManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\MusicManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\SFXOverrideTrigger.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\SFXWalkController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\SoundEffectManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\CraftingController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\EventManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\GameManager.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ItemScript.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ItemsScriptableObject.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\KuoController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\PlayerClass.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\PlayerSugarPickup.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
+    <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
     <Compile Include="Assets\Lobby_Player_Movement.cs" />
     <Compile Include="Assets\LobbyBetterPlayerList.cs" />
     <Compile Include="Assets\LobbyListName.cs" />
@@ -252,6 +250,7 @@
     <Compile Include="Assets\MusicTriggerBox.cs" />
     <Compile Include="Assets\Net_Camera_Singleton.cs" />
     <Compile Include="Assets\PlayerAttachCamera.cs" />
+    <Compile Include="Assets\PlayerListUpdater.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -360,13 +359,13 @@
     <Compile Include="Assets\UIController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\Flat Lit Toon Distance Fade.shader" />
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\Flat Lit Toon Rainbow.shader" />
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\Flat Lit Toon.shader" />
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\FlatLitToonCore.cginc" />
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\FlatLitToonShadows.cginc" />
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\Simple Gradient Sky.shader" />
-    <None Include="Assets\Chayanne\Cubed's Unity Shaders\Shaders\Unit Shadowed.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Distance Fade.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon Rainbow.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Flat Lit Toon.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonCore.cginc" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonShadows.cginc" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Simple Gradient Sky.shader" />
+    <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\Unit Shadowed.shader" />
     <None Include="Assets\Chayanne\Lobby\Documentation.txt" />
     <None Include="Assets\Chayanne\Lobby\Instruction.txt" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />

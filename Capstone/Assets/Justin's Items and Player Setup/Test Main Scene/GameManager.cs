@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using Prototype.NetworkLobby;
 using ckp;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : NetworkBehaviour {
 
     public static GameManager instance = null;
 
@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour {
             d.dropoffGO.SetActive(false);
     }
 
+    public static GameManager GetGameManager()
+    {
+        return instance;
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour {
         //    GameObject red = GameObject.Find("Red");
 
         //    Debug.Log("RED" + red);
- 
+
         //    Debug.Log("YOOOOOOOOOOOO " + temp.Length);
 
         //    for (int x = 0; x < 4; x++)

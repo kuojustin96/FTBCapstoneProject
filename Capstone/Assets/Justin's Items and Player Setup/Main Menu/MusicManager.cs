@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using DG.Tweening;
 
 public class MusicManager : MonoBehaviour {
 
@@ -34,6 +35,8 @@ public class MusicManager : MonoBehaviour {
 		} else {
 			Destroy (this.gameObject);
 		}
+
+        DOTween.Init();
 
         if (!GetComponent<AudioSource>())
             mainTrackAuds = gameObject.AddComponent<AudioSource>();
@@ -116,7 +119,7 @@ public class MusicManager : MonoBehaviour {
         float counter = 0;
         while(counter < fadeTime)
         {
-            mainTrackAuds.volume = Mathf.MoveTowards(mainTrackAuds.volume, targetVol, Time.deltaTime * fadeTime);
+            mainTrackAuds.DOFade(targetVol, fadeTime).SetEase(Ease.Linear);
             counter += Time.deltaTime / fadeTime;
             yield return null;
         }
@@ -183,7 +186,8 @@ public class MusicManager : MonoBehaviour {
 
         while(auds.volume < mainTrackAuds.volume)
         {
-            auds.volume = Mathf.MoveTowards(auds.volume, mainTrackAuds.volume, Time.deltaTime * fadeTime);
+            //auds.volume = Mathf.MoveTowards(auds.volume, mainTrackAuds.volume, Time.deltaTime * fadeTime);
+            auds.DOFade(auds.volume, fadeTime).SetEase(Ease.Linear);
             yield return null;
         }
 
@@ -208,7 +212,8 @@ public class MusicManager : MonoBehaviour {
 
         while (auds.volume > 0)
         {
-            auds.volume = Mathf.MoveTowards(auds.volume, 0, Time.deltaTime * fadeTime);
+            //auds.volume = Mathf.MoveTowards(auds.volume, 0, Time.deltaTime * fadeTime);
+            auds.DOFade(auds.volume, fadeTime).SetEase(Ease.Linear);
             yield return null;
         }
 
