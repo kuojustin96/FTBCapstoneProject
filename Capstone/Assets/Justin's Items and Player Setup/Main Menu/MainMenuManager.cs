@@ -11,6 +11,10 @@ using DG.Tweening;
 public class MainMenuManager : MonoBehaviour {
 
     public float fadeTime = 1f;
+
+    [Header("Play Game")]
+    public CanvasGroup playCanvas;
+
     [Header("Options")]
     public TMP_Dropdown qualityDropdown;
     public TMP_Dropdown resoDropdown;
@@ -38,6 +42,7 @@ public class MainMenuManager : MonoBehaviour {
 	void Start () {
         DOTween.Init();
 
+        FadeManager.instance.CanvasGroupOFF(playCanvas, false, false);
         FadeManager.instance.CanvasGroupOFF(creditsCanvas, false, false);
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
         FadeManager.instance.CanvasGroupOFF(optionsCanvas, false, false);
@@ -120,6 +125,47 @@ public class MainMenuManager : MonoBehaviour {
     }
     #endregion
 
+    #region Play Game
+    public void TogglePlay()
+    {
+        if (!inButtonTransition)
+        {
+            if (currentPanel != playCanvas)
+                CloseCurrentCanvas();
+
+            StartCoroutine(c_TogglePlay());
+        }
+    }
+
+    private IEnumerator c_TogglePlay()
+    {
+        inButtonTransition = true;
+
+        if (playCanvas.alpha == 0)
+        {
+            FadeManager.instance.FadeIn(playCanvas, fadeTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + fadeTime)
+                yield return null;
+
+            FadeManager.instance.CanvasGroupON(playCanvas, true, true);
+            currentPanel = playCanvas;
+        }
+        else
+        {
+            FadeManager.instance.FadeOut(playCanvas, fadeTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + fadeTime)
+                yield return null;
+
+            FadeManager.instance.CanvasGroupOFF(playCanvas, false, false);
+            currentPanel = null;
+        }
+
+        inButtonTransition = false;
+    }
+    #endregion
+
     #region Credits
     public void ToggleCredits()
     {
@@ -192,8 +238,10 @@ public class MainMenuManager : MonoBehaviour {
 
         if (currentPanel == optionsCanvas)
             ToggleOptions();
-        else
+        else if (currentPanel == creditsCanvas)
             ToggleCredits();
+        else
+            TogglePlay();
     }
 
     public void StartGame()
