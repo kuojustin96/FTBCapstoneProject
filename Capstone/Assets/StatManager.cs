@@ -176,7 +176,9 @@ public class StatManager : NetworkBehaviour {
         //if (!isServer) return;
         
         timeUntilTicker = Random.Range(minTickerTime, maxTickerTime);
-        randNum = Random.Range(0, GameManager.instance.playerList.Count);
+        GameManager gm = GameObject.Find("PlayerClassController").GetComponent<GameManager>();
+        Debug.Log("I FOUND GM " + gm);
+        randNum = Random.Range(0, gm.playerList.Count);
 
         if (isServer)
             CmdResetTickerTimer(timeUntilTicker, randNum);
