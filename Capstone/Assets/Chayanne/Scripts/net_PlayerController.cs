@@ -39,7 +39,7 @@ namespace jkuo
         public int maxJumpStamina = 75;
         private Vector3 moveHori;
         private Vector3 moveVert;
-        private Vector3 velocity = Vector3.zero;
+        public Vector3 velocity = Vector3.zero;
 
         bool inFreeLook = false;
         float lookSensitivity = 3.0f;
