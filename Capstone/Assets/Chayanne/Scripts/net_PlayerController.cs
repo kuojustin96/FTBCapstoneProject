@@ -440,7 +440,6 @@ namespace jkuo
 		}	
 
 		public void animateCharacter(int a){
-			Debug.Log (a);
 			//netAnim.animator.SetInteger ("CurrentState",a);
 			CmdAnimateCharacter (a);
 		}
