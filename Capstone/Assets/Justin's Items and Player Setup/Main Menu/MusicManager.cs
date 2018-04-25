@@ -45,7 +45,7 @@ public class MusicManager : MonoBehaviour {
 
         LoadMusicLibrary();
 
-		//playMusic (music, 0.5f, true);
+        PlayMainTrack(defaultTrackName);
     }
 
     void Start()

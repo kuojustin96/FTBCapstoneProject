@@ -10,6 +10,9 @@ public class GameOverManager : NetworkBehaviour {
     public static GameOverManager instance = null;
 
     private GameManager gm;
+
+    GameObject[] RootGameobjects;
+
     private List<PlayerClass> playerList = new List<PlayerClass>();
     private List<Transform> playerCanvases = new List<Transform>();
 
@@ -29,7 +32,7 @@ public class GameOverManager : NetworkBehaviour {
     public void EndGame()
     {
         this.playerList = gm.playerList;
-        SceneManager.LoadScene("winScene");
+        //SceneManager.LoadScene("winScene");
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -49,9 +52,21 @@ public class GameOverManager : NetworkBehaviour {
 
     private void SetUpWinScene()
     {
+        //RootGameobjects = SceneManager.GetSceneByName("winScene").GetRootGameObjects();
+        //GameObject uiCanvas = null;
+
+        //foreach(GameObject g in RootGameobjects)
+        //{
+        //    if (g.name.Equals("UI Canvas"))
+        //    {
+        //        uiCanvas = g;
+        //        break;
+        //    }
+        //}
+
         GameObject uiCanvas = GameObject.Find("UI Canvas");
 
-        foreach(Transform child in uiCanvas.transform)
+        foreach (Transform child in uiCanvas.transform)
         {
             if (child.name.Contains("Player"))
             {
@@ -61,14 +76,14 @@ public class GameOverManager : NetworkBehaviour {
 
         int playerCount = playerList.Count;
 
+        //Remake to use playerCanvases
         for (int x = 0; x < playerList.Count; x++)
         {
-            GameObject g = GameObject.Find("Player " + (x + 1) + " UI");
-            Transform playerScore = g.transform.GetChild(0);
+            Transform playerScore = playerCanvases[x].transform.GetChild(0);
             playerScore.GetComponent<TextMeshProUGUI>().text = "Player " + (x + 1) + " Score:\n" + playerList[x].currentPlayerScore;
         }
 
-        for(int x = (4 - playerCount); x < playerCanvases.Count; x++)
+        for (int x = (4- (4 - playerCount)); x < playerCanvases.Count; x++)
         {
             playerCanvases[x].gameObject.SetActive(false);
         }
@@ -83,6 +98,5 @@ public class GameOverManager : NetworkBehaviour {
     public void RpcSceneSwap()
     {
         SceneManager.LoadScene("winScene");
-        SetUpWinScene();
     }
 }

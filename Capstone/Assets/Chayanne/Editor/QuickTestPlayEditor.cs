@@ -7,7 +7,10 @@ using UnityEditor.SceneManagement;
 public class QuickTestPlayEditor : EditorWindow {
 
     string lobbyScenePath;
+
     public SceneAsset lobbyScene;
+    public SceneAsset playScene;
+    public SceneAsset winScene;
 
     //todo: serialize lobbyScene
     [MenuItem("Test/Test play window")]
@@ -19,8 +22,7 @@ public class QuickTestPlayEditor : EditorWindow {
 
     void OnGUI()
     {
-
-        lobbyScene = EditorGUILayout.ObjectField("Scene", lobbyScene, typeof(SceneAsset), false) as SceneAsset;
+        lobbyScene = EditorGUILayout.ObjectField("Lobby Scene", lobbyScene, typeof(SceneAsset), false) as SceneAsset;
 
         if (lobbyScene)
         {
@@ -29,6 +31,32 @@ public class QuickTestPlayEditor : EditorWindow {
                 EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(lobbyScene));
                 EditorApplication.isPlaying = true;
+            }
+        }
+
+        EditorGUILayout.Space();
+
+        playScene = EditorGUILayout.ObjectField("Play Scene", playScene, typeof(SceneAsset), false) as SceneAsset;
+
+        if (playScene)
+        {
+            if (GUILayout.Button("Test"))
+            {
+                EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+                EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(playScene));
+            }
+        }
+
+        EditorGUILayout.Space();
+
+        winScene = EditorGUILayout.ObjectField("Win Scene", winScene, typeof(SceneAsset), false) as SceneAsset;
+
+        if (winScene)
+        {
+            if (GUILayout.Button("Test"))
+            {
+                EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+                EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(winScene));
             }
         }
     }
