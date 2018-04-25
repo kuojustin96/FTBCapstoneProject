@@ -233,6 +233,14 @@ namespace jkuo
 				if (netAnim.animator.GetInteger ("CurrentState") != 3) {
 					animateCharacter (3);
 				}
+			} else if (Input.GetKey (KeyCode.A) && isGrounded) {
+				if (netAnim.animator.GetInteger ("CurrentState") != 4 && Input.GetKey (KeyCode.S) == false && Input.GetKey (KeyCode.W) == false   && netAnim.animator.GetInteger ("CurrentState") != 5  ) {				
+					animateCharacter (4);
+				}
+			}else if (Input.GetKey (KeyCode.D) && isGrounded) {
+				if (netAnim.animator.GetInteger ("CurrentState") != 4 && Input.GetKey (KeyCode.S) == false && Input.GetKey (KeyCode.W) == false   && netAnim.animator.GetInteger ("CurrentState") != 5  ) {
+					animateCharacter (5);
+				}
 			}
 		}
 
