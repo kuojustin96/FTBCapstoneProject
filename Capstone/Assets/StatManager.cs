@@ -32,6 +32,8 @@ public class StatManager : NetworkBehaviour {
     public TextAsset priorityText;
     public TextAsset nonpriorityText;
 
+    private GameManager gm;
+
     public float minTickerTime = 10f;
     public float maxTickerTime = 30f;
     [SyncVar] private float timeUntilTicker;
@@ -61,10 +63,10 @@ public class StatManager : NetworkBehaviour {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
 
         statTracker = new Dictionary<Stats, int>();
     }
@@ -77,10 +79,13 @@ public class StatManager : NetworkBehaviour {
 
     void Start()
     {
-        if(GameManager.instance == null)
+        //GameObject.Find("PlayerClassController").GetComponent<GameManager>()
+        gm = GameManager.instance;
+
+        if (gm == null)
             numSugarToWin = 50; // FOR TESTING
         else
-            numSugarToWin = GameManager.instance.numSugarToWin;
+            numSugarToWin = gm.numSugarToWin;
 
         ReadAndOrganizeTextFile(priorityText, true);
         ReadAndOrganizeTextFile(nonpriorityText, false);
@@ -89,15 +94,17 @@ public class StatManager : NetworkBehaviour {
         //PlayerClass ply = new PlayerClass();
         //ply.currentPlayerScore = 10;
         //Debug.Log(GetTickerMessage(TickerMessageType.NonPriority, ply));
+
+        ResetTickerTimer();
     }
 
     private void OnLevelWasLoaded(int level)
     {
-        if (level == 3)
-        { //Current Jacob Scene
-            //Debug.Log("ON LEVEL LOADED");
-            ResetTickerTimer();
-        }
+        //if (level == 3)
+        //{ //Current Jacob Scene
+        //    Debug.Log("ON LEVEL LOADED I DID STUFF");
+        //    ResetTickerTimer();
+        //}
     }
 
     public void UpdateStat(Stats stat)
@@ -176,8 +183,7 @@ public class StatManager : NetworkBehaviour {
         //if (!isServer) return;
         
         timeUntilTicker = Random.Range(minTickerTime, maxTickerTime);
-        GameManager gm = GameObject.Find("PlayerClassController").GetComponent<GameManager>();
-        Debug.Log("I FOUND GM " + gm);
+        //Debug.Log("I FOUND GM " + gm);
         randNum = Random.Range(0, gm.playerList.Count);
 
         if (isServer)

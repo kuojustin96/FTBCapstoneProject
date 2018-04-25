@@ -24,6 +24,7 @@ public class PlayerClass {
 	public GameObject currentItem;
 	public string currentItemString;
 
+    private GameManager gm;
     private net_PlayerController npc;
     private float minSpeed;
     private float speedPerSugar;
@@ -37,9 +38,10 @@ public class PlayerClass {
         this.dropoffPoint = dropoffPoint;
         this.playerName = playerName;
 
+        gm = GameManager.instance;
         npc = playerGO.GetComponent<net_PlayerController>();
-        minSpeed = GameManager.instance.minSpeed;
-        speedPerSugar = GameManager.instance.speedPerSugar;
+        minSpeed = gm.minSpeed;
+        speedPerSugar = gm.speedPerSugar;
     }
 
     public void PickupSugar()
@@ -55,6 +57,9 @@ public class PlayerClass {
         currentPlayerScore++;
         sugarInBackpack--;
         npc.speed += speedPerSugar;
+
+        if (currentPlayerScore >= gm.numSugarToWin)
+            GameOverManager.instance.EndGame();
     }
 
     public void LoseSugar(int amount)
@@ -69,7 +74,7 @@ public class PlayerClass {
         npc.speed += speedPerSugar;
     }
 
-    public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum)
+    public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum) //Deprecated
     {
         if (player.item != null)
         {
@@ -84,7 +89,7 @@ public class PlayerClass {
         item.gameObject.SetActive(true);
     }
 
-    public void CheckedRangedShield()
+    public void CheckedRangedShield() //Deprecated
     {
         item.usesLeft--;
         if(item.usesLeft <= 0)
