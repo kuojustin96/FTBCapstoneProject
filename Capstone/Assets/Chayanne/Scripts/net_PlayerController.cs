@@ -114,6 +114,7 @@ namespace jkuo
 			if (!GetComponent<net_PlayerController>().isLocalPlayer)
 			{
 				playerUI.SetActive(false);
+                GetComponent<AudioListener>().enabled = false;
 			}
 		}
 
@@ -346,7 +347,7 @@ namespace jkuo
 					CmdEmote(3);
 			}
 
-			if (Input.GetKeyDown(KeyCode.C))
+			if (Input.GetKeyDown(KeyCode.C) && !playingEmote)
 			{
 				emoteMenuOpen = true;
 				uic.ShowTicker(TickerBehaviors.Emotes);
@@ -369,7 +370,7 @@ namespace jkuo
 			else
 			{
 				StartCoroutine(c_EmoteCooldown(emoteNum));
-			}
+            }
 		}
 
 		[Command]
@@ -380,7 +381,10 @@ namespace jkuo
 
 		private IEnumerator c_EmoteCooldown(int emoteNum)
 		{
-			float saveTime = Time.time;
+            emoteMenuOpen = false;
+            uic.HideTicker();
+
+            float saveTime = Time.time;
 			float psDuration = Emotes[emoteNum].main.duration;
 			while (Time.time < saveTime + psDuration)
 				yield return null;

@@ -471,6 +471,7 @@ public class UIController : NetworkBehaviour {
         }
         else
         {
+            Debug.Log("IM HIDING");
             tickerBackgroud.rectTransform.DOAnchorPosY(tickerDisabledPos.y, tickerLerpTime).SetEase(Ease.OutBack);
 
             float saveTime = Time.time;
