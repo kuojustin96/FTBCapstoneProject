@@ -7,369 +7,392 @@ using Cinemachine;
 
 namespace jkuo
 {
-    [RequireComponent(typeof(Rigidbody))]
-    public class net_PlayerController : NetworkBehaviour
-    {
-        private UIController uic;
-        public CinemachineVirtualCamera virtualCam;
+	[RequireComponent(typeof(Rigidbody))]
+	public class net_PlayerController : NetworkBehaviour
+	{
+		private UIController uic;
+		public CinemachineVirtualCamera virtualCam;
 
-        public bool offlineTesting = false;
+		public bool offlineTesting = false;
 
 		private Net_Hud_SugarCounter nhs;
 
-        public Camera cam;
-        public GameObject playerUI;
-        public Slider staminaSlider;
-        public ParticleSystem[] Emotes;
-        public bool emoteMenuOpen { get; protected set; }
-        private bool playingEmote = false;
-        private PlayerClass player;
-        private Rigidbody rb;
-        private bool isPaused = false;
-        private CursorLockMode lockMode;
+		public Camera cam;
+		public GameObject playerUI;
+		public Slider staminaSlider;
+		public ParticleSystem[] Emotes;
+		public bool emoteMenuOpen { get; protected set; }
+		private bool playingEmote = false;
+		private PlayerClass player;
+		private Rigidbody rb;
+		private bool isPaused = false;
+		private CursorLockMode lockMode;
+		public NetworkAnimator netAnim;
 
-        //movement
-        [Header("Movement")]
-        public float speed = 50f;
-        public float inAirDamping = 5f;
-        public float staminaRegenSpeed = 2f;
-        public float staminaRegenDelay = 1f;
-        private Coroutine staminaResetCoroutine;
-        [Range(5, 95)]
-        public int maxJumpStamina = 75;
-        private Vector3 moveHori;
-        private Vector3 moveVert;
-        public Vector3 velocity = Vector3.zero;
+		//movement
+		[Header("Movement")]
+		public float speed = 50f;
+		public float inAirDamping = 5f;
+		public float staminaRegenSpeed = 2f;
+		public float staminaRegenDelay = 1f;
+		private Coroutine staminaResetCoroutine;
+		[Range(5, 95)]
+		public int maxJumpStamina = 75;
+		private Vector3 moveHori;
+		private Vector3 moveVert;
+		public Vector3 velocity = Vector3.zero;
 
-        bool inFreeLook = false;
-        float lookSensitivity = 3.0f;
+		bool inFreeLook = false;
+		float lookSensitivity = 3.0f;
 
-        //jump
-        [Header("Jumping")]
-        public float jumpForce = 1000f;
-        public float gravity = 100f;
-        public float downwardAcceleration = 1f;
-        public LayerMask jumpMask;
-        private bool isGrounded;
-        public bool canJump = true;
-        private Vector3 _jumpForce = Vector3.zero;
+		//jump
+		[Header("Jumping")]
+		public float jumpForce = 1000f;
+		public float gravity = 100f;
+		public float downwardAcceleration = 1f;
+		public LayerMask jumpMask;
+		private bool isGrounded;
+		public bool canJump = true;
+		private Vector3 _jumpForce = Vector3.zero;
 
-        public float fatigueSpeed = 1f;
-        private float stamina = 100f;
-        private float currentStamina = 100f;
+		public float fatigueSpeed = 1f;
+		private float stamina = 100f;
+		private float currentStamina = 100f;
 
-        //gliding
-        [Header("Gliding")]
-        private bool isGliding = false;
-        public float gravityDivisor = 20f;
-        public float glideFatigueSpeed = 0.25f;
+		//gliding
+		[Header("Gliding")]
+		private bool isGliding = false;
+		public float gravityDivisor = 20f;
+		public float glideFatigueSpeed = 0.25f;
 
-        //Particles
-        public GameObject stun;
+		//Particles
+		public GameObject stun;
 
-        CinemachineVirtualCameraBase vCam;
-        CinemachineFreeLook freeLook;
+		CinemachineVirtualCameraBase vCam;
+		CinemachineFreeLook freeLook;
 
 		public PlayerSugarPickup sugarPickup;
-        // Use this for initialization
-        void Start()
-        {
-            vCam = Net_Camera_Singleton.instance.GetCamera();
-            freeLook = vCam.gameObject.GetComponent<CinemachineFreeLook>();
+		// Use this for initialization
+		void Start()
+		{
+			vCam = Net_Camera_Singleton.instance.GetCamera();
+			freeLook = vCam.gameObject.GetComponent<CinemachineFreeLook>();
 
-            emoteMenuOpen = false;
-            uic = GetComponent<UIController>();
+			emoteMenuOpen = false;
+			uic = GetComponent<UIController>();
 
-            staminaSlider.value = staminaSlider.maxValue;
-            rb = GetComponent<Rigidbody>();
-            player = GetComponent<playerClassAdd>().player;
-            LocalCameraCheck();
+			staminaSlider.value = staminaSlider.maxValue;
+			rb = GetComponent<Rigidbody>();
+			player = GetComponent<playerClassAdd>().player;
+			LocalCameraCheck();
 			Cursor.lockState = CursorLockMode.Locked;
 
 			if (isLocalPlayer) {
-                //nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
-                //nhs.player = player;
-            }
+				//nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
+				//nhs.player = player;
+			}
 
 
-            if (isLocalPlayer)
-            {
-                GameObject virtualCamObj = GameObject.FindGameObjectWithTag("VirtualCamera");
+			if (isLocalPlayer)
+			{
+				GameObject virtualCamObj = GameObject.FindGameObjectWithTag("VirtualCamera");
 
-                if (virtualCamObj)
-                {
-                    virtualCam = virtualCamObj.GetComponent<CinemachineVirtualCamera>();
-                }
-            }
+				if (virtualCamObj)
+				{
+					virtualCam = virtualCamObj.GetComponent<CinemachineVirtualCamera>();
+				}
+			}
 
-            if (GetComponent<UIController>())
-            {
-                GetComponent<UIController>().SetUpVariables(player);
-            }
-        }
+			if (GetComponent<UIController>())
+			{
+				GetComponent<UIController>().SetUpVariables(player);
+			}
+		}
 
-        private void LocalCameraCheck()
-        {
-            if (!GetComponent<net_PlayerController>().isLocalPlayer)
-            {
-                playerUI.SetActive(false);
-            }
-        }
+		private void LocalCameraCheck()
+		{
+			if (!GetComponent<net_PlayerController>().isLocalPlayer)
+			{
+				playerUI.SetActive(false);
+			}
+		}
 
-        private void UpdateCursorLock()
-        {
-//#if (DEBUG_MODE)
-//            if (Input.GetMouseButton(0))
-//            {
-//                isPaused = false;
-//                Cursor.visible = false;
-//                lockMode = CursorLockMode.Locked;
-//            }
-//#endif
+		private void UpdateCursorLock()
+		{
+			//#if (DEBUG_MODE)
+			//            if (Input.GetMouseButton(0))
+			//            {
+			//                isPaused = false;
+			//                Cursor.visible = false;
+			//                lockMode = CursorLockMode.Locked;
+			//            }
+			//#endif
 
-            //if (Input.GetKeyDown(KeyCode.Escape))
-            //{
-            //    isPaused = !isPaused;
+			//if (Input.GetKeyDown(KeyCode.Escape))
+			//{
+			//    isPaused = !isPaused;
 
-            //    if (isPaused)
-            //    {
-            //        lockMode = CursorLockMode.None;
-            //        Cursor.visible = true;
-            //    }
-            //    else
-            //    {
-            //        Cursor.visible = false;
-            //        lockMode = CursorLockMode.Locked;
-            //    }
-            //}
-
-
-            //Cursor.lockState = lockMode;
-        }
-
-        void Update()
-        {
-            if (isLocalPlayer || offlineTesting)
-            {
-                //UpdateCursorLock();
-
-                if (!player.isStunned)
-                {
-                    if (!player.craftingUIOpen)
-                    {
-                        //Movement
-                        Movement();
-
-                        //Camera Rotation
-                        Rotation();
-
-                        FreeCam();
-
-                        //Jump
-                        Jumping();
-
-                        //Emotes
-                        UseEmotes();
-                    }
-                }
-            }
-        }
-
-        void FreeCam()
-        {
-            if (Input.GetKey(KeyCode.LeftAlt))
-            {
-                inFreeLook = true;
-                freeLook.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
-                freeLook.m_XAxis.m_InputAxisName = "Mouse X";
-            }
-            else
-            {
-                inFreeLook = false;
-                freeLook.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
-                freeLook.m_XAxis.m_InputAxisName = "";
-            }
-        }
+			//    if (isPaused)
+			//    {
+			//        lockMode = CursorLockMode.None;
+			//        Cursor.visible = true;
+			//    }
+			//    else
+			//    {
+			//        Cursor.visible = false;
+			//        lockMode = CursorLockMode.Locked;
+			//    }
+			//}
 
 
-        private void Rotation()
-        {
-            float xRot;
-            float yRot;
-            xRot = Input.GetAxisRaw("Mouse Y");
-            yRot = Input.GetAxisRaw("Mouse X");
+			//Cursor.lockState = lockMode;
+		}
 
-            if (!inFreeLook)
-            {
-                Vector3 rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
-                rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
-            }
-        }
+		void Update()
+		{
+			if (isLocalPlayer || offlineTesting)
+			{
+				//UpdateCursorLock();
 
-        private void Movement()
-        {
-            moveHori = transform.right * Input.GetAxis("Horizontal");
-            moveVert = transform.forward * Input.GetAxis("Vertical");
-                
+				if (!player.isStunned)
+				{
+					if (!player.craftingUIOpen)
+					{
+						//Movement
+						Movement();
 
-            velocity = (moveHori + moveVert) * speed;
+						//Camera Rotation
+						Rotation();
 
-            if (velocity != Vector3.zero)
-                rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
-        }
+						FreeCam();
 
-      
-        private void Jumping()
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
-            {
-                if (!isGrounded)
-                    staminaResetCoroutine = StartCoroutine(RegenStamina());
+						//Jump
+						Jumping();
 
-                isGrounded = true;
-                canJump = true;
-                isGliding = false;
-            }
-            else
-            {
-                if(isGrounded && staminaResetCoroutine != null)
-                {
-                    StopCoroutine(staminaResetCoroutine);
-                    staminaResetCoroutine = null;
-                }
+						//Emotes
+						UseEmotes();
+					}
+				}
+			}
+		}
 
-                isGrounded = false;
-                //apply gravity
-
-                if (isGliding && currentStamina > 0)
-                {
-                    rb.AddForce(new Vector3(0f, -(gravity / gravityDivisor), 0f), ForceMode.Force);
-                    currentStamina -= glideFatigueSpeed;
-                    staminaSlider.value = currentStamina;
-
-                    if (currentStamina <= 0)
-                        isGliding = false;
-                }
-                else
-                {
-                    rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
-                    rb.AddForce(Vector3.down * downwardAcceleration, ForceMode.Impulse);
-                }
-            }
-
-            if (Input.GetKey(KeyCode.Space) && canJump)
-            {
-                if (currentStamina > stamina - maxJumpStamina)
-                {
-                    _jumpForce = transform.up * (jumpForce * 1000);
-                    rb.AddForce(_jumpForce * Time.fixedDeltaTime);
-
-                    currentStamina -= fatigueSpeed;
-                    staminaSlider.value = currentStamina;
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
-                isGliding = true;
+		void FreeCam()
+		{
+			if (Input.GetKey(KeyCode.LeftAlt))
+			{
+				inFreeLook = true;
+				freeLook.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
+				freeLook.m_XAxis.m_InputAxisName = "Mouse X";
+			}
+			else
+			{
+				inFreeLook = false;
+				freeLook.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
+				freeLook.m_XAxis.m_InputAxisName = "";
+			}
+		}
 
 
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                canJump = false;
+		private void Rotation()
+		{
+			float xRot;
+			float yRot;
+			xRot = Input.GetAxisRaw("Mouse Y");
+			yRot = Input.GetAxisRaw("Mouse X");
 
-                if (isGliding)
-                    isGliding = false;
-            }
-        }
+			if (!inFreeLook)
+			{
+				Vector3 rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
+				rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+			}
+		}
 
-        private IEnumerator RegenStamina()
-        {
-            yield return new WaitForSeconds(staminaRegenDelay);
+		private void Movement()
+		{
+			moveHori = transform.right * Input.GetAxis("Horizontal");
+			moveVert = transform.forward * Input.GetAxis("Vertical");
 
-            while(currentStamina < 100)
-            {
-                currentStamina += staminaRegenSpeed;
-                staminaSlider.value = currentStamina;
 
-                yield return null;
-            }
-        }
+			velocity = (moveHori + moveVert) * speed;
 
-        #region Play Emotes
-        private void UseEmotes()
-        {
-            if (emoteMenuOpen && !playingEmote)
-            {
-                if (!isLocalPlayer)
-                    return;
+			if (velocity != Vector3.zero) {
+				rb.MovePosition (rb.position + velocity * Time.fixedDeltaTime);
+			}
+			if (Input.GetKey (KeyCode.W) && isGrounded) {
+				if (netAnim.animator.GetInteger ("CurrentState") != 1) {
+					animateCharacter (1);
+				}
+			} else if (Input.GetKey (KeyCode.S) && isGrounded) {
+				if (netAnim.animator.GetInteger ("CurrentState") != 2) {
+					animateCharacter (2);
+				}
+			} else if (velocity == Vector3.zero) {
+				animateCharacter (0);
+			} else if (Input.GetKeyDown (KeyCode.Space)) {
+				if (netAnim.animator.GetInteger ("CurrentState") != 3) {
+					animateCharacter (3);
+				}
+			}
+		}
 
-                if (Input.GetKeyDown(KeyCode.C))
-                {
-                    emoteMenuOpen = false;
-                    uic.HideTicker();
-                }
 
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                    CmdEmote(0);
+		private void Jumping()
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
+			{
+				if (!isGrounded)
+					staminaResetCoroutine = StartCoroutine(RegenStamina());
 
-                if (Input.GetKeyDown(KeyCode.Alpha2))
-                    CmdEmote(1);
+				isGrounded = true;
+				canJump = true;
+				isGliding = false;
+//				if(netAnim.animator.GetInteger("CurrentState")!=0){
+//					animateCharacter (0);
+//				}
+			}
+			else
+			{
+				if(isGrounded && staminaResetCoroutine != null)
+				{
+					StopCoroutine(staminaResetCoroutine);
+					staminaResetCoroutine = null;
+				}
 
-                if (Input.GetKeyDown(KeyCode.Alpha3))
-                    CmdEmote(2);
+				isGrounded = false;
+				//apply gravity
 
-                if (Input.GetKeyDown(KeyCode.Alpha4))
-                    CmdEmote(3);
-            }
+				if (isGliding && currentStamina > 0)
+				{
+					rb.AddForce(new Vector3(0f, -(gravity / gravityDivisor), 0f), ForceMode.Force);
+					currentStamina -= glideFatigueSpeed;
+					staminaSlider.value = currentStamina;
 
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                emoteMenuOpen = true;
-                uic.ShowTicker(TickerBehaviors.Emotes);
-            }
-        }
+					if (currentStamina <= 0)
+						isGliding = false;
+				}
+				else
+				{
+					rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
+					rb.AddForce(Vector3.down * downwardAcceleration, ForceMode.Impulse);
+				}
+			}
 
-        [ClientRpc]
-        private void RpcEmote(int emoteNum)
-        {
-            Emotes[emoteNum].Play();
-            emoteMenuOpen = false;
-            playingEmote = true;
+			if (Input.GetKey(KeyCode.Space) && canJump)
+			{
+				if (currentStamina > stamina - maxJumpStamina)
+				{
+					_jumpForce = transform.up * (jumpForce * 1000);
+					rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+					//if (Input.GetKeyDown(KeyCode.Space) && canJump) {
+					animateCharacter (3);
+					//}
 
-            if (!isLocalPlayer)
-            {
-                Vector3 temp = Emotes[emoteNum].transform.localScale;
-                temp.x = -1;
-                Emotes[emoteNum].transform.localScale = temp;
-            }
-            else
-            {
-                StartCoroutine(c_EmoteCooldown(emoteNum));
-            }
-        }
+					currentStamina -= fatigueSpeed;
+					staminaSlider.value = currentStamina;
+				}
+			}
 
-        [Command]
-        private void CmdEmote(int emoteNum)
-        {
-            RpcEmote(emoteNum);
-        }
+			if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
+				isGliding = true;
 
-        private IEnumerator c_EmoteCooldown(int emoteNum)
-        {
-            float saveTime = Time.time;
-            float psDuration = Emotes[emoteNum].main.duration;
-            while (Time.time < saveTime + psDuration)
-                yield return null;
 
-            playingEmote = false;
-        }
-        #endregion
+			if (Input.GetKeyUp(KeyCode.Space))
+			{
+				canJump = false;
 
-        #region Stun Player
-        [ClientRpc]
-        public void RpcStunPlayer(float duration)
-        {
+				if (isGliding)
+					isGliding = false;
+			}
+		}
+
+		private IEnumerator RegenStamina()
+		{
+			yield return new WaitForSeconds(staminaRegenDelay);
+
+			while(currentStamina < 100)
+			{
+				currentStamina += staminaRegenSpeed;
+				staminaSlider.value = currentStamina;
+
+				yield return null;
+			}
+		}
+
+		#region Play Emotes
+		private void UseEmotes()
+		{
+			if (emoteMenuOpen && !playingEmote)
+			{
+				if (!isLocalPlayer)
+					return;
+
+				if (Input.GetKeyDown(KeyCode.C))
+				{
+					emoteMenuOpen = false;
+					uic.HideTicker();
+				}
+
+				if (Input.GetKeyDown(KeyCode.Alpha1))
+					CmdEmote(0);
+
+				if (Input.GetKeyDown(KeyCode.Alpha2))
+					CmdEmote(1);
+
+				if (Input.GetKeyDown(KeyCode.Alpha3))
+					CmdEmote(2);
+
+				if (Input.GetKeyDown(KeyCode.Alpha4))
+					CmdEmote(3);
+			}
+
+			if (Input.GetKeyDown(KeyCode.C))
+			{
+				emoteMenuOpen = true;
+				uic.ShowTicker(TickerBehaviors.Emotes);
+			}
+		}
+
+		[ClientRpc]
+		private void RpcEmote(int emoteNum)
+		{
+			Emotes[emoteNum].Play();
+			emoteMenuOpen = false;
+			playingEmote = true;
+
+			if (!isLocalPlayer)
+			{
+				Vector3 temp = Emotes[emoteNum].transform.localScale;
+				temp.x = -1;
+				Emotes[emoteNum].transform.localScale = temp;
+			}
+			else
+			{
+				StartCoroutine(c_EmoteCooldown(emoteNum));
+			}
+		}
+
+		[Command]
+		private void CmdEmote(int emoteNum)
+		{
+			RpcEmote(emoteNum);
+		}
+
+		private IEnumerator c_EmoteCooldown(int emoteNum)
+		{
+			float saveTime = Time.time;
+			float psDuration = Emotes[emoteNum].main.duration;
+			while (Time.time < saveTime + psDuration)
+				yield return null;
+
+			playingEmote = false;
+		}
+		#endregion
+
+		#region Stun Player
+		[ClientRpc]
+		public void RpcStunPlayer(float duration)
+		{
 			if (player.currentItem == null) {
 				//Debug.Log ("PlayerHasNoItem");
 				player.isStunned = true;
@@ -391,26 +414,41 @@ namespace jkuo
 					stun.SetActive (true);
 					sugarPickup.StunDropSugar ();
 				}
-				
+
 			}
-        }
+		}
 		[Command]
 		public void CmdStunPlayer(float duration)
 		{
 			RpcStunPlayer (duration);
 		}
-			
+
 		public void StunPlayerCoroutine(float duration)
-        {
+		{
 			if (!isLocalPlayer)
 				return;
 			CmdStunPlayer (duration);
-        }
+		}
 
 		public void StunWait(){
 			player.isStunned = false;
 			stun.SetActive (false);
 		}	
-    }
-    #endregion
+
+		public void animateCharacter(int a){
+			Debug.Log (a);
+			//netAnim.animator.SetInteger ("CurrentState",a);
+			CmdAnimateCharacter (a);
+		}
+		[Command]
+		public void CmdAnimateCharacter(int a){
+			//netAnim.animator.SetInteger ("CurrentState",a);
+			RpcAnimateCharacter (a);
+		}
+		[ClientRpc]
+		public void RpcAnimateCharacter(int a){
+			netAnim.animator.SetInteger ("CurrentState",a);
+		}
+	}
+	#endregion
 }
