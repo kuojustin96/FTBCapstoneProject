@@ -30,11 +30,11 @@ public class Net_Camera_Singleton : MonoBehaviour {
     CinemachineVirtualCameraBase localCamera;
 
 
-    public void SetupCamera(GameObject player)
+    public void SetupCamera(GameObject camTarget)
     {
-        Debug.Log("Setting camera for " + player.name);
-        playerCam.LookAt = player.transform;
-        playerCam.Follow = player.transform;
+        Debug.Log("Setting camera for " + camTarget.name);
+        playerCam.LookAt = camTarget.transform;
+        playerCam.Follow = camTarget.transform;
     }
 
     public CinemachineVirtualCameraBase GetCamera()

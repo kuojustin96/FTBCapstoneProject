@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
@@ -8,16 +9,23 @@ using UnityEngine.Networking;
 public class GameOverManager : NetworkBehaviour {
 
     public static GameOverManager instance = null;
+    public float waitTimeOnPerson = 3f;
 
     private GameManager gm;
 
-    GameObject[] RootGameobjects;
+    private Camera mainCam;
 
+    private List<Transform> PersonSpots = new List<Transform>();
     private List<PlayerClass> playerList = new List<PlayerClass>();
-    private List<Transform> playerCanvases = new List<Transform>();
+    private TextMeshProUGUI playerScore;
+    private TextMeshProUGUI playerStat;
+    private CanvasGroup playerScoreCG;
+    private CanvasGroup playerStatCG;
+    private Transform playerUI;
+    private CanvasGroup fadeBackground;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
         if (instance == null)
             instance = this;
 
@@ -27,6 +35,7 @@ public class GameOverManager : NetworkBehaviour {
     private void Start()
     {
         gm = GameManager.instance;
+        DOTween.Init();
     }
 
     public void EndGame()
@@ -52,40 +61,64 @@ public class GameOverManager : NetworkBehaviour {
 
     private void SetUpWinScene()
     {
-        //RootGameobjects = SceneManager.GetSceneByName("winScene").GetRootGameObjects();
-        //GameObject uiCanvas = null;
-
-        //foreach(GameObject g in RootGameobjects)
-        //{
-        //    if (g.name.Equals("UI Canvas"))
-        //    {
-        //        uiCanvas = g;
-        //        break;
-        //    }
-        //}
-
         GameObject uiCanvas = GameObject.Find("UI Canvas");
+        GameObject ps = GameObject.Find("Person Spots");
 
-        foreach (Transform child in uiCanvas.transform)
-        {
-            if (child.name.Contains("Player"))
-            {
-                playerCanvases.Add(child);
-            }
-        }
+        foreach (Transform child in ps.transform)
+            PersonSpots.Add(child);
 
-        int playerCount = playerList.Count;
+        mainCam = Camera.main;
+        playerUI = uiCanvas.transform.GetChild(0);
+        fadeBackground = uiCanvas.transform.GetChild(1).GetComponent<CanvasGroup>();
 
-        //Remake to use playerCanvases
+        playerScore = playerUI.GetChild(0).GetComponent<TextMeshProUGUI>();
+        playerStat = playerUI.GetChild(1).GetComponent<TextMeshProUGUI>();
+        playerScoreCG = playerScore.GetComponent<CanvasGroup>();
+        playerStatCG = playerStat.GetComponent<CanvasGroup>();
+
+        FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
+        FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
+
+        StartCoroutine(winSceneAnimation());
+    }
+
+    private IEnumerator winSceneAnimation()
+    {
+        FadeManager.instance.CanvasGroupON(fadeBackground, false, false);
+        FadeManager.instance.FadeOut(fadeBackground, 1f);
+
+        float saveTime = Time.time;
+        while (Time.time < saveTime + 1f)
+            yield return null;
+
         for (int x = 0; x < playerList.Count; x++)
         {
-            Transform playerScore = playerCanvases[x].transform.GetChild(0);
-            playerScore.GetComponent<TextMeshProUGUI>().text = "Player " + (x + 1) + " Score:\n" + playerList[x].currentPlayerScore;
-        }
+            playerScore.text = playerList[x].playerName + "\n" + playerList[x].currentPlayerScore;
+            //playerStat.text Implement stat line for player from stat manager
 
-        for (int x = (4- (4 - playerCount)); x < playerCanvases.Count; x++)
-        {
-            playerCanvases[x].gameObject.SetActive(false);
+            //Move Camera into position
+            mainCam.transform.DOMoveX(PersonSpots[x].transform.position.x, 1f);
+            saveTime = Time.time;
+            while (Time.time < saveTime + 1f)
+                yield return null;
+
+            //Fade in stats
+            FadeManager.instance.FadeIn(playerScoreCG, 0.5f);
+            saveTime = Time.time;
+            while (Time.time < saveTime + 0.5f)
+                yield return null;
+
+            FadeManager.instance.FadeIn(playerStatCG, 0.5f);
+            saveTime = Time.time;
+            while (Time.time < saveTime + 0.5f + waitTimeOnPerson) //Wait On Player
+                yield return null;
+
+            //Fade Out Stats
+            FadeManager.instance.FadeOut(playerScoreCG, 0.5f);
+            FadeManager.instance.FadeOut(playerStatCG, 0.5f);
+            saveTime = Time.time;
+            while (Time.time < saveTime + 1f) //0.5f delay before camera move
+                yield return null;
         }
     }
 

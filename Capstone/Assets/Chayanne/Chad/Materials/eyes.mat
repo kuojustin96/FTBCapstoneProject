@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: eyes
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
+  m_ShaderKeywords: _DYNAMICEMISSIONLM_ON _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -60,11 +60,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _ColorLerpTime: 3
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _DynamicEmissionLM: 1
+    - _EmissionLM: 3.37
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 1
     - _GlossyReflections: 0
     - _Metallic: 0
     - _Mode: 0
@@ -80,6 +83,8 @@ Material:
     - _outline_tint: 0.5
     - _outline_width: 0.2
     m_Colors:
+    - _BaseColor: {r: 0.99127793, g: 1, b: 0.36764705, a: 1}
     - _Color: {r: 0.8327094, g: 0.83823526, b: 0.4376081, a: 1}
-    - _EmissionColor: {r: 0.3685234, g: 0.372, b: 0.1946916, a: 1}
+    - _EmissionColor: {r: 0.46314266, g: 0.4662161, b: 0.24339221, a: 0.5561876}
+    - _TargetColor: {r: 0.9862069, g: 1, b: 0, a: 1}
     - _outline_color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
