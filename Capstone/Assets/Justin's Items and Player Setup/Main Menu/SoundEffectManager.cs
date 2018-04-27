@@ -51,7 +51,7 @@ public class SoundEffectManager : MonoBehaviour {
         }
     }
 
-    public void PlaySFX(string sfxTypeName, float volume = 1f, bool canHaveMultiple = false)
+    public void PlaySFX(string sfxTypeName, GameObject audioObject, float volume = 1f, bool canHaveMultiple = false)
     {
         if (!canHaveMultiple)
         {
@@ -65,7 +65,7 @@ public class SoundEffectManager : MonoBehaviour {
         {
             if(sfxTypeName == seo.name)
             {
-                auds = gameObject.AddComponent<AudioSource>();
+                auds = audioObject.AddComponent<AudioSource>();
                 auds.clip = seo.GetRandomClip();
                 break;
             }

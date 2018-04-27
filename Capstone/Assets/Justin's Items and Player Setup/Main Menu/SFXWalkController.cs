@@ -62,22 +62,22 @@ public class SFXWalkController : MonoBehaviour {
         switch (currentSurface)
         {
             case SurfaceType.Wood:
-                sfm.PlaySFX("(Footsteps) Wood");
+                sfm.PlaySFX("(Footsteps) Wood", gameObject);
                 sfm.StopSFX("Gliding");
                 break;
 
             case SurfaceType.Metal:
-                sfm.PlaySFX("(Footsteps) Metal");
+                sfm.PlaySFX("(Footsteps) Metal", gameObject);
                 sfm.StopSFX("Gliding");
                 break;
 
             case SurfaceType.Carpet:
-                sfm.PlaySFX("(Footsteps) Carpet");
+                sfm.PlaySFX("(Footsteps) Carpet", gameObject);
                 sfm.StopSFX("Gliding");
                 break;
 
             case SurfaceType.Gliding:
-                sfm.PlaySFX("Gliding");
+                sfm.PlaySFX("Gliding", gameObject);
                 break;
         }
 
@@ -102,7 +102,7 @@ public class SFXWalkController : MonoBehaviour {
             overrideSFX = true;
             
             if(npc.velocity != Vector3.zero)
-                sfm.PlaySFX(sot.SFXOverrideName);
+                sfm.PlaySFX(sot.SFXOverrideName, gameObject);
         }
     }
 

@@ -312,6 +312,8 @@
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\sugarPickupable.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\sugarSpawning.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" />
+    <Compile Include="Assets\Scripts\VolumetricLight.cs" />
+    <Compile Include="Assets\Scripts\VolumetricLightRenderer.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\MeshBender.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
@@ -420,10 +422,14 @@
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\Resources\Text Documents\NonPriorityTickerText.txt" />
     <None Include="Assets\Resources\Text Documents\PriorityTickerText.txt" />
+    <None Include="Assets\Shaders\BilateralBlur.shader" />
+    <None Include="Assets\Shaders\BlitAdd.shader" />
+    <None Include="Assets\Shaders\VolumetricLight.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />
