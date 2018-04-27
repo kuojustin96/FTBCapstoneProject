@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Networking;
 using Prototype.NetworkLobby;
 using ckp;
 
-public class GameManager : NetworkBehaviour {
+public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 

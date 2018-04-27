@@ -8,7 +8,7 @@ namespace ckp
     {
         public static GameSettingsSO.net_Settings gs;
 
-        public static net_GameManager netgm;
+        public static net_GameManager instance;
 
         public static GameManager gm;
 
@@ -23,12 +23,22 @@ namespace ckp
 
         void Awake()
         {
-            if (netgm == null)
-                netgm = this;
-            else if (netgm != this)
-                Destroy(gameObject);
+            Debug.Log("net_GameManager is up and running!");
+            //Check if instance already exists
+            if (instance == null)
+            {
+                //if not, set instance to this
+                instance = this;
 
-            gs = netgm.GameSettings.Settings;
+            }
+            //If instance already exists and it's not this:
+            else if (instance != this)
+            {
+                //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+                Destroy(gameObject);
+            }
+
+            gs = instance.GameSettings.Settings;
             //Sets this to not be destroyed when reloading scene
             //DontDestroyOnLoad(gameObject);
         }

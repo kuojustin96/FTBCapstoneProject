@@ -63,18 +63,19 @@ public class StatManager : NetworkBehaviour {
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this);
         }
 
-        //SceneManager.sceneLoaded += OnSceneLoaded;
+        DontDestroyOnLoad(this);
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         statTracker = new Dictionary<Stats, int>();
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //if(scene.name == SceneManager.)
-        //    ResetTickerTimer();
+        //Debug.Log("MAKE SURE PLAY SCENE IS SCENE 1 IN BUILD ORDER - CHAYANNE");
+        if (scene.buildIndex == 1)
+            ResetTickerTimer();
     }
 
     void Start()
@@ -95,12 +96,14 @@ public class StatManager : NetworkBehaviour {
         //ply.currentPlayerScore = 10;
         //Debug.Log(GetTickerMessage(TickerMessageType.NonPriority, ply));
 
-        ResetTickerTimer();
+        //ResetTickerTimer();
     }
+
+
 
     private void OnLevelWasLoaded(int level)
     {
-        //if (level == 3)
+        //if (level == 1)
         //{ //Current Jacob Scene
         //    Debug.Log("ON LEVEL LOADED I DID STUFF");
         //    ResetTickerTimer();
@@ -184,7 +187,8 @@ public class StatManager : NetworkBehaviour {
         
         timeUntilTicker = Random.Range(minTickerTime, maxTickerTime);
         //Debug.Log("I FOUND GM " + gm);
-        randNum = Random.Range(0, gm.playerList.Count);
+        int numPlayers = Prototype.NetworkLobby.LobbyManager.s_Singleton.numPlayers;
+        randNum = Random.Range(0, numPlayers);
 
         if (isServer)
             CmdResetTickerTimer(timeUntilTicker, randNum);
