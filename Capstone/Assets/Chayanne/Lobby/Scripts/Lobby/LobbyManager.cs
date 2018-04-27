@@ -74,10 +74,6 @@ namespace Prototype.NetworkLobby
         bool madeHost = false;
         void OnLevelWasLoaded()
         {
-            if (inGame)
-            {
-                boxTopMesh.enabled = false;
-            }
         }
 
         public string GetLocalPlayerName()
