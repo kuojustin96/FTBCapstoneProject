@@ -90,9 +90,13 @@ public class SFXWalkController : MonoBehaviour {
         canStep = true;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         sot = other.GetComponent<SFXOverrideTrigger>();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
         if (sot)
         {
             overrideSFX = true;
@@ -105,13 +109,14 @@ public class SFXWalkController : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         SFXOverrideTrigger temp = other.GetComponent<SFXOverrideTrigger>();
-        if (!temp)
-            return;
-
-        if (temp == sot)
+        if (temp)
         {
-            overrideSFX = false;
-            sot = null;
+            Debug.Log("EXITED THE TRIGGER");
+            if (temp == sot)
+            {
+                overrideSFX = false;
+                sot = null;
+            }
         }
     }
 }

@@ -138,31 +138,18 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
 	public	 IEnumerator DropSugarAni()
 	{
-
 		dropping = true;
-
 		GameObject sugar = sugarInBackpack[0];
 		sugar.SetActive(true);
 		sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
 		float saveTime = Time.time;
-//		Vector3 randomDropLoc = transform.parent.position + transform.forward * -15f;
-//
-//			sugar.transform.DOMove (randomDropLoc, sugarPickupTime / 2);
-//			saveTime = Time.time;
-//			while (Time.time < saveTime + (sugarPickupTime / 2))
-//				yield return null;
-//			sugar.transform.position = randomDropLoc;
-//
-
-
-        //sugar.GetComponent<SimpleRotate>().enabled = true;
-		//	sugar.GetComponent<BoxCollider>().enabled = true;
 		dropping = false;
 		player.DropSugar();
 		uiController.UpdateBackpackScore(player.sugarInBackpack);
 		yield return null;
 	}
+
 	public IEnumerator DropSugarMovement(){
 		GameObject sugar = sugarInBackpack[0];
 		float saveTime = Time.time;

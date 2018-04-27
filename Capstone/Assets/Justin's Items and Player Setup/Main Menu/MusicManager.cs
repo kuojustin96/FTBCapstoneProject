@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using DG.Tweening;
 
@@ -37,6 +38,7 @@ public class MusicManager : MonoBehaviour {
 			DontDestroyOnLoad (gameObject);
 
         DOTween.Init();
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         if (!GetComponent<AudioSource>())
             mainTrackAuds = gameObject.AddComponent<AudioSource>();
@@ -53,6 +55,12 @@ public class MusicManager : MonoBehaviour {
         mainTrackAuds.loop = true;
         mainTrackAuds.playOnAwake = false;
         mainTrackAuds.outputAudioMixerGroup = audMixer.FindMatchingGroups("Music")[0];
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.buildIndex == 1)
+            SwapMainTracks("GroundFloor", 1f, 1f);
     }
 
     private void LoadMusicLibrary()
