@@ -118,43 +118,10 @@ namespace jkuo
 			}
 		}
 
-		private void UpdateCursorLock()
-		{
-			//#if (DEBUG_MODE)
-			//            if (Input.GetMouseButton(0))
-			//            {
-			//                isPaused = false;
-			//                Cursor.visible = false;
-			//                lockMode = CursorLockMode.Locked;
-			//            }
-			//#endif
-
-			//if (Input.GetKeyDown(KeyCode.Escape))
-			//{
-			//    isPaused = !isPaused;
-
-			//    if (isPaused)
-			//    {
-			//        lockMode = CursorLockMode.None;
-			//        Cursor.visible = true;
-			//    }
-			//    else
-			//    {
-			//        Cursor.visible = false;
-			//        lockMode = CursorLockMode.Locked;
-			//    }
-			//}
-
-
-			//Cursor.lockState = lockMode;
-		}
-
 		void Update()
 		{
 			if (isLocalPlayer || offlineTesting)
 			{
-				//UpdateCursorLock();
-
 				if (!player.isStunned)
 				{
 					if (!player.craftingUIOpen)

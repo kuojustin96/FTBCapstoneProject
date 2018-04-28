@@ -122,10 +122,7 @@ public class MusicManager : MonoBehaviour {
     private IEnumerator c_FadeMainTrack(float targetVol, float fadeTime, bool playMusic)
     {
         if (playMusic)
-        {
-            Debug.Log("Play New Music");
             mainTrackAuds.Play();
-        }
 
         mainTrackAuds.DOFade(targetVol, fadeTime).SetEase(Ease.Linear);
         float saveTime = Time.time;
@@ -140,10 +137,14 @@ public class MusicManager : MonoBehaviour {
 
     public void SwapMainTracks(string newMainTrackName, float targetVol, float fadeTime)
     {
+
         foreach(MusicTracks m in Music)
         {
             if(newMainTrackName == m.musicName)
             {
+                if (mainTrackAuds.clip == m.musicComponents["MainTrack"])
+                    return;
+
                 StartCoroutine(c_SwapMainTracks(m.musicComponents["MainTrack"], targetVol, fadeTime));
                 return;
             }

@@ -43,7 +43,7 @@ public class UIController : NetworkBehaviour {
     private RectTransform CraftingItemUIRect;
     public Image CraftingItemFill;
     public TextMeshProUGUI CraftingItemPercentage;
-
+    private bool inCraftMenu = false;
 
     [Header("Ingame UI")]
     public CanvasGroup IngameItemBackgroundUI;
@@ -182,11 +182,13 @@ public class UIController : NetworkBehaviour {
             ToggleCraftingUI();
         }
 
-        //TESTING
-        //if (Input.GetKeyDown(KeyCode.U))
-        //{
-        //    StatManager.instance.CallTickerMessage(TickerMessageType.Win, true);
-        //}
+        UpdateCursorLock();
+    }
+
+    private void UpdateCursorLock()
+    {
+        if (Input.GetMouseButton(0) && Cursor.lockState == CursorLockMode.None && !inCraftMenu)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region Enable/Disable Crafting UI
@@ -222,6 +224,7 @@ public class UIController : NetworkBehaviour {
         CanvasON(CraftingUI);
 
         Cursor.lockState = CursorLockMode.None;
+        inCraftMenu = true;
         //Cursor.visible = true;
     }
 
@@ -234,6 +237,7 @@ public class UIController : NetworkBehaviour {
         CraftingItemFill.gameObject.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
+        inCraftMenu = false;
         //Cursor.visible = false;
 
         foreach (RectTransform rt in ItemButtons)
@@ -471,7 +475,6 @@ public class UIController : NetworkBehaviour {
         }
         else
         {
-            Debug.Log("IM HIDING");
             tickerBackgroud.rectTransform.DOAnchorPosY(tickerDisabledPos.y, tickerLerpTime).SetEase(Ease.OutBack);
 
             float saveTime = Time.time;

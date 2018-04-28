@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour {
 		DropoffPointsClass d = DropoffPoints[x];
 		d.dropoffGO.SetActive (true);
         PlayerClass ply = new PlayerClass();
-		ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + x);
+		ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, LobbyManager.s_Singleton.GetLocalPlayerName());
         player.GetComponent<playerClassAdd>().player = ply;
         playerList.Add(ply);
         playerDropOffDict.Add(d.dropoffGO, ply);
