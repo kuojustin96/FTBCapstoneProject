@@ -210,14 +210,19 @@ namespace jkuo
 
 		private void Movement()
 		{
-			moveHori = transform.right * Input.GetAxis("Horizontal");
+			moveHori = transform.right/3 * Input.GetAxis("Horizontal");
 			moveVert = transform.forward * Input.GetAxis("Vertical");
 
 
 			velocity = (moveHori + moveVert) * speed;
 
 			if (velocity != Vector3.zero) {
-				rb.MovePosition (rb.position + velocity * Time.fixedDeltaTime);
+				if (!isGrounded &&	netAnim.animator.GetInteger ("CurrentState") == 3) {
+					velocity = velocity * 5;
+					rb.velocity = new Vector3 (velocity.x, rb.velocity.y, velocity.z);
+				}
+				else
+					rb.velocity = new Vector3 (velocity.x,rb.velocity.y,velocity.z);
 			}
 			if (Input.GetKey (KeyCode.W) && isGrounded) {
 				if (netAnim.animator.GetInteger ("CurrentState") != 1) {
