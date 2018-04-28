@@ -92,7 +92,8 @@ public class SFXWalkController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        sot = other.GetComponent<SFXOverrideTrigger>();
+        if(other.GetComponent<SFXOverrideTrigger>())
+            sot = other.GetComponent<SFXOverrideTrigger>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -100,9 +101,11 @@ public class SFXWalkController : MonoBehaviour {
         if (sot)
         {
             overrideSFX = true;
-            
-            if(npc.velocity != Vector3.zero)
+
+            if (npc.velocity != Vector3.zero)
+            {
                 sfm.PlaySFX(sot.SFXOverrideName, gameObject);
+            }
         }
     }
 
@@ -111,7 +114,6 @@ public class SFXWalkController : MonoBehaviour {
         SFXOverrideTrigger temp = other.GetComponent<SFXOverrideTrigger>();
         if (temp)
         {
-            Debug.Log("EXITED THE TRIGGER");
             if (temp == sot)
             {
                 overrideSFX = false;

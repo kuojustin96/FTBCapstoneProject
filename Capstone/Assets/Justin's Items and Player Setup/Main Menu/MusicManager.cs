@@ -122,15 +122,15 @@ public class MusicManager : MonoBehaviour {
     private IEnumerator c_FadeMainTrack(float targetVol, float fadeTime, bool playMusic)
     {
         if (playMusic)
-            mainTrackAuds.Play();
-
-        float counter = 0;
-        while(counter < fadeTime)
         {
-            mainTrackAuds.DOFade(targetVol, fadeTime).SetEase(Ease.Linear);
-            counter += Time.deltaTime / fadeTime;
-            yield return null;
+            Debug.Log("Play New Music");
+            mainTrackAuds.Play();
         }
+
+        mainTrackAuds.DOFade(targetVol, fadeTime).SetEase(Ease.Linear);
+        float saveTime = Time.time;
+        while (Time.time < saveTime + fadeTime)
+            yield return null;
 
         mainTrackAuds.volume = targetVol;
 
@@ -160,12 +160,11 @@ public class MusicManager : MonoBehaviour {
             float saveTime = Time.time;
             while (Time.time < saveTime + (fadeTime / 2))
                 yield return null;
-
         }
 
         mainTrackAuds.clip = newMainTrack;
 
-        StartCoroutine(c_FadeMainTrack(targetVol, fadeTime, true));
+        StartCoroutine(c_FadeMainTrack(targetVol, fadeTime / 2, true));
     }
 
 
@@ -192,12 +191,11 @@ public class MusicManager : MonoBehaviour {
         auds.playOnAwake = false;
         auds.Play();
 
-        while(auds.volume < mainTrackAuds.volume)
-        {
-            //auds.volume = Mathf.MoveTowards(auds.volume, mainTrackAuds.volume, Time.deltaTime * fadeTime);
-            auds.DOFade(auds.volume, fadeTime).SetEase(Ease.Linear);
+        auds.DOFade(1f, fadeTime).SetEase(Ease.Linear);
+
+        float saveTime = Time.time;
+        while (Time.time < saveTime + fadeTime)
             yield return null;
-        }
 
         auds.volume = mainTrackAuds.volume;
     }
@@ -218,12 +216,11 @@ public class MusicManager : MonoBehaviour {
     {
         AudioSource auds = musicTrack.componentsPlaying[componentName];
 
-        while (auds.volume > 0)
-        {
-            //auds.volume = Mathf.MoveTowards(auds.volume, 0, Time.deltaTime * fadeTime);
-            auds.DOFade(auds.volume, fadeTime).SetEase(Ease.Linear);
+        auds.DOFade(0, fadeTime).SetEase(Ease.Linear);
+
+        float saveTime = Time.time;
+        while (Time.time < saveTime + fadeTime)
             yield return null;
-        }
 
         auds.volume = 0;
         musicTrack.componentsPlaying.Remove(componentName);

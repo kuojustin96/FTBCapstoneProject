@@ -118,15 +118,22 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		}
 	}
 
-	public void StunDropSugar() //When stunned, drop sugar
+	public void StunDropSugar(int numToDrop = -1) //When stunned, drop sugar
 	{
 		if (sugarInBackpack.Count > 0)
 		{
 			int dropAmount;
-			if (sugarInBackpack.Count == 1)
-				dropAmount = 1;
-			else
-				dropAmount = sugarInBackpack.Count / 2;
+            if (sugarInBackpack.Count == 1)
+            {
+                dropAmount = 1;
+            }
+            else
+            {
+                if (numToDrop < 0)
+                    dropAmount = sugarInBackpack.Count / 2;
+                else
+                    dropAmount = numToDrop;
+            }
 
 			for (int x = 0; x < dropAmount; x++)
 			{

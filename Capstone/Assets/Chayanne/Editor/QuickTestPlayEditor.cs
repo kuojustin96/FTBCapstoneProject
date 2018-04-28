@@ -26,6 +26,12 @@ public class QuickTestPlayEditor : EditorWindow {
 
         if (lobbyScene)
         {
+            if(GUILayout.Button("Swap To Scene"))
+            {
+                EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+                EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(lobbyScene));
+            }
+
             if (GUILayout.Button("Test"))
             {
                 EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
@@ -40,7 +46,7 @@ public class QuickTestPlayEditor : EditorWindow {
 
         if (playScene)
         {
-            if (GUILayout.Button("Test"))
+            if (GUILayout.Button("Swap To Scene"))
             {
                 EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(playScene));
@@ -53,7 +59,7 @@ public class QuickTestPlayEditor : EditorWindow {
 
         if (winScene)
         {
-            if (GUILayout.Button("Test"))
+            if (GUILayout.Button("Swap To Scene"))
             {
                 EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(winScene));

@@ -9,5 +9,6 @@ public class SFXOverrideTrigger : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GetComponent<Collider>().isTrigger = true;
+        GetComponent<MeshRenderer>().enabled = false;
 	}
 }

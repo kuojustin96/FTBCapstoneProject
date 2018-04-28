@@ -6,6 +6,9 @@ public class MusicTriggerBox : MonoBehaviour {
 
     private MusicManager mm;
     public string mainTrackName;
+    [Tooltip("Put value of -1 to use default fade time")]
+    public float fadeTime = -1f;
+    public float targetVolume = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +16,7 @@ public class MusicTriggerBox : MonoBehaviour {
 
         //Safety function
         GetComponent<Collider>().isTrigger = true;
+        GetComponent<MeshRenderer>().enabled = false;
 	}
 	
     //OnTriggerEnter has a higher priority call than OnTriggerExit
@@ -22,7 +26,10 @@ public class MusicTriggerBox : MonoBehaviour {
         {
             if (mm.currentMusicTrigger == null)
             {
-                mm.SwapMainTracks(mainTrackName, 1f, mm.defaultFadeTime);
+                if(fadeTime < 0)
+                    mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime);
+                else
+                    mm.SwapMainTracks(mainTrackName, targetVolume, fadeTime);
             }
 
             mm.currentMusicTrigger = this;
@@ -35,11 +42,12 @@ public class MusicTriggerBox : MonoBehaviour {
         {
             if (mm.currentMusicTrigger != this)
             {
-                mm.SwapMainTracks(mm.currentMusicTrigger.mainTrackName, 1f, mm.defaultFadeTime);
+                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime);
             }
             else
             {
-                mm.SwapMainTracks(mm.defaultTrackName, 1f, mm.defaultFadeTime);
+                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime);
+
                 mm.currentMusicTrigger = null;
             }
         }
