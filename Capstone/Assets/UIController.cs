@@ -27,6 +27,8 @@ public class UIController : NetworkBehaviour {
         public Texture texture;
     }
 
+    public GameObject UICanvas;
+
     [Header("Crafting UI")]
     public ItemTexture[] ItemTextures;
     private Dictionary<string, Texture> TextureDict = new Dictionary<string, Texture>();

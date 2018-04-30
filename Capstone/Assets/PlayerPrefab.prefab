@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 114994965791854626}
   - component: {fileID: 81085988031919310}
   - component: {fileID: 114845058418527874}
+  - component: {fileID: 114168665626943278}
   m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: NetPlayer
@@ -2014,7 +2015,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189846312776972}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 19.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3743,6 +3744,22 @@ MonoBehaviour:
     i15: 202
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114168665626943278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189846312776972}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07138b7cf213903498348c78c2076d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Emotes:
+  - {fileID: 198643749250549362}
+  - {fileID: 198110135843414588}
+  - {fileID: 198774619469836044}
+  - {fileID: 198670858787665374}
 --- !u!114 &114172314954743600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6041,6 +6058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: da2a5f8187d7f5e4a9d81202a5381719, type: 3}
   FaderPanel: {fileID: 225936741955210400}
+  UICanvas: {fileID: 1114035442323022}
   ItemTextures:
   - name: keyHolder
     texture: {fileID: 2800000, guid: 3b164b82f1054464b81392b52dbde96f, type: 3}

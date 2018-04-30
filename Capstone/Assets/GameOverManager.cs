@@ -1,21 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using jkuo;
 
 public class GameOverManager : NetworkBehaviour {
 
     public static GameOverManager instance = null;
+    [Header("End Game")]
+    public GameObject[] SSModels;
+    public Transform[] PersonSpots;
+    public Transform endGameCamPos;
+    public GameObject endGameUICanvas;
     public float waitTimeOnPerson = 3f;
 
     private GameManager gm;
 
     private Camera mainCam;
 
-    private List<Transform> PersonSpots = new List<Transform>();
+    //private List<Transform> PersonSpots = new List<Transform>();
     private List<PlayerClass> playerList = new List<PlayerClass>();
     private TextMeshProUGUI playerScore;
     private TextMeshProUGUI playerStat;
@@ -36,50 +43,65 @@ public class GameOverManager : NetworkBehaviour {
     {
         gm = GameManager.instance;
         DOTween.Init();
+        endGameUICanvas.SetActive(false);
     }
 
     public void EndGame()
     {
-        this.playerList = gm.playerList;
+        SetUpWinScene();
+        //this.playerList = gm.playerList;
         //SceneManager.LoadScene("winScene");
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
 
-        CmdSceneSwap();
+        //NetworkManager.singleton.ServerChangeScene("winScene");
+        //CmdSceneSwap();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        //Find all player UIs and store them in a list
-        //Disable and UIs you don't need
-        if (scene.name == "winScene" && scene.isLoaded) {
-            SetUpWinScene();
+    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    if (scene.name == "winScene" && scene.isLoaded) {
+    //        SetUpWinScene();
 
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }   
-    }
+    //        SceneManager.sceneLoaded -= OnSceneLoaded;
+    //    }   
+    //}
 
     private void SetUpWinScene()
     {
-        GameObject uiCanvas = GameObject.Find("UI Canvas");
-        GameObject ps = GameObject.Find("Person Spots");
-
-        foreach (Transform child in ps.transform)
-            PersonSpots.Add(child);
-
+        gm.endGame = true;
         mainCam = Camera.main;
-        playerUI = uiCanvas.transform.GetChild(0);
-        fadeBackground = uiCanvas.transform.GetChild(1).GetComponent<CanvasGroup>();
 
-        playerScore = playerUI.GetChild(0).GetComponent<TextMeshProUGUI>();
-        playerStat = playerUI.GetChild(1).GetComponent<TextMeshProUGUI>();
-        playerScoreCG = playerScore.GetComponent<CanvasGroup>();
-        playerStatCG = playerStat.GetComponent<CanvasGroup>();
+        for (int x = 0; x < gm.playerList.Count; x++)
+        {
+            GameObject g = gm.playerList[x].playerGO;
+            g.GetComponent<net_PlayerController>().enabled = false;
+            g.GetComponent<winScenePlayerController>().enabled = true;
+            g.transform.position = PersonSpots[x].position;
+            g.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            g.transform.rotation = Quaternion.LookRotation(Vector3.back);
 
-        FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
-        FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
+            Net_Camera_Singleton.instance.GetCamera().enabled = false;
+            Camera.main.transform.position = endGameCamPos.position;
+            Camera.main.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+            Cursor.visible = false;
 
-        StartCoroutine(winSceneAnimation());
+            g.GetComponent<UIController>().UICanvas.SetActive(false);
+        }
+
+        endGameUICanvas.SetActive(true);
+        //playerUI = uiCanvas.transform.GetChild(0);
+        //fadeBackground = uiCanvas.transform.GetChild(1).GetComponent<CanvasGroup>();
+
+        //playerScore = playerUI.GetChild(0).GetComponent<TextMeshProUGUI>();
+        //playerStat = playerUI.GetChild(1).GetComponent<TextMeshProUGUI>();
+        //playerScoreCG = playerScore.GetComponent<CanvasGroup>();
+        //playerStatCG = playerStat.GetComponent<CanvasGroup>();
+
+        //FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
+        //FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
+
+        //StartCoroutine(winSceneAnimation());
     }
 
     private IEnumerator winSceneAnimation()
@@ -131,5 +153,6 @@ public class GameOverManager : NetworkBehaviour {
     public void RpcSceneSwap()
     {
         SceneManager.LoadScene("winScene");
+        //NetworkManager.singleton.ServerChangeScene("winScene");
     }
 }

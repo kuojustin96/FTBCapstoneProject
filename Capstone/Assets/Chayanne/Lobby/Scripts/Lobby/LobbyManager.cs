@@ -540,7 +540,7 @@ namespace Prototype.NetworkLobby
             //LobbyBetterPlayerList list = LobbyPlayerList._instance.theList;
             //Debug.Assert(list);
             //list.RpcRegenerateList(); 
-            Debug.Log("OnServerAddPlayer: " + conn.playerControllers[0].gameObject.name);
+            //Debug.Log("OnServerAddPlayer: " + conn.playerControllers[0].gameObject.name);
         }
 
     }

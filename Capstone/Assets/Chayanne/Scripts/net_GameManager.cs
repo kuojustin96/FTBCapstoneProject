@@ -23,7 +23,6 @@ namespace ckp
 
         void Awake()
         {
-            Debug.Log("net_GameManager is up and running!");
             //Check if instance already exists
             if (instance == null)
             {

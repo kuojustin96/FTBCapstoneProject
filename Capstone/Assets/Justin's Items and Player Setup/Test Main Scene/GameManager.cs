@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
     public float minSpeed = 20f;
 	public static int curPlayers;
 
+    public bool endGame = false;
+
     public GameObject playerPrefab;
     public Material[] playerMats;
 
@@ -92,7 +94,7 @@ public class GameManager : MonoBehaviour {
 		DropoffPointsClass d = DropoffPoints[x];
 		d.dropoffGO.SetActive (true);
         PlayerClass ply = new PlayerClass();
-		ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, LobbyManager.s_Singleton.GetLocalPlayerName());
+		ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + (x + 1));
         player.GetComponent<playerClassAdd>().player = ply;
         playerList.Add(ply);
         playerDropOffDict.Add(d.dropoffGO, ply);
