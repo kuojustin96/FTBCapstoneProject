@@ -24,19 +24,18 @@ public class GameOverManager : NetworkBehaviour {
 
     //private List<Transform> PersonSpots = new List<Transform>();
     private List<PlayerClass> playerList = new List<PlayerClass>();
-    private TextMeshProUGUI playerScore;
-    private TextMeshProUGUI playerStat;
-    private CanvasGroup playerScoreCG;
-    private CanvasGroup playerStatCG;
-    private Transform playerUI;
-    private CanvasGroup fadeBackground;
+    public TextMeshProUGUI playerScore;
+    public TextMeshProUGUI playerStat;
+    public CanvasGroup playerScoreCG;
+    public CanvasGroup playerStatCG;
+    public CanvasGroup fadeBackground;
 
     // Use this for initialization
     void Awake () {
         if (instance == null)
             instance = this;
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
 	}
 
     private void Start()
@@ -48,8 +47,8 @@ public class GameOverManager : NetworkBehaviour {
 
     public void EndGame()
     {
+        this.playerList = gm.playerList;
         SetUpWinScene();
-        //this.playerList = gm.playerList;
         //SceneManager.LoadScene("winScene");
 
         //SceneManager.sceneLoaded += OnSceneLoaded;
@@ -89,24 +88,20 @@ public class GameOverManager : NetworkBehaviour {
             g.GetComponent<UIController>().UICanvas.SetActive(false);
         }
 
+        FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
+        FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
+        FadeManager.instance.CanvasGroupON(fadeBackground, false, false);
         endGameUICanvas.SetActive(true);
         //playerUI = uiCanvas.transform.GetChild(0);
         //fadeBackground = uiCanvas.transform.GetChild(1).GetComponent<CanvasGroup>();
-
-        //playerScore = playerUI.GetChild(0).GetComponent<TextMeshProUGUI>();
-        //playerStat = playerUI.GetChild(1).GetComponent<TextMeshProUGUI>();
         //playerScoreCG = playerScore.GetComponent<CanvasGroup>();
         //playerStatCG = playerStat.GetComponent<CanvasGroup>();
 
-        //FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
-        //FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
-
-        //StartCoroutine(winSceneAnimation());
+        StartCoroutine(WinSceneAnimation());
     }
 
-    private IEnumerator winSceneAnimation()
+    private IEnumerator WinSceneAnimation()
     {
-        FadeManager.instance.CanvasGroupON(fadeBackground, false, false);
         FadeManager.instance.FadeOut(fadeBackground, 1f);
 
         float saveTime = Time.time;
