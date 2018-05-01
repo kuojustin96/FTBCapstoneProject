@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace Prototype.NetworkLobby
 {
@@ -13,8 +14,9 @@ namespace Prototype.NetworkLobby
         public RectTransform lobbyServerList;
         public RectTransform lobbyPanel;
 
-        public InputField ipInput;
-        public InputField matchNameInput;
+        public TMP_InputField ipInput;
+
+        public string defaultMatchName = "Memes";
 
         public bool isHosting = false;
 
@@ -25,8 +27,8 @@ namespace Prototype.NetworkLobby
             ipInput.onEndEdit.RemoveAllListeners();
             ipInput.onEndEdit.AddListener(onEndEditIP);
 
-            matchNameInput.onEndEdit.RemoveAllListeners();
-            matchNameInput.onEndEdit.AddListener(onEndEditGameName);
+            //matchNameInput.onEndEdit.RemoveAllListeners();
+            //matchNameInput.onEndEdit.AddListener(onEndEditGameName);
         }
 
         public void OnClickHost()
@@ -89,7 +91,7 @@ namespace Prototype.NetworkLobby
         {
             lobbyManager.StartMatchMaker();
             lobbyManager.matchMaker.CreateMatch(
-                matchNameInput.text,
+                defaultMatchName,
                 (uint)lobbyManager.maxPlayers,
                 true,
 				"", "", "", 0, 0,

@@ -288,6 +288,7 @@ namespace Prototype.NetworkLobby
         {
             lobbyAnims.PlayOpenBoxAnimation();
             lobbyAnims.PlayCameraZoom();
+            lobbyAnims.FadeMenu(true);
         }
 
         public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
