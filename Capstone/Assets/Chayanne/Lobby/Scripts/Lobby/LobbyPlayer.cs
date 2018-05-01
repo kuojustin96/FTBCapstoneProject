@@ -142,6 +142,7 @@ namespace Prototype.NetworkLobby
         {
 
 
+            readyObject.SetActive(true);
             Debug.Log("Setting local player!");
             CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
@@ -186,7 +187,7 @@ namespace Prototype.NetworkLobby
                 colorButton.interactable = false;
                 nameInput.interactable = false;
 
-                readyObject.SetActive(true);
+                readyObject.SetActive(false);
                 LobbySingleton.instance.getReadyUpText().SetActive(false);
             }
             else
@@ -200,7 +201,7 @@ namespace Prototype.NetworkLobby
                 colorButton.interactable = isLocalPlayer;
                 nameInput.interactable = isLocalPlayer;
 
-                readyObject.SetActive(false);
+                readyObject.SetActive(true);
 
                 LobbySingleton.instance.getReadyUpText().SetActive(true);
             }
