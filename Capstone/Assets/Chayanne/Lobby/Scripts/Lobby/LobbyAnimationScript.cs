@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyAnimationScript : MonoBehaviour {
+public class LobbyAnimationScript : MonoBehaviour
+{
 
     public Animator DoorAnimator;
     public Animator BoxtopAnimator;
     public Animator CameraAnimator;
+    public Animator UIFader;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void PlayOpenDoorAnimation()
     {
@@ -38,6 +42,11 @@ public class LobbyAnimationScript : MonoBehaviour {
         BoxtopAnimator.SetBool("isOpen", false);
 
 
+    }
+
+    public void FadeMenu(bool val)
+    {
+        UIFader.SetBool("FadeMenu", val);
     }
 
     public void PlayCameraZoom()
