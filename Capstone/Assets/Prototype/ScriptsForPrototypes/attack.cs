@@ -9,10 +9,10 @@ public class attack : NetworkBehaviour {
 	public GameObject fireballSpawn;
 	public GameObject fireballPrefab;
 	public NetworkAnimator keyAnim;
-	public NetworkAnimator matchAnim;
+	//public NetworkAnimator matchAnim;
 	public bool attacking;
 	private PlayerClass player;
-	public GameObject cameraCube;
+	public GameObject shooter;
 
 	public GameObject magnetSize;
 
@@ -40,7 +40,7 @@ public class attack : NetworkBehaviour {
 				CmdMatchAttacking ();
 				Debug.Log (player.currentItem.name);
 				attackable = false;
-				Invoke ("Attacking", 4);
+				Invoke ("Attacking", 2);
 			}
 		}
 	}
@@ -90,8 +90,9 @@ public class attack : NetworkBehaviour {
 	//Match
 	[Command]
 	public void CmdMatchAttacking(){
-		if (matchAnim.animator.GetCurrentAnimatorStateInfo (0).IsName ("idle") && !player.isStunned) {
-			Invoke ("CmdFireball", 1.5f);
+		if (!player.isStunned) {
+			//Invoke ("CmdFireball", 1.5f);
+			CmdFireball ();
 		}
 		RpcMatchAnimSend ();
 		Invoke ("CmdMatchStopAttacking", 2.458f);
@@ -106,7 +107,7 @@ public class attack : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void RpcFireball(GameObject Fireball){
-		Fireball.GetComponent<Rigidbody> ().AddForce(cameraCube.transform.forward * 3000);
+		Fireball.GetComponent<Rigidbody> ().AddForce(shooter.transform.forward * 10000);
 
 	}
 
@@ -117,11 +118,11 @@ public class attack : NetworkBehaviour {
 	[ClientRpc]
 	//send anim to all clients
 	public void RpcMatchAnimSend(){
-		matchAnim.animator.SetInteger ("matchAttack",1);
+		//matchAnim.animator.SetInteger ("matchAttack",1);
 	}
 	[ClientRpc]
 	public void RpcMatchAnimStop (){
-		matchAnim.animator.SetInteger ("matchAttack", 0);
+		//matchAnim.animator.SetInteger ("matchAttack", 0);
 		player.itemCharges--;
 		if (player.currentItem != null && player.itemCharges <= 0) {
 
@@ -152,7 +153,7 @@ public class attack : NetworkBehaviour {
 	[ClientRpc]
 	public void RpcobjectTurnoff(){
 		player.currentItem.SetActive (false);
-		//player.currentItem = null;
+		player.currentItem = null;
 		GetComponent<UIController> ().ResetUIItemTexture ();
 
 	}

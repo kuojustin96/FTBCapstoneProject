@@ -6,31 +6,22 @@ using UnityEngine.Networking;
 using jkuo;
 public class fireAttackTrigger : NetworkBehaviour {
 	PlayerClass player;
+	public GameObject explosion;
+	public GameObject flame;
 	void Start(){
-		Debug.Log ("triggerActive");
-		//Invoke ("lateDestroy", 5);
+		Destroy (gameObject,5);
 	}
 
 	void OnTriggerEnter(Collider other){
-
-		if (other.tag == "NetPlayer"){
-			Debug.Log(other);
-			//other.GetComponent<net_PlayerController> ().StunPlayer (10f);
-			GameObject x = other.gameObject;
-			stun (x);
-
-			//Destroy (gameObject);
+		if(other.tag!="sugarPickup")
+		{
+			flame.SetActive (false);
+			explosion.SetActive (true);
+			Debug.Log (other);
+			gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		}
 	}
 
-	public void stun(GameObject other){
 
-		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(4f);
-		Debug.Log ("stunCall");
-	}
-	public void lateDestroy(){
-
-		//Destroy (gameObject);
-	}
 }
 
