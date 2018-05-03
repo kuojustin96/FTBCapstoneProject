@@ -11,6 +11,7 @@ or using SyncVar hook)
     */
 public class NetworkLobbyHook : LobbyHook 
 {
+    //TODO: sync name and physicsl material color
 
     //The problem is that the lobby hook, on builds, executes 
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)

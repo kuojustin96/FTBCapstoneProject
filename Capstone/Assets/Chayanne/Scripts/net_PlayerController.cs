@@ -51,7 +51,7 @@ namespace jkuo
 		public float gravity = 100f;
 		public float downwardAcceleration = 1f;
 		public LayerMask jumpMask;
-		public bool isGrounded;
+		private bool isGrounded;
 		public bool canJump = true;
 		private Vector3 _jumpForce = Vector3.zero;
 
@@ -64,6 +64,7 @@ namespace jkuo
 		private bool isGliding = false;
 		public float gravityDivisor = 20f;
 		public float glideFatigueSpeed = 0.25f;
+
 
 		//Particles
 		public GameObject stun;
@@ -163,6 +164,7 @@ namespace jkuo
 
 		private void Rotation()
 		{
+
 			float xRot;
 			float yRot;
 			xRot = Input.GetAxisRaw("Mouse Y");
@@ -177,49 +179,73 @@ namespace jkuo
 
 		private void Movement()
 		{
-			moveHori = transform.right/3 * Input.GetAxis("Horizontal");
+            Animator anim = netAnim.animator;
+
+			moveHori = transform.right * Input.GetAxis("Horizontal");
 			moveVert = transform.forward * Input.GetAxis("Vertical");
 
+            float x = Input.GetAxis("Vertical");
+            float y = Input.GetAxis("Horizontal");
 
-			velocity = (moveHori + moveVert) * speed;
+            anim.SetFloat("Vertical", x);
+            anim.SetFloat("Horizontal", y);
+            anim.SetBool("IsGrounded", isGrounded);
+            anim.SetBool("IsGliding", isGliding);
+
+            animateCharacter(x, y, isGrounded, isGliding);
+
+            velocity = (moveHori + moveVert) * speed;
 
 			if (velocity != Vector3.zero) {
-				if (!isGrounded &&	netAnim.animator.GetInteger ("CurrentState") == 3) {
+				if (!isGrounded) {
 					velocity = velocity * 5;
 					rb.velocity = new Vector3 (velocity.x, rb.velocity.y, velocity.z);
 				}
 				else
 					rb.velocity = new Vector3 (velocity.x,rb.velocity.y,velocity.z);
 			}
-			if (Input.GetKey (KeyCode.W) && isGrounded) {
-				if (netAnim.animator.GetInteger ("CurrentState") != 1) {
-					animateCharacter (1);
-				}
-			} else if (Input.GetKey (KeyCode.S) && isGrounded) {
-				if (netAnim.animator.GetInteger ("CurrentState") != 2) {
-					animateCharacter (2);
-				}
-			} else if (velocity == Vector3.zero) {
-				animateCharacter (0);
-			} else if (Input.GetKeyDown (KeyCode.Space)) {
-				if (netAnim.animator.GetInteger ("CurrentState") != 3) {
-					animateCharacter (3);
-				}
-			} else if (Input.GetKey (KeyCode.A) && isGrounded) {
-				if (netAnim.animator.GetInteger ("CurrentState") != 4 && Input.GetKey (KeyCode.S) == false && Input.GetKey (KeyCode.W) == false   && netAnim.animator.GetInteger ("CurrentState") != 5  ) {				
-					animateCharacter (4);
-				}
-			}else if (Input.GetKey (KeyCode.D) && isGrounded) {
-				if (netAnim.animator.GetInteger ("CurrentState") != 4 && Input.GetKey (KeyCode.S) == false && Input.GetKey (KeyCode.W) == false   && netAnim.animator.GetInteger ("CurrentState") != 5  ) {
-					animateCharacter (5);
-				}
-			}
+
+
+			//if (Input.GetKey (KeyCode.W) && isGrounded) {   
+			//	if (netAnim.animator.GetInteger ("CurrentState") != 1) {
+			//		animateCharacter (1);
+			//	}
+			//} else if (Input.GetKey (KeyCode.S) && isGrounded) {
+			//	if (netAnim.animator.GetInteger ("CurrentState") != 2) {
+			//		animateCharacter (2);
+			//	}
+			//} else if (velocity == Vector3.zero) {
+			//	animateCharacter (0);
+			//} else if (Input.GetKeyDown (KeyCode.Space)) {
+			//	if (netAnim.animator.GetInteger ("CurrentState") != 3) {
+			//		animateCharacter (3);
+			//	}
+			//} else if (Input.GetKey (KeyCode.A) && isGrounded) {
+			//	if (netAnim.animator.GetInteger ("CurrentState") != 4 && Input.GetKey (KeyCode.S) == false && Input.GetKey (KeyCode.W) == false   && netAnim.animator.GetInteger ("CurrentState") != 5  ) {				
+			//		animateCharacter (4);
+			//	}
+			//}else if (Input.GetKey (KeyCode.D) && isGrounded) {
+			//	if (netAnim.animator.GetInteger ("CurrentState") != 4 && Input.GetKey (KeyCode.S) == false && Input.GetKey (KeyCode.W) == false   && netAnim.animator.GetInteger ("CurrentState") != 5  ) {
+			//		animateCharacter (5);
+			//	}
+			//}
+
+
 		}
 
 
 		private void Jumping()
 		{
-			RaycastHit hit;
+            Animator anim = netAnim.animator;
+            float x = Input.GetAxis("Vertical");
+            float y = Input.GetAxis("Horizontal");
+
+            anim.SetFloat("Vertical", x);
+            anim.SetFloat("Horizontal", y);
+            anim.SetBool("IsGrounded", isGrounded);
+            anim.SetBool("IsGliding", isGliding);
+
+            RaycastHit hit;
 			if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
 			{
 				if (!isGrounded)
@@ -266,7 +292,7 @@ namespace jkuo
 					_jumpForce = transform.up * (jumpForce * 1000);
 					rb.AddForce(_jumpForce * Time.fixedDeltaTime);
 					//if (Input.GetKeyDown(KeyCode.Space) && canJump) {
-					animateCharacter (3);
+					animateCharacter (x,y,isGrounded,isGliding);
 					//}
 
 					currentStamina -= fatigueSpeed;
@@ -419,19 +445,29 @@ namespace jkuo
 			stun.SetActive (false);
 		}	
 
-		public void animateCharacter(int a){
+		public void animateCharacter(float x, float y, bool jump, bool glide){
 			//netAnim.animator.SetInteger ("CurrentState",a);
-			CmdAnimateCharacter (a);
+			CmdAnimateCharacter (x,y,jump,glide);
 		}
-		[Command]
-		public void CmdAnimateCharacter(int a){
+
+
+        [Command]
+		public void CmdAnimateCharacter(float x, float y, bool jump, bool glide)
+        {
 			//netAnim.animator.SetInteger ("CurrentState",a);
-			RpcAnimateCharacter (a);
+			RpcAnimateCharacter (x,y,jump,glide);
 		}
 		[ClientRpc]
-		public void RpcAnimateCharacter(int a){
-			netAnim.animator.SetInteger ("CurrentState",a);
-		}
+		public void RpcAnimateCharacter(float x, float y, bool jump, bool glide)
+        {
+			netAnim.animator.SetFloat ("Horizontal",x);
+
+            netAnim.animator.SetFloat("Vertical", y);
+
+            netAnim.animator.SetBool("IsGrounded", jump);
+
+            netAnim.animator.SetBool("IsGliding", glide);
+        }
 	}
 	#endregion
 }

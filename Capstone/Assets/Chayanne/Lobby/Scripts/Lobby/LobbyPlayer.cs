@@ -149,7 +149,7 @@ namespace Prototype.NetworkLobby
             Debug.Assert(playerCamera, "Player Camera not set");
             lobbyCam.enabled = false;
             cameraScript.SwitchToCameraLocal(playerCamera);
-
+            LobbySingleton.instance.getReadyUpText().SetActive(true);
             if (playerColor == Color.white)
                 CmdColorChange();
 
