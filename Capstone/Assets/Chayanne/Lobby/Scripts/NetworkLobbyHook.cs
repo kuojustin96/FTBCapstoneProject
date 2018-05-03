@@ -24,8 +24,10 @@ public class NetworkLobbyHook : LobbyHook
 
         SyncName(lobbyPlayer, gamePlayer);
 
+        net_TeamScript team = gamePlayer.GetComponent<net_TeamScript>();
 
-        gamePlayer.GetComponent<net_TeamScript>().SetTeam((int)lobby.GetTeamColor());
+        team.SetTeam((int)lobby.GetTeamColor());
+        team.color = lobby.playerColor;
 
         switch (lobby.GetTeamColor())
         {

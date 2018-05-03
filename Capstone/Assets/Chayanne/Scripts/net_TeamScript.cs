@@ -22,6 +22,8 @@ namespace ckp
 			
 		}
 
+        public Color color;
+
         public void SetTeam(int team)
         {
 

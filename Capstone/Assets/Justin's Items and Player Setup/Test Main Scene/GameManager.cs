@@ -101,8 +101,19 @@ public class GameManager : MonoBehaviour {
 
 		//temporary position and color
 		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
-		player.GetComponent<playerClassAdd> ().Hood.GetComponent<Renderer> ().material = playerMats [x];
-		player.GetComponent<playerClassAdd> ().Cloak.GetComponent<Renderer> ().material = playerMats [x];
+
+        playerClassAdd playerClass = player.GetComponent<playerClassAdd>();
+
+
+        //Player has their color when we load in. so...
+
+        //current player's material
+        Material playerMat = playerMats[x];
+        playerMat.color = player.GetComponent<net_TeamScript>().color;
+
+        playerClass.Hood.GetComponent<Renderer> ().material = playerMats [x];
+        playerClass.Cloak.GetComponent<Renderer> ().material = playerMats [x];
+
 		curPlayers++;
     }
 
