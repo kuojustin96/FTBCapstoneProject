@@ -43,6 +43,9 @@ GameObject:
   - component: {fileID: 4633487036845000}
   - component: {fileID: 198560835640846622}
   - component: {fileID: 199807012303042718}
+  - component: {fileID: 135229295197407818}
+  - component: {fileID: 114103477100716972}
+  - component: {fileID: 114472526062659576}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -164,6 +167,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114103477100716972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508814009339462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 251
+    i1: 156
+    i2: 126
+    i3: 130
+    i4: 138
+    i5: 133
+    i6: 191
+    i7: 196
+    i8: 169
+    i9: 206
+    i10: 198
+    i11: 159
+    i12: 124
+    i13: 40
+    i14: 16
+    i15: 216
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114283143023833150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +252,17 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114472526062659576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508814009339462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813a08c581bfec4499c7f2b5fe55ae00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114862760093512304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,6 +276,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 1508814009339462}
   flame: {fileID: 1688567764298198}
+--- !u!135 &135229295197407818
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508814009339462}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.43
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135775247344728696
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -302,7 +360,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1189169534
+  randomSeed: -54340552
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3663,7 +3721,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -636912224
+  randomSeed: -1942932292
   InitialModule:
     serializedVersion: 3
     enabled: 1

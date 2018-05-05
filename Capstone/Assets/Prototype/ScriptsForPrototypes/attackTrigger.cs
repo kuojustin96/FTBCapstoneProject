@@ -6,19 +6,19 @@ using UnityEngine.Networking;
 using jkuo;
 public class attackTrigger : NetworkBehaviour {
 	PlayerClass player;
+
 		void Start(){
 			Debug.Log ("triggerActive");
-		//Invoke ("lateDestroy", 5);
 		}
 	
 		void OnTriggerEnter(Collider other){
 			
 				if (other.tag == "NetPlayer"){
 				Debug.Log(other);
-				//other.GetComponent<net_PlayerController> ().StunPlayer (10f);
 				GameObject x = other.gameObject;
-				stun (x);
 
+				stun (x);
+			
 			//Destroy (gameObject);
 				}
 			}

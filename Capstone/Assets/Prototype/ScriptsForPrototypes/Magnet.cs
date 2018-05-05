@@ -5,7 +5,7 @@ using UnityEngine;
 public class Magnet : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		GetComponentInParent<attack> ().MagnetTurnOn ();
 	}
 	
