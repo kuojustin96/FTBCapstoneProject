@@ -24,6 +24,7 @@ public class GameOverManager : NetworkBehaviour {
 
     //private List<Transform> PersonSpots = new List<Transform>();
     private List<PlayerClass> playerList = new List<PlayerClass>();
+    private PlayerClass[] finalScorePlayerList;
     public TextMeshProUGUI playerScore;
     public TextMeshProUGUI playerStat;
     public CanvasGroup playerScoreCG;
@@ -48,32 +49,64 @@ public class GameOverManager : NetworkBehaviour {
     public void EndGame()
     {
         this.playerList = gm.playerList;
-        SetUpWinScene();
-        //SceneManager.LoadScene("winScene");
-
-        //SceneManager.sceneLoaded += OnSceneLoaded;
-
-        //NetworkManager.singleton.ServerChangeScene("winScene");
-        //CmdSceneSwap();
+        finalScorePlayerList = new PlayerClass[playerList.Count];
+        OrderPlayersBasedOnScore();
     }
 
-    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    //{
-    //    if (scene.name == "winScene" && scene.isLoaded) {
-    //        SetUpWinScene();
+    private void OrderPlayersBasedOnScore()
+    {
+        for (int x = 0; x < gm.playerList.Count; x++)
+            finalScorePlayerList[x] = gm.playerList[x];
 
-    //        SceneManager.sceneLoaded -= OnSceneLoaded;
-    //    }   
-    //}
+        //Insertion Sort
+        int temp;
+        PlayerClass tempPC;
+        int index;
+        for (int x = 1; x < finalScorePlayerList.Length; x++)
+        {
+            temp = finalScorePlayerList[x].currentPlayerScore;
+            tempPC = finalScorePlayerList[x];
+            index = x - 1;
+            while (index >= 0 && finalScorePlayerList[index].currentPlayerScore > temp)
+            {
+                finalScorePlayerList[index + 1] = finalScorePlayerList[index];
+                index--;
+            }
+            finalScorePlayerList[index + 1] = tempPC;
+        }
 
-    private void SetUpWinScene()
+        CmdEndGame();
+    }
+
+    [Command]
+    private void CmdEndGame()
+    {
+        RpcEndGame();
+    }
+
+    [ClientRpc]
+    private void RpcEndGame()
+    {
+        StartCoroutine(SetUpWinScene());
+    }
+
+    private IEnumerator SetUpWinScene()
     {
         gm.endGame = true;
         mainCam = Camera.main;
 
-        for (int x = 0; x < gm.playerList.Count; x++)
+        FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
+        FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
+        endGameUICanvas.SetActive(true);
+
+        FadeManager.instance.FadeIn(fadeBackground, 1f);
+        float saveTime = Time.time;
+        while (Time.time < saveTime + 1f)
+            yield return null;
+
+        for (int x = 0; x < finalScorePlayerList.Length; x++)
         {
-            GameObject g = gm.playerList[x].playerGO;
+            GameObject g = finalScorePlayerList[x].playerGO;
             g.GetComponent<net_PlayerController>().enabled = false;
             g.GetComponent<winScenePlayerController>().enabled = true;
             g.transform.position = PersonSpots[x].position;
@@ -88,14 +121,7 @@ public class GameOverManager : NetworkBehaviour {
             g.GetComponent<UIController>().UICanvas.SetActive(false);
         }
 
-        FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
-        FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
         FadeManager.instance.CanvasGroupON(fadeBackground, false, false);
-        endGameUICanvas.SetActive(true);
-        //playerUI = uiCanvas.transform.GetChild(0);
-        //fadeBackground = uiCanvas.transform.GetChild(1).GetComponent<CanvasGroup>();
-        //playerScoreCG = playerScore.GetComponent<CanvasGroup>();
-        //playerStatCG = playerStat.GetComponent<CanvasGroup>();
 
         StartCoroutine(WinSceneAnimation());
     }
@@ -110,7 +136,7 @@ public class GameOverManager : NetworkBehaviour {
 
         for (int x = 0; x < playerList.Count; x++)
         {
-            playerScore.text = playerList[x].playerName + "\n" + playerList[x].currentPlayerScore;
+            playerScore.text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
             //playerStat.text Implement stat line for player from stat manager
 
             //Move Camera into position
@@ -137,17 +163,21 @@ public class GameOverManager : NetworkBehaviour {
             while (Time.time < saveTime + 1f) //0.5f delay before camera move
                 yield return null;
         }
-    }
 
-    [Command]
-    public void CmdSceneSwap()
-    {
-        RpcSceneSwap();
-    }
-    [ClientRpc]
-    public void RpcSceneSwap()
-    {
-        SceneManager.LoadScene("winScene");
-        //NetworkManager.singleton.ServerChangeScene("winScene");
+        saveTime = Time.time;
+        while (Time.time < saveTime + 4f)
+            yield return null;
+
+        FadeManager.instance.FadeIn(fadeBackground, 1f);
+        saveTime = Time.time;
+        while (Time.time < saveTime + 1f)
+            yield return null;
+
+        if (isServer)
+        {
+            NetworkServer.Shutdown();
+            MasterServer.UnregisterHost();
+            SceneManager.LoadScene(0);
+        }
     }
 }

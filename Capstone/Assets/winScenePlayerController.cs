@@ -42,7 +42,6 @@ public class winScenePlayerController : NetworkBehaviour {
     [Command]
     private void CmdEmote(int emoteNum)
     {
-        Debug.Log("CALLED EMOTE COMMAND");
         RpcEmote(emoteNum);
     }
 
@@ -50,17 +49,15 @@ public class winScenePlayerController : NetworkBehaviour {
     private void RpcEmote(int emoteNum)
     {
         Emotes[emoteNum].Play();
-        Debug.Log("PLAYING EMOTE");
         playingEmote = true;
 
+        Vector3 temp = Emotes[emoteNum].transform.localPosition;
+        temp.x = -4;
+        Emotes[emoteNum].transform.localPosition = temp;
+        Emotes[emoteNum].GetComponent<ParticleSystemRenderer>().alignment = ParticleSystemRenderSpace.View;
+
         if (isLocalPlayer)
-        {
-            Vector3 temp = Emotes[emoteNum].transform.localPosition;
-            temp.x = -4;
-            Emotes[emoteNum].transform.localPosition = temp;
-            Emotes[emoteNum].GetComponent<ParticleSystemRenderer>().alignment = ParticleSystemRenderSpace.View;
             StartCoroutine(c_EmoteCooldown(emoteNum));
-        }
     }
 
     private IEnumerator c_EmoteCooldown(int emoteNum)

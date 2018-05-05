@@ -17,6 +17,7 @@ public enum TickerBehaviors
 public class UIController : NetworkBehaviour {
 
     private PlayerClass player;
+    private jkuo.net_PlayerController npc;
     public Texture2D cursorTexture;
     public CanvasGroup FaderPanel;
 
@@ -72,6 +73,7 @@ public class UIController : NetworkBehaviour {
     private Vector2 tickerDisabledPos;
     public bool tickerEnabled { get; protected set; }
     private bool tickerTextPlaying = false;
+    private string currentMessage;
     private Coroutine tickerCoroutine;
     private Tweener tickerTween;
 
@@ -100,6 +102,7 @@ public class UIController : NetworkBehaviour {
         DOTween.Init();
         SetUpTicker();
 
+        npc = GetComponent<jkuo.net_PlayerController>();
         emoteUICG = emoteUI.GetComponent<CanvasGroup>();
         tickerTextUICG = tickerTextUI.GetComponent<CanvasGroup>();
         emoteUICG.alpha = 0f;
@@ -372,6 +375,9 @@ public class UIController : NetworkBehaviour {
 
     public void ShowTicker(TickerBehaviors tb, string message = null, bool isPriority = false)
     {
+        if (message != null)
+            currentMessage = message;
+
         if (isPriority)
         {
             if (!tickerEnabled)
@@ -393,35 +399,34 @@ public class UIController : NetworkBehaviour {
                     FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
                 }
                 else if (tickerTextUICG.alpha == 1f)
+                {
                     FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
+                }
             }
         }
         else
         {
+            Debug.Log("Non-Priority Ticker Enabled");
             if (!tickerEnabled)
             { //if ticker is not open and emote menu is not open
                 StartCoroutine(ToggleTicker(true, tb, message));
             }
             else
             {
-                if (!tickerEnabled)
-                { //if ticker is not open and emote menu is not open
-                    StartCoroutine(ToggleTicker(true, tb, message));
-                }
-                else
+                if (emoteUICG.alpha != 0f)
                 {
-                    if (emoteUICG.alpha != 0f)
-                    {
-                        FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
-                    }
-                    else if (tickerTextUICG.alpha != 0f)
-                    {
-                        StopCoroutine(tickerCoroutine);
-                        tickerTween.Kill();
-                    }
-
-                    SetTickerMessage(message);
+                    FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
+                    Debug.Log("Change to ticker");
                 }
+                else if (tickerTextUICG.alpha != 0f)
+                {
+                    FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
+                    Debug.Log("Change to emote");
+                    //StopCoroutine(tickerCoroutine);
+                    //tickerTween.Kill();
+                }
+
+                SetTickerMessage(currentMessage);
             }
         }
     }
@@ -430,9 +435,11 @@ public class UIController : NetworkBehaviour {
     {
         if (tickerEnabled)
         {
+            Debug.Log(tickerTextPlaying);
+
             if (tickerTextPlaying && emoteUICG.alpha != 0f)
                 FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
-            else if(tickerTextPlaying && tickerTextUICG.alpha != 0)
+            else if (tickerTextPlaying && tickerTextUICG.alpha != 0)
                 FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
             else
                 StartCoroutine(ToggleTicker(false));
@@ -451,6 +458,7 @@ public class UIController : NetworkBehaviour {
                     break;
 
                 case TickerBehaviors.TickerText:
+                    Debug.Log("TICKET TEXT");
                     startTicker = true;
                     tickerTextPlaying = true;
                     tickerTextUICG.alpha = 1f;
@@ -498,6 +506,7 @@ public class UIController : NetworkBehaviour {
 
     private IEnumerator ShowTickerMessage()
     {
+        tickerTextPlaying = true;
         tickerTextUI.anchoredPosition = new Vector2(2000, tickerTextUI.anchoredPosition.y);
 
         tickerTween = tickerTextUI.DOAnchorPosX(-2500, tickerTextLerpTime).SetEase(Ease.Linear);

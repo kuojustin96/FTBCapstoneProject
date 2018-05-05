@@ -73,12 +73,10 @@ public class StatManager : NetworkBehaviour {
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        uic.Clear();
         //Debug.Log("MAKE SURE PLAY SCENE IS SCENE 1 IN BUILD ORDER - CHAYANNE");
         if (scene.buildIndex == 1)
             ResetTickerTimer();
-        else if (scene.buildIndex == 2 && tickerTimeCoroutine != null)
-            StopCoroutine(tickerTimeCoroutine);
-            
     }
 
     void Start()
@@ -144,6 +142,12 @@ public class StatManager : NetworkBehaviour {
         {
             Debug.LogError("StatManager: Text file is empty");
         }
+    }
+
+    public void StopTickerMessages()
+    {
+        if(tickerTimeCoroutine != null)
+            StopCoroutine(tickerTimeCoroutine);
     }
 
     #region Ticker Control

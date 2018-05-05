@@ -21,7 +21,7 @@ namespace jkuo
 		public GameObject playerUI;
 		public Slider staminaSlider;
 		public ParticleSystem[] Emotes;
-		public bool emoteMenuOpen { get; protected set; }
+        public bool emoteMenuOpen = false;
 		private bool playingEmote = false;
 		private PlayerClass player;
 		private Rigidbody rb;
@@ -79,7 +79,6 @@ namespace jkuo
 			vCam = Net_Camera_Singleton.instance.GetCamera();
 			freeLook = vCam.gameObject.GetComponent<CinemachineFreeLook>();
 
-			emoteMenuOpen = false;
 			uic = GetComponent<UIController>();
 
 			staminaSlider.value = staminaSlider.maxValue;
@@ -338,6 +337,7 @@ namespace jkuo
 
 				if (Input.GetKeyDown(KeyCode.C))
 				{
+                    Debug.Log("CLOSE EMOTE MENU");
 					emoteMenuOpen = false;
 					uic.HideTicker();
 				}
