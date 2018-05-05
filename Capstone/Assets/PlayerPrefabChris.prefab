@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 114845058418527874}
   - component: {fileID: 114168665626943278}
   m_Layer: 10
-  m_Name: PlayerPrefab
+  m_Name: PlayerPrefabChris
   m_TagString: NetPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4065,22 +4065,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 110
-    i1: 114
-    i2: 246
-    i3: 86
-    i4: 154
-    i5: 65
-    i6: 251
+    i0: 210
+    i1: 183
+    i2: 245
+    i3: 232
+    i4: 156
+    i5: 236
+    i6: 242
     i7: 196
-    i8: 8
-    i9: 122
-    i10: 116
-    i11: 63
-    i12: 87
-    i13: 112
-    i14: 15
-    i15: 202
+    i8: 43
+    i9: 81
+    i10: 21
+    i11: 100
+    i12: 79
+    i13: 210
+    i14: 174
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114168665626943278
@@ -4887,22 +4887,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 110
-    i1: 114
-    i2: 246
-    i3: 86
-    i4: 154
-    i5: 65
-    i6: 251
+    i0: 210
+    i1: 183
+    i2: 245
+    i3: 232
+    i4: 156
+    i5: 236
+    i6: 242
     i7: 196
-    i8: 8
-    i9: 122
-    i10: 116
-    i11: 63
-    i12: 87
-    i13: 112
-    i14: 15
-    i15: 202
+    i8: 43
+    i9: 81
+    i10: 21
+    i11: 100
+    i12: 79
+    i13: 210
+    i14: 174
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114372077713769924
@@ -5069,22 +5069,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 110
-    i1: 114
-    i2: 246
-    i3: 86
-    i4: 154
-    i5: 65
-    i6: 251
+    i0: 210
+    i1: 183
+    i2: 245
+    i3: 232
+    i4: 156
+    i5: 236
+    i6: 242
     i7: 196
-    i8: 8
-    i9: 122
-    i10: 116
-    i11: 63
-    i12: 87
-    i13: 112
-    i14: 15
-    i15: 202
+    i8: 43
+    i9: 81
+    i10: 21
+    i11: 100
+    i12: 79
+    i13: 210
+    i14: 174
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114401225642681048
@@ -6237,22 +6237,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 110
-    i1: 114
-    i2: 246
-    i3: 86
-    i4: 154
-    i5: 65
-    i6: 251
+    i0: 210
+    i1: 183
+    i2: 245
+    i3: 232
+    i4: 156
+    i5: 236
+    i6: 242
     i7: 196
-    i8: 8
-    i9: 122
-    i10: 116
-    i11: 63
-    i12: 87
-    i13: 112
-    i14: 15
-    i15: 202
+    i8: 43
+    i9: 81
+    i10: 21
+    i11: 100
+    i12: 79
+    i13: 210
+    i14: 174
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114726637079279308
@@ -6499,22 +6499,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 110
-    i1: 114
-    i2: 246
-    i3: 86
-    i4: 154
-    i5: 65
-    i6: 251
+    i0: 210
+    i1: 183
+    i2: 245
+    i3: 232
+    i4: 156
+    i5: 236
+    i6: 242
     i7: 196
-    i8: 8
-    i9: 122
-    i10: 116
-    i11: 63
-    i12: 87
-    i13: 112
-    i14: 15
-    i15: 202
+    i8: 43
+    i9: 81
+    i10: 21
+    i11: 100
+    i12: 79
+    i13: 210
+    i14: 174
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114806823933991766
@@ -6538,6 +6538,7 @@ MonoBehaviour:
   - {fileID: 198110135843414588}
   - {fileID: 198774619469836044}
   - {fileID: 198670858787665374}
+  emoteMenuOpen: 0
   netAnim: {fileID: 114605775808654718}
   speed: 30
   inAirDamping: 5
@@ -6551,7 +6552,6 @@ MonoBehaviour:
   jumpMask:
     serializedVersion: 2
     m_Bits: 4294966271
-  isGrounded: 0
   canJump: 1
   fatigueSpeed: 1
   gravityDivisor: 5
@@ -6570,6 +6570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamColor: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114820322920255698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6770,22 +6771,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 110
-    i1: 114
-    i2: 246
-    i3: 86
-    i4: 154
-    i5: 65
-    i6: 251
+    i0: 210
+    i1: 183
+    i2: 245
+    i3: 232
+    i4: 156
+    i5: 236
+    i6: 242
     i7: 196
-    i8: 8
-    i9: 122
-    i10: 116
-    i11: 63
-    i12: 87
-    i13: 112
-    i14: 15
-    i15: 202
+    i8: 43
+    i9: 81
+    i10: 21
+    i11: 100
+    i12: 79
+    i13: 210
+    i14: 174
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114853148206355480
