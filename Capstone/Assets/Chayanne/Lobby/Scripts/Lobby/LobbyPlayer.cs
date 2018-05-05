@@ -47,6 +47,7 @@ namespace Prototype.NetworkLobby
         //static Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
         public net_PlayerCameraScript cameraScript;
+        public GameObject gamePlayerObject;
 
         public override void OnStartClient()
         {
@@ -148,7 +149,10 @@ namespace Prototype.NetworkLobby
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
             Debug.Assert(playerCamera, "Player Camera not set");
             lobbyCam.enabled = false;
-            cameraScript.SwitchToCameraLocal(playerCamera);
+
+            //ps: camera sets itself up
+
+            //cameraScript.SwitchToCameraLocal(playerCamera);
             LobbySingleton.instance.getReadyUpText().SetActive(true);
             if (playerColor == Color.white)
                 CmdColorChange();

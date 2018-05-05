@@ -158,7 +158,9 @@ namespace jkuo
 				inFreeLook = false;
 				freeLook.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
 				freeLook.m_XAxis.m_InputAxisName = "";
-			}
+                freeLook.m_XAxis.m_InputAxisValue = 0.0f;
+                freeLook.m_XAxis.Value = 0.0f;
+            }
 		}
 
 

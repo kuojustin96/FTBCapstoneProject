@@ -20,6 +20,7 @@ public class NetworkLobbyHook : LobbyHook
 
         int numPlayers = manager.numPlayers;
 
+
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
         jkuo.net_PlayerController player = gamePlayer.GetComponent<jkuo.net_PlayerController>();
 
@@ -56,9 +57,16 @@ public class NetworkLobbyHook : LobbyHook
         }
     }
 
+
     private static void SyncName(GameObject lobbyPlayer, GameObject gamePlayer)
     {
-        Debug.Log(lobbyPlayer.GetComponent<LobbyPlayer>().playerName + "Joined the game");
+        gamePlayer.GetComponent<NetworkProfile>().SetLobbyPlayer(lobbyPlayer);
+        lobbyPlayer.GetComponent<LobbyPlayer>().gamePlayerObject = gamePlayer;  
+        //gamePlayer.GetComponent<NetworkProfile>().SetLobbyPlayer(lobbyPlayer);
+        //string name = lobbyPlayer.GetComponent<LobbyPlayer>().playerName;
+        //Color color = lobbyPlayer.GetComponent<LobbyPlayer>().playerColor;
+        //gamePlayer.GetComponent<NetworkProfile>().RpcUpdateProfile(name,color);
+        Debug.Log("Joined the game");
     }
 
 

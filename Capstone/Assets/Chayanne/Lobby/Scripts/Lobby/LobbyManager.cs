@@ -184,7 +184,7 @@ namespace Prototype.NetworkLobby
         public void DisplayIsConnecting()
         {
             var _this = this;
-            infoPanel.Display("Connecting...", "Cancel", () => { _this.backDelegate(); });
+            //infoPanel.Display("Connecting...", "Cancel", () => { _this.backDelegate(); });
         }
 
         public void SetServerInfo(string status, string host)
@@ -198,8 +198,8 @@ namespace Prototype.NetworkLobby
         public BackButtonDelegate backDelegate;
         public void GoBackButton()
         {
-            backDelegate();
-            topPanel.isInGame = false;
+            //backDelegate();
+            //topPanel.isInGame = false;
         }
 
         // ----------------- Server management
@@ -228,6 +228,7 @@ namespace Prototype.NetworkLobby
             }
             else
             {
+                Debug.Log("Stopping");
                 StopHost();
             }
 
@@ -542,6 +543,17 @@ namespace Prototype.NetworkLobby
             //Debug.Assert(list);
             //list.RpcRegenerateList(); 
             //Debug.Log("OnServerAddPlayer: " + conn.playerControllers[0].gameObject.name);
+        }
+
+        public override void OnServerSceneChanged(string sceneName)
+        {
+            if (sceneName != lobbyScene)
+            {
+
+               
+
+            }
+
         }
 
     }

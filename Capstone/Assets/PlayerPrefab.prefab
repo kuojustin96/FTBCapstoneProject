@@ -442,6 +442,7 @@ GameObject:
   - component: {fileID: 81085988031919310}
   - component: {fileID: 114845058418527874}
   - component: {fileID: 114168665626943278}
+  - component: {fileID: 114468149358868882}
   m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: NetPlayer
@@ -4886,6 +4887,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minAlpha: 0
+--- !u!114 &114468149358868882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189846312776972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b13081d985f0c4c923fcbbadccda10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114468662868430618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6153,7 +6165,6 @@ MonoBehaviour:
   jumpMask:
     serializedVersion: 2
     m_Bits: 4294966271
-  isGrounded: 0
   canJump: 1
   fatigueSpeed: 1
   gravityDivisor: 5

@@ -6,11 +6,10 @@ using Cinemachine;
 
 public class Lobby_Player_Movement : NetworkBehaviour
 {
-
-
-    public CinemachineVirtualCameraBase mainCam;
-    public CinemachineVirtualCameraBase freeCam;
-
+    [Header("Animation")]
+    public NetworkAnimator netAnimator;
+    Animator anim;
+    CinemachineVirtualCameraBase mainCam;
 
     public bool offlineTesting = false;
 
@@ -37,7 +36,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
     public float gravity = 100f;
     public float downwardAcceleration = 1f;
     public LayerMask jumpMask;
-    private bool isGrounded;
+    private bool isGrounded = true;
     private bool canJump = true;
     private Vector3 _jumpForce = Vector3.zero;
 
@@ -47,6 +46,12 @@ public class Lobby_Player_Movement : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         isFocused = true;
         Cursor.visible = false;
+        anim = netAnimator.animator;
+
+        if(isLocalPlayer)
+        {
+            mainCam = Net_Camera_Singleton.instance.GetCamera();
+        }
 
     }
 
@@ -113,6 +118,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
                     inFreeLook = false;
                 }
             }
+
             //Jump
             Jumping();
 
@@ -136,18 +142,50 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     private void Movement()
     {
+
+
         moveHori = transform.right * Input.GetAxis("Horizontal");
         moveVert = transform.forward * Input.GetAxis("Vertical");
 
+        float x = Input.GetAxis("Vertical");
+        float y = Input.GetAxis("Horizontal");
+
+        anim.SetFloat("Vertical", x);
+        anim.SetFloat("Horizontal", y);
+        anim.SetBool("IsGrounded", isGrounded);
+        animateCharacter(x, y, isGrounded);
 
         velocity = (moveHori + moveVert) * speed;
 
         if (velocity != Vector3.zero)
         {
-            rb.velocity = velocity;
+            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
         }
+
     }
 
+    public void animateCharacter(float x, float y, bool jump)
+    {
+        //netAnim.animator.SetInteger ("CurrentState",a);
+        CmdAnimateCharacter(x, y, jump);
+    }
+
+
+    [Command]
+    public void CmdAnimateCharacter(float x, float y, bool jump)
+    {
+        //netAnim.animator.SetInteger ("CurrentState",a);
+        RpcAnimateCharacter(x, y, jump);
+    }
+    [ClientRpc]
+    public void RpcAnimateCharacter(float x, float y, bool jump)
+    {
+        netAnimator.animator.SetFloat("Horizontal", x);
+
+        netAnimator.animator.SetFloat("Vertical", y);
+
+        netAnimator.animator.SetBool("IsGrounded", jump);
+    }
 
     void Camera()
     {
@@ -161,6 +199,8 @@ public class Lobby_Player_Movement : NetworkBehaviour
         {
             mainCam.gameObject.GetComponent<CinemachineFreeLook>().m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
             mainCam.gameObject.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "";
+            mainCam.gameObject.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisValue = 0.0f;
+            mainCam.gameObject.GetComponent<CinemachineFreeLook>().m_XAxis.Value = 0.0f;
         }
     }
 
