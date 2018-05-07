@@ -62,6 +62,20 @@ public class MainMenuManager : MonoBehaviour {
         PopulateDropdown(resoDropdown);
         fullscreenToggle.isOn = Screen.fullScreen;
         qualityDropdown.value = QualitySettings.GetQualityLevel();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+
+            CloseCurrentCanvas();
+        }
     }
 
     public void PopulateDropdown(TMP_Dropdown dropdown)

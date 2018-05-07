@@ -249,7 +249,7 @@ public class UIController : NetworkBehaviour {
         {
             player.playerPaused = true;
             FadeManager.instance.CanvasGroupON(pauseCG, true, true);
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {

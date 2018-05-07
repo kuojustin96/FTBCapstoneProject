@@ -63,25 +63,21 @@ public class SFXWalkController : NetworkBehaviour {
         switch (currentSurface)
         {
             case SurfaceType.Wood:
-                //sfm.PlaySFX("(Footsteps) Wood", gameObject);
                 CmdPlaySFX("(Footsteps) Wood", gameObject);
-                sfm.StopSFX("Gliding");
+                CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Metal:
-                //sfm.PlaySFX("(Footsteps) Metal", gameObject);
                 CmdPlaySFX("(Footsteps) Metal", gameObject);
-                sfm.StopSFX("Gliding");
+                CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Carpet:
-                //sfm.PlaySFX("(Footsteps) Carpet", gameObject);
                 CmdPlaySFX("(Footsteps) Carpet", gameObject);
-                sfm.StopSFX("Gliding");
+                CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Gliding:
-                //sfm.PlaySFX("Gliding", gameObject);
                 CmdPlaySFX("Gliding", gameObject);
                 break;
         }
@@ -129,14 +125,26 @@ public class SFXWalkController : NetworkBehaviour {
     }
 
     [Command]
-    private void CmdPlaySFX(string sfxName, GameObject audioObject)
+    public void CmdPlaySFX(string sfxName, GameObject audioObject)
     {
         RpcPlaySFX(sfxName, audioObject);
     }
 
     [ClientRpc]
-    private void RpcPlaySFX(string sfxName, GameObject audioObject)
+    public void RpcPlaySFX(string sfxName, GameObject audioObject)
     {
         sfm.PlaySFX(sfxName, audioObject);
+    }
+
+    [Command]
+    public void CmdStopSFX(string sfxName)
+    {
+        RpcStopSFX(sfxName);
+    }
+
+    [ClientRpc]
+    public void RpcStopSFX(string sfxName)
+    {
+        sfm.StopSFX(sfxName);
     }
 }

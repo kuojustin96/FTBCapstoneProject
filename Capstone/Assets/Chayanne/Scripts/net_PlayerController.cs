@@ -122,11 +122,11 @@ namespace jkuo
 		{
 			if (isLocalPlayer || offlineTesting)
 			{
-                if (!player.playerPaused)
+                if (!player.isStunned)
                 {
-                    if (!player.isStunned)
+                    if (!player.craftingUIOpen)
                     {
-                        if (!player.craftingUIOpen)
+                        if (!player.playerPaused)
                         {
                             //Movement
                             Movement();
@@ -136,12 +136,12 @@ namespace jkuo
 
                             FreeCam();
 
-                            //Jump
-                            Jumping();
-
                             //Emotes
                             UseEmotes();
                         }
+
+                        //Jump
+                        Jumping();
                     }
                 }
 			}
@@ -252,15 +252,18 @@ namespace jkuo
             RaycastHit hit;
 			if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
 			{
-				if (!isGrounded)
-					staminaResetCoroutine = StartCoroutine(RegenStamina());
+                if (!player.playerPaused)
+                {
+                    if (!isGrounded)
+                        staminaResetCoroutine = StartCoroutine(RegenStamina());
 
-				isGrounded = true;
-				canJump = true;
-				isGliding = false;
-//				if(netAnim.animator.GetInteger("CurrentState")!=0){
-//					animateCharacter (0);
-//				}
+                    isGrounded = true;
+                    canJump = true;
+                    isGliding = false;
+                    //				if(netAnim.animator.GetInteger("CurrentState")!=0){
+                    //					animateCharacter (0);
+                    //				}
+                }
 			}
 			else
 			{
@@ -289,32 +292,35 @@ namespace jkuo
 				}
 			}
 
-			if (Input.GetKey(KeyCode.Space) && canJump)
-			{
-				if (currentStamina > stamina - maxJumpStamina)
-				{
-					_jumpForce = transform.up * (jumpForce * 1000);
-					rb.AddForce(_jumpForce * Time.fixedDeltaTime);
-					//if (Input.GetKeyDown(KeyCode.Space) && canJump) {
-					animateCharacter (x,y,isGrounded,isGliding);
-					//}
+            if (!player.playerPaused)
+            {
+                if (Input.GetKey(KeyCode.Space) && canJump)
+                {
+                    if (currentStamina > stamina - maxJumpStamina)
+                    {
+                        _jumpForce = transform.up * (jumpForce * 1000);
+                        rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+                        //if (Input.GetKeyDown(KeyCode.Space) && canJump) {
+                        animateCharacter(x, y, isGrounded, isGliding);
+                        //}
 
-					currentStamina -= fatigueSpeed;
-					staminaSlider.value = currentStamina;
-				}
-			}
+                        currentStamina -= fatigueSpeed;
+                        staminaSlider.value = currentStamina;
+                    }
+                }
 
-			if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
-				isGliding = true;
+                if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
+                    isGliding = true;
 
 
-			if (Input.GetKeyUp(KeyCode.Space))
-			{
-				canJump = false;
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    canJump = false;
 
-				if (isGliding)
-					isGliding = false;
-			}
+                    if (isGliding)
+                        isGliding = false;
+                }
+            }
 		}
 
 		private IEnumerator RegenStamina()
