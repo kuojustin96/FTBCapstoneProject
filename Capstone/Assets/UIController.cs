@@ -60,6 +60,19 @@ public class UIController : NetworkBehaviour {
     public RectTransform[] ItemButtons;
     private Vector2 itemButtonSize;
 
+    [Header("Pause UI")]
+    private MainMenuManager mmm;
+    public CanvasGroup pauseCG;
+    public Slider masterVolSlider;
+    public Slider musicVolSlider;
+    public Slider sfxVolSlider;
+    public TMP_InputField mouseSensInput;
+    public TMP_Dropdown resolutionDropdown;
+    public TMP_Dropdown qualityDropdown;
+    public Toggle windowedToggle;
+    public Button exitToMenu;
+    public Button exitToDesktop;
+
     [Header("Ticker")]
     public RawImage tickerBackgroud;
     public float tickerLerpTime = 10f;
@@ -158,6 +171,47 @@ public class UIController : NetworkBehaviour {
 
         this.player = player;
         ci = player.playerGO.GetComponent<craftingInput>();
+
+        //Set Up Pause Menu
+        mmm = MainMenuManager.instance;
+        FadeManager.instance.CanvasGroupOFF(pauseCG, false, false);
+
+        masterVolSlider.onValueChanged.AddListener(delegate { mmm.SetMasterVolume(masterVolSlider.value); });
+        musicVolSlider.onValueChanged.AddListener(delegate { mmm.SetMusicVolume(musicVolSlider.value); });
+        sfxVolSlider.onValueChanged.AddListener(delegate { mmm.SetSFXVolume(sfxVolSlider.value); });
+        windowedToggle.onValueChanged.AddListener(delegate { mmm.SetFullscreen(windowedToggle); });
+        resolutionDropdown.onValueChanged.AddListener(delegate { mmm.SetResolution(resolutionDropdown); });
+        qualityDropdown.onValueChanged.AddListener(delegate { mmm.SetGameQuality(qualityDropdown); });
+        exitToMenu.onClick.AddListener(delegate { mmm.ExitToMenu(); });
+        exitToDesktop.onClick.AddListener(delegate { mmm.QuitGame(); });
+
+        EventTrigger desktopTrigger = exitToDesktop.GetComponent<EventTrigger>();
+        EventTrigger menuTrigger = exitToMenu.GetComponent<EventTrigger>();
+
+        EventTrigger.Entry onButtonEnter = new EventTrigger.Entry();
+        onButtonEnter.eventID = EventTriggerType.PointerEnter;
+        onButtonEnter.callback.AddListener((data) => { mmm.EnterButtonHover((BaseEventData)data); });
+        desktopTrigger.triggers.Add(onButtonEnter);
+        menuTrigger.triggers.Add(onButtonEnter);
+        EventTrigger.Entry onButtonExit = new EventTrigger.Entry();
+        onButtonExit.eventID = EventTriggerType.PointerExit;
+        onButtonExit.callback.AddListener((data) => { mmm.ExitButtonHover(); });
+        desktopTrigger.triggers.Add(onButtonExit);
+        menuTrigger.triggers.Add(onButtonExit);
+
+
+        float tempValue;
+        mmm.audMixer.GetFloat("MasterVolume", out tempValue);
+        masterVolSlider.value = tempValue;
+        mmm.audMixer.GetFloat("MusicVolume", out tempValue);
+        musicVolSlider.value = tempValue;
+        mmm.audMixer.GetFloat("SFXVolume", out tempValue);
+        sfxVolSlider.value = tempValue;
+
+        windowedToggle.isOn = Screen.fullScreen;
+        qualityDropdown.value = QualitySettings.GetQualityLevel();
+
+        mmm.PopulateDropdown(resolutionDropdown);
     }
 	
 	// Update is called once per frame
@@ -167,9 +221,7 @@ public class UIController : NetworkBehaviour {
 
         //Probably want to move this to OnTriggerEnter in sugar pickup
         if (player.showCraftingUI && !player.craftingUIOpen)
-        {
             CanvasON(OpenCraftingUI);
-        }
 
         //Probably want to move this to OnTriggerEnter in sugar pickup
         if (!player.showCraftingUI)
@@ -183,16 +235,33 @@ public class UIController : NetworkBehaviour {
 
 
         if (Input.GetKeyDown(KeyCode.F) && player.showCraftingUI)
-        {
             ToggleCraftingUI();
-        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            TogglePauseMenu();
 
         UpdateCursorLock();
     }
 
+    private void TogglePauseMenu()
+    {
+        if (!player.playerPaused)
+        {
+            player.playerPaused = true;
+            FadeManager.instance.CanvasGroupON(pauseCG, true, true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            player.playerPaused = false;
+            FadeManager.instance.CanvasGroupOFF(pauseCG, false, false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     private void UpdateCursorLock()
     {
-        if (Input.GetMouseButton(0) && Cursor.lockState == CursorLockMode.None && !inCraftMenu)
+        if (Input.GetMouseButton(0) && Cursor.lockState == CursorLockMode.None && !inCraftMenu && !player.playerPaused)
             Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -406,7 +475,6 @@ public class UIController : NetworkBehaviour {
         }
         else
         {
-            Debug.Log("Non-Priority Ticker Enabled");
             if (!tickerEnabled)
             { //if ticker is not open and emote menu is not open
                 StartCoroutine(ToggleTicker(true, tb, message));
@@ -416,12 +484,10 @@ public class UIController : NetworkBehaviour {
                 if (emoteUICG.alpha != 0f)
                 {
                     FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
-                    Debug.Log("Change to ticker");
                 }
                 else if (tickerTextUICG.alpha != 0f)
                 {
                     FadeManager.instance.ChangeMenuPanels(tickerTextUICG, emoteUICG, 0.5f);
-                    Debug.Log("Change to emote");
                     //StopCoroutine(tickerCoroutine);
                     //tickerTween.Kill();
                 }

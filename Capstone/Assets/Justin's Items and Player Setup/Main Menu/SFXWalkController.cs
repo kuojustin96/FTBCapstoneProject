@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using jkuo;
 
 public enum SurfaceType
@@ -12,7 +13,7 @@ public enum SurfaceType
 }
 
 //Put on PlayerPrefab
-public class SFXWalkController : MonoBehaviour {
+public class SFXWalkController : NetworkBehaviour {
 
     public LayerMask layerMask;
     public SurfaceType currentSurface { get; protected set; }
@@ -62,22 +63,26 @@ public class SFXWalkController : MonoBehaviour {
         switch (currentSurface)
         {
             case SurfaceType.Wood:
-                sfm.PlaySFX("(Footsteps) Wood", gameObject);
+                //sfm.PlaySFX("(Footsteps) Wood", gameObject);
+                CmdPlaySFX("(Footsteps) Wood", gameObject);
                 sfm.StopSFX("Gliding");
                 break;
 
             case SurfaceType.Metal:
-                sfm.PlaySFX("(Footsteps) Metal", gameObject);
+                //sfm.PlaySFX("(Footsteps) Metal", gameObject);
+                CmdPlaySFX("(Footsteps) Metal", gameObject);
                 sfm.StopSFX("Gliding");
                 break;
 
             case SurfaceType.Carpet:
-                sfm.PlaySFX("(Footsteps) Carpet", gameObject);
+                //sfm.PlaySFX("(Footsteps) Carpet", gameObject);
+                CmdPlaySFX("(Footsteps) Carpet", gameObject);
                 sfm.StopSFX("Gliding");
                 break;
 
             case SurfaceType.Gliding:
-                sfm.PlaySFX("Gliding", gameObject);
+                //sfm.PlaySFX("Gliding", gameObject);
+                CmdPlaySFX("Gliding", gameObject);
                 break;
         }
 
@@ -104,7 +109,8 @@ public class SFXWalkController : MonoBehaviour {
 
             if (npc.velocity != Vector3.zero)
             {
-                sfm.PlaySFX(sot.SFXOverrideName, gameObject);
+                //sfm.PlaySFX(sot.SFXOverrideName, gameObject);
+                CmdPlaySFX(sot.SFXOverrideName, gameObject);
             }
         }
     }
@@ -120,5 +126,17 @@ public class SFXWalkController : MonoBehaviour {
                 sot = null;
             }
         }
+    }
+
+    [Command]
+    private void CmdPlaySFX(string sfxName, GameObject audioObject)
+    {
+        RpcPlaySFX(sfxName, audioObject);
+    }
+
+    [ClientRpc]
+    private void RpcPlaySFX(string sfxName, GameObject audioObject)
+    {
+        sfm.PlaySFX(sfxName, audioObject);
     }
 }

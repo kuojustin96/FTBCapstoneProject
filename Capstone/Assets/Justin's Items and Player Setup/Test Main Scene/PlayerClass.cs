@@ -23,6 +23,7 @@ public class PlayerClass {
     public bool craftingUIOpen = false;
 	public GameObject currentItem;
 	public string currentItemString;
+    public bool playerPaused = false;
 
     private GameManager gm;
     private net_PlayerController npc;

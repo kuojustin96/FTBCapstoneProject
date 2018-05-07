@@ -93,6 +93,8 @@ public class SoundEffectManager : MonoBehaviour {
         aud.loop = false;
         aud.playOnAwake = false;
         aud.outputAudioMixerGroup = audMixer.FindMatchingGroups("Sound Effects")[0];
+        aud.rolloffMode = AudioRolloffMode.Linear;
+        aud.maxDistance = 50f;
     }
 
     //Only works if canHaveMultiple was set to false

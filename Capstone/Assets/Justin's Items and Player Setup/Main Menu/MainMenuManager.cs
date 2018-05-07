@@ -10,6 +10,8 @@ using DG.Tweening;
 
 public class MainMenuManager : MonoBehaviour {
 
+    public static MainMenuManager instance;
+
     public float fadeTime = 1f;
 
     [Header("Play Game")]
@@ -38,8 +40,18 @@ public class MainMenuManager : MonoBehaviour {
     private bool inButtonTransition = false;
     private GameObject buttonHovered;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Use this for initialization
+    void Start () {
         DOTween.Init();
 
         FadeManager.instance.CanvasGroupOFF(playCanvas, false, false);
@@ -47,22 +59,32 @@ public class MainMenuManager : MonoBehaviour {
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
         FadeManager.instance.CanvasGroupOFF(optionsCanvas, false, false);
 
+        PopulateDropdown(resoDropdown);
+        fullscreenToggle.isOn = Screen.fullScreen;
+        qualityDropdown.value = QualitySettings.GetQualityLevel();
+    }
+
+    public void PopulateDropdown(TMP_Dropdown dropdown)
+    {
         resolutions = Screen.resolutions;
 
         List<string> resoOptions = new List<string>();
         int currentIndex = 0;
-        for(int x = 0; x < resolutions.Length; x++)
+        for (int x = 0; x < resolutions.Length; x++)
         {
             string option = resolutions[x].width + " x " + resolutions[x].height;
             resoOptions.Add(option);
 
             if (resolutions[x].width == Screen.currentResolution.width && resolutions[x].height == Screen.currentResolution.height)
+            {
                 currentIndex = x;
+                Debug.Log(currentIndex);
+            }
         }
-        resoDropdown.AddOptions(resoOptions);
-        resoDropdown.value = currentIndex;
-        resoDropdown.RefreshShownValue();
-	}
+        dropdown.AddOptions(resoOptions);
+        dropdown.value = currentIndex;
+        dropdown.RefreshShownValue();
+    }
 
     public void EnterButtonHover(BaseEventData data)
     {
@@ -176,9 +198,15 @@ public class MainMenuManager : MonoBehaviour {
                 CloseCurrentCanvas();
 
             if (!isCreditsPlaying)
+            {
                 creditsCoroutine = StartCoroutine(c_OpenCredits());
+                MusicManager.instance.SwapMainTracks("OpeningMusic", 0.75f, 1);
+            }
             else
+            {
                 StartCoroutine(c_CloseCredits());
+                MusicManager.instance.SwapMainTracks("PregameLobby", 1, 1);
+            }
         }
     }
 
@@ -205,6 +233,7 @@ public class MainMenuManager : MonoBehaviour {
         while (Time.time < saveTime + fadeTime)
             yield return null;
 
+        MusicManager.instance.SwapMainTracks("PregameLobby", 1, 1);
         isCreditsPlaying = false;
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
     }
@@ -255,6 +284,11 @@ public class MainMenuManager : MonoBehaviour {
         Application.Quit();
     }
 
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void SetMasterVolume(float volume)
     {
         if (volume <= muteVol)
@@ -285,13 +319,32 @@ public class MainMenuManager : MonoBehaviour {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
+    public void SetGameQuality(TMP_Dropdown qualityDropdown)
+    {
+        int qualityIndex = qualityDropdown.value;
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
     public void SetFullscreen()
     {
         bool isFullscreen = fullscreenToggle.isOn;
         Screen.fullScreen = isFullscreen;
     }
 
+    public void SetFullscreen(Toggle fullscreenToggle)
+    {
+        bool isFullscreen = fullscreenToggle.isOn;
+        Screen.fullScreen = isFullscreen;
+    }
+
     public void SetResolution()
+    {
+        int resoIndex = resoDropdown.value;
+        Resolution resolution = resolutions[resoIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void SetResolution(TMP_Dropdown resoDropdown)
     {
         int resoIndex = resoDropdown.value;
         Resolution resolution = resolutions[resoIndex];

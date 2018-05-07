@@ -122,25 +122,28 @@ namespace jkuo
 		{
 			if (isLocalPlayer || offlineTesting)
 			{
-				if (!player.isStunned)
-				{
-					if (!player.craftingUIOpen)
-					{
-						//Movement
-						Movement();
+                if (!player.playerPaused)
+                {
+                    if (!player.isStunned)
+                    {
+                        if (!player.craftingUIOpen)
+                        {
+                            //Movement
+                            Movement();
 
-						//Camera Rotation
-						Rotation();
+                            //Camera Rotation
+                            Rotation();
 
-						FreeCam();
+                            FreeCam();
 
-						//Jump
-						Jumping();
+                            //Jump
+                            Jumping();
 
-						//Emotes
-						UseEmotes();
-					}
-				}
+                            //Emotes
+                            UseEmotes();
+                        }
+                    }
+                }
 			}
 		}
 
