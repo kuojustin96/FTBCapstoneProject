@@ -40,18 +40,25 @@ public class MainMenuManager : MonoBehaviour {
     private bool inButtonTransition = false;
     private GameObject buttonHovered;
 
+    public Slider masterSlider;
+    public Slider sfxSlider;
+    public Slider musicSlider;
+
+    bool preparing = true;
+
     private void Awake()
     {
         if (instance == null)
             instance = this;
         else
-            Destroy(this.gameObject);
+            Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         DOTween.Init();
 
         FadeManager.instance.CanvasGroupOFF(playCanvas, false, false);
@@ -59,11 +66,89 @@ public class MainMenuManager : MonoBehaviour {
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
         FadeManager.instance.CanvasGroupOFF(optionsCanvas, false, false);
 
-        PopulateDropdown(resoDropdown);
-        fullscreenToggle.isOn = Screen.fullScreen;
-        qualityDropdown.value = QualitySettings.GetQualityLevel();
-
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        PopulateDropdown(resoDropdown);
+
+        //Chayanne's Preference saving code
+        bool firstTime = PlayerPrefs.GetInt("FirstRun") == 0;
+
+        //Set defaults on first run
+        if (firstTime)
+        {
+            Debug.Log("First run!");
+            PlayerPrefs.SetInt("FirstRun", 1);
+
+
+            PlayerPrefs.SetInt("QualityLevel", 3);
+
+            PlayerPrefs.SetFloat("MasterVolume", 1);
+            PlayerPrefs.SetFloat("MusicVolume", 1);
+            PlayerPrefs.SetFloat("SFXVolume", 1);
+
+            PlayerPrefs.SetInt("FullScreen", 1);
+
+            int width = Screen.width;
+            int height = Screen.height;
+            PlayerPrefs.SetInt("ScreenWidth", width);
+            PlayerPrefs.SetInt("ScreenHeight", height);
+
+        }
+
+        string currentRes = PlayerPrefs.GetInt("ScreenWidth") + " x " + PlayerPrefs.GetInt("ScreenHeight");
+        Debug.Log("current Resolution: " + currentRes);
+        //load settings
+        int qualitySettings = PlayerPrefs.GetInt("QualityLevel");
+
+        float masterVolume = PlayerPrefs.GetFloat("MasterVolume");
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        float sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
+
+        //Debug.Log("Master: " + masterVolume);
+        //Debug.Log("Music: " + musicVolume);
+        //Debug.Log("SFX: " + sfxVolume);
+
+
+        SetMasterVolume(masterVolume);
+        SetMusicVolume(musicVolume);
+        SetSFXVolume(sfxVolume);
+
+        int prefsWidth = PlayerPrefs.GetInt("ScreenWidth");
+        int prefsHeight = PlayerPrefs.GetInt("ScreenHeight");
+        bool isFullScreen = (PlayerPrefs.GetInt("FullScreen") == 1);
+        fullscreenToggle.isOn = isFullScreen;
+
+        SetDropdownValue(prefsWidth, prefsHeight);
+
+        //Debug.Log("Menu thing says " + resolutions[resoDropdown.value]);
+
+        qualityDropdown.value = qualitySettings;
+
+        //Set resoulution based on width and height
+        Screen.SetResolution(prefsWidth, prefsHeight, isFullScreen);
+
+        preparing = false;
+
+    }
+
+    private void SetDropdownValue(int prefsWidth, int prefsHeight)
+    {
+        //Set dropdown (Yes it's this fucking complicated)
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            bool widthMatches = ((resolutions[i].width - prefsWidth) == 0);
+            bool heightMatches = ((resolutions[i].height - prefsHeight) == 0);
+            //Debug.Log(resolutions[i].width - prefsWidth);
+            //Debug.Log(resolutions[i].height - prefsHeight);
+
+            //Debug.Log("Testing " + resolutions[i].width + " x " + resolutions[i].height + " with " + currentRes + " Results: " + widthMatches + "," + heightMatches);
+            if (widthMatches && heightMatches)
+            {
+                //Debug.Log("MEME!");
+                resoDropdown.value = i;
+                break;
+            }
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -86,18 +171,20 @@ public class MainMenuManager : MonoBehaviour {
         int currentIndex = 0;
         for (int x = 0; x < resolutions.Length; x++)
         {
-            string option = resolutions[x].width + " x " + resolutions[x].height;
+            string option = resolutions[x].ToString();
             resoOptions.Add(option);
 
             if (resolutions[x].width == Screen.currentResolution.width && resolutions[x].height == Screen.currentResolution.height)
             {
                 currentIndex = x;
-                Debug.Log(currentIndex);
+                //Debug.Log(currentIndex);
             }
         }
         dropdown.AddOptions(resoOptions);
         dropdown.value = currentIndex;
         dropdown.RefreshShownValue();
+
+
     }
 
     public void EnterButtonHover(BaseEventData data)
@@ -309,14 +396,21 @@ public class MainMenuManager : MonoBehaviour {
             volume = -80f;
 
         audMixer.SetFloat("MasterVolume", volume);
+        masterSlider.value = volume;
+        PlayerPrefs.SetFloat("MasterVolume", masterSlider.value);
+
     }
 
     public void SetMusicVolume(float volume)
     {
+        //Debug.Log("Set music to " + volume);
         if (volume <= muteVol)
             volume = -80f;
 
         audMixer.SetFloat("MusicVolume", volume);
+        musicSlider.value = volume;
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+
     }
 
     public void SetSFXVolume(float volume)
@@ -325,43 +419,85 @@ public class MainMenuManager : MonoBehaviour {
             volume = -80f;
 
         audMixer.SetFloat("SFXVolume", volume);
+        sfxSlider.value = volume;
+
+        PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
+
     }
 
     public void SetGameQuality()
     {
         int qualityIndex = qualityDropdown.value;
         QualitySettings.SetQualityLevel(qualityIndex);
+        qualityDropdown.value = qualityIndex;
+
+        PlayerPrefs.SetInt("QualityLevel", qualityIndex);
     }
 
     public void SetGameQuality(TMP_Dropdown qualityDropdown)
     {
         int qualityIndex = qualityDropdown.value;
         QualitySettings.SetQualityLevel(qualityIndex);
+
+        PlayerPrefs.SetInt("QualityLevel", qualityIndex);
     }
 
     public void SetFullscreen()
     {
         bool isFullscreen = fullscreenToggle.isOn;
         Screen.fullScreen = isFullscreen;
+
+        if (isFullscreen)
+        {
+            PlayerPrefs.SetInt("FullScreen", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("FullScreen", 0);
+        }
     }
 
     public void SetFullscreen(Toggle fullscreenToggle)
     {
         bool isFullscreen = fullscreenToggle.isOn;
         Screen.fullScreen = isFullscreen;
+
+        if (isFullscreen)
+        {
+            PlayerPrefs.SetInt("FullScreen", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("FullScreen", 0);
+        }
     }
 
     public void SetResolution()
     {
+        if (preparing)
+            return;
+        Debug.Log("Value Changed");
         int resoIndex = resoDropdown.value;
         Resolution resolution = resolutions[resoIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+
+
+        PlayerPrefs.SetInt("ScreenWidth", resolution.width);
+        PlayerPrefs.SetInt("ScreenHeight", resolution.height);
     }
+
+
 
     public void SetResolution(TMP_Dropdown resoDropdown)
     {
+        Debug.Log("Value Changed");
         int resoIndex = resoDropdown.value;
         Resolution resolution = resolutions[resoIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
+        PlayerPrefs.SetInt("ScreenWidth", resolution.width);
+        PlayerPrefs.SetInt("ScreenHeight", resolution.height);
     }
+
 }

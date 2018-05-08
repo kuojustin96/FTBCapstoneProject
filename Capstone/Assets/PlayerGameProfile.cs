@@ -66,7 +66,7 @@ public class PlayerGameProfile : MonoBehaviour {
 
     public void UpdatePlayerName()
     {
-        Debug.Log("Name is " + text.text);
+        //Debug.Log("Name is " + text.text);
         data.name = text.text;
 
         PlayerPrefs.SetString("PlayerName", data.name);    
