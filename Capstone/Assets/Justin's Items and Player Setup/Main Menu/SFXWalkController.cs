@@ -24,11 +24,13 @@ public class SFXWalkController : NetworkBehaviour {
     private SoundEffectManager sfm;
     private SFXOverrideTrigger sot;
     private net_PlayerController npc;
+    private NetworkSoundController nsc;
 
 	// Use this for initialization
 	void Start () {
         sfm = SoundEffectManager.instance;
         npc = GetComponent<net_PlayerController>();
+        nsc = GetComponent<NetworkSoundController>();
 	}
 	
 	// Update is called once per frame
@@ -63,22 +65,22 @@ public class SFXWalkController : NetworkBehaviour {
         switch (currentSurface)
         {
             case SurfaceType.Wood:
-                CmdPlaySFX("(Footsteps) Wood", gameObject);
-                CmdStopSFX("Gliding");
+                nsc.CmdPlaySFX("(Footsteps) Wood", gameObject);
+                nsc.CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Metal:
-                CmdPlaySFX("(Footsteps) Metal", gameObject);
-                CmdStopSFX("Gliding");
+                nsc.CmdPlaySFX("(Footsteps) Metal", gameObject);
+                nsc.CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Carpet:
-                CmdPlaySFX("(Footsteps) Carpet", gameObject);
-                CmdStopSFX("Gliding");
+                nsc.CmdPlaySFX("(Footsteps) Carpet", gameObject);
+                nsc.CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Gliding:
-                CmdPlaySFX("Gliding", gameObject);
+                nsc.CmdPlaySFX("Gliding", gameObject);
                 break;
         }
 
@@ -105,8 +107,7 @@ public class SFXWalkController : NetworkBehaviour {
 
             if (npc.velocity != Vector3.zero)
             {
-                //sfm.PlaySFX(sot.SFXOverrideName, gameObject);
-                CmdPlaySFX(sot.SFXOverrideName, gameObject);
+                nsc.CmdPlaySFX(sot.SFXOverrideName, gameObject);
             }
         }
     }
@@ -122,29 +123,5 @@ public class SFXWalkController : NetworkBehaviour {
                 sot = null;
             }
         }
-    }
-
-    [Command]
-    public void CmdPlaySFX(string sfxName, GameObject audioObject)
-    {
-        RpcPlaySFX(sfxName, audioObject);
-    }
-
-    [ClientRpc]
-    public void RpcPlaySFX(string sfxName, GameObject audioObject)
-    {
-        sfm.PlaySFX(sfxName, audioObject);
-    }
-
-    [Command]
-    public void CmdStopSFX(string sfxName)
-    {
-        RpcStopSFX(sfxName);
-    }
-
-    [ClientRpc]
-    public void RpcStopSFX(string sfxName)
-    {
-        sfm.StopSFX(sfxName);
     }
 }
