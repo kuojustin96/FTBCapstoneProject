@@ -6,13 +6,14 @@ using UnityEngine.Networking;
 public class sugarSpawning : NetworkBehaviour {
 	public bool Alive;
 	public float SpawnTime;
-	public float curTime;
+	private float curTime;
 	public GameObject sugarPrefab;
 	// Use this for initialization
 	void Start () {
 		Alive = false;
-		curTime = 0;
-		SpawnTime = 5;
+        //curTime = 0;
+        //SpawnTime = 5;
+        curTime = SpawnTime - 1;
 	}
 	// Update is called once per frame
 	void Update () {
