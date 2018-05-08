@@ -13,23 +13,24 @@ public class NetworkLobbyHook : LobbyHook
 {
     //TODO: sync name and physicsl material color
 
-    //The problem is that the lobby hook, on builds, executes 
     public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer)
     {
         Debug.Log("Let's Go");
 
-        int numPlayers = manager.numPlayers;
 
 
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
         jkuo.net_PlayerController player = gamePlayer.GetComponent<jkuo.net_PlayerController>();
 
-        SyncName(lobbyPlayer, gamePlayer);
+        int playerNum = lobby.playerNum;
+        SyncName(lobbyPlayer, gamePlayer, playerNum);
 
         net_TeamScript team = gamePlayer.GetComponent<net_TeamScript>();
 
         team.SetTeam((int)lobby.GetTeamColor());
         team.color = lobby.playerColor;
+
+
 
         switch (lobby.GetTeamColor())
         {
@@ -58,10 +59,22 @@ public class NetworkLobbyHook : LobbyHook
     }
 
 
-    private static void SyncName(GameObject lobbyPlayer, GameObject gamePlayer)
+    private static void SyncName(GameObject lobbyPlayer, GameObject gamePlayer, int playerNum)
     {
-        gamePlayer.GetComponent<NetworkProfile>().SetLobbyPlayer(lobbyPlayer);
-        lobbyPlayer.GetComponent<LobbyPlayer>().gamePlayerObject = gamePlayer;  
+        NetworkProfile profile = gamePlayer.GetComponent<NetworkProfile>();
+        //lobbyPlayer.GetComponent<LobbyPlayer>().gamePlayerObject = gamePlayer;
+
+        //LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
+
+
+        string name = lobbyPlayer.GetComponent<LobbyPlayer>().playerName;
+        Color color = lobbyPlayer.GetComponent<LobbyPlayer>().playerColor;
+
+        profile.UpdateProfile(name, color, playerNum);
+
+
+        Debug.Log("Synced my names!");
+        Debug.Assert(gamePlayer.GetComponent<NetworkProfile>(),"Rip me");
         //gamePlayer.GetComponent<NetworkProfile>().SetLobbyPlayer(lobbyPlayer);
         //string name = lobbyPlayer.GetComponent<LobbyPlayer>().playerName;
         //Color color = lobbyPlayer.GetComponent<LobbyPlayer>().playerColor;

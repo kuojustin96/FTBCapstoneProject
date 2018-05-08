@@ -49,6 +49,7 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
 
         if(! isReady && Input.GetKeyDown(KeyCode.G))
         {
+            Debug.Log("meme!");
             isReady = true;
 
             GetComponent<Prototype.NetworkLobby.LobbyPlayer>().OnReadyClicked();

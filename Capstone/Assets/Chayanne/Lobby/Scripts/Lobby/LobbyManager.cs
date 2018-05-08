@@ -41,6 +41,8 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
+
+
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
@@ -65,11 +67,13 @@ namespace Prototype.NetworkLobby
         bool inGame = false;
 
         [SerializeField]
-        Text nameField;
+        TMPro.TMP_InputField nameField;
 
         public Transform playerListTransform;
 
         public LobbyPlayer host;
+
+
 
         bool madeHost = false;
         void OnLevelWasLoaded()
@@ -145,6 +149,12 @@ namespace Prototype.NetworkLobby
             }
             else
             {
+                //GameObject player = conn.playerControllers[0].gameObject;
+
+                //string theName = PlayerGameProfile.instance.GetPlayerData().name;
+                //Color theColor = PlayerGameProfile.instance.GetPlayerData().color;
+                //player.GetComponent<NetworkProfile>().CmdUpdateProfile(theName,theColor);
+                Debug.Log("serverclientscenechanged");
                 ChangeTo(null);
 
                 Destroy(GameObject.Find("MainMenuUI(Clone)"));
@@ -153,6 +163,8 @@ namespace Prototype.NetworkLobby
                 topPanel.isInGame = true;
                 topPanel.ToggleVisibility(false);
             }
+
+
         }
 
         public void ChangeTo(RectTransform newPanel)
@@ -410,6 +422,8 @@ namespace Prototype.NetworkLobby
             if (_lobbyHooks)
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
 
+            //todo: find the first callback that triggers after player spawns
+
             return true;
         }
 
@@ -547,6 +561,7 @@ namespace Prototype.NetworkLobby
 
         public override void OnServerSceneChanged(string sceneName)
         {
+            Debug.Log("serverscenechanged");
             if (sceneName != lobbyScene)
             {
 

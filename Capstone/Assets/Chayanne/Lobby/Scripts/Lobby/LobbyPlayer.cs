@@ -14,6 +14,7 @@ namespace Prototype.NetworkLobby
     public class LobbyPlayer : NetworkLobbyPlayer
     {
         static Color[] Colors = new Color[] { Color.red, Color.green, Color.magenta, Color.yellow };
+
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
@@ -49,6 +50,8 @@ namespace Prototype.NetworkLobby
         public net_PlayerCameraScript cameraScript;
         public GameObject gamePlayerObject;
 
+        public int playerNum;
+
         public override void OnStartClient()
         {
             Debug.Log("=========OnStartClient=========");
@@ -57,6 +60,15 @@ namespace Prototype.NetworkLobby
 
         }
 
+        public virtual void OnLobbyServerSceneChanged(string sceneName)
+        {
+            if(sceneName == LobbyManager.s_Singleton.playScene)
+            {
+
+
+
+            }
+        }
 
         public override void OnClientEnterLobby()
         {
@@ -147,8 +159,9 @@ namespace Prototype.NetworkLobby
             Debug.Log("Setting local player!");
             CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
-            Debug.Assert(playerCamera, "Player Camera not set");
             lobbyCam.enabled = false;
+
+            PlayerGameProfile.instance.SetLobbyPlayer(this);
 
             //ps: camera sets itself up
 
@@ -335,6 +348,8 @@ namespace Prototype.NetworkLobby
             }
 
             playerColor = Colors[idx];
+
+            playerNum = idx;
 
 
         }

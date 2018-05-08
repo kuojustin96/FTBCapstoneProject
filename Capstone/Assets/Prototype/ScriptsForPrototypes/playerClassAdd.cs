@@ -18,8 +18,14 @@ public class playerClassAdd : MonoBehaviour {
         }
 	}
 
-    public void SetName(string name)
+    public void SetMaterialColor(Color color,int playerNum)
     {
+
+        //Player has their color when we load in. so...
+
+        Hood.GetComponent<Renderer>().material.color = color;
+        Cloak.GetComponent<Renderer>().material.color = color;
+        Debug.Log("My name is " + player.playerName);
 
     }
 }

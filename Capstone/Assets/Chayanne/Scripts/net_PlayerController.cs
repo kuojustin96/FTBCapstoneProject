@@ -188,6 +188,8 @@ namespace jkuo
 			moveHori = transform.right * Input.GetAxis("Horizontal");
 			moveVert = transform.forward * Input.GetAxis("Vertical");
 
+            
+
             float x = Input.GetAxis("Vertical");
             float y = Input.GetAxis("Horizontal");
 

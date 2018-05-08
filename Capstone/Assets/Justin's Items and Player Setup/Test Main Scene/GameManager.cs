@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour {
 
 	public void SetUpGame(GameObject player, net_TeamScript.Team team)
     {
+        Debug.Log("SetUpGame called");
 		int x = curPlayers;
 		DropoffPointsClass d = DropoffPoints[x];
 		d.dropoffGO.SetActive (true);
@@ -103,16 +104,6 @@ public class GameManager : MonoBehaviour {
 		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
 
         playerClassAdd playerClass = player.GetComponent<playerClassAdd>();
-
-
-        //Player has their color when we load in. so...
-
-        //current player's material
-        Material playerMat = playerMats[x];
-        playerMat.color = player.GetComponent<net_TeamScript>().color;
-
-        playerClass.Hood.GetComponent<Renderer> ().material = playerMats [x];
-        playerClass.Cloak.GetComponent<Renderer> ().material = playerMats [x];
 
 		curPlayers++;
     }
