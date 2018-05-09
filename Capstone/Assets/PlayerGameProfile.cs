@@ -81,9 +81,10 @@ public class PlayerGameProfile : MonoBehaviour {
         data = new PlayerData();
 
         string theName = PlayerPrefs.GetString("PlayerName");
-        if (PlayerPrefs.GetString("PlayerName") == "")
+		Debug.Log (theName);
+        if (theName == "")
         {
-            data.name = "Chad";
+			theName = "Chad";
         }
         else
         {
@@ -91,7 +92,6 @@ public class PlayerGameProfile : MonoBehaviour {
         }
         //updates the name field;
         text.text = theName;
-
         data.name = theName;
 
     }
