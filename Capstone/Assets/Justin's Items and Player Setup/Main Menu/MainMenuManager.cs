@@ -88,7 +88,8 @@ public class MainMenuManager : MonoBehaviour {
             int width = Screen.width;
             int height = Screen.height;
             PlayerPrefs.SetInt("ScreenWidth", width);
-            PlayerPrefs.SetInt("ScreenHeight", height);
+            PlayerPrefs.SetInt("ScreenHeight", height); 
+            PlayerPrefs.SetFloat("MouseSensitivity", 3.0f);
 
         }
 
@@ -101,7 +102,14 @@ public class MainMenuManager : MonoBehaviour {
         float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         float sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
 
+        
         float mouseSens = PlayerPrefs.GetFloat("MouseSensitivity");
+        if(mouseSens <= 0)
+        {
+            //when updating from a build before this build, default it since FirstTime already ran;
+            mouseSens = 3.0f;
+        }
+        mouseSensInputField.text = mouseSens.ToString();
 
         SetMasterVolume(masterVolume);
         SetMusicVolume(musicVolume);
