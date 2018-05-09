@@ -82,6 +82,8 @@ public class PlayerSugarPickup : NetworkBehaviour {
 			runAnimation = false;
             uiController.CancelCrafting();
             player.inBase = false;
+			if (player.craftingUIOpen)
+				player.craftingUIOpen = false;
 		}
 	}
 
