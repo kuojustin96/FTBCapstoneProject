@@ -19,7 +19,6 @@ public class fireProjectileTrigger : NetworkBehaviour {
 			GameObject x = other.gameObject;
 			stun (x);
 
-			Destroy (gameObject);
 		}
 	}
 
@@ -30,7 +29,7 @@ public class fireProjectileTrigger : NetworkBehaviour {
 	}
 	public void lateDestroy(){
 
-		Destroy (gameObject);
+		Destroy (gameObject.transform.root);
 	}
 }
 

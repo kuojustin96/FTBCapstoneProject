@@ -13,15 +13,19 @@ public class fireAttackTrigger : NetworkBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.tag!="sugarPickup")
+		if(other.tag!="sugarPickup" && other.tag !="NetPlayer")
 		{
 			flame.SetActive (false);
 			explosion.SetActive (true);
 			Debug.Log (other);
 			gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+			Invoke ("destroyLate", .5f);
 		}
 	}
 
+	public void destroyLate(){
+
+	}
 
 }
 

@@ -8,6 +8,11 @@ public class attack : NetworkBehaviour {
 	public GameObject attackTrigger;
 	public GameObject fireballSpawn;
 	public GameObject fireballPrefab;
+	public GameObject tornadoPrefab;
+	public GameObject tornadoSpawn;
+	public GameObject blizzardPrefab;
+	public GameObject blizzardSpawn;
+
 	public NetworkAnimator keyAnim;
 	//public NetworkAnimator matchAnim;
 	public bool attacking;
@@ -38,6 +43,18 @@ public class attack : NetworkBehaviour {
 			}
 			if (player.currentItem.name == "matchHolder" ) {
 				CmdMatchAttacking ();
+				Debug.Log (player.currentItem.name);
+				attackable = false;
+				Invoke ("Attacking", 2);
+			}
+			if (player.currentItem.name == "iceHolder" ) {
+				CmdBlizzard ();
+				Debug.Log (player.currentItem.name);
+				attackable = false;
+				Invoke ("Attacking", 2);
+			}
+			if (player.currentItem.name == "fanHolder" ) {
+				CmdTornado();
 				Debug.Log (player.currentItem.name);
 				attackable = false;
 				Invoke ("Attacking", 2);
@@ -145,6 +162,83 @@ public class attack : NetworkBehaviour {
 		magnetSize.GetComponent<SphereCollider> ().radius = 5;
 		CmdobjectTurnoff ();
 	}
+
+	// Magnet
+
+
+	//Blizzard
+	[Command]
+	public void CmdBlizzard(){
+		if (!player.isStunned) {
+			CmdBlizzardSpawn ();
+		}
+		Invoke ("CmdBlizzardStopAttacking", 2.458f);
+	}
+
+	[Command]
+	public void CmdBlizzardSpawn(){
+		Debug.Log ("blizzard");
+		GameObject blizzard = Instantiate (blizzardPrefab, blizzardSpawn.transform.position,transform.rotation);
+		NetworkServer.Spawn (blizzard);
+
+		RpcBlizzard (blizzard,gameObject);
+	}
+	[ClientRpc]
+	public void RpcBlizzard(GameObject Blizzard, GameObject player){
+		Blizzard.GetComponent<blizzardTrigger>().parentPlayer = player;
+	}
+
+	[Command]
+	public void CmdBlizzardStopAttacking(){
+		RpcBlizzardAnimStop ();
+	}
+	[ClientRpc]
+	public void RpcBlizzardAnimStop (){
+		//matchAnim.animator.SetInteger ("matchAttack", 0);
+		player.itemCharges--;
+		if (player.currentItem != null && player.itemCharges <= 0) {
+
+			CmdobjectTurnoff ();
+		}
+	}
+	// Blizzard
+
+	//Tornado
+	[Command]
+	public void CmdTornado(){
+		if (!player.isStunned) {
+			CmdTornadoSpawn ();
+		}
+		Invoke ("CmdTornadoStopAttacking", 2.458f);
+	}
+
+	[Command]
+	public void CmdTornadoSpawn(){
+		Debug.Log ("tornado");
+		GameObject tornado = Instantiate (tornadoPrefab, tornadoSpawn.transform.position,transform.rotation);
+		NetworkServer.Spawn (tornado);
+
+		RpcTornado (tornado,gameObject);
+	}
+	[ClientRpc]
+	public void RpcTornado(GameObject Tornado, GameObject player){
+		Tornado.GetComponent<tornadoTrigger>().parentPlayer = player;
+	}
+
+	[Command]
+	public void CmdTornadoStopAttacking(){
+		RpcTornadoAnimStop ();
+	}
+	[ClientRpc]
+	public void RpcTornadoAnimStop (){
+		//matchAnim.animator.SetInteger ("matchAttack", 0);
+		player.itemCharges--;
+		if (player.currentItem != null && player.itemCharges <= 0) {
+
+			CmdobjectTurnoff ();
+		}
+	}
+	// Tornado
 
 	[Command]
 	public void CmdobjectTurnoff(){

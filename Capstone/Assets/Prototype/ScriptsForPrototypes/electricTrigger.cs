@@ -37,7 +37,8 @@ public class electricTrigger : NetworkBehaviour {
 	public void lateDestroy(){
 
 		gameObject.SetActive (false);
-		player.currentItem.SetActive (false);
+
+		//player.currentItem.SetActive (false);
 		player.currentItem = null;
 		gameObject.transform.root.gameObject.GetComponent<UIController> ().ResetUIItemTexture ();
 
