@@ -128,19 +128,24 @@ namespace jkuo
                 {
                     if (!player.craftingUIOpen)
                     {
-                        if (!player.playerPaused)
-                        {
-                            //Movement
-                            Movement();
+						if (!player.playerPaused) {
+							//Movement
+							Movement ();
 
-                            //Camera Rotation
-                            Rotation();
+							//Camera Rotation
+							Rotation ();
 
-                            FreeCam();
+							FreeCam ();
 
-                            //Emotes
-                            UseEmotes();
-                        }
+							//Emotes
+							UseEmotes ();
+						} else {
+						
+							PauseFreeCam ();
+
+						}
+
+
 
                         //Jump
                         Jumping();
@@ -149,8 +154,19 @@ namespace jkuo
 			}
 		}
 
+		void PauseFreeCam()
+		{
+			freeLook.m_YAxis.m_InputAxisValue = 0.0f;
+			freeLook.m_YAxis.m_InputAxisName = "";
+		
+		}
+
+
         void FreeCam()
 		{
+
+			freeLook.m_YAxis.m_InputAxisName = "Mouse Y";
+
 			if (Input.GetKey(KeyCode.LeftAlt))
 			{
 				inFreeLook = true;

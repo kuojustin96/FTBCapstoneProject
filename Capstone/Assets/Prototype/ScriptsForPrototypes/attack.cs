@@ -124,7 +124,7 @@ public class attack : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void RpcFireball(GameObject Fireball){
-		Fireball.GetComponent<Rigidbody> ().AddForce(shooter.transform.forward * 10000);
+		Fireball.GetComponent<Rigidbody> ().AddForce(shooter.transform.forward * 20000);
 
 	}
 
