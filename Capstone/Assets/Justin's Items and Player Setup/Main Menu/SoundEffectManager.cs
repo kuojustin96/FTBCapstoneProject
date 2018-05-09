@@ -137,8 +137,12 @@ public class SoundEffectManager : MonoBehaviour {
     {
         foreach (KeyValuePair<string, AudioSource> pair in SFXPlaying)
         {
-            SFXPlaying[pair.Key].Stop();
-            Destroy(SFXPlaying[pair.Key]);
+            if (pair.Value != null)
+            {
+                SFXPlaying[pair.Key].Stop();
+                Destroy(SFXPlaying[pair.Key]);
+                SFXPlaying.Remove(pair.Key);
+            }
         }
     }
 }

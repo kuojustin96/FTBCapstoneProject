@@ -17,6 +17,7 @@ public enum TickerBehaviors
 public class UIController : NetworkBehaviour {
 
     private PlayerClass player;
+    private NetworkSoundController nsc;
     private jkuo.net_PlayerController npc;
     public Texture2D cursorTexture;
     public CanvasGroup FaderPanel;
@@ -115,7 +116,7 @@ public class UIController : NetworkBehaviour {
         DOTween.Init();
         SetUpTicker();
 
-        npc = GetComponent<jkuo.net_PlayerController>();
+        nsc = GetComponent<NetworkSoundController>();
         emoteUICG = emoteUI.GetComponent<CanvasGroup>();
         tickerTextUICG = tickerTextUI.GetComponent<CanvasGroup>();
         emoteUICG.alpha = 0f;
@@ -126,6 +127,7 @@ public class UIController : NetworkBehaviour {
     public void SetUpVariables(PlayerClass player)
     {
         StatManager.instance.SetUIController(this);
+        npc = GetComponent<jkuo.net_PlayerController>();
 
         origIngameUIPos = IngameItemBackgroundUI.transform.position;
 
@@ -176,6 +178,7 @@ public class UIController : NetworkBehaviour {
         mmm = MainMenuManager.instance;
         FadeManager.instance.CanvasGroupOFF(pauseCG, false, false);
 
+        //Set Listeners
         masterVolSlider.onValueChanged.AddListener(delegate { mmm.SetMasterVolume(masterVolSlider.value); });
         musicVolSlider.onValueChanged.AddListener(delegate { mmm.SetMusicVolume(musicVolSlider.value); });
         sfxVolSlider.onValueChanged.AddListener(delegate { mmm.SetSFXVolume(sfxVolSlider.value); });
@@ -199,6 +202,9 @@ public class UIController : NetworkBehaviour {
         desktopTrigger.triggers.Add(onButtonExit);
         menuTrigger.triggers.Add(onButtonExit);
 
+        float mouseSens = PlayerPrefs.GetFloat("MouseSensitivity");
+        mouseSensInput.text = mouseSens.ToString();
+        npc.lookSensitivity = mouseSens;
 
         float tempValue;
         mmm.audMixer.GetFloat("MasterVolume", out tempValue);
@@ -249,10 +255,18 @@ public class UIController : NetworkBehaviour {
         UpdateCursorLock();
     }
 
+    public void SetMouseSensitivity()
+    {
+        float sens = float.Parse(mouseSensInput.text);
+        PlayerPrefs.SetFloat("MouseSensitivity", sens);
+        npc.lookSensitivity = sens;
+    }
+
     private void TogglePauseMenu()
     {
         if (!player.playerPaused)
         {
+            //SoundEffectManager.instance.StopAllSFX();
             player.playerPaused = true;
             FadeManager.instance.CanvasGroupON(pauseCG, true, true);
             Cursor.lockState = CursorLockMode.None;

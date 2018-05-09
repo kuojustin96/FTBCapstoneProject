@@ -44,7 +44,7 @@ namespace jkuo
 		public Vector3 velocity = Vector3.zero;
 
 		bool inFreeLook = false;
-		float lookSensitivity = 3.0f;
+		public float lookSensitivity = 3.0f;
 
 		//jump
 		[Header("Jumping")]
@@ -149,7 +149,7 @@ namespace jkuo
 			}
 		}
 
-		void FreeCam()
+        void FreeCam()
 		{
 			if (Input.GetKey(KeyCode.LeftAlt))
 			{
@@ -164,6 +164,10 @@ namespace jkuo
 				freeLook.m_XAxis.m_InputAxisName = "";
                 freeLook.m_XAxis.m_InputAxisValue = 0.0f;
                 freeLook.m_XAxis.Value = 0.0f;
+
+                freeLook.m_YAxis.m_AccelTime = 0.0f;
+                freeLook.m_YAxis.m_DecelTime = 0.0f;
+                freeLook.m_YAxis.m_MaxSpeed = lookSensitivity * 1.5f;
             }
 		}
 

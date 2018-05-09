@@ -24,6 +24,7 @@ public class MainMenuManager : MonoBehaviour {
     [Header("Options")]
     public TMP_Dropdown qualityDropdown;
     public TMP_Dropdown resoDropdown;
+    public TMP_InputField mouseSensInputField;
     public Toggle fullscreenToggle;
     public CanvasGroup optionsCanvas;
     public AudioMixer audMixer;
@@ -74,6 +75,7 @@ public class MainMenuManager : MonoBehaviour {
             Debug.Log("First run!");
             PlayerPrefs.SetInt("FirstRun", 1);
 
+            PlayerPrefs.SetFloat("MouseSensitivity", 3.0f);
 
             PlayerPrefs.SetInt("QualityLevel", 3);
 
@@ -99,6 +101,7 @@ public class MainMenuManager : MonoBehaviour {
         float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         float sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
 
+        float mouseSens = PlayerPrefs.GetFloat("MouseSensitivity");
 
         SetMasterVolume(masterVolume);
         SetMusicVolume(musicVolume);
@@ -412,6 +415,12 @@ public class MainMenuManager : MonoBehaviour {
             ToggleInstructions();
         else
             TogglePlay();
+    }
+
+    public void SetMouseSensitivity()
+    {
+        float sens = float.Parse(mouseSensInputField.text);
+        PlayerPrefs.SetFloat("MouseSensitivity", sens);
     }
 
     public void QuitGame()
