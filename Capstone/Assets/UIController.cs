@@ -212,6 +212,12 @@ public class UIController : NetworkBehaviour {
         qualityDropdown.value = QualitySettings.GetQualityLevel();
 
         mmm.PopulateDropdown(resolutionDropdown);
+
+        int prefsWidth = PlayerPrefs.GetInt("ScreenWidth");
+        int prefsHeight = PlayerPrefs.GetInt("ScreenHeight");
+        bool isFullScreen = (PlayerPrefs.GetInt("FullScreen") == 1);
+        mmm.SetDropdownValue(prefsWidth, prefsHeight);
+        Screen.SetResolution(prefsWidth, prefsHeight, isFullScreen);
     }
 	
 	// Update is called once per frame
@@ -501,8 +507,6 @@ public class UIController : NetworkBehaviour {
     {
         if (tickerEnabled)
         {
-            Debug.Log(tickerTextPlaying);
-
             if (tickerTextPlaying && emoteUICG.alpha != 0f)
                 FadeManager.instance.ChangeMenuPanels(emoteUICG, tickerTextUICG, 0.5f);
             else if (tickerTextPlaying && tickerTextUICG.alpha != 0)

@@ -13,15 +13,15 @@ public class NetworkSoundController : NetworkBehaviour {
 	}
 
     [Command]
-    public void CmdPlaySFX(string sfxName, GameObject audioObject)
+    public void CmdPlaySFX(string sfxName, GameObject audioObject, float volume, bool canHaveMultiple)
     {
-        RpcPlaySFX(sfxName, audioObject);
+        RpcPlaySFX(sfxName, audioObject, volume, canHaveMultiple);
     }
 
     [ClientRpc]
-    public void RpcPlaySFX(string sfxName, GameObject audioObject)
+    public void RpcPlaySFX(string sfxName, GameObject audioObject, float volume, bool canHaveMultiple)
     {
-        sfm.PlaySFX(sfxName, audioObject);
+        sfm.PlaySFX(sfxName, audioObject, volume, canHaveMultiple);
     }
 
     [Command]

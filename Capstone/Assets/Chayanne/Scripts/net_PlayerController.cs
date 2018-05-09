@@ -11,6 +11,7 @@ namespace jkuo
 	public class net_PlayerController : NetworkBehaviour
 	{
 		private UIController uic;
+        private NetworkSoundController nsc;
 		public CinemachineVirtualCamera virtualCam;
 
 		public bool offlineTesting = false;
@@ -80,6 +81,7 @@ namespace jkuo
 			freeLook = vCam.gameObject.GetComponent<CinemachineFreeLook>();
 
 			uic = GetComponent<UIController>();
+            nsc = GetComponent<NetworkSoundController>();
 
 			staminaSlider.value = staminaSlider.maxValue;
 			rb = GetComponent<Rigidbody>();
@@ -348,22 +350,33 @@ namespace jkuo
 
 				if (Input.GetKeyDown(KeyCode.C))
 				{
-                    Debug.Log("CLOSE EMOTE MENU");
 					emoteMenuOpen = false;
 					uic.HideTicker();
 				}
 
-				if (Input.GetKeyDown(KeyCode.Alpha1))
-					CmdEmote(0);
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    nsc.CmdPlaySFX("Angry", gameObject, 1f, false);
+                    CmdEmote(0);
+                }
 
-				if (Input.GetKeyDown(KeyCode.Alpha2))
-					CmdEmote(1);
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    nsc.CmdPlaySFX("Taunt", gameObject, 1f, false);
+                    CmdEmote(1);
+                }
 
-				if (Input.GetKeyDown(KeyCode.Alpha3))
-					CmdEmote(2);
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
+                    CmdEmote(2);
+                }
 
-				if (Input.GetKeyDown(KeyCode.Alpha4))
-					CmdEmote(3);
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
+                    CmdEmote(3);
+                }
 			}
 
 			if (Input.GetKeyDown(KeyCode.C) && !playingEmote)

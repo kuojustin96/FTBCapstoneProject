@@ -11,11 +11,15 @@ using DG.Tweening;
 public class MainMenuManager : MonoBehaviour {
 
     public static MainMenuManager instance;
+    public SoundEffectManager sfm;
 
     public float fadeTime = 1f;
 
     [Header("Play Game")]
     public CanvasGroup playCanvas;
+
+    [Header("Intructions")]
+    public CanvasGroup instructionCanvas;
 
     [Header("Options")]
     public TMP_Dropdown qualityDropdown;
@@ -95,10 +99,6 @@ public class MainMenuManager : MonoBehaviour {
         float musicVolume = PlayerPrefs.GetFloat("MusicVolume");
         float sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
 
-        //Debug.Log("Master: " + masterVolume);
-        //Debug.Log("Music: " + musicVolume);
-        //Debug.Log("SFX: " + sfxVolume);
-
 
         SetMasterVolume(masterVolume);
         SetMusicVolume(musicVolume);
@@ -110,8 +110,6 @@ public class MainMenuManager : MonoBehaviour {
         fullscreenToggle.isOn = isFullScreen;
 
         SetDropdownValue(prefsWidth, prefsHeight);
-
-        //Debug.Log("Menu thing says " + resolutions[resoDropdown.value]);
 
         qualityDropdown.value = qualitySettings;
 
@@ -130,26 +128,23 @@ public class MainMenuManager : MonoBehaviour {
         FadeManager.instance.CanvasGroupOFF(creditsCanvas, false, false);
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
         FadeManager.instance.CanvasGroupOFF(optionsCanvas, false, false);
+        FadeManager.instance.CanvasGroupOFF(instructionCanvas, false, false);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         PopulateDropdown(resoDropdown);
     }
 
-    private void SetDropdownValue(int prefsWidth, int prefsHeight)
+    public void SetDropdownValue(int prefsWidth, int prefsHeight)
     {
         //Set dropdown (Yes it's this fucking complicated)
         for (int i = 0; i < resolutions.Length; i++)
         {
             bool widthMatches = ((resolutions[i].width - prefsWidth) == 0);
             bool heightMatches = ((resolutions[i].height - prefsHeight) == 0);
-            //Debug.Log(resolutions[i].width - prefsWidth);
-            //Debug.Log(resolutions[i].height - prefsHeight);
 
-            //Debug.Log("Testing " + resolutions[i].width + " x " + resolutions[i].height + " with " + currentRes + " Results: " + widthMatches + "," + heightMatches);
             if (widthMatches && heightMatches)
             {
-                //Debug.Log("MEME!");
                 resoDropdown.value = i;
                 break;
             }
@@ -173,27 +168,18 @@ public class MainMenuManager : MonoBehaviour {
         resolutions = Screen.resolutions;
 
         List<string> resoOptions = new List<string>();
-        int currentIndex = 0;
         for (int x = 0; x < resolutions.Length; x++)
         {
             string option = resolutions[x].ToString();
             resoOptions.Add(option);
-
-            if (resolutions[x].width == Screen.currentResolution.width && resolutions[x].height == Screen.currentResolution.height)
-            {
-                currentIndex = x;
-                //Debug.Log(currentIndex);
-            }
         }
         dropdown.AddOptions(resoOptions);
-        dropdown.value = currentIndex;
         dropdown.RefreshShownValue();
-
-
     }
 
     public void EnterButtonHover(BaseEventData data)
     {
+        sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.4f, true);
         PointerEventData d = data as PointerEventData;
         GameObject g = d.pointerEnter;
         buttonHovered = g;
@@ -206,6 +192,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if(buttonHovered != null)
         {
+            sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.4f, true);
             buttonHovered.transform.localScale = Vector2.one;
             buttonHovered.transform.localEulerAngles = Vector3.zero;
             buttonHovered = null;
@@ -217,6 +204,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
             if (currentPanel != optionsCanvas)
                 CloseCurrentCanvas();
 
@@ -258,6 +246,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
             if (currentPanel != playCanvas)
                 CloseCurrentCanvas();
 
@@ -300,7 +289,8 @@ public class MainMenuManager : MonoBehaviour {
         //Might need a general button check to make sure player isn't spam clicking a button
         if (!inButtonTransition)
         {
-            if(currentPanel != creditsCanvas)
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            if (currentPanel != creditsCanvas)
                 CloseCurrentCanvas();
 
             if (!isCreditsPlaying)
@@ -341,6 +331,7 @@ public class MainMenuManager : MonoBehaviour {
 
         MusicManager.instance.SwapMainTracks("PregameLobby", 1, 1);
         isCreditsPlaying = false;
+        currentPanel = null;
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
     }
     
@@ -366,6 +357,48 @@ public class MainMenuManager : MonoBehaviour {
     }
     #endregion
 
+    #region Intructions
+    public void ToggleInstructions()
+    {
+        if (!inButtonTransition)
+        {
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            if (currentPanel != instructionCanvas)
+                CloseCurrentCanvas();
+
+            StartCoroutine(c_ToggleInstructions());
+        }
+    }
+
+    private IEnumerator c_ToggleInstructions()
+    {
+        inButtonTransition = true;
+
+        if (instructionCanvas.alpha == 0)
+        {
+            FadeManager.instance.FadeIn(instructionCanvas, fadeTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + fadeTime)
+                yield return null;
+
+            FadeManager.instance.CanvasGroupON(instructionCanvas, true, true);
+            currentPanel = instructionCanvas;
+        }
+        else
+        {
+            FadeManager.instance.FadeOut(instructionCanvas, fadeTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + fadeTime)
+                yield return null;
+
+            FadeManager.instance.CanvasGroupOFF(instructionCanvas, false, false);
+            currentPanel = null;
+        }
+
+        inButtonTransition = false;
+    }
+    #endregion
+
     private void CloseCurrentCanvas()
     {
         if (currentPanel == null)
@@ -375,23 +408,21 @@ public class MainMenuManager : MonoBehaviour {
             ToggleOptions();
         else if (currentPanel == creditsCanvas)
             ToggleCredits();
+        else if (currentPanel == instructionCanvas)
+            ToggleInstructions();
         else
             TogglePlay();
     }
 
-    public void StartGame()
-    {
-        //SceneManager.LoadScene("MainScene");
-        //Convert to Host / Join game
-    }
-
     public void QuitGame()
     {
+        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
         Application.Quit();
     }
 
     public void ExitToMenu()
     {
+        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
         SceneManager.LoadScene(0);
     }
 
@@ -408,7 +439,6 @@ public class MainMenuManager : MonoBehaviour {
 
     public void SetMusicVolume(float volume)
     {
-        //Debug.Log("Set music to " + volume);
         if (volume <= muteVol)
             volume = -80f;
 
@@ -481,12 +511,10 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (preparing)
             return;
-        Debug.Log("Value Changed");
+
         int resoIndex = resoDropdown.value;
         Resolution resolution = resolutions[resoIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-
 
         PlayerPrefs.SetInt("ScreenWidth", resolution.width);
         PlayerPrefs.SetInt("ScreenHeight", resolution.height);
@@ -496,7 +524,6 @@ public class MainMenuManager : MonoBehaviour {
 
     public void SetResolution(TMP_Dropdown resoDropdown)
     {
-        Debug.Log("Value Changed");
         int resoIndex = resoDropdown.value;
         Resolution resolution = resolutions[resoIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);

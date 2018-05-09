@@ -65,22 +65,22 @@ public class SFXWalkController : NetworkBehaviour {
         switch (currentSurface)
         {
             case SurfaceType.Wood:
-                nsc.CmdPlaySFX("(Footsteps) Wood", gameObject);
+                nsc.CmdPlaySFX("(Footsteps) Wood", gameObject, 1f, false);
                 nsc.CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Metal:
-                nsc.CmdPlaySFX("(Footsteps) Metal", gameObject);
+                nsc.CmdPlaySFX("(Footsteps) Metal", gameObject, 1f, false);
                 nsc.CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Carpet:
-                nsc.CmdPlaySFX("(Footsteps) Carpet", gameObject);
+                nsc.CmdPlaySFX("(Footsteps) Carpet", gameObject, 1f, false);
                 nsc.CmdStopSFX("Gliding");
                 break;
 
             case SurfaceType.Gliding:
-                nsc.CmdPlaySFX("Gliding", gameObject);
+                nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, false);
                 break;
         }
 
@@ -107,7 +107,7 @@ public class SFXWalkController : NetworkBehaviour {
 
             if (npc.velocity != Vector3.zero)
             {
-                nsc.CmdPlaySFX(sot.SFXOverrideName, gameObject);
+                nsc.CmdPlaySFX(sot.SFXOverrideName, gameObject, 1f, false);
             }
         }
     }
