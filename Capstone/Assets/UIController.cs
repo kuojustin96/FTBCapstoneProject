@@ -528,7 +528,6 @@ public class UIController : NetworkBehaviour {
                     break;
 
                 case TickerBehaviors.TickerText:
-                    Debug.Log("TICKET TEXT");
                     startTicker = true;
                     tickerTextPlaying = true;
                     tickerTextUICG.alpha = 1f;

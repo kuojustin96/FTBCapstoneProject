@@ -108,6 +108,7 @@ public class GameOverManager : NetworkBehaviour {
         {
             GameObject g = finalScorePlayerList[x].playerGO;
             g.GetComponent<net_PlayerController>().enabled = false;
+            g.GetComponent<NetworkSoundController>().CmdStopAllSFX();
             g.GetComponent<winScenePlayerController>().enabled = true;
             g.transform.position = PersonSpots[x].position;
             g.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -173,11 +174,13 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 1f)
             yield return null;
 
-        if (isServer)
-        {
-            NetworkServer.Shutdown();
-            MasterServer.UnregisterHost();
-            SceneManager.LoadScene(0);
-        }
+        //if (isServer)
+        //{
+        //    NetworkServer.Shutdown();
+        //    MasterServer.UnregisterHost();
+        //    SceneManager.LoadScene(0);
+        //}
+
+        Application.Quit(); //TEMPORARY
     }
 }

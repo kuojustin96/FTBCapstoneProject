@@ -35,4 +35,16 @@ public class NetworkSoundController : NetworkBehaviour {
     {
         sfm.StopSFX(sfxName);
     }
+
+    [Command]
+    public void CmdStopAllSFX()
+    {
+        RpcStopAllSFX();
+    }
+
+    [ClientRpc]
+    public void RpcStopAllSFX()
+    {
+        sfm.StopAllSFX();
+    }
 }
