@@ -73,7 +73,9 @@ namespace Prototype.NetworkLobby
 
         public LobbyPlayer host;
 
+        public LobbyBetterPlayerList playerList;
 
+        string pendingName;
 
         bool madeHost = false;
         void OnLevelWasLoaded()
@@ -91,6 +93,8 @@ namespace Prototype.NetworkLobby
         {
             inGame = val;
         }
+
+
 
         void Start()
         {
@@ -334,6 +338,7 @@ namespace Prototype.NetworkLobby
 
         // ----------------- Server callbacks ------------------
 
+
         //we want to disable the button JOIN if we don't have enough player
         //But OnLobbyClientConnect isn't called on hosting player. So we override the lobbyPlayer creation
         public override GameObject OnLobbyServerCreateLobbyPlayer(NetworkConnection conn, short playerControllerId)
@@ -346,13 +351,13 @@ namespace Prototype.NetworkLobby
             if(!madeHost)
             {
                 host = newPlayer;
-                host.gameObject.AddComponent<PlayerListUpdater>();
                 madeHost = true;
             }
 
+            
 
-            Debug.Log("Regening!");
-            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
+            Debug.Log("OnLobbyServerCreateLobbyPlayer! " + gameObject.name);
+            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
 
             for (int i = 0; i < lobbySlots.Length; ++i)
             {
@@ -380,7 +385,7 @@ namespace Prototype.NetworkLobby
             //setup.SetupPosition();
 
 
-            Debug.Log("Poof!");
+            Debug.Log("CreateAndSetupPlayer! " + gameObject.name);
             return playerObj;
         }
 
@@ -410,7 +415,7 @@ namespace Prototype.NetworkLobby
         public override void OnLobbyServerDisconnect(NetworkConnection conn)
         {
 
-            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
+            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
 
         }
 
@@ -516,10 +521,6 @@ namespace Prototype.NetworkLobby
             }
         }
 
-        void AddPlayerToList(string name)
-        {
-            LobbyPlayerList._instance.AddName(name);
-        }
 
         public override void OnClientDisconnect(NetworkConnection conn)
         {

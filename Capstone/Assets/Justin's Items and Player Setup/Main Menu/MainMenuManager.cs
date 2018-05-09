@@ -53,22 +53,13 @@ public class MainMenuManager : MonoBehaviour {
         else
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     // Use this for initialization
     void Start ()
     {
-        DOTween.Init();
-
-        FadeManager.instance.CanvasGroupOFF(playCanvas, false, false);
-        FadeManager.instance.CanvasGroupOFF(creditsCanvas, false, false);
-        creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
-        FadeManager.instance.CanvasGroupOFF(optionsCanvas, false, false);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        PopulateDropdown(resoDropdown);
+        Initialize();
 
         //Chayanne's Preference saving code
         bool firstTime = PlayerPrefs.GetInt("FirstRun") == 0;
@@ -129,6 +120,20 @@ public class MainMenuManager : MonoBehaviour {
 
         preparing = false;
 
+    }
+
+    private void Initialize()
+    {
+        DOTween.Init();
+
+        FadeManager.instance.CanvasGroupOFF(playCanvas, false, false);
+        FadeManager.instance.CanvasGroupOFF(creditsCanvas, false, false);
+        creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);
+        FadeManager.instance.CanvasGroupOFF(optionsCanvas, false, false);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        PopulateDropdown(resoDropdown);
     }
 
     private void SetDropdownValue(int prefsWidth, int prefsHeight)

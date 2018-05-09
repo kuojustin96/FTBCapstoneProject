@@ -247,7 +247,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
                 return;
             }
             Debug.Log(isLocalPlayer);
-            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
+            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
@@ -258,7 +258,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
                 return;
             }
             Debug.Log(isLocalPlayer);
-            Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
+            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
         }
     }
 }

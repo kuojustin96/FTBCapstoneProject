@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Prototype.NetworkLobby;
 public class LobbyAnimationScript : MonoBehaviour
 {
 
@@ -13,7 +13,7 @@ public class LobbyAnimationScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        LobbyManager.s_Singleton.lobbyAnims = this;
     }
 
     // Update is called once per frame

@@ -56,76 +56,88 @@ namespace Prototype.NetworkLobby
         {
             Debug.Log("=========OnStartClient=========");
             base.OnStartClient();
-            Debug.Log("=========OnClientEnterLobby=========");
+            Debug.Log("=========OnStartClient=========");
 
         }
 
-        public virtual void OnLobbyServerSceneChanged(string sceneName)
-        {
-            if(sceneName == LobbyManager.s_Singleton.playScene)
-            {
+        //void Awake()
+        //{
+        //    Debug.Log("Awake " + gameObject.name);
+        //}
+        //void Start()
+        //{
+        //    Debug.Log("Start " + gameObject.name);
+        //    if (isLocalPlayer)
+        //    {
+        //        string name = PlayerGameProfile.instance.GetPlayerData().name;
+        //        Debug.Log("Starting on " + name);
+        //        CmdAddToPlayerList(name);
+        //    }
+        //}
+        
+        //[Command]
+        //void CmdAddToPlayerList(string name)
+        //{
+            
+        //    Debug.Log("Requesting name!");
+        //    RpcAddToPlayerList(name);
+        //}
 
-
-
-            }
-        }
+        //[ClientRpc]
+        //void RpcAddToPlayerList(string name)
+        //{
+        //    Debug.Log("RPC recieved!");
+        //    LobbyManager.s_Singleton.playerList.CreateName(name);
+        //}
 
         public override void OnClientEnterLobby()
         {
             Debug.Log("=========OnClientEnterLobby=========");
             Debug.Log("Local:" + isLocalPlayer);
             Debug.Log("Sever:" + isServer);
-            Debug.Log("=========OnClientEnterLobby=========");
+
             //client, NOT server!
             base.OnClientEnterLobby();
                     
-            if(isLocalPlayer && !isServer)
-            {
-                CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
-            }
+            //if(isLocalPlayer && !isServer)
+            //{
+            //    CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
+            //}
 
             //How will we get other players' names?
             
-            if (isServer)
-            {
 
-                //Debug.Log("Regening from cliententer!");
-                //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
-                return;
+            if (isLocalPlayer)
+            {
+                Debug.LogError("WHAT THE FUCK");
+                SetupLocalPlayer();
             }
             else
             {
-
-                if (isLocalPlayer)
-                {
-                    SetupLocalPlayer();
-                }
-                else
-                {
-                    SetupOtherPlayer();
-                }
-
+                SetupOtherPlayer();
             }
+
             //setup the player data on UI. The value are SyncVar so the player
             //will be created with the right value currently on server
             //AddLobbyPlayer();
             OnMyColor(playerColor);
-
+            Debug.Log("=========OnClientEnterLobby=========");
         }
 
         private void AddLobbyPlayer()
         {
-            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
-            LobbyPlayerList._instance.AddPlayer(this);
+            //if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
+            //LobbyPlayerList._instance.AddPlayer(this);
         }
 
         public override void OnStartAuthority()
         {
-            Debug.Log("OnStartAuthority");
+            Debug.Log("Me, the player joining, is being set up!");
             base.OnStartAuthority();
 
+            
             //if we return from a game, color of text can still be the one for "Ready"
-            SetupLocalPlayer();
+            SetupLocalPlayer(true);
             //AddLobbyPlayer();
         }
 
@@ -141,6 +153,7 @@ namespace Prototype.NetworkLobby
 
         void SetupOtherPlayer()
         {
+            LobbyManager.s_Singleton.playerList.CreateName(playerName);
             OnClientReady(false);
         }
 
@@ -151,17 +164,17 @@ namespace Prototype.NetworkLobby
 
         }
 
-        void SetupLocalPlayer()
+        void SetupLocalPlayer(bool isHost = false)
         {
 
 
-            readyObject.SetActive(true);
-            Debug.Log("Setting local player!");
+            Debug.Log("Setting local player! " + isHost);
             CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
             CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
             lobbyCam.enabled = false;
 
             PlayerGameProfile.instance.SetLobbyPlayer(this);
+
 
             //ps: camera sets itself up
 
@@ -171,7 +184,6 @@ namespace Prototype.NetworkLobby
                 CmdColorChange();
 
             CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
-
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
@@ -204,8 +216,11 @@ namespace Prototype.NetworkLobby
                 colorButton.interactable = false;
                 nameInput.interactable = false;
 
-                readyObject.SetActive(false);
-                LobbySingleton.instance.getReadyUpText().SetActive(false);
+                readyObject.SetActive(true);
+                if (isLocalPlayer)
+                {
+                    LobbySingleton.instance.getReadyUpText().SetActive(false);
+                }
             }
             else
             {
@@ -218,7 +233,7 @@ namespace Prototype.NetworkLobby
                 colorButton.interactable = isLocalPlayer;
                 nameInput.interactable = isLocalPlayer;
 
-                readyObject.SetActive(true);
+                readyObject.SetActive(false);
 
                 LobbySingleton.instance.getReadyUpText().SetActive(true);
             }
@@ -257,10 +272,12 @@ namespace Prototype.NetworkLobby
             SendReadyToBeginMessage();
         }
 
-        public void OnNameChanged(string str)
-        {
-            CmdNameChanged(str);
-        }
+        //public void OnNameChanged(string str)
+        //{
+        //    CmdNameChanged(str);
+        //}
+
+
 
         public void OnRemovePlayerClick()
         {
@@ -358,14 +375,27 @@ namespace Prototype.NetworkLobby
         public void CmdNameChanged(string name)
         {
             playerName = name;
+            RpcCreateNewName(name);
+        }
+
+        [ClientRpc]
+        public void RpcCreateNewName(string name)
+        {
+              
+            LobbyManager.s_Singleton.playerList.CreateName(name);
+
         }
 
         //Cleanup thing when get destroy (which happen when client kick or disconnect)
         public void OnDestroy()
         {
-            //My instance is in this list!~
-            LobbyPlayerList._instance.RemovePlayer(this);
-            if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
+            if (LobbyManager.s_Singleton.playerList)
+            {
+                LobbyManager.s_Singleton.playerList.RemoveName(playerName);
+            }
+            ////My instance is in this list!~
+            //LobbyPlayerList._instance.RemovePlayer(this);
+            //if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
 
             int idx = System.Array.IndexOf(Colors, playerColor);
 

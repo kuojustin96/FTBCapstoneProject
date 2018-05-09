@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Prototype.NetworkLobby;
-public class LobbyBetterPlayerList : NetworkBehaviour {
+public class LobbyBetterPlayerList : MonoBehaviour {
 
     public GameObject nameObject;
 
-    public void RpcCreateName(string name)
-    {
 
+
+    public void CreateName(string name)
+    {
+    
         if (name == "")
         {
+            Debug.Log("BAD");
             return;
         }
 
@@ -24,58 +27,67 @@ public class LobbyBetterPlayerList : NetworkBehaviour {
         theListName.SetName(name);
         theListName.gameObject.name = name;
 
-        if (NetworkServer.active)
-        {
-            //NetworkServer.Spawn(obj);
-        }
 
     }
 
-    [ClientRpc]
-    public void RpcRegenerateList()
+    public void RemoveName(string name)
     {
-        NetworkLobbyPlayer[] players = LobbyManager.s_Singleton.lobbySlots;
-
-        foreach (Transform obj in transform)
+        Debug.Log("removing" + name);
+        foreach(Transform t in transform)
         {
-            NetworkServer.Destroy(obj.gameObject);
+            if(t.name == name)
+            {
+                Debug.Log(name + "Left the game!~");
+                Debug.Log("Found it!");
+                Destroy(t.gameObject);
+            }
         }
+    }
 
-        int num = 0;
+    //public void RpcRegenerateList()
+    //{
+    //    NetworkLobbyPlayer[] players = LobbyManager.s_Singleton.lobbySlots;
+
+    //    foreach (Transform obj in transform)
+    //    {
+    //        NetworkServer.Destroy(obj.gameObject);
+    //    }
+
+    //    int num = 0;
 
         
-        //Debug.Log("there are " + LobbyManager.s_Singleton.numPlayers + " players");
-        foreach (NetworkLobbyPlayer player in players)
-        {
+    //    //Debug.Log("there are " + LobbyManager.s_Singleton.numPlayers + " players");
+    //    foreach (NetworkLobbyPlayer player in players)
+    //    {
 
-            if (player)
-            {
-                num++;
-                Debug.Assert(player);
-                Debug.Assert(player.gameObject);
-                string playerName = player.gameObject.GetComponent<LobbyPlayer>().playerName;
+    //        if (player)
+    //        {
+    //            num++;
+    //            Debug.Assert(player);
+    //            Debug.Assert(player.gameObject);
+    //            string playerName = player.gameObject.GetComponent<LobbyPlayer>().playerName;
 
-                //Debug.Log("creating " + playerName);
-                RpcCreateName(playerName);
+    //            //Debug.Log("creating " + playerName);
+    //            CreateName(playerName);
 
-            }
+    //        }
 
-        }
+    //    }
 
-    }
-
-
-    [Command]
-    public void CmdRegenerateList()
-    {
+    //}
 
 
-    }
-
-    [Command]
-    public void CmdCreateName(string name)
-    {
+    //[Command]
+    //public void CmdRegenerateList()
+    //{
 
 
-    }
+    //}
+
+    //[Command]
+    //public void CmdCreateName(string name)
+    //{
+    //    CreateName(name);
+
+    //}
 }
