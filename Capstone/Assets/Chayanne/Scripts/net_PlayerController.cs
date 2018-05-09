@@ -209,7 +209,7 @@ namespace jkuo
             velocity = (moveHori + moveVert) * speed;
 
 			if (velocity != Vector3.zero) {
-				if (!isGrounded) {
+				if (!isGrounded&&isGliding) {
 					velocity = velocity * 5;
 					rb.velocity = new Vector3 (velocity.x, rb.velocity.y, velocity.z);
 				}

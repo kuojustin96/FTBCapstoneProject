@@ -246,8 +246,10 @@ public class attack : NetworkBehaviour {
 	}
 	[ClientRpc]
 	public void RpcobjectTurnoff(){
-		player.currentItem.SetActive (false);
-		player.currentItem = null;
+		if (player.currentItem != null) {
+			player.currentItem.SetActive (false);
+			player.currentItem = null;
+		}
 		GetComponent<UIController> ().ResetUIItemTexture ();
 
 	}
