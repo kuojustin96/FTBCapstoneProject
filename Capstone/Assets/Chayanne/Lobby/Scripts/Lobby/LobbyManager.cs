@@ -106,7 +106,6 @@ namespace Prototype.NetworkLobby
             GetComponent<Canvas>().enabled = true;
 
             lobbyAnims = GetComponent<LobbyAnimationScript>();
-            Debug.Assert(lobbyAnims);
             DontDestroyOnLoad(gameObject.transform.parent);
 
 
