@@ -49,15 +49,15 @@ public class PlayerClass {
     {
         sugarInBackpack++;
 
-        if (npc.speed > minSpeed)
-            npc.speed -= speedPerSugar;
+        if (npc.baseSpeed > minSpeed)
+            npc.baseSpeed -= speedPerSugar;
     }
 
     public void DropoffSugarInStash()
     {
         currentPlayerScore++;
         sugarInBackpack--;
-        npc.speed += speedPerSugar;
+        npc.baseSpeed += speedPerSugar;
 
         if (currentPlayerScore >= gm.numSugarToWin)
             GameOverManager.instance.EndGame();
@@ -66,13 +66,13 @@ public class PlayerClass {
     public void LoseSugar(int amount)
     {
         currentPlayerScore -= amount;
-        npc.speed += speedPerSugar;
+        npc.baseSpeed += speedPerSugar;
     }
 
     public void DropSugar()
     {
         sugarInBackpack--;
-        npc.speed += speedPerSugar;
+        npc.baseSpeed += speedPerSugar;
     }
 
     public void SetItem(PlayerClass player, CraftingController.CraftableItem item, int itemNum) //Deprecated

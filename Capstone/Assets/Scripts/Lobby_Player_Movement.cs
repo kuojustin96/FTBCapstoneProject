@@ -9,6 +9,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
     [Header("Animation")]
     public NetworkAnimator netAnimator;
     Animator anim;
+    [SerializeField]
     CinemachineVirtualCameraBase mainCam;
 
     public bool offlineTesting = false;
@@ -20,11 +21,12 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     //movement
     [Header("Movement")]
-    public float speed = 50f;
+    public float speed = 20.0f;
+    public float gravityScale = 1.0f;
     private Vector3 moveHori;
     private Vector3 moveVert;
     private Vector3 velocity = Vector3.zero;
-
+    private Vector3 m_MoveDir = Vector3.zero;
     //look rotation
     [Header("Player / Camera Rotation")]
     public float lookSensitivity = 3f;
@@ -32,23 +34,24 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     //jump
     [Header("Jumping")]
-    public float jumpForce = 1000f;
-    public float gravity = 100f;
-    public float downwardAcceleration = 1f;
-    public LayerMask jumpMask;
+    public float jumpForce = 40.0f;
     private bool isGrounded = true;
-    private bool canJump = true;
-    private Vector3 _jumpForce = Vector3.zero;
+    public LayerMask jumpMask;
+
+    CharacterController character;
+    bool jumped = false;
+    bool canJump;
 
     void Start()
     {
+        character = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         isFocused = true;
         Cursor.visible = false;
         anim = netAnimator.animator;
 
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             mainCam = Net_Camera_Singleton.instance.GetCamera();
         }
@@ -90,22 +93,22 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer)// || offlineTesting)
+        if (isLocalPlayer || offlineTesting)
         {
             UpdateCursorLock();
 
             //Movement
-
+            isFocused = true;
             if (isFocused)
             {
-                Movement();
 
                 Rotation();
-                RefreshList();
-
                 Camera();
 
-
+                if(character.isGrounded && Input.GetKeyDown(KeyCode.Space))
+                {
+                    jumped = true;
+                }
 
                 if (Input.GetKey(KeyCode.LeftAlt))
                 {
@@ -119,13 +122,13 @@ public class Lobby_Player_Movement : NetworkBehaviour
                 }
             }
 
-            //Jump
-            Jumping();
-
-
         }
     }
-
+    void FixedUpdate()
+    {
+        Jumping();
+        Movement();
+    }
     private void Rotation()
     {
         float xRot;
@@ -136,7 +139,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
         if (!inFreeLook)
         {
             Vector3 rotation = new Vector3(0f, yRot, 0f) * lookSensitivity;
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+            transform.rotation = (transform.rotation * Quaternion.Euler(rotation));
         }
     }
 
@@ -153,39 +156,40 @@ public class Lobby_Player_Movement : NetworkBehaviour
         anim.SetFloat("Vertical", x);
         anim.SetFloat("Horizontal", y);
         anim.SetBool("IsGrounded", isGrounded);
-        animateCharacter(x, y, isGrounded);
+        //animateCharacter(x, y, isGrounded);
 
-        velocity = (moveHori + moveVert) * speed;
+        // always move along the camera forward as it is the direction that it being aimed at
+        Vector3 desiredMove = (moveHori + moveVert) * speed;
+        // get a normal for the surface that is being touched to move along it
+        RaycastHit hitInfo;
+        Physics.SphereCast(transform.position, character.radius, Vector3.down, out hitInfo,
+                           character.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+        desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-        if (velocity != Vector3.zero)
+        m_MoveDir.x = desiredMove.x * speed;
+        m_MoveDir.z = desiredMove.z * speed;
+
+
+        if (character.isGrounded)
         {
-            rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+            //m_MoveDir.y = -m_StickToGroundForce;
+
+            if (jumped)
+            {
+                jumped = false;
+                m_MoveDir.y = jumpForce;
+
+            }
         }
+        else
+        {
+            m_MoveDir += Physics.gravity * gravityScale * Time.fixedDeltaTime;
+        }
+            character.Move(m_MoveDir * Time.fixedDeltaTime);
+
 
     }
 
-    public void animateCharacter(float x, float y, bool jump)
-    {
-        //netAnim.animator.SetInteger ("CurrentState",a);
-        CmdAnimateCharacter(x, y, jump);
-    }
-
-
-    [Command]
-    public void CmdAnimateCharacter(float x, float y, bool jump)
-    {
-        //netAnim.animator.SetInteger ("CurrentState",a);
-        RpcAnimateCharacter(x, y, jump);
-    }
-    [ClientRpc]
-    public void RpcAnimateCharacter(float x, float y, bool jump)
-    {
-        netAnimator.animator.SetFloat("Horizontal", x);
-
-        netAnimator.animator.SetFloat("Vertical", y);
-
-        netAnimator.animator.SetBool("IsGrounded", jump);
-    }
 
     void Camera()
     {
@@ -217,48 +221,8 @@ public class Lobby_Player_Movement : NetworkBehaviour
         {
 
             isGrounded = false;
-            //apply gravity
-
-            rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
-            rb.AddForce(Vector3.down * downwardAcceleration, ForceMode.Impulse);
 
         }
 
-        if (isFocused)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && canJump)
-            {
-                _jumpForce = transform.up * (jumpForce * 10000);
-                rb.AddForce(_jumpForce * Time.fixedDeltaTime);
-            }
-        }
-    }
-
-    public void RefreshList()
-    {
-
-
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (!Network.isServer)
-            {
-                Debug.Log("sorry you're a client");
-                return;
-            }
-            Debug.Log(isLocalPlayer);
-            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.CmdRegenerateList();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            if (!Network.isServer)
-            {
-                Debug.Log("sorry you're a client");
-                return;
-            }
-            Debug.Log(isLocalPlayer);
-            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
-        }
     }
 }
