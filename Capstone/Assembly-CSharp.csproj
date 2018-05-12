@@ -51,8 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AlphaRaycastFilter.cs" />
-     <Compile Include="Assets\CameraShake.cs" />
      <Compile Include="Assets\Chayanne\Animations\Chad\Character_animation\AlwaysEnableObject.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyBoxTop.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyOnSceneChange.cs" />
@@ -167,10 +165,6 @@
      <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
-     <Compile Include="Assets\DontBlockMyScreen.cs" />
-     <Compile Include="Assets\FindBullshit.cs" />
-     <Compile Include="Assets\GameOverManager.cs" />
-     <Compile Include="Assets\JumpPad.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\Event_SlowDoor.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
@@ -191,19 +185,6 @@
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
-     <Compile Include="Assets\Lobby_Player_Movement.cs" />
-     <Compile Include="Assets\LobbyBetterPlayerList.cs" />
-     <Compile Include="Assets\LobbyListName.cs" />
-     <Compile Include="Assets\LobbySingleton.cs" />
-     <Compile Include="Assets\MainMenu.cs" />
-     <Compile Include="Assets\MusicTriggerBox.cs" />
-     <Compile Include="Assets\Net_Camera_Singleton.cs" />
-     <Compile Include="Assets\NetworkProfile.cs" />
-     <Compile Include="Assets\NetworkSoundController.cs" />
-     <Compile Include="Assets\PingPongEmission.cs" />
-     <Compile Include="Assets\PlayerAttachCamera.cs" />
-     <Compile Include="Assets\PlayerGameProfile.cs" />
-     <Compile Include="Assets\PlayerListUpdater.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -267,8 +248,33 @@
      <Compile Include="Assets\Prototype\ScriptsForPrototypes\tornadoTrigger.cs" />
      <Compile Include="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" />
      <Compile Include="Assets\Prototype\ScriptsForPrototypes\weaponAim.cs" />
+     <Compile Include="Assets\Scripts\AlphaRaycastFilter.cs" />
+     <Compile Include="Assets\Scripts\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\DontBlockMyScreen.cs" />
+     <Compile Include="Assets\Scripts\FindBullshit.cs" />
+     <Compile Include="Assets\Scripts\GameOverManager.cs" />
+     <Compile Include="Assets\Scripts\JumpPad.cs" />
+     <Compile Include="Assets\Scripts\Lobby_Player_Movement.cs" />
+     <Compile Include="Assets\Scripts\LobbyBetterPlayerList.cs" />
+     <Compile Include="Assets\Scripts\LobbyListName.cs" />
+     <Compile Include="Assets\Scripts\LobbySingleton.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MusicTriggerBox.cs" />
+     <Compile Include="Assets\Scripts\Net_Camera_Singleton.cs" />
+     <Compile Include="Assets\Scripts\NetworkProfile.cs" />
+     <Compile Include="Assets\Scripts\NetworkSoundController.cs" />
+     <Compile Include="Assets\Scripts\PingPongEmission.cs" />
+     <Compile Include="Assets\Scripts\PlayerAttachCamera.cs" />
+     <Compile Include="Assets\Scripts\PlayerGameProfile.cs" />
+     <Compile Include="Assets\Scripts\PlayerListUpdater.cs" />
+     <Compile Include="Assets\Scripts\StatManager.cs" />
+     <Compile Include="Assets\Scripts\TempAudioTest.cs" />
+     <Compile Include="Assets\Scripts\Test_Camera_Tracker.cs" />
+     <Compile Include="Assets\Scripts\test_HoverButton.cs" />
+     <Compile Include="Assets\Scripts\UIController.cs" />
      <Compile Include="Assets\Scripts\VolumetricLight.cs" />
      <Compile Include="Assets\Scripts\VolumetricLightRenderer.cs" />
+     <Compile Include="Assets\Scripts\winScenePlayerController.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\MeshBender.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
@@ -279,10 +285,6 @@
      <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Example\SplineExtrusion.cs" />
-     <Compile Include="Assets\StatManager.cs" />
-     <Compile Include="Assets\TempAudioTest.cs" />
-     <Compile Include="Assets\Test_Camera_Tracker.cs" />
-     <Compile Include="Assets\test_HoverButton.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -315,8 +317,6 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-     <Compile Include="Assets\UIController.cs" />
-     <Compile Include="Assets\winScenePlayerController.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Chayanne\Cubed&apos;s Unity Shaders\Shaders\FlatLitToonCore.cginc" />
