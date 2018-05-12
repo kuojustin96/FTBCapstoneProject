@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Prototype.NetworkLobby;
 using ckp;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -22,13 +23,22 @@ public class GameManager : MonoBehaviour {
 
     public GameObject playerPrefab;
     public Material[] playerMats;
+    public string[] fortNames;
 
     [System.Serializable]
     public class DropoffPointsClass
     {
         public string name;
         public GameObject dropoffGO;
+        public TextMeshProUGUI[] FortNamesTMP;
         public net_TeamScript.Team teamColor;
+
+        public string PickRandomFortName()
+        {
+            GameManager gm = GameManager.instance;
+            int rand = Random.Range(0, gm.fortNames.Length);
+            return gm.fortNames[rand];
+        }
     }
 
     public DropoffPointsClass[] DropoffPoints;
@@ -36,6 +46,7 @@ public class GameManager : MonoBehaviour {
 
     private Dictionary<string, GameObject> colorDropOffDict = new Dictionary<string, GameObject>();
     public Dictionary<GameObject, PlayerClass> playerDropOffDict = new Dictionary<GameObject, PlayerClass>();
+    public Dictionary<PlayerClass, DropoffPointsClass> dropoffToPlayer = new Dictionary<PlayerClass, DropoffPointsClass>();
 
     [HideInInspector]
     public int numPlayers;
@@ -90,7 +101,6 @@ public class GameManager : MonoBehaviour {
 
 	public void SetUpGame(GameObject player, net_TeamScript.Team team)
     {
-        Debug.Log("SetUpGame called");
 		int x = curPlayers;
 		DropoffPointsClass d = DropoffPoints[x];
 		d.dropoffGO.SetActive (true);
@@ -99,6 +109,7 @@ public class GameManager : MonoBehaviour {
         player.GetComponent<playerClassAdd>().player = ply;
         playerList.Add(ply);
         playerDropOffDict.Add(d.dropoffGO, ply);
+        dropoffToPlayer.Add(ply, d);
 
 		//temporary position and color
 		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
@@ -106,6 +117,15 @@ public class GameManager : MonoBehaviour {
         playerClassAdd playerClass = player.GetComponent<playerClassAdd>();
 
 		curPlayers++;
+    }
+
+    public void SetUpBaseName(PlayerClass ply)
+    {
+        DropoffPointsClass d = dropoffToPlayer[ply];
+        for (int y = 0; y < d.FortNamesTMP.Length; y++)
+        {
+            d.FortNamesTMP[y].text = d.PickRandomFortName() + " " + ply.playerName;
+        }
     }
 
     public PlayerClass GetPlayer(int playerNum)

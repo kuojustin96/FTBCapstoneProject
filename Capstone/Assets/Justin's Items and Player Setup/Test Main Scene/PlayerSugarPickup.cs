@@ -179,7 +179,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 	private IEnumerator StealSugarAni(GameObject dropoffPoint, PlayerClass otherPlayer)
 	{
         //Steal sugar from enemy stash
-		if (otherPlayer.currentPlayerScore > 0)
+		if (otherPlayer.currentPlayerScore > 0 && player.currentPlayerScore < player.maxCanCarry)
 		{
             nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, true);
 

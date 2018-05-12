@@ -42,11 +42,12 @@ public class NetworkProfile : NetworkBehaviour {
 
     void Start()
     {
-
+        playerClassAdd pca = GetComponent<playerClassAdd>();
         Debug.Log("my name is " + PlayerName);
-        GetComponent<playerClassAdd>().player.playerName = PlayerName;
-        GetComponent<playerClassAdd>().SetMaterialColor(PlayerColor, myNum);
+        pca.player.playerName = PlayerName;
+        pca.SetMaterialColor(PlayerColor, myNum);
 
+        GameManager.instance.SetUpBaseName(pca.player);
     }
 
     public void UpdateProfile(string name, Color color, int num)
