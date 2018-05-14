@@ -148,7 +148,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		}
 	}
 
-	public	 IEnumerator DropSugarAni()
+	public IEnumerator DropSugarAni()
 	{
 		dropping = true;
 		GameObject sugar = sugarInBackpack[0];
@@ -171,6 +171,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		while (Time.time < saveTime + (sugarPickupTime / 2))
 			yield return null;
 		sugar.transform.position = randomDropLoc;
+        sugar.GetComponent<sugarPickupable>().CheckForGround();
 	}
 
 

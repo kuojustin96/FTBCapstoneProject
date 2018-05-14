@@ -35,6 +35,7 @@ namespace Prototype.NetworkLobby
         {
             isHosting = true;
             lobbyManager.StartHost();
+            SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
         }
 
         public void LeaveLobby()
@@ -75,6 +76,7 @@ namespace Prototype.NetworkLobby
             lobbyManager.DisplayIsConnecting();
 
             lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
+            SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
         }
 
         public void OnClickDedicated()

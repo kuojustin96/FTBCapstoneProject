@@ -49,6 +49,7 @@ public class SoundEffectManager : MonoBehaviour {
             foreach (AudioClip ac in temp)
                 seo.SFXList.Add(ac);
         }
+
     }
 
     public void PlaySFX(string sfxTypeName, GameObject audioObject, float volume = 1f, bool canHaveMultiple = false)

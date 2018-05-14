@@ -49,6 +49,8 @@ namespace jkuo
 
         bool inFreeLook = false;
         public float lookSensitivity = 3.0f;
+        [HideInInspector]
+        public Coroutine pausedGravity;
 
         //jump
         [Header("Jumping")]
@@ -137,11 +139,6 @@ namespace jkuo
                     {
                         if (!player.playerPaused)
                         {
-                            //Movement
-                            Movement();
-
-
-
                             //Camera Rotation
                             Rotation();
 
@@ -152,12 +149,11 @@ namespace jkuo
                         }
                         else
                         {
-
                             PauseFreeCam();
-
                         }
 
-
+                        //Movement
+                        Movement();
 
                         //Jump
                         Jumping();
@@ -218,41 +214,43 @@ namespace jkuo
 
         private void Movement()
         {
-            Animator anim = netAnim.animator;
-            if (character.isGrounded && Input.GetKeyDown(KeyCode.Space))
+            if (!player.playerPaused)
             {
-                jumped = true;
+                Animator anim = netAnim.animator;
+                if (character.isGrounded && Input.GetKeyDown(KeyCode.Space))
+                {
+                    jumped = true;
+                }
+                moveHori = transform.right * Input.GetAxis("Horizontal");
+                moveVert = transform.forward * Input.GetAxis("Vertical");
+
+                float x = Input.GetAxis("Vertical");
+                float y = Input.GetAxis("Horizontal");
+
+                anim.SetFloat("Vertical", x);
+                anim.SetFloat("Horizontal", y);
+                anim.SetBool("IsGrounded", isGrounded);
+                //animateCharacter(x, y, isGrounded);
+
+                //velocity = (moveHori + moveVert) * speed;
+
+
+
+                //velocity += (Physics.gravity * gravityScale * Time.fixedDeltaTime);
+                //character.Move(velocity * Time.deltaTime);
+
+
+                // always move along the camera forward as it is the direction that it being aimed at
+                Vector3 desiredMove = (moveHori + moveVert) * currentSpeedMult;
+                // get a normal for the surface that is being touched to move along it
+                RaycastHit hitInfo;
+                Physics.SphereCast(transform.position, character.radius, Vector3.down, out hitInfo,
+                                   character.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+                desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
+
+                m_MoveDir.x = desiredMove.x * baseSpeed * currentSpeedMult;
+                m_MoveDir.z = desiredMove.z * baseSpeed * currentSpeedMult;
             }
-            moveHori = transform.right * Input.GetAxis("Horizontal");
-            moveVert = transform.forward * Input.GetAxis("Vertical");
-
-            float x = Input.GetAxis("Vertical");
-            float y = Input.GetAxis("Horizontal");
-
-            anim.SetFloat("Vertical", x);
-            anim.SetFloat("Horizontal", y);
-            anim.SetBool("IsGrounded", isGrounded);
-            //animateCharacter(x, y, isGrounded);
-
-            //velocity = (moveHori + moveVert) * speed;
-
-
-
-            //velocity += (Physics.gravity * gravityScale * Time.fixedDeltaTime);
-            //character.Move(velocity * Time.deltaTime);
-
-
-            // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = (moveHori + moveVert) * currentSpeedMult;
-            // get a normal for the surface that is being touched to move along it
-            RaycastHit hitInfo;
-            Physics.SphereCast(transform.position, character.radius, Vector3.down, out hitInfo,
-                               character.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
-            desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
-
-            m_MoveDir.x = desiredMove.x * baseSpeed*currentSpeedMult;
-            m_MoveDir.z = desiredMove.z * baseSpeed*currentSpeedMult;
-
 
             if (character.isGrounded)
             {
@@ -268,9 +266,27 @@ namespace jkuo
             else
             {
                 m_MoveDir += Physics.gravity * gravityScale * Time.fixedDeltaTime;
+
+                if (player.playerPaused && pausedGravity == null)
+                    pausedGravity = StartCoroutine(c_PausedGravity());
             }
             character.Move(m_MoveDir * Time.fixedDeltaTime);
+        }
 
+        private IEnumerator c_PausedGravity()
+        {
+            bool checking = true;
+            while (checking)
+            {
+                if (character.isGrounded)
+                {
+                    m_MoveDir.x = 0f;
+                    m_MoveDir.z = 0f;
+                    checking = false;
+                }
+
+                yield return null;
+            }
         }
 
 

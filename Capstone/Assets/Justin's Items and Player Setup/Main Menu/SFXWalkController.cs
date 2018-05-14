@@ -29,36 +29,55 @@ public class SFXWalkController : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
         sfm = SoundEffectManager.instance;
-        npc = GetComponent<net_PlayerController>();
-        nsc = GetComponent<NetworkSoundController>();
+        //npc = GetComponent<net_PlayerController>();
+        nsc = transform.root.GetComponent<NetworkSoundController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        RaycastHit hit;
-        if (!overrideSFX && npc.velocity != Vector3.zero)
-        {
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, layerMask))
-            {
-                int layerNum = hit.collider.gameObject.layer;
-                string layerName = LayerMask.LayerToName(layerNum);
+        //RaycastHit hit;
+        //if (!overrideSFX && npc.velocity != Vector3.zero)
+        //{
+        //    if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, layerMask))
+        //    {
+        //        int layerNum = hit.collider.gameObject.layer;
+        //        string layerName = LayerMask.LayerToName(layerNum);
 
-                if (layerName == "WoodSurface")
-                    currentSurface = SurfaceType.Wood;
-                else if (layerName == "MetalSurface")
-                    currentSurface = SurfaceType.Metal;
-                else if (layerName == "CarpetSurface")
-                    currentSurface = SurfaceType.Carpet;
-            }
-            else//Not on any surface, play gliding sound if gliding
-            {
-                currentSurface = SurfaceType.Gliding;
-            }
+        //        if (layerName == "WoodSurface")
+        //            currentSurface = SurfaceType.Wood;
+        //        else if (layerName == "MetalSurface")
+        //            currentSurface = SurfaceType.Metal;
+        //        else if (layerName == "CarpetSurface")
+        //            currentSurface = SurfaceType.Carpet;
+        //    }
+        //    else//Not on any surface, play gliding sound if gliding
+        //    {
+        //        currentSurface = SurfaceType.Gliding;
+        //    }
 
-            if(canStep)
-                PlayCorrespondingSFX();
-        }
+        //    if(canStep)
+        //        PlayCorrespondingSFX();
+        //}
 	}
+
+    public void PlayStep()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, layerMask))
+        {
+            int layerNum = hit.collider.gameObject.layer;
+            string layerName = LayerMask.LayerToName(layerNum);
+
+            if (layerName == "WoodSurface")
+                nsc.CmdPlaySFX("(Footsteps) Wood", transform.root.gameObject, 1f, false);
+            else if (layerName == "MetalSurface")
+                nsc.CmdPlaySFX("(Footsteps) Metal", transform.root.gameObject, 1f, false);
+            else if (layerName == "CarpetSurface")
+                nsc.CmdPlaySFX("(Footsteps) Carpet", transform.root.gameObject, 1f, false);
+
+            nsc.CmdStopSFX("Gliding");
+        }
+    }
 
     private void PlayCorrespondingSFX()
     {

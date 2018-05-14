@@ -308,7 +308,7 @@ namespace Prototype.NetworkLobby
                 LobbySingleton.instance.TransitionCam.gameObject.SetActive(true);
                 LobbyManager.s_Singleton.GetComponent<LobbyAnimationScript>().PlayOpenDoorAnimation();
 
-                SoundEffectManager.instance.PlaySFX("Door Open", SoundEffectManager.instance.gameObject);
+                SoundEffectManager.instance.PlaySFX("Door Open", Camera.main.gameObject);
                 //start fade
                 LobbySingleton.instance.FadeIn();
 

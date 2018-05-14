@@ -224,6 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8c1f03c40ba694f8bf850353d74627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 61440
 --- !u!198 &198577606326590232
 ParticleSystem:
   m_ObjectHideFlags: 1
