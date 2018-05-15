@@ -48,6 +48,7 @@ public class UIController : NetworkBehaviour {
     public Image CraftingItemFill;
     public TextMeshProUGUI CraftingItemPercentage;
     private bool inCraftMenu = false;
+    
 
     [Header("Ingame UI")]
     public CanvasGroup IngameItemBackgroundUI;

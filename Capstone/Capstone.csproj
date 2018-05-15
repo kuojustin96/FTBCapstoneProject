@@ -424,6 +424,7 @@
     <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
+    <Compile Include="Assets\IndicatorManager.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\Event_SlowDoor.cs" />
     <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
@@ -507,6 +508,7 @@
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\tornadoTrigger.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" />
     <Compile Include="Assets\Prototype\ScriptsForPrototypes\weaponAim.cs" />
+    <Compile Include="Assets\Scenes\Test Scripts\SimpleCameraMove.cs" />
     <Compile Include="Assets\Scripts\AlphaRaycastFilter.cs" />
     <Compile Include="Assets\Scripts\CameraShake.cs" />
     <Compile Include="Assets\Scripts\DontBlockMyScreen.cs" />
@@ -544,6 +546,7 @@
     <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
     <Compile Include="Assets\SplineMesh\Scripts\Example\SplineExtrusion.cs" />
+    <Compile Include="Assets\TestIndicatorControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -639,6 +642,7 @@
     <None Include="Assets\Resources\Text Documents\PriorityTickerText.txt" />
     <None Include="Assets\Shaders\BilateralBlur.shader" />
     <None Include="Assets\Shaders\BlitAdd.shader" />
+    <None Include="Assets\Shaders\UIDefaultWithOverlay.shader" />
     <None Include="Assets\Shaders\VolumetricLight.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Prototype.NetworkLobby;
 using ckp;
 using TMPro;
@@ -59,8 +58,6 @@ public class GameManager : MonoBehaviour {
             //DontDestroyOnLoad(this);
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
 		curPlayers = 0;
         foreach (DropoffPointsClass d in DropoffPoints)
             d.dropoffGO.SetActive(false);
@@ -69,29 +66,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager GetGameManager()
     {
         return instance;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        //if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
-        //{
-        //    GameObject[] temp = GameObject.FindGameObjectsWithTag("Dropoff Point");
-        //    GameObject red = GameObject.Find("Red");
-
-        //    Debug.Log("RED" + red);
-
-        //    Debug.Log("YOOOOOOOOOOOO " + temp.Length);
-
-        //    for (int x = 0; x < 4; x++)
-        //    {
-        //        DropoffPointsClass dpc = new DropoffPointsClass();
-        //        dpc.name = temp[x].name;
-        //        dpc.dropoffGO = temp[x];
-        //        dpc.teamColor = (net_TeamScript.Team)x;
-
-        //        temp[x].SetActive(false);
-        //    }
-        //}
     }
 
     // Use this for initialization
@@ -114,7 +88,10 @@ public class GameManager : MonoBehaviour {
 		//temporary position and color
 		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
 
-        playerClassAdd playerClass = player.GetComponent<playerClassAdd>();
+        foreach (PlayerClass p in playerList)
+            p.playerGO.GetComponent<IndicatorManager>().UpdatePlayerTransforms(playerList);
+
+        //playerClassAdd playerClass = player.GetComponent<playerClassAdd>();
 
 		curPlayers++;
     }

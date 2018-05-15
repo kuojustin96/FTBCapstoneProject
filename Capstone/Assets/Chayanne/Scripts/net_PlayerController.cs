@@ -260,7 +260,12 @@ namespace jkuo
                 {
                     jumped = false;
                     m_MoveDir.y = jumpForce;
+                }
 
+                if (player.playerPaused)
+                {
+                    m_MoveDir.x = 0f;
+                    m_MoveDir.z = 0f;
                 }
             }
             else
@@ -358,8 +363,8 @@ namespace jkuo
                 //Jumping
                 if (currentStamina > stamina - maxJumpStamina)
                 {
-                    _jumpForce = transform.up * (jumpForce * 1000);
-                    m_MoveDir.y = 10.0f;
+                    _jumpForce = transform.up * (jumpForce);
+                    m_MoveDir.y = _jumpForce.y;
                     //rb.AddForce(_jumpForce * Time.fixedDeltaTime);
 
                     //if (Input.GetKeyDown(KeyCode.Space) && canJump) {
