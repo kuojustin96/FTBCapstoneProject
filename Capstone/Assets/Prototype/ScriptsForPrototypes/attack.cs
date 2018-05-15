@@ -20,12 +20,16 @@ public class attack : NetworkBehaviour {
 	public GameObject shooter;
 
 	public GameObject magnetSize;
+    public float magnetMultiplier = 5f;
+    private float origMagnetRadius;
 
 	public bool attackable;
 	// Use this for initialization
 	void Start () {
 		 player = GetComponent<playerClassAdd>().player;
 		attackable = true;
+
+        origMagnetRadius = magnetSize.GetComponent<SphereCollider>().radius;
 	}
 	
 	// Update is called once per frame
@@ -154,12 +158,12 @@ public class attack : NetworkBehaviour {
 
 	public void MagnetTurnOn(){
 
-		magnetSize.GetComponent<SphereCollider> ().radius = 30;
-		Invoke("MagnetTurnOff",40);
+		magnetSize.GetComponent<SphereCollider> ().radius = origMagnetRadius * magnetMultiplier;
+		Invoke("MagnetTurnOff", 40);
 	}
 	public void MagnetTurnOff(){
 
-		magnetSize.GetComponent<SphereCollider> ().radius = 5;
+		magnetSize.GetComponent<SphereCollider> ().radius = origMagnetRadius;
 		CmdobjectTurnoff ();
 	}
 

@@ -59,7 +59,7 @@ namespace jkuo
         private bool isGrounded;
         public bool canJump = true;
         private Vector3 _jumpForce = Vector3.zero;
-
+        public float sugarStaminaFatigue = 0.05f;
         public float fatigueSpeed = 1f;
         private float stamina = 100f;
         private float currentStamina = 100f;
@@ -341,7 +341,7 @@ namespace jkuo
                     //rb.AddForce(new Vector3(0f, -(gravity / gravityDivisor), 0f), ForceMode.Force);
                     m_MoveDir.y = -4.0f;
                     currentSpeedMult = glideSpeedMult;
-                    currentStamina -= glideFatigueSpeed;
+                    currentStamina -= (glideFatigueSpeed + (player.sugarInBackpack * sugarStaminaFatigue));
                     staminaSlider.value = currentStamina;
 
                     if (currentStamina <= 0)

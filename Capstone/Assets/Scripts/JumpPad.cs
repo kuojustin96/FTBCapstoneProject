@@ -21,7 +21,7 @@ public class JumpPad : MonoBehaviour {
 	public IEnumerator TriggerAnimation(GameObject other)
     {
 		yield return new WaitForSeconds (.15f);
-		other.GetComponent<jkuo.net_PlayerController>().ApplyJumpForce(Vector3.up * (jumpForce * 10));
+		other.GetComponent<jkuo.net_PlayerController>().ApplyJumpForce(Vector3.up * jumpForce);
         na.SetBool("Activate", true);
 		GetComponent<Collider>().enabled = false;
 
