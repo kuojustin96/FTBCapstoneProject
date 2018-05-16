@@ -365,6 +365,10 @@ public class UIController : NetworkBehaviour {
         while (Time.time < saveTime + UIShiftTime)
             yield return null;
 
+        IngameItemBackgroundUI.transform.position = origIngameUIPos;
+        IngameItemUIRect.sizeDelta = origIngameItemUIScale;
+        IngameItemUIRect.transform.localPosition = origIngameItemUIPos;
+
         CanvasON(OpenCraftingUI);
     }
 
@@ -453,6 +457,8 @@ public class UIController : NetworkBehaviour {
 				ci.craftUtility ();
                 break;
         }
+
+        sm.UpdateStat(Stats.ItemsCrafted);
 
         IngameItemUI.texture = TextureDict[player.currentItem.name];
         CraftingItemUI.texture = TextureDict[player.currentItem.name];

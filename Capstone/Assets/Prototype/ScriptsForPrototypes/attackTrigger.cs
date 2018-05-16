@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using jkuo;
 public class attackTrigger : NetworkBehaviour {
 	PlayerClass player;
+    public float stunDuration = 4f;
 
 		void Start(){
 			Debug.Log ("triggerActive");
@@ -25,8 +26,9 @@ public class attackTrigger : NetworkBehaviour {
 		
 		public void stun(GameObject other){
 		
-		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(4f);
-			Debug.Log ("stunCall");
+		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(stunDuration);
+        StatManager.instance.UpdateStat(Stats.TimeStunnedOthers, stunDuration);
+        Debug.Log ("stunCall");
 		}
 	public void lateDestroy(){
 

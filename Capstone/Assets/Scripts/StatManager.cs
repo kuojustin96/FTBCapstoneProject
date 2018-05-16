@@ -17,17 +17,18 @@ public enum Stats
     SugarStolen = 1,
     TimeStunnedOthers = 2,
     TimeSpentStunned = 3,
-    ItemsCraft = 4,
+    ItemsCrafted = 4,
     NumEmotesUsed = 5,
     TimesVisitedBase = 6,
-    NumTimesJumped = 7,
+    TimesVisitedOtherBases = 7,
+    NumTimesJumped = 8,
 }
 
 public class StatManager : NetworkBehaviour {
 
     public static StatManager instance = null;
 
-    public Dictionary<Stats, int> statTracker { get; protected set; }
+    public Dictionary<Stats, float> statTracker { get; protected set; }
 
     public TextAsset priorityText;
     public TextAsset nonpriorityText;
@@ -71,7 +72,7 @@ public class StatManager : NetworkBehaviour {
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        statTracker = new Dictionary<Stats, int>();
+        statTracker = new Dictionary<Stats, float>();
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -106,9 +107,9 @@ public class StatManager : NetworkBehaviour {
         //ResetTickerTimer();
     }
 
-    public void UpdateStat(Stats stat)
+    public void UpdateStat(Stats stat, float updateAmount = 1)
     {
-        statTracker[stat] += 1;
+        statTracker[stat] += updateAmount;
     }
 
     private IEnumerator c_GameTimer()

@@ -18,6 +18,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
     private UIController uiController;
     private NetworkSoundController nsc;
+    private StatManager sm;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		player = GetComponentInParent<playerClassAdd>().player;
 		uiController = GetComponentInParent<UIController>();
         nsc = GetComponentInParent<NetworkSoundController>();
+        sm = StatManager.instance;
 
         sugarPickupTime = GameManager.instance.sugarPickupTime;
 		dropoffDelay = GameManager.instance.dropoffDelay;
@@ -59,6 +61,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 			{
 				runAnimation = true;
                 player.inBase = true;
+                sm.UpdateStat(Stats.TimesVisitedBase);
 
 				if (sugarInBackpack.Count > 0)
 					StartCoroutine(DropoffSugarAni(other.gameObject));
@@ -68,6 +71,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
             else //If player does not own this dropoff point
 			{
                 PlayerClass otherPlayer = GameManager.instance.GetPlayerFromDropoff(other.gameObject);
+                sm.UpdateStat(Stats.TimesVisitedOtherBases);
 
                 if(!otherPlayer.inBase)
 				    StartCoroutine(StealSugarAni(other.gameObject, otherPlayer));
@@ -188,6 +192,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 			sugarInBackpack.Add(sugar);
 			otherPlayer.LoseSugar(1);
             player.PickupSugar();
+            sm.UpdateStat(Stats.SugarStolen);
 
             uiController.UpdateBackpackScore(player.sugarInBackpack);
             otherPlayer.playerGO.GetComponent<UIController>().UpdateStashUI(otherPlayer.currentPlayerScore);
@@ -245,7 +250,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		player.PickupSugar();
 		sugarInBackpack.Add(sugar);
 		uiController.UpdateBackpackScore(player.sugarInBackpack);
-
+        sm.UpdateStat(Stats.SugarCollected);
 	}
 
 	private IEnumerator DropoffSugarAni(GameObject dropoffPoint)

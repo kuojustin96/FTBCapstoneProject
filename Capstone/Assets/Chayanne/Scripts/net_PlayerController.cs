@@ -12,6 +12,7 @@ namespace jkuo
     {
         private UIController uic;
         private NetworkSoundController nsc;
+        private StatManager sm;
         public CinemachineVirtualCamera virtualCam;
 
         public bool offlineTesting = false;
@@ -91,6 +92,7 @@ namespace jkuo
 
             uic = GetComponent<UIController>();
             nsc = GetComponent<NetworkSoundController>();
+            sm = StatManager.instance;
 
             staminaSlider.value = staminaSlider.maxValue;
             player = GetComponent<playerClassAdd>().player;
@@ -356,7 +358,8 @@ namespace jkuo
                 }
             }
 
-
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+                sm.UpdateStat(Stats.NumTimesJumped);
 
             if (Input.GetKey(KeyCode.Space) && canJump)
             {
@@ -426,24 +429,28 @@ namespace jkuo
                 {
                     nsc.CmdPlaySFX("Angry", gameObject, 1f, false);
                     CmdEmote(0);
+                    sm.UpdateStat(Stats.NumEmotesUsed);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
                     nsc.CmdPlaySFX("Taunt", gameObject, 1f, false);
                     CmdEmote(1);
+                    sm.UpdateStat(Stats.NumEmotesUsed);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
                     nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
                     CmdEmote(2);
+                    sm.UpdateStat(Stats.NumEmotesUsed);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha4))
                 {
                     nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
                     CmdEmote(3);
+                    sm.UpdateStat(Stats.NumEmotesUsed);
                 }
             }
 
@@ -536,6 +543,8 @@ namespace jkuo
         {
             if (!isLocalPlayer)
                 return;
+
+            sm.UpdateStat(Stats.TimeSpentStunned, duration);
             CmdStunPlayer(duration);
         }
 

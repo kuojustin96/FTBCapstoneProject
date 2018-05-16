@@ -8,6 +8,7 @@ using jkuo;
 public class electricTrigger : NetworkBehaviour {
 	PlayerClass player;
 	GameObject parentPlayer;
+    public float stunDuration = 4f;
 
 	void OnEnable(){
 		player = gameObject.transform.root.gameObject.GetComponent<playerClassAdd>().player;
@@ -31,8 +32,9 @@ public class electricTrigger : NetworkBehaviour {
 
 	public void stun(GameObject other){
 
-		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(4f);
-		Debug.Log ("stunCall");
+		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(stunDuration);
+        StatManager.instance.UpdateStat(Stats.TimeStunnedOthers, stunDuration);
+        Debug.Log ("stunCall");
 	}
 	public void lateDestroy(){
 
