@@ -66,8 +66,11 @@ public class SoundEffectManager : MonoBehaviour {
         {
             if(sfxTypeName == seo.name)
             {
-                auds = audioObject.AddComponent<AudioSource>();
-                auds.clip = seo.GetRandomClip();
+                if (audioObject)
+                {
+                    auds = audioObject.AddComponent<AudioSource>();
+                    auds.clip = seo.GetRandomClip();
+                }
                 break;
             }
         }

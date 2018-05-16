@@ -19,6 +19,7 @@ public class SFXWalkController : NetworkBehaviour {
     public SurfaceType currentSurface { get; protected set; }
     public float stepTime = 0.1f;
     private bool overrideSFX;
+    private string overrideName;
     private bool canStep = true;
 
     private SoundEffectManager sfm;
@@ -65,15 +66,22 @@ public class SFXWalkController : NetworkBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, layerMask))
         {
-            int layerNum = hit.collider.gameObject.layer;
-            string layerName = LayerMask.LayerToName(layerNum);
+            if (!overrideSFX)
+            {
+                int layerNum = hit.collider.gameObject.layer;
+                string layerName = LayerMask.LayerToName(layerNum);
 
-            if (layerName == "WoodSurface")
-                nsc.CmdPlaySFX("(Footsteps) Wood", transform.root.gameObject, 1f, false);
-            else if (layerName == "MetalSurface")
-                nsc.CmdPlaySFX("(Footsteps) Metal", transform.root.gameObject, 1f, false);
-            else if (layerName == "CarpetSurface")
-                nsc.CmdPlaySFX("(Footsteps) Carpet", transform.root.gameObject, 1f, false);
+                if (layerName == "WoodSurface")
+                    nsc.CmdPlaySFX("(Footsteps) Wood", transform.root.gameObject, 1f, false);
+                else if (layerName == "MetalSurface")
+                    nsc.CmdPlaySFX("(Footsteps) Metal", transform.root.gameObject, 1f, false);
+                else if (layerName == "CarpetSurface")
+                    nsc.CmdPlaySFX("(Footsteps) Carpet", transform.root.gameObject, 1f, false);
+            }
+            else
+            {
+                nsc.CmdPlaySFX(overrideName, transform.root.gameObject, 1f, false);
+            }
 
             nsc.CmdStopSFX("Gliding");
         }
@@ -123,11 +131,7 @@ public class SFXWalkController : NetworkBehaviour {
         if (sot)
         {
             overrideSFX = true;
-
-            if (npc.velocity != Vector3.zero)
-            {
-                nsc.CmdPlaySFX(sot.SFXOverrideName, gameObject, 1f, false);
-            }
+            overrideName = sot.SFXOverrideName;
         }
     }
 
@@ -140,6 +144,7 @@ public class SFXWalkController : NetworkBehaviour {
             {
                 overrideSFX = false;
                 sot = null;
+                overrideName = null;
             }
         }
     }

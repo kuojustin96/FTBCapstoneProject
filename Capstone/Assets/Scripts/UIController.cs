@@ -19,6 +19,7 @@ public class UIController : NetworkBehaviour {
     private PlayerClass player;
     private NetworkSoundController nsc;
     private jkuo.net_PlayerController npc;
+    private StatManager sm;
     public Texture2D cursorTexture;
     public CanvasGroup FaderPanel;
 
@@ -61,6 +62,9 @@ public class UIController : NetworkBehaviour {
 
     public RectTransform[] ItemButtons;
     private Vector2 itemButtonSize;
+
+    public TextMeshProUGUI gameTime;
+    public TextMeshProUGUI milisecondGameTime;
 
     [Header("Pause UI")]
     private MainMenuManager mmm;
@@ -127,7 +131,8 @@ public class UIController : NetworkBehaviour {
 
     public void SetUpVariables(PlayerClass player)
     {
-        StatManager.instance.SetUIController(this);
+        sm = StatManager.instance;
+        sm.SetUIController(this);
         npc = GetComponent<jkuo.net_PlayerController>();
 
         origIngameUIPos = IngameItemBackgroundUI.transform.position;
@@ -254,6 +259,10 @@ public class UIController : NetworkBehaviour {
             TogglePauseMenu();
 
         UpdateCursorLock();
+
+        //Update Game Timer
+        gameTime.text = sm.GetCurrentTimeLeft();
+        milisecondGameTime.text = sm.GetCurrentMiliseconds();
     }
 
     public void SetMouseSensitivity()

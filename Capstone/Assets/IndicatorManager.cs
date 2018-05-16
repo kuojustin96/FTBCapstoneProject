@@ -86,6 +86,7 @@ public class IndicatorManager : MonoBehaviour {
             newPos2.x = Mathf.Clamp(newPos2.x, m_edgeBuffer, Screen.width - m_edgeBuffer);
             newPos2.y += yOffset;
             newPos2.y = Mathf.Clamp(newPos2.y, m_edgeBuffer, Screen.height - m_edgeBuffer);
+            newPos2.z = 0f;
             baseIndicator.position = newPos2;
 
             if (newPos2.x + m_edgeBuffer >= Screen.width - m_edgeBuffer || newPos2.x - m_edgeBuffer <= 0 + m_edgeBuffer

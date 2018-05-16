@@ -33,6 +33,9 @@ public class StatManager : NetworkBehaviour {
     public TextAsset nonpriorityText;
 
     private GameManager gm;
+    private int minutes;
+    private int seconds;
+    private int miliseconds;
 
     public float minTickerTime = 10f;
     public float maxTickerTime = 30f;
@@ -76,7 +79,10 @@ public class StatManager : NetworkBehaviour {
         uic.Clear();
         //Debug.Log("MAKE SURE PLAY SCENE IS SCENE 1 IN BUILD ORDER - CHAYANNE");
         if (scene.buildIndex == 1)
+        {
             ResetTickerTimer();
+            StartCoroutine(c_GameTimer());
+        }
     }
 
     void Start()
@@ -100,10 +106,48 @@ public class StatManager : NetworkBehaviour {
         //ResetTickerTimer();
     }
 
-
     public void UpdateStat(Stats stat)
     {
         statTracker[stat] += 1;
+    }
+
+    private IEnumerator c_GameTimer()
+    {
+        float timeLeft = GameManager.instance.gameLength;
+
+        while (timeLeft > 0)
+        {
+            minutes = Mathf.FloorToInt(timeLeft / 60f);
+            seconds = Mathf.FloorToInt(timeLeft % 60f);
+            miliseconds = Mathf.RoundToInt((timeLeft * 100) % 100);
+
+            if (miliseconds == -1)
+            {
+                miliseconds = 99;
+                seconds -= 1;
+
+                if (seconds == -1)
+                {
+                    seconds = 59;
+                    minutes -= 1;
+                }
+            }
+
+            timeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        GameOverManager.instance.EndGame();
+    }
+
+    public string GetCurrentTimeLeft()
+    {
+        return minutes.ToString("00") + ":" + seconds.ToString("00");
+    }
+
+    public string GetCurrentMiliseconds()
+    {
+        return miliseconds.ToString("00");
     }
 
     private void ReadAndOrganizeTextFile(TextAsset textAsset, bool isPriority)

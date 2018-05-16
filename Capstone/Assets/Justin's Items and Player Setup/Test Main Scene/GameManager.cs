@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
+    [Tooltip("In Seconds")]
+    public float gameLength = 600f;
     public int numSugarToWin = 50;
     public float sugarPickupTime = 0.5f;
     public float dropoffDelay = 0.5f;
