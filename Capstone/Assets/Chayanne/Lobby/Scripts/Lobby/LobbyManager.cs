@@ -43,6 +43,7 @@ namespace Prototype.NetworkLobby
 
 
 
+
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
         [HideInInspector]
@@ -57,6 +58,15 @@ namespace Prototype.NetworkLobby
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
+
+
+        [Header("Emote UI")]
+        public RawImage tickerBackgroud;
+        public GameObject emoteUI;
+        public CanvasGroup emoteUICG;
+
+
+        [Header("Other")]
 
         public MeshRenderer boxTopMesh;
 

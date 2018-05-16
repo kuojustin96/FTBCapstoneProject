@@ -463,6 +463,7 @@ namespace jkuo
 
             if (!isLocalPlayer)
             {
+            // code run on other players
                 Vector3 temp = Emotes[emoteNum].transform.localScale;
                 temp.x = -1;
                 Emotes[emoteNum].transform.localScale = temp;
