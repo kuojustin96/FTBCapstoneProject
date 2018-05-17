@@ -165,6 +165,7 @@
      <Compile Include="Assets\CinemachineExamples\Shared\Scripts\MixingCameraBlend.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Examples\Sequences.cs" />
+     <Compile Include="Assets\IndicatorManager.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\event_DoorDisappear.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Events\Event_SlowDoor.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Main Menu\FadeManager.cs" />
@@ -185,6 +186,8 @@
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\ScoreController.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SimpleRotate.cs" />
      <Compile Include="Assets\Justin&apos;s Items and Player Setup\Test Main Scene\SugarManager.cs" />
+     <Compile Include="Assets\NetworkEmoteScript.cs" />
+     <Compile Include="Assets\NetworkOutfitScript.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -248,6 +251,7 @@
      <Compile Include="Assets\Prototype\ScriptsForPrototypes\tornadoTrigger.cs" />
      <Compile Include="Assets\Prototype\ScriptsForPrototypes\UI_Trigger.cs" />
      <Compile Include="Assets\Prototype\ScriptsForPrototypes\weaponAim.cs" />
+     <Compile Include="Assets\Scenes\Test Scripts\SimpleCameraMove.cs" />
      <Compile Include="Assets\Scripts\AlphaRaycastFilter.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\DontBlockMyScreen.cs" />
@@ -285,6 +289,7 @@
      <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Example\SplineExtrusion.cs" />
+     <Compile Include="Assets\TestIndicatorControl.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -410,6 +415,7 @@
      <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />
      <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\Shaders\UIDefaultWithOverlay.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
@@ -440,22 +446,22 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTween43">
- <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
  </Reference>
  <Reference Include="DOTween46">
- <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
  </Reference>
  <Reference Include="DOTween50">
- <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
- <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
  </Reference>
  <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
- <HintPath>C:/Users/jfragos2/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

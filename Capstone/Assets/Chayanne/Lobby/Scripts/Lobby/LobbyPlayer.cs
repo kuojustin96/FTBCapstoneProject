@@ -49,6 +49,7 @@ namespace Prototype.NetworkLobby
 
         public net_PlayerCameraScript cameraScript;
         public GameObject gamePlayerObject;
+        NetworkOutfitScript outfitScript;
 
         public int playerNum;
 
@@ -64,21 +65,15 @@ namespace Prototype.NetworkLobby
         //{
         //    Debug.Log("Awake " + gameObject.name);
         //}
-        //void Start()
-        //{
-        //    Debug.Log("Start " + gameObject.name);
-        //    if (isLocalPlayer)
-        //    {
-        //        string name = PlayerGameProfile.instance.GetPlayerData().name;
-        //        Debug.Log("Starting on " + name);
-        //        CmdAddToPlayerList(name);
-        //    }
-        //}
-        
+        void Awake()
+        {
+            outfitScript = GetComponent<NetworkOutfitScript>();
+        }
+
         //[Command]
         //void CmdAddToPlayerList(string name)
         //{
-            
+
         //    Debug.Log("Requesting name!");
         //    RpcAddToPlayerList(name);
         //}
@@ -184,6 +179,7 @@ namespace Prototype.NetworkLobby
                 CmdColorChange();
 
             CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
+
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby

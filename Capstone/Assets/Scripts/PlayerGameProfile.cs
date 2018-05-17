@@ -11,6 +11,9 @@ public struct PlayerData
     public Color color;
     public LobbyPlayer localLobbyPlayer;
     public GameObject localGamePlayer;
+
+    public int playerHatIndex;
+
 }
 public class PlayerGameProfile : MonoBehaviour {
 
