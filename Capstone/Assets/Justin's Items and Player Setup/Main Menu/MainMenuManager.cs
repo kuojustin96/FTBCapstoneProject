@@ -7,16 +7,23 @@ using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Cinemachine;
 
 public class MainMenuManager : MonoBehaviour {
 
     public static MainMenuManager instance;
     public SoundEffectManager sfm;
+    public MenuOutfitManager mom;
 
     public float fadeTime = 1f;
 
     [Header("Play Game")]
     public CanvasGroup playCanvas;
+
+
+    [Header("Customization Menu")]
+    public CanvasGroup customizeCanvas;
+    public CinemachineVirtualCameraBase customizeCam;
 
     [Header("Intructions")]
     public CanvasGroup instructionCanvas;
@@ -265,6 +272,49 @@ public class MainMenuManager : MonoBehaviour {
         }
     }
 
+    public void ToggleCustomization()
+    {
+        if (!inButtonTransition)
+        {
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            if (currentPanel != customizeCanvas)
+                CloseCurrentCanvas();
+
+            StartCoroutine(c_ToggleCustomize());
+        }
+    }
+
+    private IEnumerator c_ToggleCustomize()
+    {
+        inButtonTransition = true;
+
+        if (customizeCanvas.alpha == 0)
+        {
+            customizeCam.gameObject.SetActive(true);
+            FadeManager.instance.FadeIn(customizeCanvas, fadeTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + fadeTime)
+                yield return null;
+
+            FadeManager.instance.CanvasGroupON(customizeCanvas, true, true);
+            currentPanel = customizeCanvas;
+        }
+        else
+        {
+            customizeCam.gameObject.SetActive(false);
+            FadeManager.instance.FadeOut(customizeCanvas, fadeTime);
+            float saveTime = Time.time;
+            while (Time.time < saveTime + fadeTime)
+                yield return null;
+
+            FadeManager.instance.CanvasGroupOFF(customizeCanvas, false, false);
+            currentPanel = null;
+
+        }
+
+        inButtonTransition = false;
+    }
+
     private IEnumerator c_TogglePlay()
     {
         inButtonTransition = true;
@@ -419,6 +469,8 @@ public class MainMenuManager : MonoBehaviour {
             ToggleOptions();
         else if (currentPanel == creditsCanvas)
             ToggleCredits();
+        else if (currentPanel == customizeCanvas)
+            ToggleCustomization();
         else if (currentPanel == instructionCanvas)
             ToggleInstructions();
         else

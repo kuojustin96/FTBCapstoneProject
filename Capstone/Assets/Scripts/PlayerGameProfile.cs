@@ -76,6 +76,17 @@ public class PlayerGameProfile : MonoBehaviour {
         
     }
 
+    public void UpdatePlayerOutfitSelection(int index)
+    {
+        PlayerPrefs.SetInt("OutfitChoice", index);
+        data.playerHatIndex = index;
+    }
+
+    public int GetPlayerOutfitSelection()   
+    {
+        return PlayerPrefs.GetInt("OutfitChoice");
+    }
+
 
 
 	// Use this for initialization

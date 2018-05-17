@@ -17,16 +17,16 @@ public class NetworkOutfitScript : NetworkBehaviour {
     public HatList Hats;
 
     [SyncVar]
-    public int currentHat;
+    public int currentHat = 0;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        if (isLocalPlayer)
-        {
-            CmdChangeHat(currentHat);
-        }
+        //if (isLocalPlayer)
+        //{
+        //    CmdChangeHat(currentHat);
+        //}
     }
 
     public void PopulateHats()
@@ -47,7 +47,6 @@ public class NetworkOutfitScript : NetworkBehaviour {
     [ClientRpc]
     void RpcChangeHat(int index)
     {
-
 
         Hats.list[currentHat].SetActive(false);
         currentHat = index % Hats.list.Count;

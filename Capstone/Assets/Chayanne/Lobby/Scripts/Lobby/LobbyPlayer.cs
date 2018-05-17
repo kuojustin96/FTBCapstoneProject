@@ -180,6 +180,7 @@ namespace Prototype.NetworkLobby
 
             CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
 
+            outfitScript.CmdChangeHat(PlayerGameProfile.instance.GetPlayerData().playerHatIndex);
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
