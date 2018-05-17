@@ -48,9 +48,12 @@ public class GameOverManager : NetworkBehaviour {
 
     public void EndGame()
     {
-        this.playerList = gm.playerList;
-        finalScorePlayerList = new PlayerClass[playerList.Count];
-        OrderPlayersBasedOnScore();
+        if (isServer)
+        {
+            this.playerList = gm.playerList;
+            finalScorePlayerList = new PlayerClass[playerList.Count];
+            OrderPlayersBasedOnScore();
+        }
     }
 
     private void OrderPlayersBasedOnScore()
