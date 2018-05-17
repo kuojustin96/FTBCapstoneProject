@@ -28,7 +28,17 @@ public class StatManager : NetworkBehaviour {
 
     public static StatManager instance = null;
 
-    public Dictionary<Stats, float> statTracker { get; protected set; }
+    public Dictionary<Stats, StatClasses> statTracker { get; protected set; }
+    
+    [System.Serializable]
+    public class StatClasses
+    {
+        public float num = 0;
+        public string AccoladeString;
+    }
+
+    public StatClasses[] GameStats = new StatClasses[System.Enum.GetValues(typeof(Stats)).Length];
+    public string[] MiscAccolades;
 
     public TextAsset priorityText;
     public TextAsset nonpriorityText;
@@ -72,7 +82,7 @@ public class StatManager : NetworkBehaviour {
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        statTracker = new Dictionary<Stats, float>();
+        statTracker = new Dictionary<Stats, StatClasses>();
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -99,17 +109,26 @@ public class StatManager : NetworkBehaviour {
         ReadAndOrganizeTextFile(priorityText, true);
         ReadAndOrganizeTextFile(nonpriorityText, false);
 
-        //Test Code
-        //PlayerClass ply = new PlayerClass();
-        //ply.currentPlayerScore = 10;
-        //Debug.Log(GetTickerMessage(TickerMessageType.NonPriority, ply));
+        AssignStatTrackerDictionary();
+    }
 
-        //ResetTickerTimer();
+    private void AssignStatTrackerDictionary()
+    {
+        statTracker.Add(Stats.SugarCollected, GameStats[0]);
+        statTracker.Add(Stats.SugarStolen, GameStats[1]);
+        statTracker.Add(Stats.TimeStunnedOthers, GameStats[2]);
+        statTracker.Add(Stats.TimeSpentStunned, GameStats[3]);
+        statTracker.Add(Stats.ItemsCrafted, GameStats[4]);
+        statTracker.Add(Stats.NumEmotesUsed, GameStats[5]);
+        statTracker.Add(Stats.TimesVisitedBase, GameStats[6]);
+        statTracker.Add(Stats.TimesVisitedOtherBases, GameStats[7]);
+        statTracker.Add(Stats.NumTimesJumped, GameStats[8]);
     }
 
     public void UpdateStat(Stats stat, float updateAmount = 1)
     {
-        statTracker[stat] += updateAmount;
+        StatClasses temp = statTracker[stat];
+        temp.num += updateAmount;
     }
 
     private IEnumerator c_GameTimer()

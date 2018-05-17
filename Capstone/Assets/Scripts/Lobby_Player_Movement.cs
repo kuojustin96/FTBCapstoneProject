@@ -93,7 +93,7 @@ public class Lobby_Player_Movement : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer || offlineTesting)
+        if (isLocalPlayer)
         {
             UpdateCursorLock();
 
@@ -126,8 +126,11 @@ public class Lobby_Player_Movement : NetworkBehaviour
     }
     void FixedUpdate()
     {
-        Jumping();
-        Movement();
+        if (isLocalPlayer)
+        {
+            Jumping();
+            Movement();
+        }
     }
     private void Rotation()
     {
