@@ -20,6 +20,8 @@ public class SugarManager : NetworkBehaviour {
     private List<GameObject> inactiveSugar = new List<GameObject>();
     private List<GameObject> activeSugar = new List<GameObject>();
 
+    public GameObject parent;
+
     [System.Serializable]
     public class SugarSpawnSpot
     {
@@ -36,6 +38,7 @@ public class SugarManager : NetworkBehaviour {
     {
         if (instance == null)
             instance = this;
+        parent = new GameObject();
     }
 
     [Command]
@@ -43,7 +46,7 @@ public class SugarManager : NetworkBehaviour {
     {
         for(int x = 0; x < numSugarPool; x++)
         {
-            GameObject sugar = Instantiate(sugarPrefab, Vector3.zero, Quaternion.identity, transform);
+            GameObject sugar = Instantiate(sugarPrefab, Vector3.zero, Quaternion.identity, parent.transform);
             NetworkServer.Spawn(sugar);
             sugar.SetActive(false);
             inactiveSugar.Add(sugar);
@@ -162,7 +165,7 @@ public class SugarManager : NetworkBehaviour {
 
         if (inactiveSugar.Count == 0)
         {
-            GameObject sugar = Instantiate(sugarPrefab, inactiveSpots[x].spawn.position, Quaternion.identity);
+            GameObject sugar = Instantiate(sugarPrefab, inactiveSpots[x].spawn.position, Quaternion.identity,parent.transform);
             NetworkServer.Spawn(sugar);
 
             //sugar.transform.parent = inactiveSpots[x].spawn;

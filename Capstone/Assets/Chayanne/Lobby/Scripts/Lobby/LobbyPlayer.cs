@@ -153,8 +153,9 @@ namespace Prototype.NetworkLobby
         void SetupOtherPlayer()
         {
             LobbyManager.s_Singleton.playerList.CreateName(playerName);
-            outfitScript.ChangeHat(outfitNum,Color.black,false);
+            outfitScript.ChangeHat(outfitNum);
             OnClientReady(false);
+            OnReadyClicked();
         }
 
         public net_TeamScript.Team GetTeamColor()
@@ -315,11 +316,11 @@ namespace Prototype.NetworkLobby
             {
                 countDownStart = true;
                 LobbySingleton.instance.TransitionCam.gameObject.SetActive(true);
-                LobbyManager.s_Singleton.GetComponent<LobbyAnimationScript>().PlayOpenDoorAnimation();
+                LobbyManager.s_Singleton.lobbyAnims.PlayOpenDoorAnimation();
 
                 SoundEffectManager.instance.PlaySFX("Door Open", Camera.main.gameObject);
                 //start fade
-                LobbySingleton.instance.FadeIn();
+                LobbyManager.s_Singleton.cameraHolder.FadeIn();
 
             }
 

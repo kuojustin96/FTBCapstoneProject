@@ -61,21 +61,17 @@ public class NetworkLobbyHook : LobbyHook
 
     private static void SyncVariables(GameObject lobbyPlayer, GameObject gamePlayer, int playerNum)
     {
-        NetworkProfile profile = gamePlayer.GetComponent<NetworkProfile>();
-        //lobbyPlayer.GetComponent<LobbyPlayer>().gamePlayerObject = gamePlayer;
 
-        //LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
+        LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
 
 
-        string name = lobbyPlayer.GetComponent<LobbyPlayer>().playerName;
+        //string name = lobbyPlayer.GetComponent<LobbyPlayer>().playerName;
+        //Color color = lobbyPlayer.GetComponent<LobbyPlayer>().playerColor;
+        //int outfit  = lobbyPlayer.GetComponent<LobbyPlayer>().outfitNum;
+        //profile.UpdateProfile(name, color, playerNum,outfit);
 
-        Color color = lobbyPlayer.GetComponent<LobbyPlayer>().playerColor;
+        gamePlayer.GetComponent<NetworkProfile>().CopyProfile(lp);
 
-        int outfit  = lobbyPlayer.GetComponent<LobbyPlayer>().outfitNum;
-
-
-
-        profile.UpdateProfile(name, color, playerNum,outfit);
 
 
         Debug.Log("Synced my names!");

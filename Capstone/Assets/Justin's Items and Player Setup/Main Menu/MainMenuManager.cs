@@ -13,8 +13,6 @@ public class MainMenuManager : MonoBehaviour {
 
     public static MainMenuManager instance;
     public SoundEffectManager sfm;
-    public MenuOutfitManager mom;
-
     public float fadeTime = 1f;
 
     [Header("Play Game")]
@@ -56,6 +54,8 @@ public class MainMenuManager : MonoBehaviour {
     public Slider sfxSlider;
     public Slider musicSlider;
 
+    public Animator mainMenuFader;
+
     bool preparing = true;
 
     private void Awake()
@@ -65,12 +65,25 @@ public class MainMenuManager : MonoBehaviour {
         else
             Destroy(gameObject);
 
+
         //DontDestroyOnLoad(gameObject);
     }
+
+
+    public void FadeMenu(bool val)
+    {
+        mainMenuFader.SetBool("FadeMenu", val);
+    }
+
 
     // Use this for initialization
     void Start ()
     {
+        if(sfm == null)
+        {
+            sfm = SoundEffectManager.instance;
+        }
+
         Initialize();
 
         //Chayanne's Preference saving code

@@ -41,7 +41,7 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
-
+        public LobbySingleton cameraHolder;
 
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
@@ -89,8 +89,10 @@ namespace Prototype.NetworkLobby
 
         bool madeHost = false;
         void OnLevelWasLoaded()
-        {
+        {   
         }
+
+
 
         public string GetLocalPlayerName()
         {
@@ -115,7 +117,7 @@ namespace Prototype.NetworkLobby
             backButton.gameObject.SetActive(false);
             GetComponent<Canvas>().enabled = true;
 
-            lobbyAnims = GetComponent<LobbyAnimationScript>();
+            //lobbyAnims = GetComponent<LobbyAnimationScript>();
             DontDestroyOnLoad(gameObject.transform.parent);
 
 
@@ -313,8 +315,7 @@ namespace Prototype.NetworkLobby
         private void TransitionToLobbyMenu()
         {
             lobbyAnims.PlayOpenBoxAnimation();
-            lobbyAnims.PlayCameraZoom();
-            lobbyAnims.FadeMenu(true);
+            MainMenuManager.instance.FadeMenu(true);
         }
 
         public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
@@ -323,7 +324,7 @@ namespace Prototype.NetworkLobby
             _currentMatchID = (System.UInt64)matchInfo.networkId;
         }
 
-        public override void OnDestroyMatch(bool success, string extendedInfo)
+        public override void OnDestroyMatch(bool success, string extendedInfo)  
         {
             base.OnDestroyMatch(success, extendedInfo);
             if (_disconnectServer)

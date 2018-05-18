@@ -11,8 +11,10 @@ public class LobbyAnimationScript : MonoBehaviour
     public Animator UIFader;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        if(LobbyManager.s_Singleton)
+        LobbyManager.s_Singleton.lobbyAnims = this;
     }
 
     // Update is called once per frame
@@ -43,10 +45,7 @@ public class LobbyAnimationScript : MonoBehaviour
 
     }
 
-    public void FadeMenu(bool val)
-    {
-        UIFader.SetBool("FadeMenu", val);
-    }
+
 
     public void PlayCameraZoom()
     {

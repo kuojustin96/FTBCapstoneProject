@@ -85,6 +85,12 @@ public class MusicManager : MonoBehaviour {
         }
     }
 
+    //todo: get rid of menu, get rid of faders, get rid of transition camera.
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    }
 
     public void PlayMainTrack(string mainTrackName, float fadeTime = 0, float volume = 0.4f)
     {
@@ -137,8 +143,8 @@ public class MusicManager : MonoBehaviour {
 
     public void SwapMainTracks(string newMainTrackName, float targetVol, float fadeTime)
     {
-
-        foreach(MusicTracks m in Music)
+        mainTrackAuds = GetComponent<AudioSource>();
+        foreach (MusicTracks m in Music)
         {
             if(newMainTrackName == m.musicName)
             {
