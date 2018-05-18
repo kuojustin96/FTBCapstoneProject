@@ -23,7 +23,7 @@ public class NetworkLobbyHook : LobbyHook
         jkuo.net_PlayerController player = gamePlayer.GetComponent<jkuo.net_PlayerController>();
 
         int playerNum = lobby.playerNum;
-        SyncName(lobbyPlayer, gamePlayer, playerNum);
+        SyncVariables(lobbyPlayer, gamePlayer, playerNum);
 
         net_TeamScript team = gamePlayer.GetComponent<net_TeamScript>();
 
@@ -59,7 +59,7 @@ public class NetworkLobbyHook : LobbyHook
     }
 
 
-    private static void SyncName(GameObject lobbyPlayer, GameObject gamePlayer, int playerNum)
+    private static void SyncVariables(GameObject lobbyPlayer, GameObject gamePlayer, int playerNum)
     {
         NetworkProfile profile = gamePlayer.GetComponent<NetworkProfile>();
         //lobbyPlayer.GetComponent<LobbyPlayer>().gamePlayerObject = gamePlayer;
@@ -68,9 +68,14 @@ public class NetworkLobbyHook : LobbyHook
 
 
         string name = lobbyPlayer.GetComponent<LobbyPlayer>().playerName;
+
         Color color = lobbyPlayer.GetComponent<LobbyPlayer>().playerColor;
 
-        profile.UpdateProfile(name, color, playerNum);
+        int outfit  = lobbyPlayer.GetComponent<LobbyPlayer>().outfitNum;
+
+
+
+        profile.UpdateProfile(name, color, playerNum,outfit);
 
 
         Debug.Log("Synced my names!");
