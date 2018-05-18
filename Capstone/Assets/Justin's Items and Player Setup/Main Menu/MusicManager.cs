@@ -47,7 +47,7 @@ public class MusicManager : MonoBehaviour {
 
         LoadMusicLibrary();
 
-        PlayMainTrack(defaultTrackName);
+        PlayMainTrack(defaultTrackName, 0, 0.4f);
     }
 
     void Start()
@@ -60,7 +60,7 @@ public class MusicManager : MonoBehaviour {
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if(scene.buildIndex == 1)
-            SwapMainTracks("GroundFloor", 1f, 1f);
+            SwapMainTracks("GroundFloor", 1f, 0.4f);
     }
 
     private void LoadMusicLibrary()
@@ -86,7 +86,7 @@ public class MusicManager : MonoBehaviour {
     }
 
 
-    public void PlayMainTrack(string mainTrackName, float fadeTime = 0, float volume = 1f)
+    public void PlayMainTrack(string mainTrackName, float fadeTime = 0, float volume = 0.4f)
     {
         foreach(MusicTracks m in Music)
         {
