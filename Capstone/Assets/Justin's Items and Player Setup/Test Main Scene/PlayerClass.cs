@@ -26,6 +26,7 @@ public class PlayerClass {
     public bool playerPaused = false;
 
     private GameManager gm;
+    public StatManager sm;
     private net_PlayerController npc;
     private float minSpeed;
     private float speedPerSugar;
@@ -40,6 +41,7 @@ public class PlayerClass {
         this.playerName = playerName;
 
         gm = GameManager.instance;
+        sm = StatManager.instance;
         npc = playerGO.GetComponent<net_PlayerController>();
         minSpeed = gm.minSpeed;
         speedPerSugar = gm.speedPerSugar;

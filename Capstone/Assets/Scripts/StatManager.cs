@@ -38,7 +38,6 @@ public class StatManager : NetworkBehaviour {
     }
 
     public StatClasses[] GameStats = new StatClasses[System.Enum.GetValues(typeof(Stats)).Length];
-    public string[] MiscAccolades;
 
     public TextAsset priorityText;
     public TextAsset nonpriorityText;

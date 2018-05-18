@@ -12,6 +12,11 @@ public class GameOverManager : NetworkBehaviour {
 
     public static GameOverManager instance = null;
     [Header("End Game")]
+    public string[] LastPlaceAccolades;
+    public string[] MiddlePlaceAccolades;
+    public string[] WinnerAccolades;
+    private int randAccolade;
+
     public GameObject[] SSModels;
     public Transform[] PersonSpots;
     public Transform endGameCamPos;
@@ -48,12 +53,9 @@ public class GameOverManager : NetworkBehaviour {
 
     public void EndGame()
     {
-        if (isServer)
-        {
-            this.playerList = gm.playerList;
-            finalScorePlayerList = new PlayerClass[playerList.Count];
-            OrderPlayersBasedOnScore();
-        }
+        this.playerList = gm.playerList;
+        finalScorePlayerList = new PlayerClass[playerList.Count];
+        OrderPlayersBasedOnScore();
     }
 
     private void OrderPlayersBasedOnScore()
@@ -132,6 +134,7 @@ public class GameOverManager : NetworkBehaviour {
 
     private IEnumerator WinSceneAnimation()
     {
+        int middlePlaceTemp = -1;
         FadeManager.instance.FadeOut(fadeBackground, 1f);
 
         float saveTime = Time.time;
@@ -141,7 +144,44 @@ public class GameOverManager : NetworkBehaviour {
         for (int x = 0; x < playerList.Count; x++)
         {
             playerScore.text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
-            //playerStat.text Implement stat line for player from stat manager
+            string title = "";
+            if (x == playerList.Count - 1)
+            {
+                if (isServer)
+                {
+                    randAccolade = Random.Range(0, WinnerAccolades.Length);
+                    CmdSyncRand(randAccolade);
+                }
+                title = WinnerAccolades[randAccolade];
+            }
+            else if (x == 0)
+            {
+                if (isServer)
+                {
+                    randAccolade = Random.Range(0, LastPlaceAccolades.Length);
+                    CmdSyncRand(randAccolade);
+                }
+                title = LastPlaceAccolades[randAccolade];
+            }
+            else
+            {
+                bool picking = true;
+                while (picking)
+                {
+                    if (isServer)
+                    {
+                        randAccolade = Random.Range(0, MiddlePlaceAccolades.Length);
+                        CmdSyncRand(randAccolade);
+                    }
+                    if (randAccolade != middlePlaceTemp)
+                    {
+                        middlePlaceTemp = randAccolade;
+                        title = MiddlePlaceAccolades[randAccolade];
+                    }
+                }
+            }
+
+            playerStat.text = title;
 
             //Move Camera into position
             mainCam.transform.DOMoveX(PersonSpots[x].transform.position.x, 1f);
@@ -185,5 +225,17 @@ public class GameOverManager : NetworkBehaviour {
         //}
 
         Application.Quit(); //TEMPORARY
+    }
+
+    [Command]
+    private void CmdSyncRand(int rand)
+    {
+        RpcSyncRand(rand);
+    }
+
+    [ClientRpc]
+    private void RpcSyncRand(int rand)
+    {
+        randAccolade = rand;
     }
 }
