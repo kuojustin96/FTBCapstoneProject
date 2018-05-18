@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class rotate : MonoBehaviour {
 	public float rotateSpeed;
+    public float rotateSpeedx;
+    public float rotateSpeedz;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +13,6 @@ public class rotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.Rotate (0, rotateSpeed, 0);
+		transform.Rotate (rotateSpeedx, rotateSpeed, rotateSpeedz);
 	}
 }

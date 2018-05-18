@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 33589205561742420}
   - component: {fileID: 23492679423714352}
   - component: {fileID: 95608989435502140}
+  - component: {fileID: 114447275793584362}
   m_Layer: 0
   m_Name: Battery
   m_TagString: Untagged
@@ -3509,7 +3510,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189846312776972}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -38.6, y: 8.01, z: 3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000218716509136}
@@ -3749,8 +3750,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113453668009774}
   m_LocalRotation: {x: -0, y: -0.008726567, z: -0, w: 0.999962}
-  m_LocalPosition: {x: -1.1571044, y: 6.0300016, z: 66.289894}
-  m_LocalScale: {x: 20.743711, y: 17.844202, z: 124.3815}
+  m_LocalPosition: {x: -1.6, y: 6.0300016, z: 94.3}
+  m_LocalScale: {x: 113.14055, y: 96.39481, z: 169.23108}
   m_Children:
   - {fileID: 4948072320525406}
   m_Father: {fileID: 4474650468296432}
@@ -4214,7 +4215,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9f07939b78d70bb489c309f585c54155, type: 3}
+  - {fileID: 2100000, guid: 5dc9feb7daacc1b4ea71694c4f967a70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6117,6 +6118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 10
+  rotateSpeedx: 0
+  rotateSpeedz: 0
 --- !u!114 &114177050654783578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7623,6 +7626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813a08c581bfec4499c7f2b5fe55ae00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunDuration: 4
 --- !u!114 &114389781129608096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8261,6 +8265,20 @@ MonoBehaviour:
   m_canvasRenderer: {fileID: 222895070220260082}
   m_TextComponent: {fileID: 114533693904807282}
   m_materialReferenceIndex: 1
+--- !u!114 &114447275793584362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129202244750460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379f6da23dc955e4dbdcd87f2e2131ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 2
+  rotateSpeedx: 0
+  rotateSpeedz: 0
 --- !u!114 &114456826793405076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8491,6 +8509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 5
+  rotateSpeedx: 0
+  rotateSpeedz: 0
 --- !u!114 &114501450153699416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8548,6 +8568,7 @@ MonoBehaviour:
     currentItem: {fileID: 0}
     currentItemString: 
     playerPaused: 0
+    sm: {fileID: 0}
   psp: {fileID: 114726637079279308}
   Hood: {fileID: 1861833577881330}
   Cloak: {fileID: 1452559225245780}
@@ -8622,6 +8643,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 5
+  rotateSpeedx: 0
+  rotateSpeedz: 0
 --- !u!114 &114533693904807282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9866,6 +9889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03768bdb4cd80c0428fd82cd8313218b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunDuration: 4
 --- !u!114 &114712203215075930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12455,7 +12479,7 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.0003433368, y: 0.06487193, z: -0.024172897}
+    m_Center: {x: 0.00034344196, y: 0.06487194, z: -0.024172902}
     m_Extent: {x: 0.063137196, y: 0.046455465, z: 0.05770148}
   m_DirtyAABB: 0
 --- !u!143 &143200556180259018
@@ -38803,7 +38827,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2025160851
+  randomSeed: 1118277464
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -38955,7 +38979,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -39254,7 +39278,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 20, y: 15, z: 124}
+    m_Scale: {x: 113, y: 96, z: 169}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0

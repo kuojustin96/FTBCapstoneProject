@@ -1686,8 +1686,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.99999976, y: 2.506471, z: 1}
+  m_Center: {x: 0, y: -0.7467648, z: 0}
 --- !u!33 &125299461
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12780,11 +12780,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -20759,11 +20759,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -22773,7 +22773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameLength: 600
-  numSugarToWin: 2
+  numSugarToWin: 15
   sugarPickupTime: 0.5
   dropoffDelay: 0.5
   maxSugarCarry: 10
@@ -24775,8 +24775,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 4, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 2.5443177, z: 1}
+  m_Center: {x: 0, y: -0.7278407, z: 0}
 --- !u!33 &2018636466
 MeshFilter:
   m_ObjectHideFlags: 0
