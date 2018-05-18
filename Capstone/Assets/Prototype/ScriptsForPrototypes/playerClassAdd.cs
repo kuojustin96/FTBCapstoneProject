@@ -23,7 +23,7 @@ public class playerClassAdd : MonoBehaviour {
 
         //Player has their color when we load in. so...
 
-        Hood.GetComponent<Renderer>().material.color = color;
+        //GetComponent<NetworkOutfitScript>().myMaterial.color = color;
         Cloak.GetComponent<Renderer>().material.color = color;
         Debug.Log("My name is " + player.playerName);
 

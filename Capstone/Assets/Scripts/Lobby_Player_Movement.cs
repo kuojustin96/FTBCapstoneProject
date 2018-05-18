@@ -156,9 +156,9 @@ public class Lobby_Player_Movement : NetworkBehaviour
         float x = Input.GetAxis("Vertical");
         float y = Input.GetAxis("Horizontal");
 
-        anim.SetFloat("Vertical", x);
-        anim.SetFloat("Horizontal", y);
-        anim.SetBool("IsGrounded", isGrounded);
+        //anim.SetFloat("Vertical", x);
+        //anim.SetFloat("Horizontal", y);
+        //anim.SetBool("IsGrounded", isGrounded);
         //animateCharacter(x, y, isGrounded);
 
         // always move along the camera forward as it is the direction that it being aimed at
@@ -189,10 +189,33 @@ public class Lobby_Player_Movement : NetworkBehaviour
             m_MoveDir += Physics.gravity * gravityScale * Time.fixedDeltaTime;
         }
             character.Move(m_MoveDir * Time.fixedDeltaTime);
-
+        CmdAnimateCharacter(x, y, isGrounded, false);
 
     }
+    public void animateCharacter(float x, float y, bool jump, bool glide)
+    {
+        //netAnim.animator.SetInteger ("CurrentState",a);
+        CmdAnimateCharacter(x, y, jump, glide);
+    }
 
+
+    [Command]
+    public void CmdAnimateCharacter(float x, float y, bool jump, bool glide)
+    {
+        //netAnim.animator.SetInteger ("CurrentState",a);
+        RpcAnimateCharacter(x, y, jump, glide);
+    }
+    [ClientRpc]
+    public void RpcAnimateCharacter(float x, float y, bool jump, bool glide)
+    {
+        anim.SetFloat("Horizontal", x);
+
+        anim.SetFloat("Vertical", y);
+
+        anim.SetBool("IsGrounded", jump);
+
+        anim.SetBool("IsGliding", glide);
+    }
 
     void Camera()
     {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ckp;
 using Cinemachine;
+using System;
 
 namespace Prototype.NetworkLobby
 {
@@ -52,6 +53,9 @@ namespace Prototype.NetworkLobby
         NetworkOutfitScript outfitScript;
 
         public int playerNum;
+
+        [SyncVar]
+        public int outfitNum;
 
         public override void OnStartClient()
         {
@@ -149,6 +153,7 @@ namespace Prototype.NetworkLobby
         void SetupOtherPlayer()
         {
             LobbyManager.s_Singleton.playerList.CreateName(playerName);
+            outfitScript.ChangeHat(outfitNum,Color.black,false);
             OnClientReady(false);
         }
 
@@ -180,11 +185,18 @@ namespace Prototype.NetworkLobby
 
             CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
 
-            outfitScript.CmdChangeHat(PlayerGameProfile.instance.GetPlayerData().playerHatIndex);
+            CmdOutfitChanged(PlayerGameProfile.instance.GetPlayerOutfitSelection());
+
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
+        }
+
+        private void CmdOutfitChanged(int outfitIndex)
+        {
+            outfitNum = outfitIndex;
+            outfitScript.CmdChangeHat(outfitIndex);
         }
 
         //This enable/disable the remove button depending on if that is the only local player or not

@@ -15,46 +15,32 @@ public class NetworkProfile : NetworkBehaviour {
 
     [SyncVar]
     int myNum;
-    //[Command]
-    //public void CmdUpdateProfile(string name, Color color)
-    //{
-    //    RpcUpdateProfile(name,color,PlayerGameProfile.instance.GetGamePlayer());
-    //}
 
-    //[ClientRpc]
-    //public void RpcUpdateProfile(string name, Color color,GameObject player)
-    //{
-    //    Debug.Log("meme");
-    //    PlayerName = name; 
-    //    PlayerColor = color;
+    [SyncVar]
+    int outfitChoice;
 
-    //    gPlayer = player;
+    playerClassAdd pca;
+    NetworkOutfitScript nos;
 
-    //    Debug.Assert(gPlayer);
-    //    Debug.Assert(gPlayer.GetComponent<playerClassAdd>());
-    //    Debug.Assert(gPlayer.GetComponent<playerClassAdd>().player != null);
-
-    //    Debug.Log("Updating profile!" + " Name: " + name);
-    //    gPlayer.GetComponent<playerClassAdd>().player.playerName = name;
-    //    gPlayer.GetComponent<playerClassAdd>().SetMaterialColor(color, myNum);
-
-    //}
 
     void Start()
     {
-        playerClassAdd pca = GetComponent<playerClassAdd>();
+        nos = GetComponent<NetworkOutfitScript>();
+        pca = GetComponent<playerClassAdd>();
         Debug.Log("my name is " + PlayerName);
         pca.player.playerName = PlayerName;
         pca.SetMaterialColor(PlayerColor, myNum);
+        nos.ChangeHat(outfitChoice, PlayerColor);
 
         GameManager.instance.SetUpBaseName(pca.player);
     }
 
-    public void UpdateProfile(string name, Color color, int num)
+    public void UpdateProfile(string name, Color color, int num, int outfitNum)
     {
         PlayerName = name;
         PlayerColor = color;
         myNum = num;
+        outfitChoice = outfitNum;
     }
 
     //public void RpcUpdateProfile(string name, Color color,GameObject player)

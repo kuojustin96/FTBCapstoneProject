@@ -10,7 +10,8 @@ public struct HatList
     public List<GameObject> list;
 }
 
-public class NetworkOutfitScript : NetworkBehaviour {
+public class NetworkOutfitScript : NetworkBehaviour
+{
 
     public Transform HatRoot;
 
@@ -19,14 +20,10 @@ public class NetworkOutfitScript : NetworkBehaviour {
     [SyncVar]
     public int currentHat = 0;
 
-
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-        //if (isLocalPlayer)
-        //{
-        //    CmdChangeHat(currentHat);
-        //}
+
     }
 
     public void PopulateHats()
@@ -52,10 +49,31 @@ public class NetworkOutfitScript : NetworkBehaviour {
         currentHat = index % Hats.list.Count;
         Hats.list[currentHat].SetActive(true);
 
+        Debug.Log("You have hat " + currentHat);
+    }
+
+    public void ChangeHat(int num, Color pColor, bool doColor = true)
+    {
+        Hats.list[currentHat].SetActive(false);
+        currentHat = num % Hats.list.Count;
+        Hats.list[currentHat].SetActive(true);
+
+        if (!doColor)
+        {
+            return;
+        }
+        Renderer[] rends = HatRoot.GetComponentsInChildren<Renderer>();
+
+        foreach(Renderer r in rends)
+        {
+            r.material.color = pColor;
+        }
+        Debug.Log("You have hat " + currentHat);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
     }
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
