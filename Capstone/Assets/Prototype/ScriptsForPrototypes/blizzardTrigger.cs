@@ -9,13 +9,17 @@ public class blizzardTrigger : NetworkBehaviour {
 	public PlayerClass player;
 	public GameObject parentPlayer;
     public float stunDuration = 4f;
+    public float timer;
+    private float curTimer;
 
 	void OnEnable(){
 		Debug.Log ("triggerActive");
 		Invoke ("lateDestroy", 30f);
+        timer = stunDuration * 2;
+        curTimer = timer;
 	}
 	
-	void OnTriggerEnter(Collider other){
+	void OnTriggerStay(Collider other){
 
 		if (other.tag == "NetPlayer"){
 			Debug.Log(other);
@@ -29,10 +33,13 @@ public class blizzardTrigger : NetworkBehaviour {
 	}
 
 	public void stun(GameObject other){
-
-		other.GetComponent<net_PlayerController> ().StunPlayerCoroutine(stunDuration);
-        StatManager.instance.UpdateStat(Stats.TimeStunnedOthers, stunDuration);
-		Debug.Log ("stunCall");
+        if (curTimer>timer)
+        {
+            other.GetComponent<net_PlayerController>().StunPlayerCoroutine(stunDuration);
+            StatManager.instance.UpdateStat(Stats.TimeStunnedOthers, stunDuration);
+            Debug.Log("stunCall");
+            curTimer = 0;
+        }
 	}
 	public void lateDestroy(){
 
@@ -43,4 +50,8 @@ public class blizzardTrigger : NetworkBehaviour {
 //		gameObject.transform.root.gameObject.GetComponent<UIController> ().ResetUIItemTexture ();
 
 	}
+    private void FixedUpdate()
+    {
+        curTimer += Time.deltaTime;
+    }
 }

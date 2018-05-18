@@ -135,8 +135,6 @@ namespace jkuo
         {
             if (isLocalPlayer || offlineTesting)
             {
-                if (!player.isStunned)
-                {
                     if (!player.craftingUIOpen)
                     {
                         if (!player.playerPaused)
@@ -148,6 +146,7 @@ namespace jkuo
 
                             //Emotes
                             UseEmotes();
+
                         }
                         else
                         {
@@ -160,7 +159,6 @@ namespace jkuo
                         //Jump
                         Jumping();
                     }
-                }
             }
         }
 
@@ -216,7 +214,7 @@ namespace jkuo
 
         private void Movement()
         {
-            if (!player.playerPaused)
+            if (!player.playerPaused && !player.isStunned)
             {
                 Animator anim = netAnim.animator;
                 if (character.isGrounded && Input.GetKeyDown(KeyCode.Space))
@@ -274,7 +272,7 @@ namespace jkuo
             {
                 m_MoveDir += Physics.gravity * gravityScale * Time.fixedDeltaTime;
 
-                if (player.playerPaused && pausedGravity == null)
+                if ((player.playerPaused && pausedGravity == null) || player.isStunned)
                     pausedGravity = StartCoroutine(c_PausedGravity());
             }
             character.Move(m_MoveDir * Time.fixedDeltaTime);
@@ -357,40 +355,42 @@ namespace jkuo
                     //rb.AddForce(Vector3.down * downwardAcceleration, ForceMode.Impulse);
                 }
             }
-
-            if (Input.GetKeyDown(KeyCode.Space) && canJump)
-                sm.UpdateStat(Stats.NumTimesJumped);
-
-            if (Input.GetKey(KeyCode.Space) && canJump)
+            if (!player.playerPaused && !player.isStunned)
             {
-                //Jumping
-                if (currentStamina > stamina - maxJumpStamina)
+                if (Input.GetKeyDown(KeyCode.Space) && canJump)
+                    sm.UpdateStat(Stats.NumTimesJumped);
+
+                if (Input.GetKey(KeyCode.Space) && canJump)
                 {
-                    _jumpForce = transform.up * (jumpForce);
-                    m_MoveDir.y = _jumpForce.y;
-                    //rb.AddForce(_jumpForce * Time.fixedDeltaTime);
+                    //Jumping
+                    if (currentStamina > stamina - maxJumpStamina)
+                    {
+                        _jumpForce = transform.up * (jumpForce);
+                        m_MoveDir.y = _jumpForce.y;
+                        //rb.AddForce(_jumpForce * Time.fixedDeltaTime);
 
-                    //if (Input.GetKeyDown(KeyCode.Space) && canJump) {
-                    animateCharacter(x, y, isGrounded, isGliding);
-                    //}
+                        //if (Input.GetKeyDown(KeyCode.Space) && canJump) {
+                        animateCharacter(x, y, isGrounded, isGliding);
+                        //}
 
-                    currentStamina -= fatigueSpeed;
-                    staminaSlider.value = currentStamina;
+                        currentStamina -= fatigueSpeed;
+                        staminaSlider.value = currentStamina;
+                    }
                 }
-            }
 
-            //Gliding initiation
-            if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
-                isGliding = true;
+                //Gliding initiation
+                if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
+                    isGliding = true;
 
 
-            //Jumping/Gliding
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                canJump = false;
+                //Jumping/Gliding
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    canJump = false;
 
-                if (isGliding)
-                    isGliding = false;
+                    if (isGliding)
+                        isGliding = false;
+                }
             }
         }
 
