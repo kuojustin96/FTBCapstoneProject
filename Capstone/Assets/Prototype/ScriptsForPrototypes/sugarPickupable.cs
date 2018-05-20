@@ -10,15 +10,7 @@ public class sugarPickupable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         particles = transform.GetChild(0);
-	}
-
-    void OnEnable()
-    {
-		Invoke ("lateEnable", 1f);
-	}
-	void lateEnable(){
-		gameObject.GetComponent<BoxCollider> ().enabled = true;
-        StartCoroutine(c_CheckForGround());
+        CheckForGround();
 	}
 
     public void CheckForGround()

@@ -177,6 +177,7 @@ public class GameOverManager : NetworkBehaviour {
                     {
                         middlePlaceTemp = randAccolade;
                         title = MiddlePlaceAccolades[randAccolade];
+                        picking = false;
                     }
                 }
             }

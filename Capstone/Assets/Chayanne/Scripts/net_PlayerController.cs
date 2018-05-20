@@ -310,7 +310,7 @@ namespace jkuo
 
             //IsGrounded check
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, jumpMask))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 5f, jumpMask))
             {
                 if (!player.playerPaused)
                 {

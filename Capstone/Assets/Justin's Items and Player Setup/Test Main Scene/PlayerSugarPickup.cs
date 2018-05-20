@@ -15,6 +15,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 	private bool runAnimation = false;
 	public bool dropping = false;
 	public networkCallback callback;
+    private Coroutine stealSugarCoroutine;
 
     private UIController uiController;
     private NetworkSoundController nsc;
@@ -34,13 +35,13 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
-		if (!player.isStunned)
-		{
-			if (Input.GetKeyDown (KeyCode.Q)&& !dropping) {
-					DropSugar ();
-			}
-		}
+        //Drop Sugar on input
+		//if (!player.isStunned)
+		//{
+		//	if (Input.GetKeyDown (KeyCode.Q)&& !dropping) {
+		//			DropSugar ();
+		//	}
+		//}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -54,32 +55,39 @@ public class PlayerSugarPickup : NetworkBehaviour {
 			return;
 		}
 
-		if (other.tag == "Dropoff Point")
-		{
-			runAnimation = true;
-			if (player.dropoffPoint == other.gameObject) //If player owns this dropoff point
-			{
-				runAnimation = true;
+        if (other.tag == "Dropoff Point")
+        {
+            runAnimation = true;
+            if (player.dropoffPoint == other.gameObject) //If player owns this dropoff point
+            {
+                runAnimation = true;
                 player.inBase = true;
                 sm.UpdateStat(Stats.TimesVisitedBase);
 
-				if (sugarInBackpack.Count > 0)
-					StartCoroutine(DropoffSugarAni(other.gameObject));
+                if (sugarInBackpack.Count > 0)
+                    StartCoroutine(DropoffSugarAni(other.gameObject));
 
-				return;
-			}
-            else //If player does not own this dropoff point
-			{
+                return;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Dropoff Point") //If player does not own this dropoff point
+        {
+            if (player.dropoffPoint != other.gameObject && stealSugarCoroutine == null)
+            {
                 PlayerClass otherPlayer = GameManager.instance.GetPlayerFromDropoff(other.gameObject);
                 sm.UpdateStat(Stats.TimesVisitedOtherBases);
 
-                if(!otherPlayer.inBase)
-				    StartCoroutine(StealSugarAni(other.gameObject, otherPlayer));
-			}
-		}
-	}
+                if (!otherPlayer.inBase)
+                    stealSugarCoroutine = StartCoroutine(StealSugarAni(other.gameObject, otherPlayer));
+            }
+        }
+    }
 
-	void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
 	{
 		if (other.tag == "Dropoff Point")
 		{
@@ -163,7 +171,8 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		dropping = false;
 		player.DropSugar();
 		uiController.UpdateBackpackScore(player.sugarInBackpack);
-		yield return null;
+        sugar.GetComponent<sugarPickupable>().CheckForGround();
+        yield return null;
 	}
 
 	public IEnumerator DropSugarMovement(){
@@ -219,6 +228,10 @@ public class PlayerSugarPickup : NetworkBehaviour {
                 yield return new WaitForSeconds(2f);
                 StartCoroutine(StealSugarAni(dropoffPoint, otherPlayer));
             }
+            else
+            {
+                stealSugarCoroutine = null;
+            }
 		}
 	}
 
@@ -234,7 +247,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
         nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, true);
 
 		dropping = true;
-		sugar.GetComponent<BoxCollider>().enabled = false;
+		sugar.GetComponent<Collider>().enabled = false;
         sugar.transform.parent = transform;
 		Vector3 saveScale = sugar.transform.localScale;
 
@@ -289,7 +302,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
 		yield return new WaitForSeconds(dropoffDelay);
 
-		if (sugarInBackpack.Count > 0 && runAnimation)
-			StartCoroutine(DropoffSugarAni(dropoffPoint));
+        if (sugarInBackpack.Count > 0 && runAnimation)
+            StartCoroutine(DropoffSugarAni(dropoffPoint));
 	}
 }

@@ -7,6 +7,7 @@ public class IndicatorManager : MonoBehaviour {
     public RectTransform[] indicators;
     public RectTransform baseIndicator;
     public float yOffset = 20f;
+    public float minShowDistance = 150f;
 
     private Transform dropoffPoint;
     private PlayerClass player;
@@ -47,30 +48,40 @@ public class IndicatorManager : MonoBehaviour {
 
     private void UpdateTargetIconPosition()
     {
+        //Player Indicators
         for(int x = 0; x < playerTransforms.Count; x++)
         {
-            Vector3 newPos = playerTransforms[x].position;
-            newPos = Camera.main.WorldToViewportPoint(newPos);
-            if (newPos.z < 0)
+            indicators[x].gameObject.SetActive(true);
+            float dist = Vector3.Distance(transform.position, playerTransforms[x].position);
+            if (dist > minShowDistance)
             {
-                newPos.x = 1f - newPos.x;
-                newPos.y = 1f - newPos.y;
-                newPos.z = 0;
-                newPos = Vector3Maxamize(newPos);
-            }
-            newPos = Camera.main.ViewportToScreenPoint(newPos);
-            newPos.x = Mathf.Clamp(newPos.x, m_edgeBuffer, Screen.width - m_edgeBuffer);
-            newPos.y += yOffset;
-            newPos.y = Mathf.Clamp(newPos.y, m_edgeBuffer, Screen.height - m_edgeBuffer);
-            indicators[x].position = newPos;
+                Vector3 newPos = playerTransforms[x].position;
+                newPos = Camera.main.WorldToViewportPoint(newPos);
+                if (newPos.z < 0)
+                {
+                    newPos.x = 1f - newPos.x;
+                    newPos.y = 1f - newPos.y;
+                    newPos.z = 0;
+                    newPos = Vector3Maxamize(newPos);
+                }
+                newPos = Camera.main.ViewportToScreenPoint(newPos);
+                newPos.x = Mathf.Clamp(newPos.x, m_edgeBuffer, Screen.width - m_edgeBuffer);
+                newPos.y += yOffset;
+                newPos.y = Mathf.Clamp(newPos.y, m_edgeBuffer, Screen.height - m_edgeBuffer);
+                indicators[x].position = newPos;
 
-            if (newPos.x + m_edgeBuffer >= Screen.width - m_edgeBuffer || newPos.x - m_edgeBuffer <= 0 + m_edgeBuffer
-                || newPos.y + m_edgeBuffer >= Screen.height - m_edgeBuffer || newPos.y - m_edgeBuffer <= 0 + m_edgeBuffer)
+                if (newPos.x + m_edgeBuffer >= Screen.width - m_edgeBuffer || newPos.x - m_edgeBuffer <= 0 + m_edgeBuffer
+                    || newPos.y + m_edgeBuffer >= Screen.height - m_edgeBuffer || newPos.y - m_edgeBuffer <= 0 + m_edgeBuffer)
+                    indicators[x].gameObject.SetActive(false);
+                else
+                    indicators[x].gameObject.SetActive(true);
+            } else
+            {
                 indicators[x].gameObject.SetActive(false);
-            else
-                indicators[x].gameObject.SetActive(true);
+            }
         }
 
+        //Base Indicator
         if (player != null)
         {
             Vector3 newPos2 = player.dropoffPoint.transform.position;
