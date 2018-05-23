@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2550493, g: 0.23347905, b: 0.17765358, a: 1}
+  m_IndirectSpecularColor: {r: 0.17621937, g: 0.17555755, b: 0.16030918, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1310719372
+  randomSeed: -720410850
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -14170,7 +14170,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1612494316
+  randomSeed: 1116627850
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -38489,7 +38489,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 893598490
+  randomSeed: 1947058562
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -42143,6 +42143,30 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 137965621187195480, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.00034344196
+      objectReference: {fileID: 0}
+    - target: {fileID: 137965621187195480, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.06487194
+      objectReference: {fileID: 0}
+    - target: {fileID: 137965621187195480, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.024172902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113453668009774, guid: 6e72f6569a41fbc4087a743f57700fca, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224342882854967900, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 788.98
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e72f6569a41fbc4087a743f57700fca, type: 2}
   m_IsPrefabParent: 0
@@ -45758,7 +45782,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1796037632
+  randomSeed: -1104178794
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -91359,7 +91383,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 632346767
+  randomSeed: -1948099315
   InitialModule:
     serializedVersion: 3
     enabled: 1

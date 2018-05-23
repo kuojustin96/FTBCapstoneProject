@@ -242,6 +242,10 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
 	public IEnumerator PickupSugarAni(GameObject sugar)
 	{
+        player.PickupSugar();
+        sugarInBackpack.Add(sugar);
+        uiController.UpdateBackpackScore(player.sugarInBackpack);
+        sm.UpdateStat(Stats.SugarCollected);
         //Pick up sugar from the ground
         //sugar.GetComponent<SimpleRotate>().enabled = false;
         nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, true);
@@ -260,10 +264,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
         sugar.SetActive(false);
 		sugar.transform.localScale = saveScale;
 		dropping = false;
-		player.PickupSugar();
-		sugarInBackpack.Add(sugar);
-		uiController.UpdateBackpackScore(player.sugarInBackpack);
-        sm.UpdateStat(Stats.SugarCollected);
+
 	}
 
 	private IEnumerator DropoffSugarAni(GameObject dropoffPoint)

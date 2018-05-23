@@ -7,9 +7,9 @@ using jkuo;
 public class attackTrigger : NetworkBehaviour {
 	PlayerClass player;
     public float stunDuration = 4f;
-
-		void Start(){
-			Debug.Log ("triggerActive");
+    public ParticleSystem slashParticle;
+    void OnEnable() { 
+            Debug.Log ("triggerActive");
 		}
 	
 		void OnTriggerEnter(Collider other){
@@ -17,7 +17,7 @@ public class attackTrigger : NetworkBehaviour {
 				if (other.tag == "NetPlayer"){
 				Debug.Log(other);
 				GameObject x = other.gameObject;
-
+                slashParticle.Play();
 				stun (x);
 			
 			//Destroy (gameObject);
