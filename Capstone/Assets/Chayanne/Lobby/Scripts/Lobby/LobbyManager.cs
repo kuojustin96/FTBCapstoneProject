@@ -87,18 +87,34 @@ namespace Prototype.NetworkLobby
 
         string pendingName;
 
+        public LobbyMainMenu mainMenu;
+
+
         bool madeHost = false;
         void OnLevelWasLoaded()
         {   
         }
 
+        public static bool IsPlayScene()
+        {
+            return SceneManager.GetActiveScene().name == LobbyManager.s_Singleton.playScene;
+        }
 
+
+        public static bool IsLobbyScene()
+        {
+            return SceneManager.GetActiveScene().name == LobbyManager.s_Singleton.lobbyScene;
+        }
 
         public string GetLocalPlayerName()
         {
             return nameField.text;
         }
 
+        public static bool IsLocalPlayerHost()
+        {
+            return s_Singleton.mainMenu.isHosting;
+        }
 
         //TODO: Please call this when we make out in game menu so that the box top mesh can be unloaded properly
         public void SetInGame(bool val)
@@ -124,8 +140,11 @@ namespace Prototype.NetworkLobby
             SetServerInfo("Offline", "None");
         }
 
+
+
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
+
             if (SceneManager.GetSceneAt(0).name == lobbyScene)
             {
                 if (topPanel.isInGame)
@@ -146,10 +165,12 @@ namespace Prototype.NetworkLobby
                     {
                         if (conn.playerControllers[0].unetView.isClient)
                         {
+
                             backDelegate = StopHostClbk;
                         }
                         else
                         {
+
                             backDelegate = StopClientClbk;
                         }
                     }
@@ -303,16 +324,14 @@ namespace Prototype.NetworkLobby
             //lobbyAnims.PlayOpenBoxAnimation();
 
             base.OnStartHost();
-            TransitionToLobbyMenu();
 
-            
-
+            //TransitionToLobbyMenu();
             ChangeTo(lobbyPanel);
-            backDelegate = StopHostClbk;
-            SetServerInfo("Hosting", networkAddress);
+            //backDelegate = StopHostClbk;
+            //SetServerInfo("Hosting", networkAddress);
         }
 
-        private void TransitionToLobbyMenu()
+        public void TransitionToLobbyMenu()
         {
             lobbyAnims.PlayOpenBoxAnimation();
             MainMenuManager.instance.FadeMenu(true);
@@ -333,6 +352,8 @@ namespace Prototype.NetworkLobby
                 StopHost();
             }
         }
+
+        
 
         //allow to handle the (+) button to add/remove player
         public void OnPlayersNumberModified(int count)

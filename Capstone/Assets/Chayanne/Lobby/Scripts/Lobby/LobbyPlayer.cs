@@ -155,7 +155,6 @@ namespace Prototype.NetworkLobby
             LobbyManager.s_Singleton.playerList.CreateName(playerName);
             outfitScript.ChangeHat(outfitNum);
             OnClientReady(false);
-            OnReadyClicked();
         }
 
         public net_TeamScript.Team GetTeamColor()

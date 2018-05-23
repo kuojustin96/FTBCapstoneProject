@@ -15,7 +15,7 @@ public class MenuOutfitManager : MonoBehaviour {
 
         PopulateHats();
         int selection = PlayerGameProfile.instance.GetPlayerOutfitSelection();
-        Debug.Log(selection);
+        Debug.Log("Outfit selection: " + selection);
         ChangeSelection(selection);
     }
 
