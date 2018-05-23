@@ -95,7 +95,6 @@ public class PlayerGameProfile : MonoBehaviour {
         data = new PlayerData();
 
         string theName = PlayerPrefs.GetString("PlayerName");
-		Debug.Log (theName);
         if (theName == "")
         {
 			theName = "Chad";

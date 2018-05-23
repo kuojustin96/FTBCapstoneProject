@@ -33,9 +33,23 @@ namespace Prototype.NetworkLobby
 
         public void OnClickHost()
         {
-            isHosting = true;
-            lobbyManager.StartHost();
-            SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
+
+            Debug.Log("LobbyMainMenu!");
+            bool didHost = (lobbyManager.StartHost() != null);
+            Debug.Log("LobbyMainMenu!");
+            if (didHost)
+            {
+                LobbyManager.s_Singleton.TransitionToLobbyMenu();
+                isHosting = true;
+                SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
+            }
+            else
+            {
+
+
+                MainMenuManager.instance.ShowConnectionError();
+
+            }
         }
 
         public void LeaveLobby()

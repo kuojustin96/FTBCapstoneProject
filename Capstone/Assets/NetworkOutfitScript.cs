@@ -18,12 +18,19 @@ public class NetworkOutfitScript : NetworkBehaviour
     public HatList Hats;
 
     [SyncVar]
-    public int currentHat = 0;
+    public int currentHat;
+
+    [SyncVar]
+    public Color theColor;
 
     // Use this for initialization
     void Start()
     {
-
+        Debug.Log("AM I LOCAL? " + isLocalPlayer);
+        
+            ChangeHat(currentHat);
+            ChangeColor(theColor);
+        
     }
 
     public void PopulateHats()
@@ -38,6 +45,14 @@ public class NetworkOutfitScript : NetworkBehaviour
     [Command]
     public void CmdChangeHat(int index)
     {
+        Debug.Log("Command!");
+        //index = WrapNumber(index);
+
+        //Hats.list[currentHat].SetActive(false);
+        //currentHat = index;
+        //Hats.list[currentHat].SetActive(true);
+
+
         RpcChangeHat(index);
     }
 
@@ -45,28 +60,48 @@ public class NetworkOutfitScript : NetworkBehaviour
     void RpcChangeHat(int index)
     {
 
+        Debug.Log("RPC!");
+        index = WrapNumber(index);
+
         Hats.list[currentHat].SetActive(false);
-        currentHat = index % Hats.list.Count;
+        currentHat = index;
         Hats.list[currentHat].SetActive(true);
 
         Debug.Log("You have hat " + currentHat);
     }
 
-    public void ChangeHat(int num, Color pColor, bool doColor = true)
+    public void ChangeHat(int index)
     {
+        index = WrapNumber(index);
+
         Hats.list[currentHat].SetActive(false);
-        currentHat = num % Hats.list.Count;
+        currentHat = index;
         Hats.list[currentHat].SetActive(true);
 
-        if (!doColor)
+    }
+
+    private int WrapNumber(int index)
+    {
+        if (index < 0)
         {
-            return;
+            index = Hats.list.Count - 1;
         }
+        if (index >= Hats.list.Count)
+        {
+            index = 0;
+        }
+
+        return index;
+    }
+
+    public void ChangeColor(Color color)
+    {
+        theColor = color;
         Renderer[] rends = HatRoot.GetComponentsInChildren<Renderer>();
 
-        foreach(Renderer r in rends)
+        foreach (Renderer r in rends)
         {
-            r.material.color = pColor;
+            r.material.color = color;
         }
         Debug.Log("You have hat " + currentHat);
     }

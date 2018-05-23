@@ -47,7 +47,7 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
         if (!isLocalPlayer)
             return;
 
-        if(! isReady && Input.GetKeyDown(KeyCode.G))
+        if(!isReady && Input.GetKeyDown(KeyCode.G))
         {
             Debug.Log("meme!");
             isReady = true;

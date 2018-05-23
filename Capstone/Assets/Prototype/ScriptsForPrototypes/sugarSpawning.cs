@@ -4,10 +4,21 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class sugarSpawning : NetworkBehaviour {
+    public static GameObject sugarSpawn;    
+
 	public bool Alive;
 	public float SpawnTime;
 	private float curTime;
 	public GameObject sugarPrefab;
+
+    void Awake()
+    {
+        if (!sugarSpawn)
+        {
+            sugarSpawn = new GameObject("Sugar");
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 		Alive = false;
@@ -30,7 +41,7 @@ public class sugarSpawning : NetworkBehaviour {
 	}
 	[Command]
 	public void CmdSpawn(){
-		GameObject sugar = Instantiate(sugarPrefab, this.transform.position, Quaternion.identity);
+		GameObject sugar = Instantiate(sugarPrefab, this.transform.position, Quaternion.identity,sugarSpawn.transform);
 		NetworkServer.Spawn (sugar);
 		curTime = 0;
 		Alive = true;

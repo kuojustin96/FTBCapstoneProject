@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+//Sorry this is CameraHolder
 public class LobbySingleton : MonoBehaviour
 {
 
@@ -25,6 +26,7 @@ public class LobbySingleton : MonoBehaviour
     CanvasGroup fader;
 
     public float fadeTime = 1.0f;
+
 
     public CinemachineVirtualCameraBase TransitionCam
     {

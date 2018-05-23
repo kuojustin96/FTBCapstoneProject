@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Prototype.NetworkLobby;
 using UnityEngine.Networking;
 public class NetworkProfile : NetworkBehaviour {
 
@@ -14,10 +15,10 @@ public class NetworkProfile : NetworkBehaviour {
     Color PlayerColor;
 
     [SyncVar]
-    int myNum;
+    public int myNum;
 
     [SyncVar]
-    int outfitChoice;
+    public int outfitChoice;
 
     playerClassAdd pca;
     NetworkOutfitScript nos;
@@ -30,8 +31,6 @@ public class NetworkProfile : NetworkBehaviour {
         Debug.Log("my name is " + PlayerName);
         pca.player.playerName = PlayerName;
         pca.SetMaterialColor(PlayerColor, myNum);
-        nos.ChangeHat(outfitChoice, PlayerColor);
-
         GameManager.instance.SetUpBaseName(pca.player);
     }
 
@@ -41,6 +40,28 @@ public class NetworkProfile : NetworkBehaviour {
         PlayerColor = color;
         myNum = num;
         outfitChoice = outfitNum;
+
+        nos = GetComponent<NetworkOutfitScript>();
+
+        nos.currentHat = outfitChoice;
+        nos.theColor = color;
+
+        Debug.Log("okay your outfit is " + outfitChoice);
+
+    }
+
+    public void CopyProfile(LobbyPlayer player)
+    {
+        nos = GetComponent<NetworkOutfitScript>();
+
+        PlayerName = player.playerName;
+        PlayerColor = player.playerColor;
+        myNum = player.playerNum;
+        outfitChoice = player.outfitNum;
+
+        nos.theColor = PlayerColor;
+        nos.currentHat = outfitChoice;
+        nos.ChangeHat(outfitChoice);
     }
 
     //public void RpcUpdateProfile(string name, Color color,GameObject player)

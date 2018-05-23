@@ -8,6 +8,12 @@ public class LobbyBetterPlayerList : MonoBehaviour {
     public GameObject nameObject;
 
 
+    private void Start()
+    {
+
+        LobbyManager.s_Singleton.playerList = this;
+
+    }
 
     public void CreateName(string name)
     {

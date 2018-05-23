@@ -8,13 +8,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Cinemachine;
+using Prototype.NetworkLobby;
 
 public class MainMenuManager : MonoBehaviour {
 
     public static MainMenuManager instance;
     public SoundEffectManager sfm;
-    public MenuOutfitManager mom;
-
     public float fadeTime = 1f;
 
     [Header("Play Game")]
@@ -56,6 +55,10 @@ public class MainMenuManager : MonoBehaviour {
     public Slider sfxSlider;
     public Slider musicSlider;
 
+    public Animator mainMenuFader;
+
+    public GameObject connectionError;
+
     bool preparing = true;
 
     private void Awake()
@@ -65,12 +68,26 @@ public class MainMenuManager : MonoBehaviour {
         else
             Destroy(gameObject);
 
+
         //DontDestroyOnLoad(gameObject);
     }
+
+
+    public void FadeMenu(bool val)
+    {
+        mainMenuFader.SetBool("FadeMenu", val);
+    }
+
+
 
     // Use this for initialization
     void Start ()
     {
+        if(sfm == null)
+        {
+            sfm = SoundEffectManager.instance;
+        }
+
         Initialize();
 
         //Chayanne's Preference saving code
@@ -179,6 +196,13 @@ public class MainMenuManager : MonoBehaviour {
 
             CloseCurrentCanvas();
         }
+
+        Debug.Log("Loaded!!!!!!! " + SceneManager.GetActiveScene().name);
+        if(LobbyManager.IsLobbyScene())
+        {
+            Debug.Log("Fading in!");
+            FadeMenu(false);
+        }
     }
 
     public void PopulateDropdown(TMP_Dropdown dropdown)
@@ -215,6 +239,11 @@ public class MainMenuManager : MonoBehaviour {
             buttonHovered.transform.localEulerAngles = Vector3.zero;
             buttonHovered = null;
         }
+    }
+
+    public void ShowConnectionError()
+    {
+        connectionError.SetActive(true);
     }
 
     #region Options
@@ -492,7 +521,18 @@ public class MainMenuManager : MonoBehaviour {
     public void ExitToMenu()
     {
         sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
-        SceneManager.LoadScene(0);
+        Debug.Log("Disconnecting");
+
+        
+        if(LobbyManager.IsLocalPlayerHost())
+        {
+            LobbyManager.s_Singleton.StopHost();
+        }
+        else
+        {
+            LobbyManager.s_Singleton.StopClient();
+        }
+        //SceneManager.LoadScene(0);
     }
 
     public void SetMasterVolume(float volume)

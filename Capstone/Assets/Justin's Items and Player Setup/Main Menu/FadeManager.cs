@@ -5,6 +5,7 @@ public class FadeManager : MonoBehaviour
 {
     public static FadeManager instance = null;
 
+
     void Awake()
     {
         if (instance == null)
@@ -13,6 +14,7 @@ public class FadeManager : MonoBehaviour
         }
 
     }
+
 
     public void FadeIn(CanvasGroup c, float _time, float _alpha = 1f)
     {
