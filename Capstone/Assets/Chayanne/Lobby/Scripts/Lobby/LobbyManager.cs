@@ -41,7 +41,7 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
-
+        public LobbySingleton cameraHolder;
 
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
@@ -87,9 +87,23 @@ namespace Prototype.NetworkLobby
 
         string pendingName;
 
+        public LobbyMainMenu mainMenu;
+
+
         bool madeHost = false;
         void OnLevelWasLoaded()
+        {   
+        }
+
+        public static bool IsPlayScene()
         {
+            return SceneManager.GetActiveScene().name == LobbyManager.s_Singleton.playScene;
+        }
+
+
+        public static bool IsLobbyScene()
+        {
+            return SceneManager.GetActiveScene().name == LobbyManager.s_Singleton.lobbyScene;
         }
 
         public string GetLocalPlayerName()
@@ -97,6 +111,10 @@ namespace Prototype.NetworkLobby
             return nameField.text;
         }
 
+        public static bool IsLocalPlayerHost()
+        {
+            return s_Singleton.mainMenu.isHosting;
+        }
 
         //TODO: Please call this when we make out in game menu so that the box top mesh can be unloaded properly
         public void SetInGame(bool val)
@@ -115,15 +133,18 @@ namespace Prototype.NetworkLobby
             backButton.gameObject.SetActive(false);
             GetComponent<Canvas>().enabled = true;
 
-            lobbyAnims = GetComponent<LobbyAnimationScript>();
+            //lobbyAnims = GetComponent<LobbyAnimationScript>();
             DontDestroyOnLoad(gameObject.transform.parent);
 
 
             SetServerInfo("Offline", "None");
         }
 
+
+
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
+
             if (SceneManager.GetSceneAt(0).name == lobbyScene)
             {
                 if (topPanel.isInGame)
@@ -144,10 +165,12 @@ namespace Prototype.NetworkLobby
                     {
                         if (conn.playerControllers[0].unetView.isClient)
                         {
+
                             backDelegate = StopHostClbk;
                         }
                         else
                         {
+
                             backDelegate = StopClientClbk;
                         }
                     }
@@ -301,20 +324,17 @@ namespace Prototype.NetworkLobby
             //lobbyAnims.PlayOpenBoxAnimation();
 
             base.OnStartHost();
-            TransitionToLobbyMenu();
 
-            
-
+            //TransitionToLobbyMenu();
             ChangeTo(lobbyPanel);
-            backDelegate = StopHostClbk;
-            SetServerInfo("Hosting", networkAddress);
+            //backDelegate = StopHostClbk;
+            //SetServerInfo("Hosting", networkAddress);
         }
 
-        private void TransitionToLobbyMenu()
+        public void TransitionToLobbyMenu()
         {
             lobbyAnims.PlayOpenBoxAnimation();
-            lobbyAnims.PlayCameraZoom();
-            lobbyAnims.FadeMenu(true);
+            MainMenuManager.instance.FadeMenu(true);
         }
 
         public override void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
@@ -323,7 +343,7 @@ namespace Prototype.NetworkLobby
             _currentMatchID = (System.UInt64)matchInfo.networkId;
         }
 
-        public override void OnDestroyMatch(bool success, string extendedInfo)
+        public override void OnDestroyMatch(bool success, string extendedInfo)  
         {
             base.OnDestroyMatch(success, extendedInfo);
             if (_disconnectServer)
@@ -332,6 +352,8 @@ namespace Prototype.NetworkLobby
                 StopHost();
             }
         }
+
+        
 
         //allow to handle the (+) button to add/remove player
         public void OnPlayersNumberModified(int count)

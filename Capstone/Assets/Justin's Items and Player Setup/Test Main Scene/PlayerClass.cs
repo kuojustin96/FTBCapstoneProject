@@ -24,12 +24,15 @@ public class PlayerClass {
 	public GameObject currentItem;
 	public string currentItemString;
     public bool playerPaused = false;
+    public int outfitNum;
+    
 
     private GameManager gm;
     public StatManager sm;
     private net_PlayerController npc;
     private float minSpeed;
     private float speedPerSugar;
+    
 
     //Basically acts as the Start() function
     public void SetUpPlayer(int playerNum, int maxCanCarry, GameObject playerGO, GameObject dropoffPoint, string playerName)
