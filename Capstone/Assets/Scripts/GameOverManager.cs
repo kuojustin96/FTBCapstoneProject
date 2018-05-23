@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using jkuo;
+using Prototype.NetworkLobby;
 
 public class GameOverManager : NetworkBehaviour {
 
@@ -225,7 +226,16 @@ public class GameOverManager : NetworkBehaviour {
         //    SceneManager.LoadScene(0);
         //}
 
-        Application.Quit(); //TEMPORARY
+        if(LobbyManager.IsLocalPlayerHost())
+        {
+            LobbyManager.s_Singleton.StopHost();
+        }
+        else
+        {
+            LobbyManager.s_Singleton.StopClient();
+        }
+
+        //Application.Quit(); //TEMPORARY
     }
 
     [Command]
