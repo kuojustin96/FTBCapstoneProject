@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MenuOutfitManager : MonoBehaviour {
 
     public Transform HatRoot;
@@ -10,8 +10,23 @@ public class MenuOutfitManager : MonoBehaviour {
 
     public int currentHat = 0;
 
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameObject chadRoot = GameObject.FindGameObjectWithTag("ChadCustomize");
+
+        if (chadRoot)
+        {
+            HatRoot = GameObject.FindGameObjectWithTag("ChadCustomize").transform;
+            PopulateHats(); 
+        }
+    }
+
     void Start()
     {
+        //will change later
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         PopulateHats();
         int selection = PlayerGameProfile.instance.GetPlayerOutfitSelection();
