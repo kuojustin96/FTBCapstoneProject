@@ -325,7 +325,10 @@ namespace jkuo
                     isGliding = false;
 
                     if (glidingParticleEffect)
+                    {
                         CmdStopGlideParticle();
+                        nsc.CmdStopSFX("Gliding");
+                    }
                 }
             }
             else
@@ -393,6 +396,7 @@ namespace jkuo
                 {
                     isGliding = true;
                     CmdPlayGlideParticle();
+                    nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, false);
                 }
 
 
@@ -452,10 +456,13 @@ namespace jkuo
         [ClientRpc]
         private void RpcStopGlideParticle()
         {
-            float delay = glidingParticleEffect.GetComponent<ParticleSystem>().main.duration;
-            ObjectPoolManager.instance.RecycleObject("Glide Particle", glidingParticleEffect, delay);
-            glidingParticleEffect.transform.parent = null;
-            glidingParticleEffect = null;
+            if (glidingParticleEffect)
+            {
+                float delay = glidingParticleEffect.GetComponent<ParticleSystem>().main.duration;
+                ObjectPoolManager.instance.RecycleObject("Glide Particle", glidingParticleEffect, delay);
+                glidingParticleEffect.transform.parent = null;
+                glidingParticleEffect = null;
+            }
         }
         #endregion
 
