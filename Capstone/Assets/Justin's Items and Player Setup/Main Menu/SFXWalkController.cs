@@ -17,54 +17,29 @@ public class SFXWalkController : NetworkBehaviour {
 
     public LayerMask layerMask;
     public SurfaceType currentSurface { get; protected set; }
-    public float stepTime = 0.1f;
     private bool overrideSFX;
     private string overrideName;
     private bool canStep = true;
 
+    private NetworkParticleController netparticle;
     private SoundEffectManager sfm;
     private SFXOverrideTrigger sot;
     private net_PlayerController npc;
     private NetworkSoundController nsc;
+    private Vector3 walkParticlePos;
 
 	// Use this for initialization
 	void Start () {
         sfm = SoundEffectManager.instance;
-        //npc = GetComponent<net_PlayerController>();
         nsc = transform.root.GetComponent<NetworkSoundController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //RaycastHit hit;
-        //if (!overrideSFX && npc.velocity != Vector3.zero)
-        //{
-        //    if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, layerMask))
-        //    {
-        //        int layerNum = hit.collider.gameObject.layer;
-        //        string layerName = LayerMask.LayerToName(layerNum);
-
-        //        if (layerName == "WoodSurface")
-        //            currentSurface = SurfaceType.Wood;
-        //        else if (layerName == "MetalSurface")
-        //            currentSurface = SurfaceType.Metal;
-        //        else if (layerName == "CarpetSurface")
-        //            currentSurface = SurfaceType.Carpet;
-        //    }
-        //    else//Not on any surface, play gliding sound if gliding
-        //    {
-        //        currentSurface = SurfaceType.Gliding;
-        //    }
-
-        //    if(canStep)
-        //        PlayCorrespondingSFX();
-        //}
+        npc = transform.root.GetComponent<net_PlayerController>();
+        netparticle = transform.root.GetComponent<NetworkParticleController>();
 	}
 
     public void PlayStep()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 4.5f, layerMask))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 5f, layerMask))
         {
             if (!overrideSFX)
             {
@@ -83,36 +58,10 @@ public class SFXWalkController : NetworkBehaviour {
                 nsc.CmdPlaySFX(overrideName, transform.root.gameObject, 1f, false);
             }
 
+            walkParticlePos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
+            netparticle.CmdPlayParticleEffect("Walk Particle", npc.gameObject, walkParticlePos, 2f);
             nsc.CmdStopSFX("Gliding");
         }
-    }
-
-    private void PlayCorrespondingSFX()
-    {
-        switch (currentSurface)
-        {
-            case SurfaceType.Wood:
-                nsc.CmdPlaySFX("(Footsteps) Wood", gameObject, 1f, false);
-                nsc.CmdStopSFX("Gliding");
-                break;
-
-            case SurfaceType.Metal:
-                nsc.CmdPlaySFX("(Footsteps) Metal", gameObject, 1f, false);
-                nsc.CmdStopSFX("Gliding");
-                break;
-
-            case SurfaceType.Carpet:
-                nsc.CmdPlaySFX("(Footsteps) Carpet", gameObject, 1f, false);
-                nsc.CmdStopSFX("Gliding");
-                break;
-
-            case SurfaceType.Gliding:
-                nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, false);
-                break;
-        }
-
-        canStep = false;
-        Invoke("AllowStep", stepTime);
     }
 
     private void AllowStep()

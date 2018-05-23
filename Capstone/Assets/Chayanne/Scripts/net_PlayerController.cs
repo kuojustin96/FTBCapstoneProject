@@ -12,6 +12,7 @@ namespace jkuo
     {
         private UIController uic;
         private NetworkSoundController nsc;
+        private NetworkParticleController netparticle;
         private StatManager sm;
         public CinemachineVirtualCamera virtualCam;
 
@@ -70,6 +71,7 @@ namespace jkuo
         private bool isGliding = false;
         public float gravityDivisor = 20f;
         public float glideFatigueSpeed = 0.25f;
+        private GameObject glidingParticleEffect;
 
         CharacterController character;
 
@@ -92,6 +94,7 @@ namespace jkuo
 
             uic = GetComponent<UIController>();
             nsc = GetComponent<NetworkSoundController>();
+            netparticle = GetComponent<NetworkParticleController>();
             sm = StatManager.instance;
 
             staminaSlider.value = staminaSlider.maxValue;
@@ -320,6 +323,9 @@ namespace jkuo
                     isGrounded = true;
                     canJump = true;
                     isGliding = false;
+
+                    if (glidingParticleEffect)
+                        CmdStopGlideParticle();
                 }
             }
             else
@@ -358,7 +364,11 @@ namespace jkuo
             if (!player.playerPaused && !player.isStunned)
             {
                 if (Input.GetKeyDown(KeyCode.Space) && canJump)
-                    sm.UpdateStat(Stats.NumTimesJumped);
+                {
+                    Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
+                    netparticle.CmdPlayParticleEffect("Walk Particle", gameObject, pos, 5f);
+                }
+                    
 
                 if (Input.GetKey(KeyCode.Space) && canJump)
                 {
@@ -380,7 +390,10 @@ namespace jkuo
 
                 //Gliding initiation
                 if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
+                {
                     isGliding = true;
+                    CmdPlayGlideParticle();
+                }
 
 
                 //Jumping/Gliding
@@ -389,7 +402,11 @@ namespace jkuo
                     canJump = false;
 
                     if (isGliding)
+                    {
                         isGliding = false;
+                        if (glidingParticleEffect)
+                            CmdStopGlideParticle();
+                    }
                 }
             }
         }
@@ -410,6 +427,37 @@ namespace jkuo
                 yield return null;
             }
         }
+
+        #region Glide Particle Effect
+        [Command]
+        private void CmdPlayGlideParticle()
+        {
+            RpcPlayGlideParticle();
+        }
+
+        [ClientRpc]
+        private void RpcPlayGlideParticle()
+        {
+            glidingParticleEffect = ObjectPoolManager.instance.SpawnObject("Glide Particle", 3f);
+            glidingParticleEffect.transform.parent = transform;
+            glidingParticleEffect.transform.position = transform.position;
+        }
+
+        [Command]
+        private void CmdStopGlideParticle()
+        {
+            RpcStopGlideParticle();
+        }
+
+        [ClientRpc]
+        private void RpcStopGlideParticle()
+        {
+            float delay = glidingParticleEffect.GetComponent<ParticleSystem>().main.duration;
+            ObjectPoolManager.instance.RecycleObject("Glide Particle", glidingParticleEffect, delay);
+            glidingParticleEffect.transform.parent = null;
+            glidingParticleEffect = null;
+        }
+        #endregion
 
         #region Play Emotes
         private void UseEmotes()
