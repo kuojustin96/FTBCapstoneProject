@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224092423806762856}
   - component: {fileID: 222819567369475696}
   - component: {fileID: 114248028696447462}
+  - component: {fileID: 114617890427418244}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -36,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224304569044273690}
+  - component: {fileID: 114170215947024282}
   m_Layer: 5
   m_Name: Handle Slide Area
   m_TagString: Untagged
@@ -52,6 +54,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4584944049344830}
   - component: {fileID: 114283976464150206}
+  - component: {fileID: 114949200756118354}
+  - component: {fileID: 114541913097356486}
   m_Layer: 0
   m_Name: Capture Point
   m_TagString: Untagged
@@ -69,6 +73,7 @@ GameObject:
   - component: {fileID: 224605916565473670}
   - component: {fileID: 222684149160834814}
   - component: {fileID: 114054914291569950}
+  - component: {fileID: 114826780916701084}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -84,6 +89,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224293744348271882}
+  - component: {fileID: 114226991216325484}
   m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
@@ -102,6 +108,7 @@ GameObject:
   - component: {fileID: 223294965960486226}
   - component: {fileID: 114456276766484870}
   - component: {fileID: 114376794296992210}
+  - component: {fileID: 114709685884475858}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -122,6 +129,7 @@ GameObject:
   - component: {fileID: 23865611204513714}
   - component: {fileID: 114134523997458148}
   - component: {fileID: 95567487454796944}
+  - component: {fileID: 114042514140793316}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -138,6 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224656179024591148}
   - component: {fileID: 114526980150566226}
+  - component: {fileID: 114136530619890968}
   m_Layer: 5
   m_Name: Progress Bar
   m_TagString: Untagged
@@ -241,6 +250,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114042514140793316
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1668518962713410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 0f3c78bc-9255-40b3-b051-893f9321773f
 --- !u!114 &114054914291569950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,6 +301,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowInGame: 0
+--- !u!114 &114136530619890968
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880566683825328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 8ec7086b-bb1b-427c-b95a-10f3b54804e1
+--- !u!114 &114170215947024282
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1272351087642072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 91ee1fdd-7776-475c-b611-bd552027511e
+--- !u!114 &114226991216325484
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603702689612008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: fb5a0fa1-10ec-4078-8038-c8dd597a399e
 --- !u!114 &114248028696447462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -422,6 +479,77 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114541913097356486
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366009295056372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 86c8845e-0bc2-4ef5-8272-ea3245be4a8d
+--- !u!114 &114617890427418244
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1042046048320748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: b31e4496-d481-4532-9dcb-bc4da80a7f3b
+--- !u!114 &114709685884475858
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606399400387972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: a8d75adb-3796-421a-861f-3c2702a7b11d
+--- !u!114 &114826780916701084
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443929895354794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 3ece92f7-1c44-43df-985c-17ce2cd905fd
+--- !u!114 &114949200756118354
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1366009295056372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1366009295056372}
+    - {fileID: 1668518962713410}
+    - {fileID: 1606399400387972}
+    - {fileID: 1880566683825328}
+    - {fileID: 1443929895354794}
+    - {fileID: 1603702689612008}
+    - {fileID: 1042046048320748}
+    - {fileID: 1272351087642072}
+  _assetGuid: f8fbc046326831041b1f1b3e01f3d51a
 --- !u!222 &222684149160834814
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -3,7 +3,7 @@ guid: 32840a948c154f446a68eb2ea002366f
 timeCreated: 1517382158
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
     100002: bunkbed
@@ -62,6 +62,19 @@ ModelImporter:
     4300016: pillow4
     4300018: slide
     4300020: stair
+    11400000: //RootNode
+    11400002: //RootNode
+    11400004: bunkbed
+    11400006: cover02
+    11400008: cover_01
+    11400010: mattress01
+    11400012: pCube3
+    11400014: pillow1
+    11400016: pillow2
+    11400018: pillow3
+    11400020: pillow4
+    11400022: slide
+    11400024: stair
   materials:
     importMaterials: 1
     materialName: 0
@@ -84,6 +97,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -91,7 +105,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -107,6 +124,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

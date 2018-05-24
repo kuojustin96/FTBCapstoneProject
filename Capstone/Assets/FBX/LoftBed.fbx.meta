@@ -3,7 +3,7 @@ guid: 0ad3701b572250746bbc06e0ec488981
 timeCreated: 1525715743
 licenseType: Free
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: BedDrawer
     100002: BedMain
@@ -19,12 +19,14 @@ ModelImporter:
     4300000: BedMain
     4300002: BedDrawer
     9500000: //RootNode
-  externalObjects: {}
+    11400000: BedDrawer
+    11400002: BedMain
+    11400004: //RootNode
+    11400006: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -37,7 +39,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -62,8 +63,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

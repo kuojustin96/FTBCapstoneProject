@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4627042946090404}
+  - component: {fileID: 114341998574864616}
+  - component: {fileID: 114140563150741166}
   m_Layer: 0
   m_Name: Bounce Pad
   m_TagString: Untagged
@@ -40,6 +42,7 @@ GameObject:
   - component: {fileID: 114167764155079496}
   - component: {fileID: 114338307581997790}
   - component: {fileID: 114819616430512878}
+  - component: {fileID: 114625591338778058}
   m_Layer: 0
   m_Name: BouncePad Model
   m_TagString: Untagged
@@ -103,6 +106,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114140563150741166
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104977076810400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 800a0455-e0ba-490d-8e2a-2bcd1c6ad077
 --- !u!114 &114167764155079496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 50
+  na: {fileID: 0}
 --- !u!114 &114338307581997790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,6 +150,35 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114341998574864616
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104977076810400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1104977076810400}
+    - {fileID: 1525766162860374}
+  _assetGuid: 949a587a090952447a213e1f685ec165
+--- !u!114 &114625591338778058
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525766162860374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 311b20a2-8406-49ff-9999-a5d380f52b02
 --- !u!114 &114819616430512878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,7 +220,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -191,7 +235,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

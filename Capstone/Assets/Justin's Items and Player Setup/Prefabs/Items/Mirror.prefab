@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 23083259361899756}
   - component: {fileID: 54325550944061490}
   - component: {fileID: 114939616425291244}
+  - component: {fileID: 114047064588275628}
+  - component: {fileID: 114727990941670262}
   m_Layer: 2
   m_Name: Mirror
   m_TagString: RangedDefenseShield
@@ -98,6 +100,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114047064588275628
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1086861190946622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1086861190946622}
+  _assetGuid: 279f4fc1f876bd946ab77e54d5855386
+--- !u!114 &114727990941670262
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1086861190946622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 0543c6c3-d4c3-42cc-a627-992ce60c7510
 --- !u!114 &114939616425291244
 MonoBehaviour:
   m_ObjectHideFlags: 1

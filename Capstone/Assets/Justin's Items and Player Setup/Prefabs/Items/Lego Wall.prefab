@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 65234742709244188}
   - component: {fileID: 23069101820478686}
   - component: {fileID: 114492635446311802}
+  - component: {fileID: 114926366825613406}
+  - component: {fileID: 114496419822829344}
   m_Layer: 2
   m_Name: Lego Wall
   m_TagString: Untagged
@@ -105,3 +107,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d107887e8a0d44a88760b148e920e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114496419822829344
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1758664529197830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 7d76d357-4e3d-40b7-973f-ac1b65f5dbf9
+--- !u!114 &114926366825613406
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1758664529197830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1758664529197830}
+  _assetGuid: bcb4a0d0b6fe84644b90c83b4ae2a05c

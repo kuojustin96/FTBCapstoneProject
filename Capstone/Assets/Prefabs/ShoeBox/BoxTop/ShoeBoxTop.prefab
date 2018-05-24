@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33389703262475596}
   - component: {fileID: 23789584236192706}
   - component: {fileID: 95179717976059052}
+  - component: {fileID: 114565801571213686}
+  - component: {fileID: 114642942670313104}
   m_Layer: 0
   m_Name: ShoeBoxTop
   m_TagString: Untagged
@@ -98,3 +100,31 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114565801571213686
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1288319726831220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1288319726831220}
+  _assetGuid: 4016a0318ef7ca6429d64d9e9e34506b
+--- !u!114 &114642942670313104
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1288319726831220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: e81df10b-7d5e-4072-8ddf-fe13f2b05c2b

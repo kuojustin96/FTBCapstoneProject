@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4768835354759514}
   - component: {fileID: 33614456286891208}
   - component: {fileID: 23404558073783426}
+  - component: {fileID: 114195275221192510}
   m_Layer: 0
   m_Name: PushPin (7)
   m_TagString: Untagged
@@ -39,6 +40,8 @@ GameObject:
   - component: {fileID: 33334203107500382}
   - component: {fileID: 23095366731265178}
   - component: {fileID: 95785235204494676}
+  - component: {fileID: 114240349049720580}
+  - component: {fileID: 114096638873269290}
   m_Layer: 0
   m_Name: BoxDoor2
   m_TagString: Untagged
@@ -66,7 +69,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1449982719528910}
-  m_LocalRotation: {x: -0.057845946, y: 0.74923897, z: 0.658242, w: 0.044860262}
+  m_LocalRotation: {x: -0.05784594, y: 0.7492389, z: 0.6582419, w: 0.04486026}
   m_LocalPosition: {x: -3.3408632, y: -0.7606722, z: 0.8116417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -169,3 +172,44 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114096638873269290
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958935846105168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: eed992af-209d-409c-bdb9-1cba75937e5d
+--- !u!114 &114195275221192510
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1449982719528910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: ab26869b-768c-49af-b7e3-cd899f2cef51
+--- !u!114 &114240349049720580
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958935846105168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1958935846105168}
+    - {fileID: 1449982719528910}
+  _assetGuid: 8c4f3e0940581bf4c92fde0bccf2457d

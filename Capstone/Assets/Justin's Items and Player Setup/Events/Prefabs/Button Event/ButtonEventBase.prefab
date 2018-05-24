@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4106571299474498}
   - component: {fileID: 33286499975769048}
   - component: {fileID: 23265296026804676}
+  - component: {fileID: 114976875494035360}
+  - component: {fileID: 114698518751936856}
   m_Layer: 0
   m_Name: ButtonEventBase
   m_TagString: Untagged
@@ -80,3 +82,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1348552125180052}
   m_Mesh: {fileID: 4300000, guid: bda1f514053022e4080e9b204730718e, type: 3}
+--- !u!114 &114698518751936856
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1348552125180052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: dc0530a2-5a03-4891-97a8-30719551cd08
+--- !u!114 &114976875494035360
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1348552125180052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1348552125180052}
+  _assetGuid: 75fb5ae1ec0a71148a432248ad99d227

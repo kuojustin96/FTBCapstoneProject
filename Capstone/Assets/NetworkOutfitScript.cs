@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using Prototype.NetworkLobby;
 
 [System.Serializable]
 public struct HatList
@@ -20,18 +20,19 @@ public class NetworkOutfitScript : NetworkBehaviour
     [SyncVar]
     public int currentHat;
 
-    [SyncVar]
-    public Color theColor;
+    public GameObject clothing;
+
 
     // Use this for initialization
     void Start()
     {
+        PopulateHats();
         Debug.Log("AM I LOCAL? " + isLocalPlayer);
-        
-            ChangeHat(currentHat);
-            ChangeColor(theColor);
-        
+        ChangeHat(currentHat);
+        //ChangeColor(theColor);
+
     }
+
 
     public void PopulateHats()
     {
@@ -59,6 +60,10 @@ public class NetworkOutfitScript : NetworkBehaviour
     [ClientRpc]
     void RpcChangeHat(int index)
     {
+        foreach (GameObject hat in Hats.list)
+        {
+            hat.SetActive(false);
+        }
 
         Debug.Log("RPC!");
         index = WrapNumber(index);
@@ -72,6 +77,17 @@ public class NetworkOutfitScript : NetworkBehaviour
 
     public void ChangeHat(int index)
     {
+        Debug.Log("We have " + Hats.list.Count);
+        if (Hats.list.Count == 0)
+        {
+            return;
+        }
+
+        foreach (GameObject hat in Hats.list)
+        {
+            hat.SetActive(false);
+        }
+
         index = WrapNumber(index);
 
         Hats.list[currentHat].SetActive(false);
@@ -94,21 +110,6 @@ public class NetworkOutfitScript : NetworkBehaviour
         return index;
     }
 
-    public void ChangeColor(Color color)
-    {
-        theColor = color;
-        Renderer[] rends = HatRoot.GetComponentsInChildren<Renderer>();
 
-        foreach (Renderer r in rends)
-        {
-            r.material.color = color;
-        }
-        Debug.Log("You have hat " + currentHat);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

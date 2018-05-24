@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33311655436560622}
   - component: {fileID: 23352342535138090}
   - component: {fileID: 64271822695157706}
+  - component: {fileID: 114245312813274778}
+  - component: {fileID: 114829123817246582}
   m_Layer: 0
   m_Name: TriangleThinBlock
   m_TagString: Untagged
@@ -95,3 +97,31 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a9825071d3d0c9a47a67071c2267ca91, type: 3}
+--- !u!114 &114245312813274778
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1111670548745676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1111670548745676}
+  _assetGuid: 5665969595ab3ec45adffd97bb4303a6
+--- !u!114 &114829123817246582
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1111670548745676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: efea2c4d-8e81-461b-8519-065c96261852

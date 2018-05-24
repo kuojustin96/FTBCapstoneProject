@@ -3,7 +3,7 @@ guid: 8837f192a88abd84da9f1907d0b6bdb4
 timeCreated: 1500891250
 licenseType: Pro
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Body
     100002: Chest
@@ -151,18 +151,84 @@ ModelImporter:
     400142: UpperChest
     4300000: Body
     9500000: //RootNode
+    11400000: Body
+    11400002: Chest
+    11400004: //RootNode
+    11400006: //RootNode
+    11400008: Head
+    11400010: Hips
+    11400012: Jaw
+    11400014: JawEnd
+    11400016: LeftEye
+    11400018: LeftFoot
+    11400020: LeftHand
+    11400022: LeftIndexDistal
+    11400024: LeftIndexDistalEnd
+    11400026: LeftIndexIntermediate
+    11400028: LeftIndexProximal
+    11400030: LeftLowerArm
+    11400032: LeftLowerLeg
+    11400034: LeftMiddleDistal
+    11400036: LeftMiddleDistalEnd
+    11400038: LeftMiddleIntermediate
+    11400040: LeftMiddleProximal
+    11400042: LeftPinkyDistal
+    11400044: LeftPinkyDistalEnd
+    11400046: LeftPinkyIntermediate
+    11400048: LeftPinkyProximal
+    11400050: LeftRingDistal
+    11400052: LeftRingDistalEnd
+    11400054: LeftRingIntermediate
+    11400056: LeftRingProximal
+    11400058: LeftShoulder
+    11400060: LeftThumbDistal
+    11400062: LeftThumbDistalEnd
+    11400064: LeftThumbIntermediate
+    11400066: LeftThumbProximal
+    11400068: LeftToes
+    11400070: LeftToesEnd
+    11400072: LeftUpperArm
+    11400074: LeftUpperLeg
+    11400076: Neck
+    11400078: RightEye
+    11400080: RightFoot
+    11400082: RightHand
+    11400084: RightIndexDistal
+    11400086: RightIndexDistalEnd
+    11400088: RightIndexIntermediate
+    11400090: RightIndexProximal
+    11400092: RightLowerArm
+    11400094: RightLowerLeg
+    11400096: RightMiddleDistal
+    11400098: RightMiddleDistalEnd
+    11400100: RightMiddleIntermediate
+    11400102: RightMiddleProximal
+    11400104: RightPinkyDistal
+    11400106: RightPinkyDistalEnd
+    11400108: RightPinkyIntermediate
+    11400110: RightPinkyProximal
+    11400112: RightRingDistal
+    11400114: RightRingDistalEnd
+    11400116: RightRingIntermediate
+    11400118: RightRingProximal
+    11400120: RightShoulder
+    11400122: RightThumbDistal
+    11400124: RightThumbDistalEnd
+    11400126: RightThumbIntermediate
+    11400128: RightThumbProximal
+    11400130: RightToes
+    11400132: RightToesEnd
+    11400134: RightUpperArm
+    11400136: RightUpperLeg
+    11400138: Root
+    11400140: Skeleton
+    11400142: Spine
+    11400144: UpperChest
     13700000: Body
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DefaultMale_Mat
-    second: {fileID: 2100000, guid: d7f8b496adee38e4a9edc877d5939f5b, type: 2}
   materials:
     importMaterials: 1
     materialName: 1
     materialSearch: 2
-    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -175,7 +241,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -200,8 +265,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

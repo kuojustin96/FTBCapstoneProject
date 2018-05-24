@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4053946115126276}
   - component: {fileID: 198761468635352426}
   - component: {fileID: 199583005678273700}
+  - component: {fileID: 114613701460098062}
   m_Layer: 0
   m_Name: cloud_burst
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4959705487234772}
   - component: {fileID: 198909709489310908}
   - component: {fileID: 199788918456193812}
+  - component: {fileID: 114237695568679702}
   m_Layer: 0
   m_Name: cloud
   m_TagString: Untagged
@@ -53,6 +55,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4485364056078190}
+  - component: {fileID: 114916379365859232}
+  - component: {fileID: 114636016842257892}
   m_Layer: 0
   m_Name: snowAttack
   m_TagString: Untagged
@@ -70,6 +74,7 @@ GameObject:
   - component: {fileID: 4781519198099798}
   - component: {fileID: 198290244567386270}
   - component: {fileID: 199858147111172590}
+  - component: {fileID: 114041039419689018}
   m_Layer: 0
   m_Name: snow
   m_TagString: Untagged
@@ -87,6 +92,7 @@ GameObject:
   - component: {fileID: 4581143915987438}
   - component: {fileID: 198320144912438268}
   - component: {fileID: 199367774684324096}
+  - component: {fileID: 114449556202113290}
   m_Layer: 0
   m_Name: snow_burst
   m_TagString: Untagged
@@ -163,6 +169,86 @@ Transform:
   m_Father: {fileID: 4485364056078190}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114041039419689018
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1614333125594552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: eb7e2b4c-53f2-48e6-bc42-4e47ce14d516
+--- !u!114 &114237695568679702
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233337487058022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: ba782bcb-5af6-4465-985c-662aa85150b4
+--- !u!114 &114449556202113290
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911162910382508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 43e55091-1fd6-4896-83d7-dcefb88183f8
+--- !u!114 &114613701460098062
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020449306367456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 8590d2ad-fb12-487a-bb5f-67e7f97f4f62
+--- !u!114 &114636016842257892
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253082826545662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 27ad6ee9-bd28-4a86-aeb1-fe48ba7dbcf3
+--- !u!114 &114916379365859232
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253082826545662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1253082826545662}
+    - {fileID: 1020449306367456}
+    - {fileID: 1911162910382508}
+    - {fileID: 1233337487058022}
+    - {fileID: 1614333125594552}
+  _assetGuid: ae6f6b7fe3cb9aa4087f753a6f1506f8
 --- !u!198 &198290244567386270
 ParticleSystem:
   m_ObjectHideFlags: 1

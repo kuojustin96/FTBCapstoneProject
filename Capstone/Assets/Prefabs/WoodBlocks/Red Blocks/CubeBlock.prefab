@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33363177885031096}
   - component: {fileID: 23527062727229686}
   - component: {fileID: 65659614186116230}
+  - component: {fileID: 114358533115941108}
+  - component: {fileID: 114332868527069196}
   m_Layer: 0
   m_Name: CubeBlock
   m_TagString: Untagged
@@ -93,3 +95,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.860188, y: 5.8543606, z: 5.860188}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114332868527069196
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983725737071808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: d47212bb-27cc-4420-b867-204a7834a3b0
+--- !u!114 &114358533115941108
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1983725737071808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1983725737071808}
+  _assetGuid: 44521aa2c964cfe409cdbcea9b74570e

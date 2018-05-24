@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33207526506422972}
   - component: {fileID: 23002218529804580}
   - component: {fileID: 65728269993990986}
+  - component: {fileID: 114216661162421168}
+  - component: {fileID: 114992248460214500}
   m_Layer: 0
   m_Name: PlayingCard
   m_TagString: Untagged
@@ -93,3 +95,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.286563, y: 0.0874778, z: 9.457527}
   m_Center: {x: -0.00000047683716, y: 0, z: -0.00000047683716}
+--- !u!114 &114216661162421168
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894654610324196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1894654610324196}
+  _assetGuid: c68a0adcd2bc4a24bab0d63645c4bd9d
+--- !u!114 &114992248460214500
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1894654610324196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: f9235abd-5180-4de6-b27d-30f2247100bb

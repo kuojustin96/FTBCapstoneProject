@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33585481260478450}
   - component: {fileID: 23757489070404440}
   - component: {fileID: 95455928755100174}
+  - component: {fileID: 114466696394232050}
+  - component: {fileID: 114826898316535304}
   m_Layer: 0
   m_Name: BoxDoor1
   m_TagString: Untagged
@@ -39,6 +41,7 @@ GameObject:
   - component: {fileID: 4121561356220170}
   - component: {fileID: 33587424205980018}
   - component: {fileID: 23295074057150274}
+  - component: {fileID: 114798499781953554}
   m_Layer: 0
   m_Name: PushPin (6)
   m_TagString: Untagged
@@ -169,3 +172,44 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114466696394232050
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102860623375068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1102860623375068}
+    - {fileID: 1747062965938610}
+  _assetGuid: ddfec76fbf490794b8cc38ae3bd1a5cf
+--- !u!114 &114798499781953554
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1747062965938610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: d2e1a3db-6a71-4f28-9d38-056c67bab0bf
+--- !u!114 &114826898316535304
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102860623375068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 0b48577a-e688-4ec5-826a-c8199344d52d

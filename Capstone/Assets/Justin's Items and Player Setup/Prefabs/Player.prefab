@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224340574709581074}
   - component: {fileID: 222020781819769118}
   - component: {fileID: 114272493238921806}
+  - component: {fileID: 114877978998220274}
   m_Layer: 0
   m_Name: Crafting Bar
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4001359707731352}
   - component: {fileID: 135171994666183128}
   - component: {fileID: 114069580120048670}
+  - component: {fileID: 114986130465778340}
   m_Layer: 2
   m_Name: Sugar Collider
   m_TagString: Untagged
@@ -55,6 +57,7 @@ GameObject:
   - component: {fileID: 224554535067826108}
   - component: {fileID: 222068383626026894}
   - component: {fileID: 114876768743624792}
+  - component: {fileID: 114060924564148024}
   m_Layer: 0
   m_Name: Foreground
   m_TagString: Untagged
@@ -73,6 +76,7 @@ GameObject:
   - component: {fileID: 223025924293235132}
   - component: {fileID: 114260847623293752}
   - component: {fileID: 114621234190955028}
+  - component: {fileID: 114054386621776934}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -90,6 +94,7 @@ GameObject:
   - component: {fileID: 4625783459908512}
   - component: {fileID: 65737218487303028}
   - component: {fileID: 114818680086274830}
+  - component: {fileID: 114117736693235730}
   m_Layer: 2
   m_Name: Bodyslam Collider
   m_TagString: Untagged
@@ -110,6 +115,8 @@ GameObject:
   - component: {fileID: 23474895418214978}
   - component: {fileID: 114350638715216060}
   - component: {fileID: 54364545374235454}
+  - component: {fileID: 114094730840654630}
+  - component: {fileID: 114355159851990616}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -225,6 +232,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114054386621776934
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1607554794349944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 7793aaa3-4eed-42c6-81e8-febf61c5b406
+--- !u!114 &114060924564148024
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471169036669154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: e15cae59-f7e0-4ed3-82f3-7346ce14dd88
 --- !u!114 &114069580120048670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,6 +267,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e07afbbcad781a4a8ddaeb3db039e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropping: 0
+  callback: {fileID: 0}
+--- !u!114 &114094730840654630
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820047343676046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1820047343676046}
+    - {fileID: 1464906232229664}
+    - {fileID: 1647416678656522}
+    - {fileID: 1607554794349944}
+    - {fileID: 1310200607845062}
+    - {fileID: 1471169036669154}
+  _assetGuid: 5df1197a80aadf041ad2a6b061b4eeb7
+--- !u!114 &114117736693235730
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1647416678656522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: d49a9126-025a-43cf-981f-0f44bee99b29
 --- !u!114 &114260847623293752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,22 +362,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  fallThreshold: 3
   player:
     playerNum: 0
     playerGO: {fileID: 0}
     dropoffPoint: {fileID: 0}
+    inBase: 0
     playerName: 
     maxCanCarry: 10
     sugarInBackpack: 0
     currentPlayerScore: 0
     isStunned: 0
+    isInvulnerable: 0
     itemNum: 0
+    itemCharges: 0
     usingItem: 0
+    showCraftingUI: 0
+    craftingUIOpen: 0
+    currentItem: {fileID: 0}
+    currentItemString: 
+    playerPaused: 0
+    outfitNum: 0
+    sm: {fileID: 0}
   bodySlamStunDur: 4
   bodySlamCol: {fileID: 65737218487303028}
   psp: {fileID: 114069580120048670}
   timeToCraft: 3
   CraftingBar: {fileID: 114272493238921806}
+--- !u!114 &114355159851990616
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820047343676046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: fa8baf0b-96ad-44b7-ab78-71e91f3f670f
 --- !u!114 &114621234190955028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,6 +455,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114877978998220274
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1310200607845062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: d09e713b-be68-4cf1-b50f-09c1c79ffa1b
+--- !u!114 &114986130465778340
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1464906232229664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 18a0d720-6d84-42d0-a917-99073408ff32
 --- !u!135 &135171994666183128
 SphereCollider:
   m_ObjectHideFlags: 1

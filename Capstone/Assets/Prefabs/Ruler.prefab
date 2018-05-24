@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33638037421671388}
   - component: {fileID: 23874041532888964}
   - component: {fileID: 65123590823067118}
+  - component: {fileID: 114800777511003172}
+  - component: {fileID: 114273338224569310}
   m_Layer: 0
   m_Name: Ruler
   m_TagString: Untagged
@@ -93,3 +95,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1277008, y: 0.80086607, z: 24.17767}
   m_Center: {x: -0.0000014305115, y: 0.11105606, z: 0.005984783}
+--- !u!114 &114273338224569310
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956178800178356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 9058a110-51e9-4490-be0b-e61cd5251356
+--- !u!114 &114800777511003172
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956178800178356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1956178800178356}
+  _assetGuid: b20a437161542274085495c2867d7511

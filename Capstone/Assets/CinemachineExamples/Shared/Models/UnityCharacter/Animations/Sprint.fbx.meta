@@ -3,7 +3,7 @@ guid: 7fa1f9e8c2e4188478cbd5a152ce790e
 timeCreated: 1507742507
 licenseType: Pro
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Head
     100002: HeadTop_End
@@ -139,12 +139,77 @@ ModelImporter:
     400130: //RootNode
     7400000: Sprint
     9500000: //RootNode
-  externalObjects: {}
+    11400000: Head
+    11400002: HeadTop_End
+    11400004: Hips
+    11400006: LeftArm
+    11400008: LeftFoot
+    11400010: LeftForeArm
+    11400012: LeftHand
+    11400014: LeftHandIndex1
+    11400016: LeftHandIndex2
+    11400018: LeftHandIndex3
+    11400020: LeftHandIndex4
+    11400022: LeftHandMiddle1
+    11400024: LeftHandMiddle2
+    11400026: LeftHandMiddle3
+    11400028: LeftHandMiddle4
+    11400030: LeftHandPinky1
+    11400032: LeftHandPinky2
+    11400034: LeftHandPinky3
+    11400036: LeftHandPinky4
+    11400038: LeftHandRing1
+    11400040: LeftHandRing2
+    11400042: LeftHandRing3
+    11400044: LeftHandRing4
+    11400046: LeftHandThumb1
+    11400048: LeftHandThumb2
+    11400050: LeftHandThumb3
+    11400052: LeftHandThumb4
+    11400054: LeftLeg
+    11400056: LeftShoulder
+    11400058: LeftToe_End
+    11400060: LeftToeBase
+    11400062: LeftUpLeg
+    11400064: Neck
+    11400066: RightArm
+    11400068: RightFoot
+    11400070: RightForeArm
+    11400072: RightHand
+    11400074: RightHandIndex1
+    11400076: RightHandIndex2
+    11400078: RightHandIndex3
+    11400080: RightHandIndex4
+    11400082: RightHandMiddle1
+    11400084: RightHandMiddle2
+    11400086: RightHandMiddle3
+    11400088: RightHandMiddle4
+    11400090: RightHandPinky1
+    11400092: RightHandPinky2
+    11400094: RightHandPinky3
+    11400096: RightHandPinky4
+    11400098: RightHandRing1
+    11400100: RightHandRing2
+    11400102: RightHandRing3
+    11400104: RightHandRing4
+    11400106: RightHandThumb1
+    11400108: RightHandThumb2
+    11400110: RightHandThumb3
+    11400112: RightHandThumb4
+    11400114: RightLeg
+    11400116: RightShoulder
+    11400118: RightToe_End
+    11400120: RightToeBase
+    11400122: RightUpLeg
+    11400124: Spine
+    11400126: Spine1
+    11400128: Spine2
+    11400130: //RootNode
+    11400132: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -157,7 +222,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -210,8 +274,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
