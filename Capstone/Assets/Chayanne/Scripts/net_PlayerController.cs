@@ -397,6 +397,7 @@ namespace jkuo
                     isGliding = true;
                     CmdPlayGlideParticle();
                     nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, false);
+                    SoundEffectManager.instance.PlaySFX("Glide Boost", gameObject, 0.3f);
                 }
 
 

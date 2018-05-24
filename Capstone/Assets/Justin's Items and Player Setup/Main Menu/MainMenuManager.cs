@@ -221,7 +221,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public void EnterButtonHover(BaseEventData data)
     {
-        sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.4f, true);
+        sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.2f, true);
         PointerEventData d = data as PointerEventData;
         GameObject g = d.pointerEnter;
         buttonHovered = g;
@@ -234,7 +234,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if(buttonHovered != null)
         {
-            sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.4f, true);
+            sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.2f, true);
             buttonHovered.transform.localScale = Vector2.one;
             buttonHovered.transform.localEulerAngles = Vector3.zero;
             buttonHovered = null;
@@ -251,7 +251,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
             if (currentPanel != optionsCanvas)
                 CloseCurrentCanvas();
 
@@ -293,7 +293,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
             if (currentPanel != playCanvas)
                 CloseCurrentCanvas();
 
@@ -305,7 +305,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
             if (currentPanel != customizeCanvas)
                 CloseCurrentCanvas();
 
@@ -379,19 +379,19 @@ public class MainMenuManager : MonoBehaviour {
         //Might need a general button check to make sure player isn't spam clicking a button
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
             if (currentPanel != creditsCanvas)
                 CloseCurrentCanvas();
 
             if (!isCreditsPlaying)
             {
                 creditsCoroutine = StartCoroutine(c_OpenCredits());
-                MusicManager.instance.SwapMainTracks("OpeningMusic", 0.75f, 1);
+                MusicManager.instance.SwapMainTracks("OpeningMusic", 0.5f, 1);
             }
             else
             {
                 StartCoroutine(c_CloseCredits());
-                MusicManager.instance.SwapMainTracks("PregameLobby", 1, 1);
+                MusicManager.instance.SwapMainTracks("PregameLobby", 0.4f, 1);
             }
         }
     }
@@ -452,7 +452,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.5f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
             if (currentPanel != instructionCanvas)
                 CloseCurrentCanvas();
 
@@ -514,13 +514,13 @@ public class MainMenuManager : MonoBehaviour {
 
     public void QuitGame()
     {
-        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
+        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
         Application.Quit();
     }
 
     public void ExitToMenu()
     {
-        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.4f, true);
+        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
         Debug.Log("Disconnecting");
 
         

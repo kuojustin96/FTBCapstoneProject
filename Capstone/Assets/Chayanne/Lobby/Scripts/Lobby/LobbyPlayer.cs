@@ -317,7 +317,8 @@ namespace Prototype.NetworkLobby
                 LobbySingleton.instance.TransitionCam.gameObject.SetActive(true);
                 LobbyManager.s_Singleton.lobbyAnims.PlayOpenDoorAnimation();
 
-                SoundEffectManager.instance.PlaySFX("Door Open", Camera.main.gameObject);
+                SoundEffectManager.instance.PlaySFX("Door Open", Camera.main.gameObject, 0.2f);
+                SoundEffectManager.instance.PlaySFX("Door Open Jingle", Camera.main.gameObject);
                 //start fade
                 LobbyManager.s_Singleton.cameraHolder.FadeIn();
 
