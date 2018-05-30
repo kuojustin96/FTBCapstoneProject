@@ -15,7 +15,6 @@ public class SyncColor : MonoBehaviour
     // Use this for initialization
     void OnEnable()
     {
-        Debug.LogWarning("Enabled!");
         bool shouldEnable = false;
 
 

@@ -1362,7 +1362,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329087176206288}
-  m_LocalRotation: {x: -0.73172635, y: 0.68132114, z: -0.013391291, w: 0.014101527}
+  m_LocalRotation: {x: -0.73172635, y: 0.68132114, z: -0.013391287, w: 0.014101523}
   m_LocalPosition: {x: 0, y: 0, z: -0.0055241664}
   m_LocalScale: {x: 0.9998602, y: 1.3286723, z: 0.7046922}
   m_Children: []
@@ -2566,8 +2566,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00034332275, y: 0.06487179, z: -0.024172783}
-    m_Extent: {x: 0.06313731, y: 0.04645543, z: 0.05770138}
+    m_Center: {x: 0.00033569336, y: 0.06487203, z: -0.02417183}
+    m_Extent: {x: 0.06313919, y: 0.04645543, z: 0.0577015}
   m_DirtyAABB: 0
 --- !u!137 &137951971385208446
 SkinnedMeshRenderer:
@@ -2642,8 +2642,8 @@ Cloth:
   m_WorldAccelerationScale: 1
   m_Friction: 0.5
   m_CollisionMassScale: 0.23
-  m_UseContinuousCollision: 1
-  m_UseVirtualParticles: 1
+  m_UseContinuousCollision: 0
+  m_UseVirtualParticles: 0
   m_SolverFrequency: 250
   m_SleepThreshold: 0
   m_Coefficients:
@@ -5227,11 +5227,5 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   - maxDistance: 0.02
     collisionSphereDistance: 3.4028235e+38
-  m_CapsuleColliders:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_CapsuleColliders: []
   m_SphereColliders: []

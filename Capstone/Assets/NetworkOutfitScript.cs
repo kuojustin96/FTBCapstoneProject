@@ -23,14 +23,39 @@ public class NetworkOutfitScript : NetworkBehaviour
     public GameObject clothing;
 
 
+    //
+    public float timer = 5.0f;
+
+
     // Use this for initialization
     void Start()
     {
         PopulateHats();
         Debug.Log("AM I LOCAL? " + isLocalPlayer);
-        ChangeHat(currentHat);
+            
         //ChangeColor(theColor);
 
+    }
+
+    void Update()
+    {
+        //ugly hack to sync player clothing. Repeatedly calls CmdChangeHat for the first second the client sees their player
+        if (isLocalPlayer)
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                return;
+            }
+
+            
+            int hatColor = PlayerGameProfile.instance.GetPlayerOutfitSelection();
+            CmdChangeHat(hatColor);
+
+        }
     }
 
 
@@ -45,8 +70,7 @@ public class NetworkOutfitScript : NetworkBehaviour
 
     [Command]
     public void CmdChangeHat(int index)
-    {
-        Debug.Log("Command!");
+    {   
         //index = WrapNumber(index);
 
         //Hats.list[currentHat].SetActive(false);
@@ -60,24 +84,26 @@ public class NetworkOutfitScript : NetworkBehaviour
     [ClientRpc]
     void RpcChangeHat(int index)
     {
+
+        if (Hats.list.Count == 0)
+        {
+            return;
+        }
         foreach (GameObject hat in Hats.list)
         {
             hat.SetActive(false);
         }
 
-        Debug.Log("RPC!");
         index = WrapNumber(index);
 
         Hats.list[currentHat].SetActive(false);
         currentHat = index;
         Hats.list[currentHat].SetActive(true);
 
-        Debug.Log("You have hat " + currentHat);
     }
 
     public void ChangeHat(int index)
     {
-        Debug.Log("We have " + Hats.list.Count);
         if (Hats.list.Count == 0)
         {
             return;
@@ -93,6 +119,7 @@ public class NetworkOutfitScript : NetworkBehaviour
         Hats.list[currentHat].SetActive(false);
         currentHat = index;
         Hats.list[currentHat].SetActive(true);
+
 
     }
 

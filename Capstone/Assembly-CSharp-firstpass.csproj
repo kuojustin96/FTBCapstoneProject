@@ -244,17 +244,17 @@
  <Reference Include="DOTween50">
  <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
  </Reference>
- <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
- <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
- </Reference>
- <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
- <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
- </Reference>
  <Reference Include="NestedPrefabs">
  <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Plugins/Visual Design Cafe/Nested Prefabs/NestedPrefabs.dll</HintPath>
  </Reference>
  <Reference Include="NestedPrefabs.Editor">
  <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/Plugins/Visual Design Cafe/Nested Prefabs/NestedPrefabs.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
+ <HintPath>C:/Users/ckhan3/Documents/GitHub/FTBCapstoneProject/Capstone/Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
