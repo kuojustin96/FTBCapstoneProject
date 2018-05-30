@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33085166513243874}
   - component: {fileID: 23500125248594934}
   - component: {fileID: 65492213093060324}
+  - component: {fileID: 114126924077173566}
+  - component: {fileID: 114538989804749154}
   m_Layer: 0
   m_Name: Domino
   m_TagString: Untagged
@@ -93,3 +95,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.2899094, y: 0.37802258, z: 5.451332}
   m_Center: {x: -0.00000023841858, y: 0, z: -0.00000047683716}
+--- !u!114 &114126924077173566
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1561798542302536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1561798542302536}
+  _assetGuid: 55dccac7039e6cd49abc2393c53e6468
+--- !u!114 &114538989804749154
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1561798542302536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 351d65b1-5487-4e98-a089-860c72b8bad9

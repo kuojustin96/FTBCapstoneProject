@@ -3,7 +3,7 @@ guid: bbdd28d697a0ebc4cb7650c19d075731
 timeCreated: 1516156354
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Cylinder01
     100002: //RootNode
@@ -97,6 +97,26 @@ ModelImporter:
     4300030: planche14
     4300032: portebureau
     4300034: portebureau01
+    11400000: Cylinder01
+    11400002: //RootNode
+    11400004: //RootNode
+    11400006: Line01
+    11400008: planche02
+    11400010: planche03
+    11400012: planche04
+    11400014: planche05
+    11400016: planche06
+    11400018: planche07
+    11400020: planche08
+    11400022: planche09
+    11400024: planche1
+    11400026: planche10
+    11400028: planche11
+    11400030: planche12
+    11400032: planche13
+    11400034: planche14
+    11400036: portebureau
+    11400038: portebureau01
   materials:
     importMaterials: 1
     materialName: 0
@@ -119,6 +139,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -126,7 +147,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -142,6 +166,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

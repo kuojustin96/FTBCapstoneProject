@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 114146100359548764}
   - component: {fileID: 114771451441086280}
   - component: {fileID: 114568352491942070}
+  - component: {fileID: 114605670475808754}
+  - component: {fileID: 114641594717311004}
   m_Layer: 0
   m_Name: PlayerClassController
   m_TagString: Untagged
@@ -77,6 +79,34 @@ MonoBehaviour:
   itemSO: {fileID: 11400000, guid: 2946cb9e99d2eba45b749412c6b4b7f9, type: 2}
   sugarNeededToCraft: 1
   timeToCraft: 3
+--- !u!114 &114605670475808754
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518781718378772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1518781718378772}
+  _assetGuid: 9890eb174fc1f974689c69e6f62748f7
+--- !u!114 &114641594717311004
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1518781718378772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 75b61df3-e0c9-422a-b381-47408d4ff67b
 --- !u!114 &114771451441086280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,9 +118,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fa8fafac7b52a44a6a8cc1df7e9928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sugarPickUpSpeed: 3
+  gameLength: 600
+  numSugarToWin: 50
+  sugarPickupTime: 0.5
   dropoffDelay: 0.5
   maxSugarCarry: 10
+  speedPerSugar: 0.5
+  minSpeed: 20
+  endGame: 0
   playerPrefab: {fileID: 1162454042834014, guid: 0a063b696753be042a8aae1cc612ed2a,
     type: 2}
   playerMats:
@@ -98,10 +133,23 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 326780a4b17cd0741a42373e2bba1ea0, type: 2}
   - {fileID: 2100000, guid: 38b0eac3d016d134a8454c6431476739, type: 2}
   - {fileID: 2100000, guid: 1b33237e8f1cae24088de789a1065283, type: 2}
+  fortNames: []
   DropoffPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - name: 
+    dropoffGO: {fileID: 0}
+    FortNamesTMP: []
+    teamColor: 0
+  - name: 
+    dropoffGO: {fileID: 0}
+    FortNamesTMP: []
+    teamColor: 0
+  - name: 
+    dropoffGO: {fileID: 0}
+    FortNamesTMP: []
+    teamColor: 0
+  - name: 
+    dropoffGO: {fileID: 0}
+    FortNamesTMP: []
+    teamColor: 0
   playerList: []
   numPlayers: 0

@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4101033993324876}
   - component: {fileID: 198073016311773302}
   - component: {fileID: 199198327641841636}
+  - component: {fileID: 114353651852338520}
+  - component: {fileID: 114501556027459396}
   m_Layer: 0
   m_Name: flying
   m_TagString: Untagged
@@ -41,6 +43,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114353651852338520
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028394477061282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1028394477061282}
+  _assetGuid: 9a3cd7186649fbc478a3d8e72a3245f8
+--- !u!114 &114501556027459396
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1028394477061282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 72d78788-c836-4d8f-99de-9cd2f9dd0d91
 --- !u!198 &198073016311773302
 ParticleSystem:
   m_ObjectHideFlags: 1

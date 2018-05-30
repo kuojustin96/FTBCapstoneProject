@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4610744621642568}
   - component: {fileID: 114526466652113968}
+  - component: {fileID: 114072141573889410}
+  - component: {fileID: 114365444111791664}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,6 +42,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114072141573889410
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1389352593547058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1389352593547058}
+  _assetGuid: 1cfecf3d7ea04454cb12673a55ad9bdc
+--- !u!114 &114365444111791664
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1389352593547058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 74b66b5e-c5c5-47f1-9bf2-50e029a47320
 --- !u!114 &114526466652113968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,3 +85,4 @@ MonoBehaviour:
   greenSpawn: {fileID: 0}
   purpleSpawn: {fileID: 0}
   redSpawn: {fileID: 0}
+  GameSettings: {fileID: 0}

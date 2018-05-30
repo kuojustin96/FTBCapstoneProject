@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33444496362186514}
   - component: {fileID: 23915680742748032}
   - component: {fileID: 65757423533904280}
+  - component: {fileID: 114284210292890124}
   m_Layer: 0
   m_Name: LegoBrick (9)
   m_TagString: Untagged
@@ -40,6 +41,7 @@ GameObject:
   - component: {fileID: 33554190774537424}
   - component: {fileID: 23458376186647608}
   - component: {fileID: 65144662641107660}
+  - component: {fileID: 114978792896790436}
   m_Layer: 0
   m_Name: LegoBrick (3)
   m_TagString: Untagged
@@ -58,6 +60,7 @@ GameObject:
   - component: {fileID: 33836114554485092}
   - component: {fileID: 23297466550251808}
   - component: {fileID: 65786688650400318}
+  - component: {fileID: 114516483482384748}
   m_Layer: 0
   m_Name: LegoBrick (6)
   m_TagString: Untagged
@@ -76,6 +79,7 @@ GameObject:
   - component: {fileID: 33066949616016510}
   - component: {fileID: 23611482211368256}
   - component: {fileID: 65863590649418830}
+  - component: {fileID: 114029141447620134}
   m_Layer: 0
   m_Name: LegoBrick (12)
   m_TagString: Untagged
@@ -94,6 +98,7 @@ GameObject:
   - component: {fileID: 33047609672249140}
   - component: {fileID: 23384586585718226}
   - component: {fileID: 65323415949420916}
+  - component: {fileID: 114277395245548980}
   m_Layer: 0
   m_Name: LegoBrick (7)
   m_TagString: Untagged
@@ -112,6 +117,7 @@ GameObject:
   - component: {fileID: 33505371297673802}
   - component: {fileID: 23215168718535112}
   - component: {fileID: 65932600383531622}
+  - component: {fileID: 114171725135736822}
   m_Layer: 0
   m_Name: LegoBrick (10)
   m_TagString: Untagged
@@ -130,6 +136,7 @@ GameObject:
   - component: {fileID: 33721885317911522}
   - component: {fileID: 23125522340392678}
   - component: {fileID: 65923020856064396}
+  - component: {fileID: 114212470423372130}
   m_Layer: 0
   m_Name: LegoBrick (8)
   m_TagString: Untagged
@@ -148,6 +155,7 @@ GameObject:
   - component: {fileID: 33876425481997784}
   - component: {fileID: 23435958790200190}
   - component: {fileID: 65944417912456694}
+  - component: {fileID: 114259981543192452}
   m_Layer: 0
   m_Name: LegoBrick (11)
   m_TagString: Untagged
@@ -163,6 +171,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4846162856962616}
+  - component: {fileID: 114983375393340850}
+  - component: {fileID: 114316921652267160}
   m_Layer: 0
   m_Name: BrickStairs
   m_TagString: Untagged
@@ -181,6 +191,7 @@ GameObject:
   - component: {fileID: 33115251143409104}
   - component: {fileID: 23807798136608762}
   - component: {fileID: 65036210166656472}
+  - component: {fileID: 114679543726492082}
   m_Layer: 0
   m_Name: LegoBrick (2)
   m_TagString: Untagged
@@ -199,6 +210,7 @@ GameObject:
   - component: {fileID: 33453787746176638}
   - component: {fileID: 23586050880369664}
   - component: {fileID: 65618629087255660}
+  - component: {fileID: 114355218792743242}
   m_Layer: 0
   m_Name: LegoBrick (4)
   m_TagString: Untagged
@@ -869,3 +881,161 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.1084995, y: 1.7764693, z: 2.5654702}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114029141447620134
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401784259539202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: f19b9314-88a1-427e-a0d9-85483c85cd53
+--- !u!114 &114171725135736822
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1516487989227186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 007ec71e-8b5a-4a9c-a5b3-93a9075a0dff
+--- !u!114 &114212470423372130
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1558564789858898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 8bdff3d2-926b-43fc-9310-cc6d5e7e0839
+--- !u!114 &114259981543192452
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1781401032423238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 8c8ea1f0-f97e-4915-9d38-ebd358a16229
+--- !u!114 &114277395245548980
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420078794739224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 1091b5bd-103a-4f95-95d6-19487068dba6
+--- !u!114 &114284210292890124
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100162804681310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: fb87ddb0-613b-492b-af22-3b9678825ef8
+--- !u!114 &114316921652267160
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801838307167526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 9f5a0878-1c13-494f-ae88-d57302284a1e
+--- !u!114 &114355218792743242
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865096663230038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: f0a72877-e8d0-48eb-9066-a00ebe4bcdc5
+--- !u!114 &114516483482384748
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1319636646241542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 990f9476-c3bb-489f-886d-cc4be73303fb
+--- !u!114 &114679543726492082
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821524692671710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 0eff00d9-c362-4bb1-b5ef-301c0e49b8b6
+--- !u!114 &114978792896790436
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233303639238896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 341b9787-200c-4caf-bdb5-392119523034
+--- !u!114 &114983375393340850
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1801838307167526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1801838307167526}
+    - {fileID: 1821524692671710}
+    - {fileID: 1233303639238896}
+    - {fileID: 1865096663230038}
+    - {fileID: 1319636646241542}
+    - {fileID: 1420078794739224}
+    - {fileID: 1558564789858898}
+    - {fileID: 1100162804681310}
+    - {fileID: 1516487989227186}
+    - {fileID: 1781401032423238}
+    - {fileID: 1401784259539202}
+  _assetGuid: 76c49c1d52b633b4988063431bbaa7c3

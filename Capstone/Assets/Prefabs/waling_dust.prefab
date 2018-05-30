@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4050471365236032}
   - component: {fileID: 198389407247243458}
   - component: {fileID: 199114664279420066}
+  - component: {fileID: 114802566891302786}
+  - component: {fileID: 114558653542257306}
   m_Layer: 0
   m_Name: waling_dust
   m_TagString: Untagged
@@ -41,6 +43,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114558653542257306
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1210638453633614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 1cc18282-40b3-482f-9ace-4004ce008981
+--- !u!114 &114802566891302786
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1210638453633614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1210638453633614}
+  _assetGuid: 574716e68a56a5a449d38219616ab527
 --- !u!198 &198389407247243458
 ParticleSystem:
   m_ObjectHideFlags: 1

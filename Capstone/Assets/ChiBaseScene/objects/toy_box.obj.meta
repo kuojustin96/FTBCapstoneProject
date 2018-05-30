@@ -3,7 +3,7 @@ guid: ea662def6394a35498972ae1a9dbbd9d
 timeCreated: 1516156360
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
     100002: toybox
@@ -12,6 +12,9 @@ ModelImporter:
     2300000: toybox
     3300000: toybox
     4300000: toybox
+    11400000: //RootNode
+    11400002: //RootNode
+    11400004: toybox
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,6 +37,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -41,7 +45,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -57,6 +64,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
