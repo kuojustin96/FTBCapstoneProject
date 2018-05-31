@@ -12,7 +12,7 @@ public class NetworkProfile : NetworkBehaviour {
 
     [SyncVar]
     [SerializeField]
-    Color PlayerColor;
+    public Color PlayerColor;
 
     [SyncVar]
     public int myNum;
@@ -28,7 +28,7 @@ public class NetworkProfile : NetworkBehaviour {
     {
         nos = GetComponent<NetworkOutfitScript>();
         pca = GetComponent<playerClassAdd>();
-        Debug.Log("my name is " + PlayerName);
+    
         pca.player.playerName = PlayerName;
         pca.SetMaterialColor(PlayerColor, myNum);
         GameManager.instance.SetUpBaseName(pca.player);
@@ -44,7 +44,6 @@ public class NetworkProfile : NetworkBehaviour {
         nos = GetComponent<NetworkOutfitScript>();
 
         nos.currentHat = outfitChoice;
-        nos.theColor = color;
 
         Debug.Log("okay your outfit is " + outfitChoice);
 
@@ -59,7 +58,7 @@ public class NetworkProfile : NetworkBehaviour {
         myNum = player.playerNum;
         outfitChoice = player.outfitNum;
 
-        nos.theColor = PlayerColor;
+        //nos.theColor = PlayerColor;
         nos.currentHat = outfitChoice;
         nos.ChangeHat(outfitChoice);
     }

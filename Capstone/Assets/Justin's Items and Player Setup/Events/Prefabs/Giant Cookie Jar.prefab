@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224986998875045148}
   - component: {fileID: 222520558582649800}
   - component: {fileID: 114363898286985628}
+  - component: {fileID: 114452352750906920}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 224210186128070650}
   - component: {fileID: 222746151658058746}
   - component: {fileID: 114154396825490478}
+  - component: {fileID: 114114464282229056}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -56,6 +58,7 @@ GameObject:
   - component: {fileID: 223505406351511996}
   - component: {fileID: 114930852069600692}
   - component: {fileID: 114988164736982428}
+  - component: {fileID: 114167232295610466}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -76,6 +79,7 @@ GameObject:
   - component: {fileID: 23365177201779006}
   - component: {fileID: 114691024716192834}
   - component: {fileID: 114683201492018234}
+  - component: {fileID: 114567574029380482}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -96,6 +100,7 @@ GameObject:
   - component: {fileID: 23168697885349234}
   - component: {fileID: 114921005161634486}
   - component: {fileID: 114977247092295874}
+  - component: {fileID: 114433249443006324}
   m_Layer: 0
   m_Name: Button (3)
   m_TagString: Untagged
@@ -113,6 +118,7 @@ GameObject:
   - component: {fileID: 224408909914872804}
   - component: {fileID: 222892826742910324}
   - component: {fileID: 114108884629218724}
+  - component: {fileID: 114529643627226328}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -128,6 +134,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4861000566048918}
+  - component: {fileID: 114834012679452206}
   m_Layer: 0
   m_Name: Sugar Drop Position
   m_TagString: Untagged
@@ -145,6 +152,7 @@ GameObject:
   - component: {fileID: 224353252548800022}
   - component: {fileID: 222385608262369392}
   - component: {fileID: 114850014578806222}
+  - component: {fileID: 114582530252291340}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -165,6 +173,7 @@ GameObject:
   - component: {fileID: 23071333640918804}
   - component: {fileID: 114835955551015444}
   - component: {fileID: 114384558172988742}
+  - component: {fileID: 114945013619265862}
   m_Layer: 0
   m_Name: Button (2)
   m_TagString: Untagged
@@ -183,6 +192,7 @@ GameObject:
   - component: {fileID: 33857471587119184}
   - component: {fileID: 23329347630546456}
   - component: {fileID: 64607418819716546}
+  - component: {fileID: 114396916163553348}
   m_Layer: 0
   m_Name: Cookie Jar
   m_TagString: Untagged
@@ -201,6 +211,8 @@ GameObject:
   - component: {fileID: 114808833497237698}
   - component: {fileID: 114300218243603618}
   - component: {fileID: 114126122797443792}
+  - component: {fileID: 114024380549803672}
+  - component: {fileID: 114127452580630470}
   m_Layer: 0
   m_Name: Giant Cookie Jar
   m_TagString: Untagged
@@ -221,6 +233,7 @@ GameObject:
   - component: {fileID: 23815160245694238}
   - component: {fileID: 114476178211523062}
   - component: {fileID: 114638812064239178}
+  - component: {fileID: 114797433106718092}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -239,6 +252,7 @@ GameObject:
   - component: {fileID: 223243550118340460}
   - component: {fileID: 114553339554038250}
   - component: {fileID: 114634559120347078}
+  - component: {fileID: 114104331607047034}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -257,6 +271,7 @@ GameObject:
   - component: {fileID: 223792850521294260}
   - component: {fileID: 114572458842123210}
   - component: {fileID: 114012882941134196}
+  - component: {fileID: 114087655838011790}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -275,6 +290,7 @@ GameObject:
   - component: {fileID: 223952205166003438}
   - component: {fileID: 114000794681812038}
   - component: {fileID: 114637814809732440}
+  - component: {fileID: 114552772429014898}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -677,6 +693,60 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114024380549803672
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1765243866867886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1765243866867886}
+    - {fileID: 1588794345213034}
+    - {fileID: 1140941485110928}
+    - {fileID: 1873450981486786}
+    - {fileID: 1399079148175488}
+    - {fileID: 1769087905829210}
+    - {fileID: 1937110829009908}
+    - {fileID: 1530242780125424}
+    - {fileID: 1559097606610650}
+    - {fileID: 1929199684737898}
+    - {fileID: 1007942620208426}
+    - {fileID: 1178272705819398}
+    - {fileID: 1130462821409268}
+    - {fileID: 1124022122395544}
+    - {fileID: 1529589395868468}
+  _assetGuid: 7c7863284541b484e98528b55ec46098
+--- !u!114 &114087655838011790
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1929199684737898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: e6f9aefd-a945-423f-a7e3-d5bee2d9f12f
+--- !u!114 &114104331607047034
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873450981486786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 692531b8-28b5-4d55-beda-a7e2a2cf3d10
 --- !u!114 &114108884629218724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -789,6 +859,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114114464282229056
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124022122395544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: ad84fffe-85d4-4a55-abc3-9c292c1d904b
 --- !u!114 &114126122797443792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -800,6 +882,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac0eb24740c3fc409d12d1547336a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114127452580630470
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1765243866867886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: b1b6528a-f145-4844-910d-d2b40fb127c9
 --- !u!114 &114154396825490478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -912,6 +1006,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114167232295610466
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130462821409268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 22ae4ce4-6918-42ce-b6fd-003264176f85
 --- !u!114 &114300218243603618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1078,6 +1184,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPlayersInTrigger: 0
+--- !u!114 &114396916163553348
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1588794345213034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 2debd397-b806-4b12-8e4f-323486133783
+--- !u!114 &114433249443006324
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1178272705819398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: aa606360-54ba-4abe-9ab7-ba1dcba1687c
+--- !u!114 &114452352750906920
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1007942620208426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 31b2aed5-126e-40cf-8115-df6c2524d7bc
 --- !u!114 &114476178211523062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1110,6 +1252,30 @@ MonoBehaviour:
     i15: 152
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114529643627226328
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1399079148175488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: e7cb7ed1-2529-4979-b054-1f8f00bbee04
+--- !u!114 &114552772429014898
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1937110829009908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 1e232198-e5ea-4e04-8f0e-ccfcb8c2090e
 --- !u!114 &114553339554038250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1131,6 +1297,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114567574029380482
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140941485110928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: d52679fc-50a9-4c07-a49d-d68c0f8e1306
 --- !u!114 &114572458842123210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1152,6 +1330,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114582530252291340
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530242780125424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: b38624ab-f6a0-4d97-9b7b-41a1e24a5386
 --- !u!114 &114634559120347078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1240,6 +1430,18 @@ MonoBehaviour:
     i15: 152
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114797433106718092
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769087905829210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 09447cb2-121a-4d18-92f7-acabc2b90c95
 --- !u!114 &114808833497237698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1272,6 +1474,18 @@ MonoBehaviour:
     i15: 152
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114834012679452206
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529589395868468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 4a6d26e0-24e6-4368-b62c-820bdf6ed00e
 --- !u!114 &114835955551015444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1469,6 +1683,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114945013619265862
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1559097606610650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 75f45f6b-cc7b-4267-835e-47cbebb42b25
 --- !u!114 &114977247092295874
 MonoBehaviour:
   m_ObjectHideFlags: 1

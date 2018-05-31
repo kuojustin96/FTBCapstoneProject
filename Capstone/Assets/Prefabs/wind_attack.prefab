@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4736875451212520}
   - component: {fileID: 198027604826387426}
   - component: {fileID: 199915913416796856}
+  - component: {fileID: 114885076689965390}
   m_Layer: 0
   m_Name: dust
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4744197604999038}
   - component: {fileID: 198591954545020154}
   - component: {fileID: 199128162764212670}
+  - component: {fileID: 114895047287158780}
   m_Layer: 0
   m_Name: flying_dust
   m_TagString: Untagged
@@ -55,6 +57,7 @@ GameObject:
   - component: {fileID: 4967905115526614}
   - component: {fileID: 198366114029210754}
   - component: {fileID: 199816726097122262}
+  - component: {fileID: 114649215457265540}
   m_Layer: 0
   m_Name: tornado
   m_TagString: Untagged
@@ -70,6 +73,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4216449263333870}
+  - component: {fileID: 114774722800892156}
+  - component: {fileID: 114841594382920594}
   m_Layer: 0
   m_Name: wind_attack
   m_TagString: Untagged
@@ -132,6 +137,73 @@ Transform:
   m_Father: {fileID: 4216449263333870}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114649215457265540
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811256171228640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 6e8eca4a-6c45-4156-addf-605629259878
+--- !u!114 &114774722800892156
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889843872281242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1889843872281242}
+    - {fileID: 1811256171228640}
+    - {fileID: 1310482863425472}
+    - {fileID: 1717914150886604}
+  _assetGuid: e0a099e9ba213744cbe0a7e38e397b72
+--- !u!114 &114841594382920594
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889843872281242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 19937cf6-ce7f-4042-a5c3-fd746fe7ab8a
+--- !u!114 &114885076689965390
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1310482863425472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: cca5fdda-f19d-46de-a02e-6b56f21256b1
+--- !u!114 &114895047287158780
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1717914150886604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 21ae9091-3896-4155-b406-5451f44844e4
 --- !u!198 &198027604826387426
 ParticleSystem:
   m_ObjectHideFlags: 1

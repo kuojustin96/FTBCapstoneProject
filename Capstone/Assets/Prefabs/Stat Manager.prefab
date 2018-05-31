@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4881950624517442}
   - component: {fileID: 114555419018297778}
   - component: {fileID: 114373276742918254}
+  - component: {fileID: 114273081119497956}
+  - component: {fileID: 114651272825034878}
   m_Layer: 0
   m_Name: Stat Manager
   m_TagString: Untagged
@@ -41,6 +43,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114273081119497956
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231484885101908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1231484885101908}
+  _assetGuid: 124ae125ff707b44ca119a43e5a2d722
 --- !u!114 &114373276742918254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,6 +70,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac0fa456e0b2b14790a709c0b49fe48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameStats:
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
+  - num: 0
+    AccoladeString: 
   priorityText: {fileID: 4900000, guid: 337dfd6f0861ac84baa874ee79eea93d, type: 3}
   nonpriorityText: {fileID: 4900000, guid: 8993a8a860bbc934c935edcba44aa9ea, type: 3}
   minTickerTime: 10
@@ -88,3 +125,15 @@ MonoBehaviour:
     i15: 34
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114651272825034878
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231484885101908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 28ceeca8-a1d3-4037-bf5d-b848b72f701d

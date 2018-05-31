@@ -3,7 +3,7 @@ guid: 7d24719256e2ce240b5234f85e42ab08
 timeCreated: 1524659362
 licenseType: Free
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
     100002: Head
@@ -50,13 +50,33 @@ ModelImporter:
     2100000: lambert3
     4300000: pSphere11
     9500000: //RootNode
+    11400000: //RootNode
+    11400002: //RootNode
+    11400004: Head
+    11400006: ikHandle1
+    11400008: ikHandle2
+    11400010: ikHandle3
+    11400012: ikHandle4
+    11400014: Left_Leg_Ankle
+    11400016: Left_Leg_Hip
+    11400018: Left_Leg_Knee
+    11400020: Left_Leg_Toe
+    11400022: LeftAnkle_Twist_Move
+    11400024: LeftToe_Move
+    11400026: Right_Leg_Ankle
+    11400028: Right_Leg_Hip
+    11400030: Right_Leg_Knee
+    11400032: Right_Leg_Toe
+    11400034: RightAnkle_Twist_Move
+    11400036: RightToe_Move
+    11400038: Spine_Mid
+    11400040: Spine_Root
+    11400042: SpineTwist
     13700000: //RootNode
-  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -69,7 +89,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -94,8 +113,6 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
-    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33243317367852908}
   - component: {fileID: 23066581498309602}
   - component: {fileID: 64278051644235482}
+  - component: {fileID: 114041769034054140}
+  - component: {fileID: 114891315181522620}
   m_Layer: 0
   m_Name: TrackDown
   m_TagString: Untagged
@@ -95,3 +97,31 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300006, guid: 0a7184a267a7cc644a2f11f1237db3fa, type: 3}
+--- !u!114 &114041769034054140
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296686458168932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1296686458168932}
+  _assetGuid: 302cee4e868d25d428cad85422728d67
+--- !u!114 &114891315181522620
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296686458168932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 1c6ee211-9f4d-4592-b183-5487ac3c560c

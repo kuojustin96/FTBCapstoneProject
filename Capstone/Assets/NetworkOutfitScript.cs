@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using Prototype.NetworkLobby;
 
 [System.Serializable]
 public struct HatList
@@ -20,18 +20,44 @@ public class NetworkOutfitScript : NetworkBehaviour
     [SyncVar]
     public int currentHat;
 
-    [SyncVar]
-    public Color theColor;
+    public GameObject clothing;
+
+
+    //
+    public float timer = 5.0f;
+
 
     // Use this for initialization
     void Start()
     {
+        PopulateHats();
         Debug.Log("AM I LOCAL? " + isLocalPlayer);
-        
-            ChangeHat(currentHat);
-            ChangeColor(theColor);
-        
+            
+        //ChangeColor(theColor);
+
     }
+
+    void Update()
+    {
+        //ugly hack to sync player clothing. Repeatedly calls CmdChangeHat for the first second the client sees their player
+        if (isLocalPlayer)
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                return;
+            }
+
+            
+            int hatColor = PlayerGameProfile.instance.GetPlayerOutfitSelection();
+            CmdChangeHat(hatColor);
+
+        }
+    }
+
 
     public void PopulateHats()
     {
@@ -44,8 +70,7 @@ public class NetworkOutfitScript : NetworkBehaviour
 
     [Command]
     public void CmdChangeHat(int index)
-    {
-        Debug.Log("Command!");
+    {   
         //index = WrapNumber(index);
 
         //Hats.list[currentHat].SetActive(false);
@@ -60,23 +85,41 @@ public class NetworkOutfitScript : NetworkBehaviour
     void RpcChangeHat(int index)
     {
 
-        Debug.Log("RPC!");
+        if (Hats.list.Count == 0)
+        {
+            return;
+        }
+        foreach (GameObject hat in Hats.list)
+        {
+            hat.SetActive(false);
+        }
+
         index = WrapNumber(index);
 
         Hats.list[currentHat].SetActive(false);
         currentHat = index;
         Hats.list[currentHat].SetActive(true);
 
-        Debug.Log("You have hat " + currentHat);
     }
 
     public void ChangeHat(int index)
     {
+        if (Hats.list.Count == 0)
+        {
+            return;
+        }
+
+        foreach (GameObject hat in Hats.list)
+        {
+            hat.SetActive(false);
+        }
+
         index = WrapNumber(index);
 
         Hats.list[currentHat].SetActive(false);
         currentHat = index;
         Hats.list[currentHat].SetActive(true);
+
 
     }
 
@@ -94,21 +137,6 @@ public class NetworkOutfitScript : NetworkBehaviour
         return index;
     }
 
-    public void ChangeColor(Color color)
-    {
-        theColor = color;
-        Renderer[] rends = HatRoot.GetComponentsInChildren<Renderer>();
 
-        foreach (Renderer r in rends)
-        {
-            r.material.color = color;
-        }
-        Debug.Log("You have hat " + currentHat);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

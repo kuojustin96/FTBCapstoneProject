@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 223176012628820080}
   - component: {fileID: 114478763412096448}
   - component: {fileID: 114184219609671978}
+  - component: {fileID: 114244790721690754}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -42,6 +43,7 @@ GameObject:
   - component: {fileID: 23315491049782532}
   - component: {fileID: 114571953252975274}
   - component: {fileID: 114839078896360690}
+  - component: {fileID: 114058917624585566}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -62,6 +64,7 @@ GameObject:
   - component: {fileID: 23455174545621066}
   - component: {fileID: 114189930482092976}
   - component: {fileID: 114003417876037610}
+  - component: {fileID: 114298396352138254}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -79,6 +82,7 @@ GameObject:
   - component: {fileID: 224153136702054062}
   - component: {fileID: 222591966977216130}
   - component: {fileID: 114007990841234492}
+  - component: {fileID: 114816307683636142}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -97,6 +101,7 @@ GameObject:
   - component: {fileID: 223137721853827526}
   - component: {fileID: 114281689120351870}
   - component: {fileID: 114251953669465518}
+  - component: {fileID: 114726851592816180}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -117,6 +122,7 @@ GameObject:
   - component: {fileID: 23491786314104316}
   - component: {fileID: 114534542289968022}
   - component: {fileID: 114977502551604882}
+  - component: {fileID: 114006119024091628}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -132,6 +138,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4425842063329646}
+  - component: {fileID: 114066836057403290}
   m_Layer: 0
   m_Name: Sugar Drop Position
   m_TagString: Untagged
@@ -153,6 +160,8 @@ GameObject:
   - component: {fileID: 114018341577619448}
   - component: {fileID: 114805955061003864}
   - component: {fileID: 114887115323325978}
+  - component: {fileID: 114846980438884574}
+  - component: {fileID: 114460491041842862}
   m_Layer: 0
   m_Name: DisappearDoorTest
   m_TagString: Untagged
@@ -170,6 +179,7 @@ GameObject:
   - component: {fileID: 224997225062437086}
   - component: {fileID: 222286519317251602}
   - component: {fileID: 114429912067060816}
+  - component: {fileID: 114792359576554996}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -464,6 +474,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPlayersInTrigger: 0
+--- !u!114 &114006119024091628
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620206668495822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: a6cb7d90-68be-48f7-8196-f92bb3b0375e
 --- !u!114 &114007990841234492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -608,6 +630,30 @@ MonoBehaviour:
     i15: 214
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114058917624585566
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242887483873734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 01818d05-2a07-4784-8433-b4793dd01df7
+--- !u!114 &114066836057403290
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1778360201069236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 4b53df96-4ada-4cce-b280-d050aa805c7a
 --- !u!114 &114184219609671978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -656,6 +702,18 @@ MonoBehaviour:
     i15: 214
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114244790721690754
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238727496893308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: ca6fe2ca-146f-4d9c-bc8a-61ecaf053b8e
 --- !u!114 &114251953669465518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,6 +751,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114298396352138254
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258178336515328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 3ad59af4-d134-4373-bbf4-ce13ce8071d6
 --- !u!114 &114429912067060816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -805,6 +875,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114460491041842862
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1793493406620668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: b192d493-fd3d-4ead-8c48-f973151953e2
 --- !u!114 &114478763412096448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -890,6 +972,30 @@ MonoBehaviour:
     i15: 214
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114726851592816180
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501743196155028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 7bb04894-d1ae-46c0-b31c-5bcb8f25ad82
+--- !u!114 &114792359576554996
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990081208542736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 14a7ed66-50a3-44be-9e53-172aba240832
 --- !u!114 &114805955061003864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -930,6 +1036,18 @@ MonoBehaviour:
   debugInfo:
     debugNumPlayers: 0
     finishedEvent: 0
+--- !u!114 &114816307683636142
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1352452104382138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: a62215b0-43dc-4b02-ab7f-e6f91aecd2cb
 --- !u!114 &114839078896360690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -951,6 +1069,30 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114846980438884574
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1793493406620668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1793493406620668}
+    - {fileID: 1620206668495822}
+    - {fileID: 1238727496893308}
+    - {fileID: 1352452104382138}
+    - {fileID: 1258178336515328}
+    - {fileID: 1501743196155028}
+    - {fileID: 1990081208542736}
+    - {fileID: 1242887483873734}
+    - {fileID: 1778360201069236}
+  _assetGuid: f06110be3c1ae334384b81be222c22d6
 --- !u!114 &114887115323325978
 MonoBehaviour:
   m_ObjectHideFlags: 1

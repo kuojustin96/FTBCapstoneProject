@@ -57,6 +57,8 @@ namespace Prototype.NetworkLobby
         [SyncVar]
         public int outfitNum;
 
+
+
         public override void OnStartClient()
         {
             Debug.Log("=========OnStartClient=========");
@@ -181,7 +183,9 @@ namespace Prototype.NetworkLobby
             //cameraScript.SwitchToCameraLocal(playerCamera);
             LobbySingleton.instance.getReadyUpText().SetActive(true);
             if (playerColor == Color.white)
+            {
                 CmdColorChange();
+            }
 
             CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
 
@@ -264,7 +268,7 @@ namespace Prototype.NetworkLobby
         public void OnMyColor(Color newColor)
         {
             playerColor = newColor;
-            colorButton.GetComponent<Image>().color = newColor;
+            //colorButton.GetComponent<Image>().color = newColor;
         }
 
         //===== UI Handler

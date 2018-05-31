@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33796537477572716}
   - component: {fileID: 23019549722092700}
   - component: {fileID: 64157627776779302}
+  - component: {fileID: 114343458632439476}
+  - component: {fileID: 114580670274813586}
   m_Layer: 0
   m_Name: BridgeBlock
   m_TagString: Untagged
@@ -95,3 +97,31 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: b061cb4f394b7984f90ebecb5e92535f, type: 3}
+--- !u!114 &114343458632439476
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300574628152448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1300574628152448}
+  _assetGuid: b3568a99fd926744c88e2581ebe8cfe5
+--- !u!114 &114580670274813586
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300574628152448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: bc9924fb-40aa-4f8b-9726-e54fda7c9ee0

@@ -3,7 +3,7 @@ guid: f6be43e364da21244b6e3e791029a313
 timeCreated: 1509722081
 licenseType: Store
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Camera
     100002: //RootNode
@@ -21,17 +21,12 @@ ModelImporter:
     4300000: Cylinder.001
     4300002: Cylinder
     10800000: Lamp
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: c2ded7645929e1746befa52ddd920fbb, type: 2}
+    11400000: //RootNode
+    11400002: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -44,7 +39,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5

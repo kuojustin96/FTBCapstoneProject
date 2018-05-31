@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65780625079032156}
   - component: {fileID: 23377098124797496}
   - component: {fileID: 114450584957749084}
+  - component: {fileID: 114557167734666896}
   m_Layer: 0
   m_Name: Candy Bar
   m_TagString: Untagged
@@ -43,6 +44,7 @@ GameObject:
   - component: {fileID: 23770065588442924}
   - component: {fileID: 114249011948725804}
   - component: {fileID: 114216940293249416}
+  - component: {fileID: 114901092595077876}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -60,6 +62,7 @@ GameObject:
   - component: {fileID: 224321403481515564}
   - component: {fileID: 222949705817365676}
   - component: {fileID: 114373524710219312}
+  - component: {fileID: 114533700204596188}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -78,6 +81,7 @@ GameObject:
   - component: {fileID: 223097287127839150}
   - component: {fileID: 114080327850293290}
   - component: {fileID: 114037147985222180}
+  - component: {fileID: 114659198979617766}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -95,6 +99,7 @@ GameObject:
   - component: {fileID: 224122671378664410}
   - component: {fileID: 222126398131088088}
   - component: {fileID: 114720755690125560}
+  - component: {fileID: 114202271393183648}
   m_Layer: 0
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -116,6 +121,8 @@ GameObject:
   - component: {fileID: 114245156978959864}
   - component: {fileID: 114735626409862458}
   - component: {fileID: 114657976211613714}
+  - component: {fileID: 114956819729145286}
+  - component: {fileID: 114972068353239410}
   m_Layer: 0
   m_Name: CandyBarTest
   m_TagString: Untagged
@@ -136,6 +143,7 @@ GameObject:
   - component: {fileID: 23371627014303678}
   - component: {fileID: 114710384090005768}
   - component: {fileID: 114059149525191966}
+  - component: {fileID: 114588863555881982}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -151,6 +159,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4933021608404828}
+  - component: {fileID: 114356975916521528}
   m_Layer: 0
   m_Name: Sugar Drop Point
   m_TagString: Untagged
@@ -169,6 +178,7 @@ GameObject:
   - component: {fileID: 223459127222207404}
   - component: {fileID: 114498189129937116}
   - component: {fileID: 114440431384124252}
+  - component: {fileID: 114934747687350352}
   m_Layer: 0
   m_Name: ProgressBar Canvas
   m_TagString: Untagged
@@ -500,6 +510,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114202271393183648
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1600671832766334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 8d93c581-dd9e-4dc5-8eb5-ce70024c87a1
 --- !u!114 &114216940293249416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -576,6 +598,18 @@ MonoBehaviour:
     i15: 192
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114356975916521528
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771937204279470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: dcfdcc5c-7f89-41ee-8a02-c24fe97da9d5
 --- !u!114 &114373524710219312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -757,6 +791,42 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114533700204596188
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1245476392882406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: fc183bd2-cf3c-4fc0-b351-893b9a0c575f
+--- !u!114 &114557167734666896
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1064480452724906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: d75619b3-b905-4068-bb85-a8607247919b
+--- !u!114 &114588863555881982
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1672460543587640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 9577f57a-55f7-4f86-90a2-6a16b768fa32
 --- !u!114 &114657976211613714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -769,6 +839,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   candyBar: {fileID: 1064480452724906}
+--- !u!114 &114659198979617766
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541214531512748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 0e791c79-8286-4206-b401-0304ea0bc4aa
 --- !u!114 &114710384090005768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -953,6 +1035,66 @@ MonoBehaviour:
   debugInfo:
     debugNumPlayers: 0
     finishedEvent: 0
+--- !u!114 &114901092595077876
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175533740667292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 77e5755e-e057-47a0-bfb7-4c034c75158a
+--- !u!114 &114934747687350352
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863048935366752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 3bdae633-cc55-450f-90cd-5d5b436816de
+--- !u!114 &114956819729145286
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620516075922512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1620516075922512}
+    - {fileID: 1175533740667292}
+    - {fileID: 1863048935366752}
+    - {fileID: 1245476392882406}
+    - {fileID: 1672460543587640}
+    - {fileID: 1541214531512748}
+    - {fileID: 1600671832766334}
+    - {fileID: 1064480452724906}
+    - {fileID: 1771937204279470}
+  _assetGuid: ccd720481793ab647860a5dc65bc26c0
+--- !u!114 &114972068353239410
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620516075922512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 58646093-40c9-4a4c-b791-24e066ab5cee
 --- !u!222 &222126398131088088
 CanvasRenderer:
   m_ObjectHideFlags: 1

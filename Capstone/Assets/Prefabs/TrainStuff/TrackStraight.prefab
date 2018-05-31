@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4514077926218524}
   - component: {fileID: 33418518919519452}
   - component: {fileID: 23734736986454624}
+  - component: {fileID: 114911677041002724}
+  - component: {fileID: 114056828791352850}
   m_Layer: 0
   m_Name: TrackStraight
   m_TagString: Untagged
@@ -80,3 +82,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1451943032626660}
   m_Mesh: {fileID: 4300002, guid: 0a7184a267a7cc644a2f11f1237db3fa, type: 3}
+--- !u!114 &114056828791352850
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451943032626660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: f7094255-d76b-400f-a47b-1c81e088bf43
+--- !u!114 &114911677041002724
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451943032626660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1451943032626660}
+  _assetGuid: 636bada6200d6824cad0352205aa7107

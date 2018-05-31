@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4111678014909424}
   - component: {fileID: 198604210352659496}
   - component: {fileID: 199242244595310916}
+  - component: {fileID: 114372181426232314}
+  - component: {fileID: 114915911169283254}
   m_Layer: 0
   m_Name: middleFinger
   m_TagString: Untagged
@@ -41,6 +43,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114372181426232314
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093763551474462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 
+  _referenceCollection:
+    _collection:
+    - {fileID: 1093763551474462}
+  _assetGuid: 1a6493bdde6241c48a2102a704858bfc
+--- !u!114 &114915911169283254
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1093763551474462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guid: 87f98400-3417-41bb-9dfa-a71c72fc9a18
 --- !u!198 &198604210352659496
 ParticleSystem:
   m_ObjectHideFlags: 1
