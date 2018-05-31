@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public static MainMenuManager instance;
     public SoundEffectManager sfm;
+    public MusicManager mm;
     public float fadeTime = 1f;
 
     [Header("Play Game")]
@@ -386,12 +387,12 @@ public class MainMenuManager : MonoBehaviour {
             if (!isCreditsPlaying)
             {
                 creditsCoroutine = StartCoroutine(c_OpenCredits());
-                MusicManager.instance.SwapMainTracks("OpeningMusic", 0.5f, 1);
+                mm.SwapMainTracks("OpeningMusic", 0.5f, 1, mm.defaultAuds);
             }
             else
             {
                 StartCoroutine(c_CloseCredits());
-                MusicManager.instance.SwapMainTracks("PregameLobby", 0.4f, 1);
+                mm.SwapMainTracks("PregameLobby", 0.4f, 1, mm.defaultAuds);
             }
         }
     }
@@ -419,7 +420,7 @@ public class MainMenuManager : MonoBehaviour {
         while (Time.time < saveTime + fadeTime)
             yield return null;
 
-        MusicManager.instance.SwapMainTracks("PregameLobby", 1, 1);
+        mm.SwapMainTracks("PregameLobby", 0.4f, 1, mm.defaultAuds);
         isCreditsPlaying = false;
         currentPanel = null;
         creditsScrollArea.anchoredPosition = new Vector2(creditsScrollArea.anchoredPosition.x, scrollStartY);

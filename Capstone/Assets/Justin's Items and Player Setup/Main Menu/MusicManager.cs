@@ -22,20 +22,21 @@ public class MusicManager : MonoBehaviour {
     [HideInInspector]
     public MusicTriggerBox currentMusicTrigger;
     public float defaultFadeTime = 1f;
-    public string defaultTrackName;
+    public string defaultLobbyTrack;
+    public string defaultGameplayTrack;
 
     public MusicTracks[] Music;
 
     private AudioSource mainTrackAuds;
+    public AudioSource defaultAuds { get; protected set; }
 
     // Use this for initialization
     void Awake () {
-		if (instance == null) {
-			instance = this;
-		} else {
-			Destroy (this.gameObject);
-		}
-			DontDestroyOnLoad (gameObject);
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
+        DontDestroyOnLoad (gameObject);
 
         DOTween.Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -45,9 +46,11 @@ public class MusicManager : MonoBehaviour {
         else
             mainTrackAuds = GetComponent<AudioSource>();
 
+        defaultAuds = mainTrackAuds;
+
         LoadMusicLibrary();
 
-        PlayMainTrack(defaultTrackName, 0, 0.4f);
+        PlayMainTrack(defaultLobbyTrack, 0, 0.4f);
     }
 
     void Start()
@@ -59,8 +62,15 @@ public class MusicManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.buildIndex == 1)
-            SwapMainTracks("GroundFloor", 1f, 0.4f);
+        if (scene.buildIndex == 1) {
+            StopMainTrack(0);
+
+            foreach(PlayerClass p in GameManager.instance.playerList)
+            {
+                AudioSource auds = p.playerGO.GetComponent<LocalMusicManager>().mainTrackAuds;
+                SwapMainTracks(defaultGameplayTrack, 1f, 0.4f, auds);
+            }
+        }
     }
 
     private void LoadMusicLibrary()
@@ -141,9 +151,9 @@ public class MusicManager : MonoBehaviour {
             mainTrackAuds.Stop();
     }
 
-    public void SwapMainTracks(string newMainTrackName, float targetVol, float fadeTime)
+    public void SwapMainTracks(string newMainTrackName, float targetVol, float fadeTime, AudioSource targetSource)
     {
-        mainTrackAuds = GetComponent<AudioSource>();
+        mainTrackAuds = targetSource;
         foreach (MusicTracks m in Music)
         {
             if(newMainTrackName == m.musicName)

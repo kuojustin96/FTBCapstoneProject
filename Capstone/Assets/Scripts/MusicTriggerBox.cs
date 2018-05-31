@@ -10,9 +10,13 @@ public class MusicTriggerBox : MonoBehaviour {
     public float fadeTime = -1f;
     public float targetVolume = 1f;
 
+    AudioSource temp;
+
 	// Use this for initialization
 	void Start () {
+        //mm = MusicManager.instance;
         mm = MusicManager.instance;
+        //temp = GameObject.Find("PlayerClassController").GetComponent<AudioSource>();
 
         //Safety function
         GetComponent<Collider>().isTrigger = true;
@@ -26,10 +30,12 @@ public class MusicTriggerBox : MonoBehaviour {
         {
             if (mm.currentMusicTrigger == null)
             {
+                AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
+
                 if(fadeTime < 0)
-                    mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime);
+                    mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
                 else
-                    mm.SwapMainTracks(mainTrackName, targetVolume, fadeTime);
+                    mm.SwapMainTracks(mainTrackName, targetVolume, fadeTime, temp);
             }
 
             mm.currentMusicTrigger = this;
@@ -40,21 +46,23 @@ public class MusicTriggerBox : MonoBehaviour {
     {
         if (mm.currentMusicTrigger != null)
         {
+            AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
+
             if (mm.currentMusicTrigger != this)
             {
-                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime);
+                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
             }
             else
             {
-                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime);
+                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
 
                 mm.currentMusicTrigger = null;
             }
         }
         else
         {
-            //This should never be called
-            mm.SwapMainTracks(mm.defaultTrackName, 1f, mm.defaultFadeTime);
+            AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
+            mm.SwapMainTracks(mm.defaultGameplayTrack, 1f, mm.defaultFadeTime, temp);
         }
     }
 }
