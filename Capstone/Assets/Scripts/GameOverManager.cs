@@ -19,7 +19,12 @@ public class GameOverManager : NetworkBehaviour {
     private int randAccolade;
 
     public GameObject[] SSModels;
-    public Transform[] PersonSpots;
+    public Transform[] onePlayerSpot;
+    public Transform[] twoPlayerSpots;
+    public Transform[] threePlayerSpots;
+    public Transform[] fourPlayerSpots;
+    public Transform[] pedalstals;
+    private Transform[] PersonSpots;
     public Transform endGameCamPos;
     public GameObject endGameUICanvas;
     public float waitTimeOnPerson = 3f;
@@ -54,9 +59,24 @@ public class GameOverManager : NetworkBehaviour {
 
     public void EndGame()
     {
-        this.playerList = GameManager.instance.playerList;
-        finalScorePlayerList = new PlayerClass[playerList.Count];
-        OrderPlayersBasedOnScore();
+        //this.playerList = GameManager.instance.playerList;
+        //finalScorePlayerList = new PlayerClass[playerList.Count];
+        //OrderPlayersBasedOnScore();
+        SetPersonSpots();
+        //CmdEndGame();
+        StartCoroutine(SetUpWinScene());
+    }
+
+    private void SetPersonSpots()
+    {
+        if (gm.playerList.Count == 1)
+            PersonSpots = onePlayerSpot;
+        else if (gm.playerList.Count == 2)
+            PersonSpots = twoPlayerSpots;
+        else if (gm.playerList.Count == 3)
+            PersonSpots = threePlayerSpots;
+        else
+            PersonSpots = fourPlayerSpots;
     }
 
     private void OrderPlayersBasedOnScore()
@@ -87,12 +107,14 @@ public class GameOverManager : NetworkBehaviour {
     [Command]
     private void CmdEndGame()
     {
+        Debug.Log("IN CMD NDSIAPNDISAPNDPISA");
         RpcEndGame();
     }
 
     [ClientRpc]
     private void RpcEndGame()
     {
+        Debug.Log("IN RPC NIDASNDIA)SNDIANDI)A");
         StartCoroutine(SetUpWinScene());
     }
 
@@ -110,11 +132,12 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 1f)
             yield return null;
 
-        for (int x = 0; x < finalScorePlayerList.Length; x++)
+        //Clients dont get placed, error with CmdStopAllSFX (maybe? double check)
+        for (int x = 0; x < gm.playerList.Count; x++)
         {
-            GameObject g = finalScorePlayerList[x].playerGO;
+            GameObject g = gm.playerList[x].playerGO;
             g.GetComponent<net_PlayerController>().enabled = false;
-            g.GetComponent<NetworkSoundController>().CmdStopAllSFX();
+            //g.GetComponent<NetworkSoundController>().CmdStopAllSFX();
             g.GetComponent<winScenePlayerController>().enabled = true;
             g.transform.position = PersonSpots[x].position;
             g.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -130,7 +153,13 @@ public class GameOverManager : NetworkBehaviour {
 
         FadeManager.instance.CanvasGroupON(fadeBackground, false, false);
 
-        StartCoroutine(WinSceneAnimation());
+        FadeManager.instance.FadeOut(fadeBackground, 1f);
+        saveTime = Time.time;
+        while (Time.time < saveTime + 1f)
+            yield return null;
+
+        FadeManager.instance.CanvasGroupOFF(fadeBackground, false, false);
+        //StartCoroutine(WinSceneAnimation());
     }
 
     private IEnumerator WinSceneAnimation()
@@ -219,13 +248,6 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 1f)
             yield return null;
 
-        //if (isServer)
-        //{
-        //    NetworkServer.Shutdown();
-        //    MasterServer.UnregisterHost();
-        //    SceneManager.LoadScene(0);
-        //}
-
         if(LobbyManager.IsLocalPlayerHost())
         {
             LobbyManager.s_Singleton.StopHost();
@@ -234,8 +256,6 @@ public class GameOverManager : NetworkBehaviour {
         {
             LobbyManager.s_Singleton.StopClient();
         }
-
-        //Application.Quit(); //TEMPORARY
     }
 
     [Command]
