@@ -36,10 +36,7 @@ public class GameOverManager : NetworkBehaviour {
     //private List<Transform> PersonSpots = new List<Transform>();
     private List<PlayerClass> playerList = new List<PlayerClass>();
     private PlayerClass[] finalScorePlayerList;
-    public TextMeshProUGUI playerScore;
-    public TextMeshProUGUI playerStat;
-    public CanvasGroup playerScoreCG;
-    public CanvasGroup playerStatCG;
+    public CanvasGroup[] endPlayerUIs;
     public CanvasGroup fadeBackground;
 
     // Use this for initialization
@@ -123,8 +120,9 @@ public class GameOverManager : NetworkBehaviour {
         gm.endGame = true;
         mainCam = Camera.main;
 
-        FadeManager.instance.CanvasGroupOFF(playerScoreCG, false, false);
-        FadeManager.instance.CanvasGroupOFF(playerStatCG, false, false);
+        foreach(CanvasGroup c in endPlayerUIs)
+            FadeManager.instance.CanvasGroupOFF(c, false, false);
+
         endGameUICanvas.SetActive(true);
 
         FadeManager.instance.FadeIn(fadeBackground, 1f);
@@ -173,7 +171,7 @@ public class GameOverManager : NetworkBehaviour {
 
         for (int x = 0; x < playerList.Count; x++)
         {
-            playerScore.text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
+            endPlayerUIs[x].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
             string title = "";
             if (x == playerList.Count - 1)
             {
@@ -212,31 +210,7 @@ public class GameOverManager : NetworkBehaviour {
                 }
             }
 
-            playerStat.text = title;
-
-            //Move Camera into position
-            mainCam.transform.DOMoveX(PersonSpots[x].transform.position.x, 1f);
-            saveTime = Time.time;
-            while (Time.time < saveTime + 1f)
-                yield return null;
-
-            //Fade in stats
-            FadeManager.instance.FadeIn(playerScoreCG, 0.5f);
-            saveTime = Time.time;
-            while (Time.time < saveTime + 0.5f)
-                yield return null;
-
-            FadeManager.instance.FadeIn(playerStatCG, 0.5f);
-            saveTime = Time.time;
-            while (Time.time < saveTime + 0.5f + waitTimeOnPerson) //Wait On Player
-                yield return null;
-
-            //Fade Out Stats
-            FadeManager.instance.FadeOut(playerScoreCG, 0.5f);
-            FadeManager.instance.FadeOut(playerStatCG, 0.5f);
-            saveTime = Time.time;
-            while (Time.time < saveTime + 1f) //0.5f delay before camera move
-                yield return null;
+            endPlayerUIs[x].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = title;
         }
 
         saveTime = Time.time;
