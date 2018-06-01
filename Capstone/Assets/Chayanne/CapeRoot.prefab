@@ -147,6 +147,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -162,6 +163,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -179,8 +181,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00033569336, y: 0.06487203, z: -0.02417183}
-    m_Extent: {x: 0.06313919, y: 0.04645543, z: 0.0577015}
+    m_Center: {x: 0.00034333422, y: 0.06487194, z: -0.024172893}
+    m_Extent: {x: 0.063137196, y: 0.04645546, z: 0.057701476}
   m_DirtyAABB: 0
 --- !u!183 &183287150099947496
 Cloth:
@@ -201,7 +203,6 @@ Cloth:
   m_Friction: 0.5
   m_CollisionMassScale: 0.23
   m_UseContinuousCollision: 0
-  m_UseVirtualParticles: 0
   m_SolverFrequency: 250
   m_SleepThreshold: 0
   m_Coefficients:
@@ -2787,3 +2788,14 @@ Cloth:
     collisionSphereDistance: 3.4028235e+38
   m_CapsuleColliders: []
   m_SphereColliders: []
+  m_SelfCollisionDistance: 0
+  m_SelfCollisionStiffness: 1
+  m_SelfAndInterCollisionIndices: 
+  m_VirtualParticleWeights:
+  - {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  - {x: 0.6666667, y: 0.16666667, z: 0.16666667}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  - {x: 0.6666667, y: 0.16666667, z: 0.16666667}
+  - {x: 0.5, y: 0.5, z: 0}
+  m_VirtualParticleIndices: 

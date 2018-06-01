@@ -24,17 +24,17 @@ public class GameOverManager : NetworkBehaviour {
     public Transform[] threePlayerSpots;
     public Transform[] fourPlayerSpots;
     public Transform[] pedalstals;
+    public float[] pedalstalHeights;
     private Transform[] PersonSpots;
     public Transform endGameCamPos;
     public GameObject endGameUICanvas;
-    public float waitTimeOnPerson = 3f;
+    public float leadUpWaitTime = 5f;
+    public float pedalstalGrowTime = 2f;
 
     private GameManager gm;
 
     private Camera mainCam;
 
-    //private List<Transform> PersonSpots = new List<Transform>();
-    private List<PlayerClass> playerList = new List<PlayerClass>();
     private PlayerClass[] finalScorePlayerList;
     public CanvasGroup[] endPlayerUIs;
     public CanvasGroup fadeBackground;
@@ -56,11 +56,9 @@ public class GameOverManager : NetworkBehaviour {
 
     public void EndGame()
     {
-        //this.playerList = GameManager.instance.playerList;
-        //finalScorePlayerList = new PlayerClass[playerList.Count];
-        //OrderPlayersBasedOnScore();
+        finalScorePlayerList = new PlayerClass[gm.playerList.Count];
+        OrderPlayersBasedOnScore();
         SetPersonSpots();
-        //CmdEndGame();
         StartCoroutine(SetUpWinScene());
     }
 
@@ -98,7 +96,7 @@ public class GameOverManager : NetworkBehaviour {
             finalScorePlayerList[index + 1] = tempPC;
         }
 
-        CmdEndGame();
+        //CmdEndGame();
     }
 
     [Command]
@@ -157,7 +155,7 @@ public class GameOverManager : NetworkBehaviour {
             yield return null;
 
         FadeManager.instance.CanvasGroupOFF(fadeBackground, false, false);
-        //StartCoroutine(WinSceneAnimation());
+        StartCoroutine(WinSceneAnimation());
     }
 
     private IEnumerator WinSceneAnimation()
@@ -169,11 +167,11 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 1f)
             yield return null;
 
-        for (int x = 0; x < playerList.Count; x++)
+        for (int x = 0; x < gm.playerList.Count; x++)
         {
             endPlayerUIs[x].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
             string title = "";
-            if (x == playerList.Count - 1)
+            if (x == gm.playerList.Count - 1)
             {
                 if (isServer)
                 {
@@ -212,9 +210,33 @@ public class GameOverManager : NetworkBehaviour {
 
             endPlayerUIs[x].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = title;
         }
+        
+        //drumroll music
+        saveTime = Time.time; //Time from the start of the animation, until winner is revealed
+        while (Time.time < saveTime + leadUpWaitTime)
+            yield return null;
 
-        saveTime = Time.time;
-        while (Time.time < saveTime + 4f)
+        //winning music
+        for(int x = 0; x < gm.playerList.Count; x++)
+        {
+            pedalstals[x].transform.position = new Vector3(finalScorePlayerList[x].playerGO.transform.position.x, pedalstals[x].transform.position.y, finalScorePlayerList[x].playerGO.transform.position.z);
+            pedalstals[x].DOScaleY(pedalstalHeights[x], pedalstalGrowTime);
+            gm.playerList[x].playerGO.transform.DOMoveY(gm.playerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2), pedalstalGrowTime);
+        }
+
+        saveTime = Time.time; //Time it takes the pedastals to grow
+        while (Time.time < saveTime + pedalstalGrowTime)
+            yield return null;
+
+        for(int x = 0; x < gm.playerList.Count; x++)
+        {
+            FadeManager.instance.FadeIn(endPlayerUIs[x], 1f, 1f);
+            endPlayerUIs[x].transform.position = new Vector3(pedalstals[x].transform.position.x, endPlayerUIs[x].transform.position.y, endPlayerUIs[x].transform.position.z);
+        }
+
+
+        saveTime = Time.time; //Time from end of animation until the game auto sends you to the menu
+        while (Time.time < saveTime + 15f)
             yield return null;
 
         FadeManager.instance.FadeIn(fadeBackground, 1f);

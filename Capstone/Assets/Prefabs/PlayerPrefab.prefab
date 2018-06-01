@@ -16420,8 +16420,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00033569336, y: 0.06487203, z: -0.02417183}
-    m_Extent: {x: 0.06313919, y: 0.04645543, z: 0.0577015}
+    m_Center: {x: 0.00034333422, y: 0.06487194, z: -0.024172893}
+    m_Extent: {x: 0.063137196, y: 0.04645546, z: 0.057701476}
   m_DirtyAABB: 0
 --- !u!143 &143200556180259018
 CharacterController:
@@ -49112,7 +49112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -960, y: -2156.463}
   m_SizeDelta: {x: 1200, y: 525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224725221201019922
