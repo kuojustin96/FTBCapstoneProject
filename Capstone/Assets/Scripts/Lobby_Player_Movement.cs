@@ -208,6 +208,9 @@ public class Lobby_Player_Movement : NetworkBehaviour
     [ClientRpc]
     public void RpcAnimateCharacter(float x, float y, bool jump, bool glide)
     {
+
+        if (!anim)
+            return;
         anim.SetFloat("Horizontal", x);
 
         anim.SetFloat("Vertical", y);

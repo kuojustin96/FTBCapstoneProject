@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkParticleController : NetworkBehaviour {
+public class NetworkParticleController : NetworkBehaviour
+{
 
     private ObjectPoolManager opm;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         opm = ObjectPoolManager.instance;
-	}
+    }
 
     [Command]
     public void CmdPlayParticleEffect(string name, GameObject parent, Vector3 position, float size)
@@ -23,7 +25,10 @@ public class NetworkParticleController : NetworkBehaviour {
     {
         StartCoroutine(PlayParticleEffect(name, parent, position, size));
     }
-
+    public void PlayParticleEffectLocal(string name, GameObject parent, Vector3 position, float size)
+    {
+        StartCoroutine(PlayParticleEffect(name, parent, position, size));
+    }
     private IEnumerator PlayParticleEffect(string name, GameObject parent, Vector3 position, float size)
     {
         GameObject g = ObjectPoolManager.instance.SpawnObject(name, size);

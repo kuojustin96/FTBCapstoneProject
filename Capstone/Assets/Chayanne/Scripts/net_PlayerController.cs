@@ -233,7 +233,7 @@ namespace jkuo
                 anim.SetFloat("Vertical", x);
                 anim.SetFloat("Horizontal", y);
                 anim.SetBool("IsGrounded", isGrounded);
-                //animateCharacter(x, y, isGrounded);
+                animateCharacter(x, y, isGrounded,isGliding);
 
                 //velocity = (moveHori + moveVert) * speed;
 

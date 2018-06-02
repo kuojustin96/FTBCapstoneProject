@@ -24,10 +24,21 @@ public class NetworkSoundController : NetworkBehaviour {
         sfm.PlaySFX(sfxName, audioObject, volume, canHaveMultiple);
     }
 
+    public void PlaySFXLocal(string sfxName, GameObject audioObject, float volume, bool canHaveMultiple)
+    {
+        sfm.PlaySFX(sfxName, audioObject, volume, canHaveMultiple);
+    }
+
+
     [Command]
     public void CmdStopSFX(string sfxName)
     {
         RpcStopSFX(sfxName);
+    }
+
+    public void StopSFXLocal(string sfxName)
+    {
+        sfm.StopSFX(sfxName);
     }
 
     [ClientRpc]

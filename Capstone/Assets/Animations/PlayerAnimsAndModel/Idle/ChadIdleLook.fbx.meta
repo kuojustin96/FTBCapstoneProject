@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 47d4d6e59ec3e8243ad75676d79d1ee6
+timeCreated: 1527897562
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Head
+    100004: ikHandle1
+    100006: ikHandle2
+    100008: ikHandle3
+    100010: ikHandle4
+    100012: Left_Leg_Ankle
+    100014: Left_Leg_Hip
+    100016: Left_Leg_Knee
+    100018: Left_Leg_Toe
+    100020: LeftAnkle_Twist_Move
+    100022: LeftToe_Move
+    100024: Right_Leg_Ankle
+    100026: Right_Leg_Hip
+    100028: Right_Leg_Knee
+    100030: Right_Leg_Toe
+    100032: RightAnkle_Twist_Move
+    100034: RightToe_Move
+    100036: Spine_Mid
+    100038: Spine_Root
+    100040: SpineTwist
+    400000: //RootNode
+    400002: Head
+    400004: ikHandle1
+    400006: ikHandle2
+    400008: ikHandle3
+    400010: ikHandle4
+    400012: Left_Leg_Ankle
+    400014: Left_Leg_Hip
+    400016: Left_Leg_Knee
+    400018: Left_Leg_Toe
+    400020: LeftAnkle_Twist_Move
+    400022: LeftToe_Move
+    400024: Right_Leg_Ankle
+    400026: Right_Leg_Hip
+    400028: Right_Leg_Knee
+    400030: Right_Leg_Toe
+    400032: RightAnkle_Twist_Move
+    400034: RightToe_Move
+    400036: Spine_Mid
+    400038: Spine_Root
+    400040: SpineTwist
+    4300000: pSphere11
+    7400000: ChadLooking
+    9500000: //RootNode
+    11400000: //RootNode
+    11400002: //RootNode
+    11400004: Head
+    11400006: ikHandle1
+    11400008: ikHandle2
+    11400010: ikHandle3
+    11400012: ikHandle4
+    11400014: Left_Leg_Ankle
+    11400016: Left_Leg_Hip
+    11400018: Left_Leg_Knee
+    11400020: Left_Leg_Toe
+    11400022: LeftAnkle_Twist_Move
+    11400024: LeftToe_Move
+    11400026: Right_Leg_Ankle
+    11400028: Right_Leg_Hip
+    11400030: Right_Leg_Knee
+    11400032: Right_Leg_Toe
+    11400034: RightAnkle_Twist_Move
+    11400036: RightToe_Move
+    11400038: Spine_Mid
+    11400040: Spine_Root
+    11400042: SpineTwist
+    13700000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: ChadLooking
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 57
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
