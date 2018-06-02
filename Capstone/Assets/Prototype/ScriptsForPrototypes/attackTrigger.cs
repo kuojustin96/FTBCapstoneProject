@@ -6,19 +6,35 @@ using UnityEngine.Networking;
 using jkuo;
 public class attackTrigger : NetworkBehaviour {
 	PlayerClass player;
+    public GameObject parentPlayer;
     public float stunDuration = 4f;
     public ParticleSystem slashParticle;
+    public ParticleSystem Explosion;
+    public ParticleSystem shards;
     void OnEnable() { 
             Debug.Log ("triggerActive");
 		}
-	
-		void OnTriggerEnter(Collider other){
+    private void Start()
+    {
+        slashParticle.Play();
+        Invoke("lateDestroy", 2f);
+    }
+
+    void OnTriggerEnter(Collider other){
 			
 				if (other.tag == "NetPlayer"){
 				Debug.Log(other);
 				GameObject x = other.gameObject;
-                slashParticle.Play();
-				stun (x);
+                
+            if (x != parentPlayer)
+            {
+                stun(x);
+                Explosion.transform.position = other.transform.position;
+                shards.transform.position = other.transform.position;
+                Explosion.Play();
+                shards.Play();
+            }
+            
 			
 			//Destroy (gameObject);
 				}
@@ -32,7 +48,7 @@ public class attackTrigger : NetworkBehaviour {
 		}
 	public void lateDestroy(){
 
-		//Destroy (gameObject);
+		Destroy (gameObject);
 	}
 }
 
