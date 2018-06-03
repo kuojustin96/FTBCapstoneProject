@@ -125,7 +125,7 @@ public class GameOverManager : NetworkBehaviour {
 
         FadeManager.instance.FadeIn(fadeBackground, 1f);
         float saveTime = Time.time;
-        while (Time.time < saveTime + 1f)
+        while (Time.time < saveTime + 3f)
             yield return null;
 
         //Clients dont get placed, error with CmdStopAllSFX (maybe? double check)
@@ -155,6 +155,7 @@ public class GameOverManager : NetworkBehaviour {
             yield return null;
 
         FadeManager.instance.CanvasGroupOFF(fadeBackground, false, false);
+      
         StartCoroutine(WinSceneAnimation());
     }
 
@@ -167,48 +168,40 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 1f)
             yield return null;
 
-        for (int x = 0; x < gm.playerList.Count; x++)
+        for (int x = 0; x < finalScorePlayerList.Length; x++)
         {
-            endPlayerUIs[x].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
+            //endPlayerUIs[x].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
             string title = "";
             if (x == gm.playerList.Count - 1)
             {
-                if (isServer)
-                {
-                    randAccolade = Random.Range(0, WinnerAccolades.Length);
-                    CmdSyncRand(randAccolade);
-                }
+                randAccolade = Random.Range(0, WinnerAccolades.Length);
+                //CmdSyncRand(randAccolade);
                 title = WinnerAccolades[randAccolade];
-            }
+                SetText(title, x);
+        }
             else if (x == 0)
             {
-                if (isServer)
-                {
-                    randAccolade = Random.Range(0, LastPlaceAccolades.Length);
-                    CmdSyncRand(randAccolade);
-                }
+                randAccolade = Random.Range(0, LastPlaceAccolades.Length);
+                //CmdSyncRand(randAccolade);
                 title = LastPlaceAccolades[randAccolade];
-            }
+                SetText(title, x);
+        }
             else
             {
                 bool picking = true;
                 while (picking)
                 {
-                    if (isServer)
-                    {
-                        randAccolade = Random.Range(0, MiddlePlaceAccolades.Length);
-                        CmdSyncRand(randAccolade);
-                    }
+                    randAccolade = Random.Range(0, MiddlePlaceAccolades.Length);
+                    //CmdSyncRand(randAccolade);
                     if (randAccolade != middlePlaceTemp)
                     {
                         middlePlaceTemp = randAccolade;
                         title = MiddlePlaceAccolades[randAccolade];
+                        SetText(title, x);
                         picking = false;
                     }
                 }
             }
-
-            endPlayerUIs[x].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = title;
         }
         
         //drumroll music
@@ -221,7 +214,7 @@ public class GameOverManager : NetworkBehaviour {
         {
             pedalstals[x].transform.position = new Vector3(finalScorePlayerList[x].playerGO.transform.position.x, pedalstals[x].transform.position.y, finalScorePlayerList[x].playerGO.transform.position.z);
             pedalstals[x].DOScaleY(pedalstalHeights[x], pedalstalGrowTime);
-            gm.playerList[x].playerGO.transform.DOMoveY(gm.playerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2), pedalstalGrowTime);
+            finalScorePlayerList[x].playerGO.transform.DOMoveY(finalScorePlayerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2), pedalstalGrowTime);
         }
 
         saveTime = Time.time; //Time it takes the pedastals to grow
@@ -257,6 +250,7 @@ public class GameOverManager : NetworkBehaviour {
     [Command]
     private void CmdSyncRand(int rand)
     {
+        randAccolade = rand;
         RpcSyncRand(rand);
     }
 
@@ -264,5 +258,25 @@ public class GameOverManager : NetworkBehaviour {
     private void RpcSyncRand(int rand)
     {
         randAccolade = rand;
+    }
+
+    [Command]
+    private void CmdText(string randAccolade, int playerNum)
+    {
+        endPlayerUIs[playerNum].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randAccolade + "\n" + finalScorePlayerList[playerNum].playerName + "\n" + finalScorePlayerList[playerNum].currentPlayerScore;
+        RpcText(randAccolade, playerNum);
+    }
+
+    [ClientRpc]
+    private void RpcText(string randAccolade, int playerNum)
+    {
+        endPlayerUIs[playerNum].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randAccolade + "\n" + finalScorePlayerList[playerNum].playerName + "\n" + finalScorePlayerList[playerNum].currentPlayerScore;
+        SetText(randAccolade, playerNum);
+    }
+
+    private void SetText(string randAccolade, int playerNum)
+    {
+        Debug.Log(randAccolade);
+        endPlayerUIs[playerNum].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randAccolade + "\n" + finalScorePlayerList[playerNum].playerName + "\n" + finalScorePlayerList[playerNum].currentPlayerScore;
     }
 }
