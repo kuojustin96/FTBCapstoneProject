@@ -42,7 +42,7 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 1
+      intensity: 3.4
       radius: 1
       sampleCount: 10
       downsampling: 0
@@ -69,13 +69,13 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      focusDistance: 10
-      aperture: 5.6
-      focalLength: 50
+      focusDistance: 11.7
+      aperture: 5.1
+      focalLength: 80
       useCameraFov: 0
-      kernelSize: 1
+      kernelSize: 2
   motionBlur:
     m_Enabled: 0
     m_Settings:
@@ -85,25 +85,25 @@ MonoBehaviour:
   eyeAdaptation:
     m_Enabled: 0
     m_Settings:
-      lowPercent: 45
+      lowPercent: 1
       highPercent: 95
-      minLuminance: -5
-      maxLuminance: 1
+      minLuminance: -3.44
+      maxLuminance: 9.23
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
       speedUp: 2
       speedDown: 1
-      logMin: -8
-      logMax: 4
+      logMin: -2
+      logMax: 16
   bloom:
     m_Enabled: 0
     m_Settings:
       bloom:
-        intensity: 1.01
+        intensity: 0.35
         threshold: 1.08
         softKnee: 1
-        radius: 2.73
+        radius: 2.25
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
