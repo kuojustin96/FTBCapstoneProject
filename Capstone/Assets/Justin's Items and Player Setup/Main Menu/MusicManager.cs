@@ -53,6 +53,8 @@ public class MusicManager : MonoBehaviour {
         PlayMainTrack(defaultLobbyTrack, 0, 0.4f);
     }
 
+
+
     void Start()
     {
         mainTrackAuds.loop = true;
@@ -62,6 +64,13 @@ public class MusicManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+        //chayannes temp fix
+        if (!GetComponent<AudioSource>())
+            mainTrackAuds = gameObject.AddComponent<AudioSource>();
+        else
+            mainTrackAuds = GetComponent<AudioSource>();
+
         if (scene.buildIndex == 1) {
             StopMainTrack(0);
 

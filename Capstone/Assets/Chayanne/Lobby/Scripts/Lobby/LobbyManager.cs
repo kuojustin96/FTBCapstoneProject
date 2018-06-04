@@ -97,13 +97,13 @@ namespace Prototype.NetworkLobby
 
         public static bool IsPlayScene()
         {
-            return SceneManager.GetActiveScene().name == LobbyManager.s_Singleton.playScene;
+            return SceneManager.GetActiveScene().name == s_Singleton.playScene;
         }
 
 
         public static bool IsLobbyScene()
         {
-            return SceneManager.GetActiveScene().name == LobbyManager.s_Singleton.lobbyScene;
+            return SceneManager.GetActiveScene().name == s_Singleton.lobbyScene;
         }
 
         public string GetLocalPlayerName()

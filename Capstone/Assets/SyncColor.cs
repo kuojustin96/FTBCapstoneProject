@@ -48,12 +48,14 @@ public class SyncColor : MonoBehaviour
         {
             if (lobbyPlayer)
             {
-                r.material.color = lobbyPlayer.playerColor;
+                if(r)
+                    r.material.color = lobbyPlayer.playerColor;
 
             }
             else if(profile)
             {
-                r.material.color = profile.PlayerColor;
+                if (r)
+                    r.material.color = profile.PlayerColor;
 
             }
         }
