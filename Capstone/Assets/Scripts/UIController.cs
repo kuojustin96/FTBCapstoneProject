@@ -169,6 +169,8 @@ public class UIController : NetworkBehaviour {
 
         UpdateMaxBackpackScore(maxBackpackScore);
 
+        OpenCraftingUI.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
         Cursor.lockState = CursorLockMode.Locked;
         Vector2 hotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
         Cursor.SetCursor(cursorTexture, hotSpot, CursorMode.ForceSoftware);

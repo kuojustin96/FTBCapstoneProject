@@ -89,6 +89,9 @@ public class MainMenuManager : MonoBehaviour {
             sfm = SoundEffectManager.instance;
         }
 
+        if (mm == null)
+            mm = MusicManager.instance;
+
         Initialize();
 
         //Chayanne's Preference saving code
@@ -387,6 +390,7 @@ public class MainMenuManager : MonoBehaviour {
             if (!isCreditsPlaying)
             {
                 creditsCoroutine = StartCoroutine(c_OpenCredits());
+                //Debug.Log(mm.defaultAuds);
                 mm.SwapMainTracks("OpeningMusic", 0.5f, 1, mm.defaultAuds);
             }
             else

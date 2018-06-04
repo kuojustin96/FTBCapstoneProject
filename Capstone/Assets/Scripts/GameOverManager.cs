@@ -105,6 +105,7 @@ public class GameOverManager : NetworkBehaviour {
             finalScorePlayerList[index + 1] = tempPC;
         }
 
+        System.Array.Reverse(finalScorePlayerList);
         //CmdEndGame();
     }
 
@@ -179,20 +180,20 @@ public class GameOverManager : NetworkBehaviour {
         {
             //endPlayerUIs[x].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = finalScorePlayerList[x].playerName + "\n" + finalScorePlayerList[x].currentPlayerScore;
             string title = "";
-            if (x == gm.playerList.Count - 1)
-            {
-                randAccolade = Random.Range(0, WinnerAccolades.Length);
-                //CmdSyncRand(randAccolade);
-                title = WinnerAccolades[randAccolade];
-                SetText(title, x);
-        }
-            else if (x == 0)
+            if (x == finalScorePlayerList.Length - 1)
             {
                 randAccolade = Random.Range(0, LastPlaceAccolades.Length);
                 //CmdSyncRand(randAccolade);
                 title = LastPlaceAccolades[randAccolade];
                 SetText(title, x);
-        }
+            }
+            else if (x == 0)
+            {
+                randAccolade = Random.Range(0, WinnerAccolades.Length);
+                //CmdSyncRand(randAccolade);
+                title = WinnerAccolades[randAccolade];
+                SetText(title, x);
+            }
             else
             {
                 bool picking = true;
