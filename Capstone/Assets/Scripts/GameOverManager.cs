@@ -26,6 +26,7 @@ public class GameOverManager : NetworkBehaviour {
     public Transform[] pedalstals;
     public float[] pedalstalHeights;
     private Transform[] PersonSpots;
+    public GameObject winnerParticles;
     public Transform endGameCamPos;
     public GameObject endGameUICanvas;
     public float leadUpWaitTime = 5f;
@@ -224,9 +225,11 @@ public class GameOverManager : NetworkBehaviour {
         for(int x = 0; x < gm.playerList.Count; x++)
         {
             FadeManager.instance.FadeIn(endPlayerUIs[x], 1f, 1f);
-            endPlayerUIs[x].transform.position = new Vector3(pedalstals[x].transform.position.x, endPlayerUIs[x].transform.position.y, endPlayerUIs[x].transform.position.z);
+            endPlayerUIs[x].transform.position = new Vector3(pedalstals[x].transform.position.x, finalScorePlayerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2) + 10, endPlayerUIs[x].transform.position.z);
         }
 
+        winnerParticles.transform.position = new Vector3(finalScorePlayerList[0].playerGO.transform.position.x, finalScorePlayerList[0].playerGO.transform.position.y, finalScorePlayerList[0].playerGO.transform.position.z - 5);
+        winnerParticles.SetActive(true);
 
         saveTime = Time.time; //Time from end of animation until the game auto sends you to the menu
         while (Time.time < saveTime + 15f)
