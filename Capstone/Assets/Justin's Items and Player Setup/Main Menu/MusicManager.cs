@@ -64,7 +64,6 @@ public class MusicManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
         //chayannes temp fix
         if (!GetComponent<AudioSource>())
             mainTrackAuds = gameObject.AddComponent<AudioSource>();
@@ -72,7 +71,7 @@ public class MusicManager : MonoBehaviour {
             mainTrackAuds = GetComponent<AudioSource>();
 
         if (scene.buildIndex == 1) {
-            StopMainTrack(0);
+            StopMainTrack(0, defaultAuds);
 
             foreach(PlayerClass p in GameManager.instance.playerList)
             {
@@ -136,8 +135,9 @@ public class MusicManager : MonoBehaviour {
         Debug.Log("DIDN'T FIND THE SONG");
     }
 
-    public void StopMainTrack(float fadeTime)
+    public void StopMainTrack(float fadeTime, AudioSource auds)
     {
+        mainTrackAuds = auds;
         if (fadeTime != 0)
             StartCoroutine(c_FadeMainTrack(0, fadeTime, false));
         else

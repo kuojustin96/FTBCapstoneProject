@@ -44,25 +44,28 @@ public class MusicTriggerBox : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (mm.currentMusicTrigger != null)
+        if (!GameManager.instance.endGame)
         {
-            AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
-
-            if (mm.currentMusicTrigger != this)
+            if (mm.currentMusicTrigger != null)
             {
-                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
+                AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
+
+                if (mm.currentMusicTrigger != this)
+                {
+                    mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
+                }
+                else
+                {
+                    mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
+
+                    mm.currentMusicTrigger = null;
+                }
             }
             else
             {
-                mm.SwapMainTracks(mainTrackName, targetVolume, mm.defaultFadeTime, temp);
-
-                mm.currentMusicTrigger = null;
+                AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
+                mm.SwapMainTracks(mm.defaultGameplayTrack, 1f, mm.defaultFadeTime, temp);
             }
-        }
-        else
-        {
-            AudioSource temp = other.transform.root.GetComponent<LocalMusicManager>().mainTrackAuds;
-            mm.SwapMainTracks(mm.defaultGameplayTrack, 1f, mm.defaultFadeTime, temp);
         }
     }
 }

@@ -57,6 +57,14 @@ public class GameOverManager : NetworkBehaviour {
 
     public void EndGame()
     {
+        gm.endGame = true;
+
+        foreach (PlayerClass pc in gm.playerList)
+        {
+            AudioSource temp = pc.playerGO.GetComponent<AudioSource>();
+            MusicManager.instance.StopMainTrack(0.75f, temp);
+        }
+
         finalScorePlayerList = new PlayerClass[gm.playerList.Count];
         OrderPlayersBasedOnScore();
         SetPersonSpots();
@@ -116,7 +124,6 @@ public class GameOverManager : NetworkBehaviour {
 
     private IEnumerator SetUpWinScene()
     {
-        gm.endGame = true;
         mainCam = Camera.main;
 
         foreach(CanvasGroup c in endPlayerUIs)
@@ -129,12 +136,10 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 3f)
             yield return null;
 
-        //Clients dont get placed, error with CmdStopAllSFX (maybe? double check)
         for (int x = 0; x < gm.playerList.Count; x++)
         {
             GameObject g = gm.playerList[x].playerGO;
             g.GetComponent<net_PlayerController>().enabled = false;
-            //g.GetComponent<NetworkSoundController>().CmdStopAllSFX();
             g.GetComponent<winScenePlayerController>().enabled = true;
             g.transform.position = PersonSpots[x].position;
             g.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -150,6 +155,12 @@ public class GameOverManager : NetworkBehaviour {
 
         FadeManager.instance.CanvasGroupON(fadeBackground, false, false);
 
+        foreach (PlayerClass pc in gm.playerList)
+        {
+            AudioSource temp = pc.playerGO.GetComponent<AudioSource>();
+            MusicManager.instance.SwapMainTracks("WinBuildUp", 0.4f, 0.5f, temp);
+        }
+
         FadeManager.instance.FadeOut(fadeBackground, 1f);
         saveTime = Time.time;
         while (Time.time < saveTime + 1f)
@@ -163,11 +174,6 @@ public class GameOverManager : NetworkBehaviour {
     private IEnumerator WinSceneAnimation()
     {
         int middlePlaceTemp = -1;
-        FadeManager.instance.FadeOut(fadeBackground, 1f);
-
-        float saveTime = Time.time;
-        while (Time.time < saveTime + 1f)
-            yield return null;
 
         for (int x = 0; x < finalScorePlayerList.Length; x++)
         {
@@ -206,8 +212,8 @@ public class GameOverManager : NetworkBehaviour {
         }
         
         //drumroll music
-        saveTime = Time.time; //Time from the start of the animation, until winner is revealed
-        while (Time.time < saveTime + leadUpWaitTime)
+        float saveTime = Time.time; //Time from the start of the animation, until winner is revealed
+        while (Time.time < saveTime + (leadUpWaitTime - pedalstalGrowTime))
             yield return null;
 
         //winning music
@@ -226,6 +232,8 @@ public class GameOverManager : NetworkBehaviour {
         {
             FadeManager.instance.FadeIn(endPlayerUIs[x], 1f, 1f);
             endPlayerUIs[x].transform.position = new Vector3(pedalstals[x].transform.position.x, finalScorePlayerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2) + 10, endPlayerUIs[x].transform.position.z);
+            AudioSource temp = finalScorePlayerList[x].playerGO.GetComponent<AudioSource>();
+            MusicManager.instance.SwapMainTracks("WinMusicLoop", 1f, 1f, temp);
         }
 
         winnerParticles.transform.position = new Vector3(finalScorePlayerList[0].playerGO.transform.position.x, finalScorePlayerList[0].playerGO.transform.position.y, finalScorePlayerList[0].playerGO.transform.position.z - 5);
@@ -240,6 +248,8 @@ public class GameOverManager : NetworkBehaviour {
         while (Time.time < saveTime + 1f)
             yield return null;
 
+        ResetPlayers();
+
         if(LobbyManager.IsLocalPlayerHost())
         {
             LobbyManager.s_Singleton.StopHost();
@@ -247,6 +257,26 @@ public class GameOverManager : NetworkBehaviour {
         else
         {
             LobbyManager.s_Singleton.StopClient();
+        }
+    }
+
+    private void ResetPlayers()
+    {
+        for (int x = 0; x < gm.playerList.Count; x++)
+        {
+            GameObject g = gm.playerList[x].playerGO;
+            g.GetComponent<net_PlayerController>().enabled = true;
+            g.GetComponent<winScenePlayerController>().enabled = false;
+            //g.transform.position = PersonSpots[x].position;
+            g.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            g.transform.rotation = Quaternion.LookRotation(Vector3.back);
+
+            Net_Camera_Singleton.instance.GetCamera().enabled = true;
+            //Camera.main.transform.position = endGameCamPos.position;
+            //Camera.main.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+            Cursor.visible = true;
+
+            g.GetComponent<UIController>().UICanvas.SetActive(true);
         }
     }
 
@@ -279,7 +309,6 @@ public class GameOverManager : NetworkBehaviour {
 
     private void SetText(string randAccolade, int playerNum)
     {
-        Debug.Log(randAccolade);
         endPlayerUIs[playerNum].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randAccolade + "\n" + finalScorePlayerList[playerNum].playerName + "\n" + finalScorePlayerList[playerNum].currentPlayerScore;
     }
 }
