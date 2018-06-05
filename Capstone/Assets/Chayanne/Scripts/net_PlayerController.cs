@@ -370,6 +370,7 @@ namespace jkuo
                 {
                     Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
                     netparticle.CmdPlayParticleEffect("Walk Particle", gameObject, pos, 5f);
+                    SoundEffectManager.instance.PlaySFX("Jump", gameObject, 0.3f);
                 }
                     
 
@@ -397,7 +398,7 @@ namespace jkuo
                     isGliding = true;
                     CmdPlayGlideParticle();
                     nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, false);
-                    SoundEffectManager.instance.PlaySFX("Glide Boost", gameObject, 0.3f);
+                    SoundEffectManager.instance.PlaySFX("Jump", gameObject, 0.3f);
                 }
 
 
