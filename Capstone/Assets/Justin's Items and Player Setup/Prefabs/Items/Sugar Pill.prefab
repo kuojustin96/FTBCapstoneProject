@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 136815017182049112}
   - component: {fileID: 23265514476104262}
   - component: {fileID: 114021647775100978}
-  - component: {fileID: 114094350021304980}
-  - component: {fileID: 114458747120677264}
   m_Layer: 0
   m_Name: Sugar Pill
   m_TagString: Untagged
@@ -54,6 +52,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -69,6 +68,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -95,34 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d107887e8a0d44a88760b148e920e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114094350021304980
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1847964669528328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 
-  _referenceCollection:
-    _collection:
-    - {fileID: 1847964669528328}
-  _assetGuid: 431dda0a5803bd44ab88762691b6d007
---- !u!114 &114458747120677264
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1847964669528328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 2d6c8732-8a8e-4ce5-a1f4-73aa96f93462
 --- !u!136 &136815017182049112
 CapsuleCollider:
   m_ObjectHideFlags: 1

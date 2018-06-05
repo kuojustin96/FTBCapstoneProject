@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 65105714530401440}
   - component: {fileID: 23581770585887238}
   - component: {fileID: 114780404484910950}
-  - component: {fileID: 114964054205989468}
-  - component: {fileID: 114971317001320544}
   m_Layer: 0
   m_Name: Sugar Transport
   m_TagString: Untagged
@@ -54,6 +52,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -69,6 +68,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -107,31 +107,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d107887e8a0d44a88760b148e920e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114964054205989468
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1280847651785796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 
-  _referenceCollection:
-    _collection:
-    - {fileID: 1280847651785796}
-  _assetGuid: 73fda66846d3ec349a82e3f2b2a91898
---- !u!114 &114971317001320544
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1280847651785796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 45391245-d631-4de0-abb8-71ec570b000d

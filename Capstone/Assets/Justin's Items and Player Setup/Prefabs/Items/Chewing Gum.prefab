@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 65447277714547232}
   - component: {fileID: 23261045719190056}
   - component: {fileID: 114681218542172326}
-  - component: {fileID: 114736165526076304}
-  - component: {fileID: 114353250145645042}
   m_Layer: 2
   m_Name: Chewing Gum
   m_TagString: Untagged
@@ -54,6 +52,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -69,6 +68,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -96,18 +96,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114353250145645042
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1412247563062796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: a5458abf-7883-48c4-b57d-d6d7a043626c
 --- !u!114 &114681218542172326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,19 +107,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d107887e8a0d44a88760b148e920e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114736165526076304
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1412247563062796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 
-  _referenceCollection:
-    _collection:
-    - {fileID: 1412247563062796}
-  _assetGuid: 4cf3b7598b5868540806e1566fae42f1

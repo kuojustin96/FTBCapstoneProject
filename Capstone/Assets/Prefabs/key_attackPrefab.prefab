@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4539624544518346}
   - component: {fileID: 198243108901186036}
   - component: {fileID: 199842972164856698}
-  - component: {fileID: 114584218791077650}
   m_Layer: 0
   m_Name: slash
   m_TagString: Untagged
@@ -39,7 +38,6 @@ GameObject:
   - component: {fileID: 4097278410364690}
   - component: {fileID: 198771211933582176}
   - component: {fileID: 199304883620121814}
-  - component: {fileID: 114955018625804266}
   m_Layer: 0
   m_Name: shards
   m_TagString: Untagged
@@ -57,7 +55,6 @@ GameObject:
   - component: {fileID: 4487118745198476}
   - component: {fileID: 198255467617091716}
   - component: {fileID: 199962425132032714}
-  - component: {fileID: 114975144972350004}
   m_Layer: 0
   m_Name: blast
   m_TagString: Untagged
@@ -74,8 +71,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4654575789438598}
   - component: {fileID: 65339672410175082}
-  - component: {fileID: 114193710623043178}
-  - component: {fileID: 114397036072988210}
   - component: {fileID: 114543205823530754}
   - component: {fileID: 114801173832595924}
   m_Layer: 0
@@ -152,37 +147,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 60, y: 50, z: 100}
   m_Center: {x: 0, y: 0, z: 50}
---- !u!114 &114193710623043178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1948067022590190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 
-  _referenceCollection:
-    _collection:
-    - {fileID: 1948067022590190}
-    - {fileID: 1022186464026168}
-    - {fileID: 1885294078465582}
-    - {fileID: 1843242269760246}
-  _assetGuid: 269711f216b0e0049b89e05358659825
---- !u!114 &114397036072988210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1948067022590190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: a2046faa-0911-40f0-8c6f-da59e4f11715
 --- !u!114 &114543205823530754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,18 +179,6 @@ MonoBehaviour:
     i15: 37
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114584218791077650
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1022186464026168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 72074488-dfe9-463f-b239-4080ac9f4d33
 --- !u!114 &114801173832595924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -243,30 +195,6 @@ MonoBehaviour:
   slashParticle: {fileID: 198243108901186036}
   Explosion: {fileID: 198255467617091716}
   shards: {fileID: 198771211933582176}
---- !u!114 &114955018625804266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1843242269760246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 4d0abaec-aedd-42e9-91a5-4254f4efd649
---- !u!114 &114975144972350004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885294078465582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _guid: 2e1b8a0c-9eb4-4520-bc3b-376e7c3f414b
 --- !u!198 &198243108901186036
 ParticleSystem:
   m_ObjectHideFlags: 1

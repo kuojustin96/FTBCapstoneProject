@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 139382370}
-  m_IndirectSpecularColor: {r: 0.4125897, g: 0.43795857, b: 0.44888544, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &19848126
@@ -567,11 +567,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1534,11 +1534,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1615,8 +1615,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &425124707
@@ -5389,8 +5389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &468286961
@@ -5645,8 +5645,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &523367258
@@ -6151,6 +6151,7 @@ MonoBehaviour:
     type: 2}
   numSugarInLvl: 30
   timeBetweenSugarDrop: 0.1
+  parent: {fileID: 0}
   spawnSpots:
   - spawn: {fileID: 819243190}
     sugarBeingHeld: {fileID: 0}
@@ -7009,8 +7010,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &819243194
@@ -7996,90 +7997,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 989217224}
---- !u!1 &994680242
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 994680243}
-  - component: {fileID: 994680246}
-  - component: {fileID: 994680245}
-  - component: {fileID: 994680244}
-  m_Layer: 0
-  m_Name: Collider Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
---- !u!4 &994680243
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 994680242}
-  m_LocalRotation: {x: -0, y: -0.04687493, z: -0, w: 0.9989008}
-  m_LocalPosition: {x: 13.5, y: -0.93, z: 15.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1791834982}
-  m_RootOrder: 23
-  m_LocalEulerAnglesHint: {x: 0, y: -5.373, z: 0}
---- !u!23 &994680244
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 994680242}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &994680245
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 994680242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 19, z: 33}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &994680246
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 994680242}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &997512397
 GameObject:
   m_ObjectHideFlags: 0
@@ -8906,8 +8823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &1180787897
@@ -9376,6 +9293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd9cbfa4332d9c43a84351de1e0383b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  FaderPanel: {fileID: 0}
+  UICanvas: {fileID: 0}
   ItemTextures:
   - name: keyHolder
     texture: {fileID: 2800000, guid: 3b164b82f1054464b81392b52dbde96f, type: 3}
@@ -9399,10 +9319,27 @@ MonoBehaviour:
   IngameItemBackgroundUI: {fileID: 1399422118}
   IngameItemUI: {fileID: 1837744538}
   BackpackScore: {fileID: 1887385633}
+  StashScore: {fileID: 0}
+  ItemButtons: []
+  gameTime: {fileID: 0}
+  milisecondGameTime: {fileID: 0}
+  pauseCG: {fileID: 0}
+  masterVolSlider: {fileID: 0}
+  musicVolSlider: {fileID: 0}
+  sfxVolSlider: {fileID: 0}
+  mouseSensInput: {fileID: 0}
+  resolutionDropdown: {fileID: 0}
+  qualityDropdown: {fileID: 0}
+  windowedToggle: {fileID: 0}
+  exitToMenu: {fileID: 0}
+  exitToDesktop: {fileID: 0}
+  tickerBackgroud: {fileID: 0}
+  tickerLerpTime: 10
+  tickerTextLerpTime: 10
+  emoteUI: {fileID: 0}
+  tickerTextUI: {fileID: 0}
+  tickerText: {fileID: 0}
   UIShiftTime: 0.2
-  UIShiftSpeed: 200
-  UIScaleSpeed: 0.05
-  UIItemShiftSpeed: 1
 --- !u!114 &1197691302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12732,6 +12669,7 @@ MonoBehaviour:
     playerNum: 0
     playerGO: {fileID: 0}
     dropoffPoint: {fileID: 0}
+    inBase: 0
     playerName: 
     maxCanCarry: 10
     sugarInBackpack: 0
@@ -12745,6 +12683,9 @@ MonoBehaviour:
     craftingUIOpen: 0
     currentItem: {fileID: 0}
     currentItemString: 
+    playerPaused: 0
+    outfitNum: 0
+    sm: {fileID: 0}
 --- !u!1 &1399422116
 GameObject:
   m_ObjectHideFlags: 0
@@ -14015,8 +13956,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &1513020682
@@ -14161,90 +14102,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513056205}
---- !u!1 &1578979787
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1578979788}
-  - component: {fileID: 1578979791}
-  - component: {fileID: 1578979790}
-  - component: {fileID: 1578979789}
-  m_Layer: 0
-  m_Name: Collider Cube (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
---- !u!4 &1578979788
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1578979787}
-  m_LocalRotation: {x: -0, y: 0.6294296, z: -0, w: 0.7770576}
-  m_LocalPosition: {x: -1, y: -0.9300003, z: 27.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1791834982}
-  m_RootOrder: 24
-  m_LocalEulerAnglesHint: {x: 0, y: 78.01601, z: 0}
---- !u!23 &1578979789
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1578979787}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &1578979790
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1578979787}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 19, z: 33}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1578979791
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1578979787}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1610792772
 GameObject:
   m_ObjectHideFlags: 0
@@ -14331,8 +14188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &1610792777
@@ -14632,11 +14489,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -16863,11 +16720,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.275942, y: 31.350847, z: 21.84362}
   m_Center: {x: -8.907185, y: 10.789583, z: -10.751671}
---- !u!4 &1791834982 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4747478467435870, guid: 0cfee82da27263d4493695007ebeeb2b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1791834979}
 --- !u!1 &1791834983 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1380853993199820, guid: 0cfee82da27263d4493695007ebeeb2b,
@@ -17109,8 +16961,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &1817900236
@@ -17272,8 +17124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 0
+  enableRandomColors: 0
   SpawnTime: 5
-  curTime: 0
   sugarPrefab: {fileID: 1852602723753234, guid: d5b7904c93b308c429dbc8b24e22b55d,
     type: 2}
 --- !u!114 &1836585232
@@ -17460,9 +17312,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58fa8fafac7b52a44a6a8cc1df7e9928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sugarPickUpSpeed: 3
+  gameLength: 600
+  numSugarToWin: 50
+  sugarPickupTime: 0.5
   dropoffDelay: 0.5
   maxSugarCarry: 10
+  speedPerSugar: 0.5
+  minSpeed: 20
+  endGame: 0
   playerPrefab: {fileID: 1189846312776972, guid: 6e72f6569a41fbc4087a743f57700fca,
     type: 2}
   playerMats:
@@ -17470,18 +17327,23 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 326780a4b17cd0741a42373e2bba1ea0, type: 2}
   - {fileID: 2100000, guid: 1b33237e8f1cae24088de789a1065283, type: 2}
   - {fileID: 2100000, guid: 16306bfb4eac7fd4a89b2d1f36bfa569, type: 2}
+  fortNames: []
   DropoffPoints:
   - name: Green
     dropoffGO: {fileID: 125299457}
+    FortNamesTMP: []
     teamColor: 1
   - name: Purple
     dropoffGO: {fileID: 1625445165}
+    FortNamesTMP: []
     teamColor: 2
   - name: Yellow
     dropoffGO: {fileID: 2018636462}
+    FortNamesTMP: []
     teamColor: 3
   - name: Red
     dropoffGO: {fileID: 988965335}
+    FortNamesTMP: []
     teamColor: 0
   playerList: []
   numPlayers: 0
@@ -17777,11 +17639,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -18211,11 +18073,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 2
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
