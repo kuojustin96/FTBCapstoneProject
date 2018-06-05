@@ -8,7 +8,9 @@ public class fireAttackTrigger : NetworkBehaviour {
 	PlayerClass player;
 	public GameObject explosion;
 	public GameObject flame;
+    private NetworkSoundController nsc;
 	void Start(){
+        nsc = GetComponent<NetworkSoundController>();
 		Destroy (gameObject,5);
 	}
 
@@ -17,7 +19,7 @@ public class fireAttackTrigger : NetworkBehaviour {
 		{
 			flame.SetActive (false);
 			explosion.SetActive (true);
-			Debug.Log (other);
+            nsc.CmdPlaySFX("FireballImpact", gameObject, 1f, 200f, true, false);
 			gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 			Invoke ("destroyLate", .5f);
 		}

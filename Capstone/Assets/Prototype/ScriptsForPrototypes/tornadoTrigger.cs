@@ -7,8 +7,12 @@ public class tornadoTrigger : NetworkBehaviour {
 	public float radius = 5.0F;
 	public float power = 10.0F;
 	public GameObject parentPlayer;
-	void OnEnable()
+    private NetworkSoundController nsc;
+
+    void OnEnable()
 	{
+        nsc = GetComponent<NetworkSoundController>();
+        nsc.CmdPlaySFX("Tornado", gameObject, 1f, 400f, true, true);
 		Destroy (gameObject, 30);
 	}
 	void FixedUpdate(){
@@ -23,4 +27,9 @@ public class tornadoTrigger : NetworkBehaviour {
 			}
 		}
 	}
+
+    private void OnDestroy()
+    {
+        nsc.CmdStopSFX("Tornado", gameObject);
+    }
 }

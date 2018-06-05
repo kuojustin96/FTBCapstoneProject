@@ -13,38 +13,38 @@ public class NetworkSoundController : NetworkBehaviour {
 	}
 
     [Command]
-    public void CmdPlaySFX(string sfxName, GameObject audioObject, float volume, bool canHaveMultiple)
+    public void CmdPlaySFX(string sfxName, GameObject audioObject, float volume, float maxDistance, bool canHaveMultiple, bool looping)
     {
-        RpcPlaySFX(sfxName, audioObject, volume, canHaveMultiple);
+        RpcPlaySFX(sfxName, audioObject, volume, maxDistance, canHaveMultiple, looping);
     }
 
     [ClientRpc]
-    public void RpcPlaySFX(string sfxName, GameObject audioObject, float volume, bool canHaveMultiple)
+    public void RpcPlaySFX(string sfxName, GameObject audioObject, float volume, float maxDistance, bool canHaveMultiple, bool looping)
     {
-        sfm.PlaySFX(sfxName, audioObject, volume, canHaveMultiple);
+        sfm.PlaySFX(sfxName, audioObject, volume, maxDistance, canHaveMultiple, looping);
     }
 
-    public void PlaySFXLocal(string sfxName, GameObject audioObject, float volume, bool canHaveMultiple)
+    public void PlaySFXLocal(string sfxName, GameObject audioObject, float volume, float maxDistance, bool canHaveMultiple, bool looping)
     {
-        sfm.PlaySFX(sfxName, audioObject, volume, canHaveMultiple);
+        sfm.PlaySFX(sfxName, audioObject, volume, maxDistance, canHaveMultiple, looping);
     }
 
 
     [Command]
-    public void CmdStopSFX(string sfxName)
+    public void CmdStopSFX(string sfxName, GameObject audioObject)
     {
-        RpcStopSFX(sfxName);
+        RpcStopSFX(sfxName, audioObject);
     }
 
-    public void StopSFXLocal(string sfxName)
+    public void StopSFXLocal(string sfxName, GameObject audioObject)
     {
-        sfm.StopSFX(sfxName);
+        sfm.StopSFX(sfxName, audioObject);
     }
 
     [ClientRpc]
-    public void RpcStopSFX(string sfxName)
+    public void RpcStopSFX(string sfxName, GameObject audioObject)
     {
-        sfm.StopSFX(sfxName);
+        sfm.StopSFX(sfxName, audioObject);
     }
 
     [Command]

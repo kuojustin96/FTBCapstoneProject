@@ -225,7 +225,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public void EnterButtonHover(BaseEventData data)
     {
-        sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.2f, true);
+        sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.2f, 100f, true);
         PointerEventData d = data as PointerEventData;
         GameObject g = d.pointerEnter;
         buttonHovered = g;
@@ -238,7 +238,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if(buttonHovered != null)
         {
-            sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.2f, true);
+            sfm.PlaySFX("Sugar Pickup", Camera.main.gameObject, 0.2f, 100f, true);
             buttonHovered.transform.localScale = Vector2.one;
             buttonHovered.transform.localEulerAngles = Vector3.zero;
             buttonHovered = null;
@@ -255,7 +255,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
             if (currentPanel != optionsCanvas)
                 CloseCurrentCanvas();
 
@@ -297,7 +297,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
             if (currentPanel != playCanvas)
                 CloseCurrentCanvas();
 
@@ -309,7 +309,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
             if (currentPanel != customizeCanvas)
                 CloseCurrentCanvas();
 
@@ -383,7 +383,7 @@ public class MainMenuManager : MonoBehaviour {
         //Might need a general button check to make sure player isn't spam clicking a button
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
             if (currentPanel != creditsCanvas)
                 CloseCurrentCanvas();
 
@@ -457,7 +457,7 @@ public class MainMenuManager : MonoBehaviour {
     {
         if (!inButtonTransition)
         {
-            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+            sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
             if (currentPanel != instructionCanvas)
                 CloseCurrentCanvas();
 
@@ -519,13 +519,13 @@ public class MainMenuManager : MonoBehaviour {
 
     public void QuitGame()
     {
-        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
         Application.Quit();
     }
 
     public void ExitToMenu()
     {
-        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+        sfm.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
         Debug.Log("Disconnecting");
 
         

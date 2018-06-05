@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 114122639712638698}
   - component: {fileID: 114977768005640462}
   - component: {fileID: 135218999791416402}
+  - component: {fileID: 114873148010223790}
   m_Layer: 0
   m_Name: wind_attackInstantiate
   m_TagString: Untagged
@@ -212,6 +213,17 @@ MonoBehaviour:
     i15: 32
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114873148010223790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1474164290132800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8e541c60052c849a9ed01592edea80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114876186914697216
 MonoBehaviour:
   m_ObjectHideFlags: 1

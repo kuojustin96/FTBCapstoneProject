@@ -436,6 +436,7 @@ public class UIController : NetworkBehaviour {
         CraftingItemUI.texture = NoItemTexture;
         CraftingItemFill.fillAmount = 0f;
         CraftingItemFill.gameObject.SetActive(true);
+        SoundEffectManager.instance.PlaySFX("Crafting", gameObject);
 
         float time = Time.time;
         while(Time.time < time + CraftItemTime)
@@ -461,6 +462,7 @@ public class UIController : NetworkBehaviour {
         }
 
         sm.UpdateStat(Stats.ItemsCrafted);
+        MusicManager.instance.defaultGameplayTrack = "GroundFloorAttack";
 
         IngameItemUI.texture = TextureDict[player.currentItem.name];
         CraftingItemUI.texture = TextureDict[player.currentItem.name];

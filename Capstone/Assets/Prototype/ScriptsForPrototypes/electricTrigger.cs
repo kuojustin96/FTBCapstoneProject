@@ -8,12 +8,19 @@ using jkuo;
 public class electricTrigger : NetworkBehaviour {
 	PlayerClass player;
 	GameObject parentPlayer;
+    private NetworkSoundController nsc;
     public float stunDuration = 4f;
 
-	void OnEnable(){
+    private void Awake()
+    {
+        nsc = transform.root.GetComponent<NetworkSoundController>();
+    }
+
+    void OnEnable(){
 		player = gameObject.transform.root.gameObject.GetComponent<playerClassAdd>().player;
 		Debug.Log ("triggerActive");
 		parentPlayer = gameObject.transform.root.gameObject;
+        nsc.CmdPlaySFX("Battery", transform.root.gameObject, 1f, 100f, false, true);
 		Invoke ("lateDestroy", 30f);
 	}
 
@@ -39,9 +46,9 @@ public class electricTrigger : NetworkBehaviour {
 	public void lateDestroy(){
 
 		gameObject.SetActive (false);
-
-		//player.currentItem.SetActive (false);
-		player.currentItem = null;
+        nsc.CmdStopSFX("Battery", transform.root.gameObject);
+        //player.currentItem.SetActive (false);
+        player.currentItem = null;
 		gameObject.transform.root.gameObject.GetComponent<UIController> ().ResetUIItemTexture ();
 
 	}

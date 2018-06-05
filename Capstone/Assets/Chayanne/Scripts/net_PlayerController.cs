@@ -12,6 +12,7 @@ namespace jkuo
     {
         private UIController uic;
         private NetworkSoundController nsc;
+        private float defaultMaxDist;
         private NetworkParticleController netparticle;
         private StatManager sm;
         public CinemachineVirtualCamera virtualCam;
@@ -94,6 +95,7 @@ namespace jkuo
 
             uic = GetComponent<UIController>();
             nsc = GetComponent<NetworkSoundController>();
+            defaultMaxDist = SoundEffectManager.instance.defaultMaxDist;
             netparticle = GetComponent<NetworkParticleController>();
             sm = StatManager.instance;
 
@@ -327,7 +329,7 @@ namespace jkuo
                     if (glidingParticleEffect)
                     {
                         CmdStopGlideParticle();
-                        nsc.CmdStopSFX("Gliding");
+                        nsc.CmdStopSFX("Gliding", gameObject);
                     }
                 }
             }
@@ -370,7 +372,7 @@ namespace jkuo
                 {
                     Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
                     netparticle.CmdPlayParticleEffect("Walk Particle", gameObject, pos, 5f);
-                    SoundEffectManager.instance.PlaySFX("Jump", gameObject, 0.3f);
+                    nsc.CmdPlaySFX("Jump", gameObject, 0.3f, defaultMaxDist, true, false);
                 }
                     
 
@@ -397,8 +399,8 @@ namespace jkuo
                 {
                     isGliding = true;
                     CmdPlayGlideParticle();
-                    nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, false);
-                    SoundEffectManager.instance.PlaySFX("Jump", gameObject, 0.3f);
+                    nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, defaultMaxDist, false, false);
+                    nsc.CmdPlaySFX("Jump", gameObject, 0.3f, defaultMaxDist, true, false);
                 }
 
 
@@ -484,28 +486,28 @@ namespace jkuo
 
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    nsc.CmdPlaySFX("Angry", gameObject, 1f, false);
+                    nsc.CmdPlaySFX("Angry", gameObject, 1f, defaultMaxDist, false, false);
                     CmdEmote(0);
                     sm.UpdateStat(Stats.NumEmotesUsed);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    nsc.CmdPlaySFX("Taunt", gameObject, 1f, false);
+                    nsc.CmdPlaySFX("Taunt", gameObject, 1f, defaultMaxDist, false, false);
                     CmdEmote(1);
                     sm.UpdateStat(Stats.NumEmotesUsed);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
-                    nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
+                    nsc.CmdPlaySFX("Cheer", gameObject, 1f, defaultMaxDist, false, false);
                     CmdEmote(2);
                     sm.UpdateStat(Stats.NumEmotesUsed);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Alpha4))
                 {
-                    nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
+                    nsc.CmdPlaySFX("Cheer", gameObject, 1f, defaultMaxDist, false, false);
                     CmdEmote(3);
                     sm.UpdateStat(Stats.NumEmotesUsed);
                 }

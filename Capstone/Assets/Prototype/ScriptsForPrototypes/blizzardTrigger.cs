@@ -11,12 +11,15 @@ public class blizzardTrigger : NetworkBehaviour {
     public float stunDuration = 4f;
     public float timer;
     private float curTimer;
+    private NetworkSoundController nsc;
 
 	void OnEnable(){
 		Debug.Log ("triggerActive");
 		Invoke ("lateDestroy", 30f);
         timer = stunDuration * 2;
         curTimer = timer;
+        nsc = GetComponent<NetworkSoundController>();
+        nsc.CmdPlaySFX("Blizzard", gameObject, 1f, 400f, true, true);
 	}
 	
 	void OnTriggerStay(Collider other){
@@ -44,9 +47,9 @@ public class blizzardTrigger : NetworkBehaviour {
 	public void lateDestroy(){
 
 		gameObject.SetActive (false);
-
-		//player.currentItem.SetActive (false);
-		player.currentItem = null;
+        nsc.CmdStopSFX("Blizzard", gameObject);
+        //player.currentItem.SetActive (false);
+        player.currentItem = null;
 //		gameObject.transform.root.gameObject.GetComponent<UIController> ().ResetUIItemTexture ();
 
 	}

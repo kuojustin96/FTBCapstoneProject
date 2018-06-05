@@ -41,7 +41,7 @@ namespace Prototype.NetworkLobby
             {
                 LobbyManager.s_Singleton.TransitionToLobbyMenu();
                 isHosting = true;
-                SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+                SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
             }
             else
             {
@@ -90,7 +90,7 @@ namespace Prototype.NetworkLobby
             lobbyManager.DisplayIsConnecting();
 
             lobbyManager.SetServerInfo("Connecting...", lobbyManager.networkAddress);
-            SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, true);
+            SoundEffectManager.instance.PlaySFX("MouseClick", Camera.main.gameObject, 0.2f, 100f, true);
         }
 
         public void OnClickDedicated()

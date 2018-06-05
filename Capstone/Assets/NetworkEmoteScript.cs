@@ -24,8 +24,9 @@ public class NetworkEmoteScript : NetworkBehaviour {
     private bool playingEmote = false;
     private Vector2 tickerEnabledPos;
     private Vector2 tickerDisabledPos;
-    private UIController uic    ;
+    private UIController uic;
     private NetworkSoundController nsc;
+    private float defaultMaxDist;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class NetworkEmoteScript : NetworkBehaviour {
 
             uic = GetComponent<UIController>();
             nsc = GetComponent<NetworkSoundController>();
+            defaultMaxDist = SoundEffectManager.instance.defaultMaxDist;
             tickerEnabledPos = tickerBackgroud.rectTransform.anchoredPosition;
             tickerDisabledPos = new Vector2(tickerEnabledPos.x, tickerEnabledPos.y - (tickerBackgroud.rectTransform.rect.height / 2));
             tickerBackgroud.rectTransform.anchoredPosition = tickerDisabledPos;
@@ -69,25 +71,25 @@ public class NetworkEmoteScript : NetworkBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                nsc.CmdPlaySFX("Angry", gameObject, 1f, false);
+                nsc.CmdPlaySFX("Angry", gameObject, 1f, defaultMaxDist, false, false);
                 CmdEmote(0);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                nsc.CmdPlaySFX("Taunt", gameObject, 1f, false);
+                nsc.CmdPlaySFX("Taunt", gameObject, 1f, defaultMaxDist, false, false);
                 CmdEmote(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
+                nsc.CmdPlaySFX("Cheer", gameObject, 1f, defaultMaxDist, false, false);
                 CmdEmote(2);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                nsc.CmdPlaySFX("Cheer", gameObject, 1f, false);
+                nsc.CmdPlaySFX("Cheer", gameObject, 1f, defaultMaxDist, false, false);
                 CmdEmote(3);
             }
         }

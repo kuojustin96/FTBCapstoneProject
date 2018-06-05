@@ -25,12 +25,14 @@ public class attack : NetworkBehaviour {
     public float magnetMultiplier = 5f;
     private float origMagnetRadius;
     private NetworkSoundController nsc;
+    private float defaultMaxDist;
 	public bool attackable;
 	// Use this for initialization
 	void Start () {
 		 player = GetComponent<playerClassAdd>().player;
 		attackable = true;
         nsc = GetComponent<NetworkSoundController>();
+        defaultMaxDist = SoundEffectManager.instance.defaultMaxDist;
         origMagnetRadius = magnetSize.GetComponent<SphereCollider>().radius;
 	}
 	
@@ -43,28 +45,28 @@ public class attack : NetworkBehaviour {
 				return;
 			if (player.currentItem.name == "keyHolder") {
 				CmdKeyAttacking ();
-				Debug.Log (player.currentItem.name);
-				attackable = false;
+                nsc.CmdPlaySFX("SwordSwing", gameObject, 1f, defaultMaxDist, true, false);
+                attackable = false;
 				Invoke ("Attacking", 2);
                 //nsc.CmdPlaySFX("SwordSwing", gameObject, 0.5f, false);
             }
 			if (player.currentItem.name == "matchHolder" ) {
 				CmdMatchAttacking ();
-				Debug.Log (player.currentItem.name);
-				attackable = false;
+                nsc.CmdPlaySFX("Fireball Interactions", gameObject, 1f, defaultMaxDist, true, false);
+                nsc.CmdPlaySFX("SwordSwing", gameObject, 1f, defaultMaxDist, true, false);
+                attackable = false;
 				Invoke ("Attacking", 2);
                 //nsc.CmdPlaySFX("Fireball_Interactions", gameObject, 0.5f, false);
             }
 			if (player.currentItem.name == "iceHolder" ) {
 				CmdBlizzard ();
-				Debug.Log (player.currentItem.name);
 				attackable = false;
 				Invoke ("Attacking", 2);
                // nsc.CmdPlaySFX("IceHolder", gameObject, 0.5f, false);
             }
 			if (player.currentItem.name == "fanHolder" ) {
 				CmdTornado();
-				Debug.Log (player.currentItem.name);
+                nsc.CmdPlaySFX("Fan", gameObject, 1f, defaultMaxDist, true, false);
 				attackable = false;
 				Invoke ("Attacking", 2);
               //  nsc.CmdPlaySFX("FanHolder", gameObject, 0.5f, false);
@@ -264,8 +266,10 @@ public class attack : NetworkBehaviour {
 			player.currentItem = null;
 		}
 		GetComponent<UIController> ().ResetUIItemTexture ();
-
-	}
+        MusicManager.instance.defaultGameplayTrack = "GroundFloor";
+        AudioSource temp = GetComponent<AudioSource>();
+        MusicManager.instance.SwapMainTracks(MusicManager.instance.defaultGameplayTrack, 0.4f, 1f, temp);
+    }
 
 
 }

@@ -19,6 +19,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
     private UIController uiController;
     private NetworkSoundController nsc;
+    private float defaultMaxDist;
     private StatManager sm;
 
 	// Use this for initialization
@@ -27,6 +28,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		player = GetComponentInParent<playerClassAdd>().player;
 		uiController = GetComponentInParent<UIController>();
         nsc = GetComponentInParent<NetworkSoundController>();
+        defaultMaxDist = SoundEffectManager.instance.defaultMaxDist;
         sm = StatManager.instance;
 
         sugarPickupTime = GameManager.instance.sugarPickupTime;
@@ -129,7 +131,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		if(sugarInBackpack.Count > 0)
 		{
             //Breaks if you spam the drop button
-            nsc.CmdPlaySFX("SugarDrop", transform.parent.gameObject, 1f, true);
+            nsc.CmdPlaySFX("SugarDrop", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
             callback.sugarCall ();
 		}
 	}
@@ -154,7 +156,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 			for (int x = 0; x < dropAmount; x++)
 			{
                 //StartCoroutine(DropSugarAni());
-                nsc.CmdPlaySFX("SugarDrop", transform.parent.gameObject, 1f, true);
+                nsc.CmdPlaySFX("SugarDrop", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
                 callback.sugarCall ();
 			}
 		}
@@ -195,7 +197,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
         //Steal sugar from enemy stash
 		if (otherPlayer.currentPlayerScore > 0 && player.currentPlayerScore < player.maxCanCarry)
 		{
-            nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, true);
+            nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
 
             GameObject sugar = otherPlayer.dropoffPoint.transform.parent.GetChild(1).gameObject;
 			sugarInBackpack.Add(sugar);
@@ -248,7 +250,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
         sm.UpdateStat(Stats.SugarCollected);
         //Pick up sugar from the ground
         //sugar.GetComponent<SimpleRotate>().enabled = false;
-        nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, true);
+        nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
 
 		dropping = true;
 		sugar.GetComponent<Collider>().enabled = false;
@@ -270,7 +272,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 	private IEnumerator DropoffSugarAni(GameObject dropoffPoint)
 	{
         //Drop off sugar in the player's stash
-        nsc.CmdPlaySFX("SugarDrop", transform.parent.gameObject, 1f, true);
+        nsc.CmdPlaySFX("SugarDrop", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
 
         Vector3 saveScale = sugarInBackpack[0].transform.localScale;
 		GameObject sugar = sugarInBackpack[0];

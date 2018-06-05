@@ -47,21 +47,21 @@ public class SFXWalkController : NetworkBehaviour {
                 string layerName = LayerMask.LayerToName(layerNum);
 
                 if (layerName == "WoodSurface")
-                    nsc.PlaySFXLocal("(Footsteps) Wood", transform.root.gameObject, 1f, false);
+                    nsc.PlaySFXLocal("(Footsteps) Wood", transform.root.gameObject, 1f, 100f, false, false);
                 else if (layerName == "MetalSurface")
-                    nsc.PlaySFXLocal("(Footsteps) Metal", transform.root.gameObject, 1f, false);
+                    nsc.PlaySFXLocal("(Footsteps) Metal", transform.root.gameObject, 1f, 100f, false, false);
                 else if (layerName == "CarpetSurface")
-                    nsc.PlaySFXLocal("(Footsteps) Carpet", transform.root.gameObject, 1f, false);
+                    nsc.PlaySFXLocal("(Footsteps) Carpet", transform.root.gameObject, 1f, 100f, false, false);
             }
             else
             {
-                nsc.PlaySFXLocal(overrideName, transform.root.gameObject, 1f, false);
+                nsc.PlaySFXLocal(overrideName, transform.root.gameObject, 1f, 100f, false, false);
             }
 
             walkParticlePos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
             if(netparticle)
             netparticle.PlayParticleEffectLocal("Walk Particle", npc.gameObject, walkParticlePos, 2f);
-            nsc.StopSFXLocal("Gliding");
+            nsc.StopSFXLocal("Gliding", transform.root.gameObject);
         }
     }
 

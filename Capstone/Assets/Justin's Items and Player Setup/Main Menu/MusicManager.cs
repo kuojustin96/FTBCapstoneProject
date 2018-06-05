@@ -188,7 +188,8 @@ public class MusicManager : MonoBehaviour {
                 yield return null;
         }
 
-        mainTrackAuds.clip = newMainTrack;
+        if(mainTrackAuds)
+            mainTrackAuds.clip = newMainTrack;
 
         StartCoroutine(c_FadeMainTrack(targetVol, fadeTime / 2, true));
     }

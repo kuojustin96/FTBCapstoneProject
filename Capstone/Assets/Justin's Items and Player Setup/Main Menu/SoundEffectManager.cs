@@ -7,6 +7,7 @@ public class SoundEffectManager : MonoBehaviour {
 
     public static SoundEffectManager instance = null;
     public AudioMixer audMixer;
+    public float defaultMaxDist = 100f;
 
     [System.Serializable]
     public class SoundEffectCategories
@@ -52,7 +53,7 @@ public class SoundEffectManager : MonoBehaviour {
 
     }
 
-    public void PlaySFX(string sfxTypeName, GameObject audioObject, float volume = 1f, bool canHaveMultiple = false)
+    public void PlaySFX(string sfxTypeName, GameObject audioObject, float volume = 1f, float maxDistance = 100f, bool canHaveMultiple = false, bool looping = false)
     {
         if (!canHaveMultiple)
         {
@@ -77,7 +78,7 @@ public class SoundEffectManager : MonoBehaviour {
 
         if (auds)
         {
-            DefaultAudioSettings(auds);
+            DefaultAudioSettings(auds, maxDistance, looping);
 
             auds.volume = volume;
             auds.Play();
@@ -92,25 +93,33 @@ public class SoundEffectManager : MonoBehaviour {
         }
     }
 
-    private void DefaultAudioSettings(AudioSource aud)
+    private void DefaultAudioSettings(AudioSource aud, float maxDistance, bool looping)
     {
-        aud.loop = false;
+        aud.loop = looping;
         aud.playOnAwake = false;
         aud.outputAudioMixerGroup = audMixer.FindMatchingGroups("Sound Effects")[0];
         aud.spatialBlend = 1f;
         aud.rolloffMode = AudioRolloffMode.Linear;
-        aud.maxDistance = 100f;
+        aud.maxDistance = maxDistance;
     }
 
     //Only works if canHaveMultiple was set to false
-    public void StopSFX(string sfxTypeName)
+    public void StopSFX(string sfxTypeName, GameObject g)
     {
         if (SFXPlaying.ContainsKey(sfxTypeName))
         {
-            AudioSource temp = SFXPlaying[sfxTypeName];
-            temp.Stop();
-            SFXPlaying.Remove(sfxTypeName);
-            Destroy(temp);
+            AudioSource temp;
+            if (g == null)
+                temp = SFXPlaying[sfxTypeName];
+            else
+                temp = g.GetComponent<AudioSource>();
+
+            if (temp)
+            {
+                temp.Stop();
+                SFXPlaying.Remove(sfxTypeName);
+                Destroy(temp);
+            }
         }
     }
 

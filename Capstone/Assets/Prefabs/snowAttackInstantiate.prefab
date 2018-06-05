@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 114395791628479634}
   - component: {fileID: 114437324550660710}
   - component: {fileID: 114770078910929102}
+  - component: {fileID: 114169192532757876}
   m_Layer: 0
   m_Name: snowAttackInstantiate
   m_TagString: Untagged
@@ -179,6 +180,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 25, y: 20, z: 25}
   m_Center: {x: 0, y: 10, z: 0}
+--- !u!114 &114169192532757876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1932313980131626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8e541c60052c849a9ed01592edea80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114395791628479634
 MonoBehaviour:
   m_ObjectHideFlags: 1
