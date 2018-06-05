@@ -10,12 +10,14 @@ public class JumpPad : MonoBehaviour {
    // private Collider col;
     //private Animator animator;
 	public Animator na;
+    private NetworkSoundController nsc;
 
 	// Use this for initialization
 	void Start () {
-       // col = GetComponent<Collider>();
+        // col = GetComponent<Collider>();
         //animator = GetComponent<Animator>();
-       // na = GetComponent<Animator>();
+        // na = GetComponent<Animator>();
+        nsc = GetComponent<NetworkSoundController>();
 	}
 
 	public IEnumerator TriggerAnimation(GameObject other)
@@ -24,6 +26,7 @@ public class JumpPad : MonoBehaviour {
 		other.GetComponent<jkuo.net_PlayerController>().ApplyJumpForce(Vector3.up * jumpForce);
         na.SetBool("Activate", true);
 		GetComponent<Collider>().enabled = false;
+        nsc.CmdPlaySFX("BouncePad", gameObject, 1f, 100f, true, false);
 
         float saveTime = Time.time;
         while (Time.time < saveTime + (na.runtimeAnimatorController.animationClips[0].length + 0.5f))
