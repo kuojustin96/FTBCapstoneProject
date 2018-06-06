@@ -13,7 +13,7 @@ public class tornadoTrigger : NetworkBehaviour {
 	{
         nsc = GetComponent<NetworkSoundController>();
         nsc.CmdPlaySFX("Tornado", gameObject, 1f, 400f, true, true);
-		Destroy (gameObject, 30);
+		Destroy (gameObject, 8);
 	}
 	void FixedUpdate(){
 		Vector3 explosionPos = transform.position;
@@ -22,8 +22,9 @@ public class tornadoTrigger : NetworkBehaviour {
 			if (hit.tag == "NetPlayer") {
 				Rigidbody rb = hit.GetComponent<Rigidbody> ();
 
-				if (rb != null && rb.gameObject != parentPlayer)
-					rb.AddExplosionForce (power, explosionPos, radius);
+                // if (rb != null && rb.gameObject != parentPlayer)
+                if (rb != null) ;
+                    rb.gameObject.transform.position = Vector3.MoveTowards(rb.gameObject.transform.position, transform.position, .05f* Vector3.Distance(rb.gameObject.transform.position,transform.position));
 			}
 		}
 	}

@@ -9533,7 +9533,6 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 79f08fd7-0c43-4e1d-91f3-9c405f2fe67e
 --- !u!114 &274846459
 MonoBehaviour:
   m_ObjectHideFlags: 10
@@ -9546,16 +9545,6 @@ MonoBehaviour:
   m_Script: {fileID: -605777808, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 
-  _referenceCollection:
-    _collection:
-    - {fileID: 274846457}
-    - {fileID: 393912064}
-    - {fileID: 1231734179}
-    - {fileID: 1468150704}
-    - {fileID: 339950759}
-    - {fileID: 2138207271}
-  _assetGuid: 65745063aa8ea2244bb61344c8ae32cc
 --- !u!4 &274846460
 Transform:
   m_ObjectHideFlags: 0
@@ -17025,7 +17014,6 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 5fed54ee-c4a0-4178-af54-e33c8277c9f9
 --- !u!199 &339950761
 ParticleSystemRenderer:
   serializedVersion: 4
@@ -24217,11 +24205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!1 &393912064 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1757675720917786, guid: 6e72f6569a41fbc4087a743f57700fca,
-    type: 2}
-  m_PrefabInternal: {fileID: 1180501574}
 --- !u!1 &408201358
 GameObject:
   m_ObjectHideFlags: 0
@@ -88211,7 +88194,6 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 9342cbdf-9395-40a2-b6a1-1a3e1ee42294
 --- !u!199 &1231734181
 ParticleSystemRenderer:
   serializedVersion: 4
@@ -104381,7 +104363,6 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 63027be3-c6f7-471d-b2a9-db79918f7eaa
 --- !u!199 &1468150706
 ParticleSystemRenderer:
   serializedVersion: 4
@@ -143022,7 +143003,6 @@ MonoBehaviour:
   m_Script: {fileID: 112998890, guid: 325c5b2a7434372429c2ca9d61dba58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guid: 2d455703-6c59-4f39-969e-cd1f0f6f339e
 --- !u!199 &2138207273
 ParticleSystemRenderer:
   serializedVersion: 4
