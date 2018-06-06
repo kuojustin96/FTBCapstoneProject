@@ -109,10 +109,11 @@ public class SoundEffectManager : MonoBehaviour {
         if (SFXPlaying.ContainsKey(sfxTypeName))
         {
             AudioSource temp;
-            if (g == null)
-                temp = SFXPlaying[sfxTypeName];
-            else
-                temp = g.GetComponent<AudioSource>();
+            temp = SFXPlaying[sfxTypeName];
+            //if (g == null)
+            //    temp = SFXPlaying[sfxTypeName];
+            //else
+            //    temp = g.GetComponent<AudioSource>();
 
             if (temp)
             {

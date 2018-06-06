@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 139382370}
-  m_IndirectSpecularColor: {r: 0.14186327, g: 0.16104174, b: 0.16974217, a: 1}
+  m_IndirectSpecularColor: {r: 0.41258967, g: 0.4379582, b: 0.44888502, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -32542,7 +32542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameLength: 600
-  numSugarToWin: 2
+  numSugarToWin: 50
   sugarPickupTime: 0.5
   dropoffDelay: 0.5
   maxSugarCarry: 10

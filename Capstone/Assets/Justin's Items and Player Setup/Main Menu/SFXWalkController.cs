@@ -60,8 +60,9 @@ public class SFXWalkController : NetworkBehaviour {
 
             walkParticlePos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
             if(netparticle)
-            netparticle.PlayParticleEffectLocal("Walk Particle", npc.gameObject, walkParticlePos, 2f);
-            nsc.StopSFXLocal("Gliding", transform.root.gameObject);
+                netparticle.PlayParticleEffectLocal("Walk Particle", npc.gameObject, walkParticlePos, 2f);
+            //nsc.StopSFXLocal("Gliding", transform.root.gameObject);
+            //nsc.CmdStopSFX("Gliding", transform.root.gameObject);
         }
     }
 

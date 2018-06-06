@@ -329,8 +329,9 @@ namespace jkuo
                     if (glidingParticleEffect)
                     {
                         CmdStopGlideParticle();
-                        nsc.CmdStopSFX("Gliding", gameObject);
                     }
+
+                    nsc.CmdStopSFX("Gliding", gameObject);
                 }
             }
             else
