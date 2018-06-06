@@ -9,8 +9,10 @@ public class fireAttackTrigger : NetworkBehaviour {
 	public GameObject explosion;
 	public GameObject flame;
     private NetworkSoundController nsc;
+    public GameObject sentPlayer;
 	void Start(){
         nsc = GetComponent<NetworkSoundController>();
+        explosion.GetComponent<fireProjectileTrigger>().sentPlayer = sentPlayer;
 		Destroy (gameObject,5);
 	}
 

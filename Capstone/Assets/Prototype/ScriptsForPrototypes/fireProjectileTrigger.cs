@@ -7,9 +7,10 @@ using jkuo;
 public class fireProjectileTrigger : NetworkBehaviour {
 	PlayerClass player;
     public float stunDuration = 4f;
+    public GameObject sentPlayer;
 	void Start(){
 		Debug.Log ("triggerActive");
-		Invoke ("lateDestroy", 5);
+		Invoke ("lateDestroy", 1.5f);
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -18,6 +19,7 @@ public class fireProjectileTrigger : NetworkBehaviour {
 			Debug.Log(other);
 			//other.GetComponent<net_PlayerController> ().StunPlayer (10f);
 			GameObject x = other.gameObject;
+            if(x!= transform.parent.gameObject.GetComponent<fireAttackTrigger>().sentPlayer)
 			stun (x);
 
 		}
@@ -31,7 +33,7 @@ public class fireProjectileTrigger : NetworkBehaviour {
 	}
 	public void lateDestroy(){
 
-		Destroy (gameObject.transform.root);
+		Destroy (gameObject.transform.root.gameObject);
 	}
 }
 

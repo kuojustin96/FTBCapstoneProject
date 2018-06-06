@@ -135,12 +135,12 @@ public class attack : NetworkBehaviour {
 		Debug.Log ("fireball");
 		GameObject fireball = Instantiate (fireballPrefab, fireballSpawn.transform.position, fireballSpawn.transform.rotation);
 		NetworkServer.Spawn (fireball);
-		RpcFireball (fireball);
+		RpcFireball (fireball,gameObject);
 	}
 	[ClientRpc]
-	public void RpcFireball(GameObject Fireball){
-		Fireball.GetComponent<Rigidbody> ().AddForce(shooter.transform.forward * 10000);
-
+	public void RpcFireball(GameObject Fireball, GameObject sentPlayer){
+		Fireball.GetComponent<Rigidbody> ().AddForce(shooter.transform.forward * 15000);
+        Fireball.GetComponent<fireAttackTrigger>().sentPlayer = sentPlayer;
 	}
 
 	[Command]
