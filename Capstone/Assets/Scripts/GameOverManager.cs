@@ -218,11 +218,14 @@ public class GameOverManager : NetworkBehaviour {
             yield return null;
 
         //winning music
-        for(int x = 0; x < gm.playerList.Count; x++)
+        if (isLocalPlayer)
         {
-            pedalstals[x].transform.position = new Vector3(finalScorePlayerList[x].playerGO.transform.position.x, pedalstals[x].transform.position.y, finalScorePlayerList[x].playerGO.transform.position.z);
-            pedalstals[x].DOScaleY(pedalstalHeights[x], pedalstalGrowTime);
-            finalScorePlayerList[x].playerGO.transform.DOMoveY(finalScorePlayerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2), pedalstalGrowTime);
+            for (int x = 0; x < gm.playerList.Count; x++)
+            {
+                pedalstals[x].transform.position = new Vector3(finalScorePlayerList[x].playerGO.transform.position.x, pedalstals[x].transform.position.y, finalScorePlayerList[x].playerGO.transform.position.z);
+                pedalstals[x].DOScaleY(pedalstalHeights[x], pedalstalGrowTime);
+                finalScorePlayerList[x].playerGO.transform.DOMoveY(finalScorePlayerList[x].playerGO.transform.position.y + (pedalstalHeights[x] / 2), pedalstalGrowTime);
+            }
         }
 
         saveTime = Time.time; //Time it takes the pedastals to grow
