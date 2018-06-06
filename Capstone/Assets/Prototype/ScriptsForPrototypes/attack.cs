@@ -40,7 +40,7 @@ public class attack : NetworkBehaviour {
 	void Update () {
 	if (!isLocalPlayer)
 		return;
-		if (Input.GetButtonDown ("Fire1")&& attackable) {
+		if (Input.GetButtonDown ("Fire1")&& attackable && !player.craftingUIOpen) {
 			if (player.currentItem == null)
 				return;
 			if (player.currentItem.name == "keyHolder") {

@@ -135,8 +135,6 @@ public class UIController : NetworkBehaviour {
         sm.SetUIController(this);
         npc = GetComponent<jkuo.net_PlayerController>();
 
-        origIngameUIPos = IngameItemBackgroundUI.transform.position;
-
         IngameItemRect = IngameItemBackgroundUI.GetComponent<RectTransform>();
         origIngameUIScale = IngameItemRect.sizeDelta;
         origIngameUIPos = IngameItemRect.position;
