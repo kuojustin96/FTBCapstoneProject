@@ -80280,6 +80280,36 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 137192118622158412, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.00034332275
+      objectReference: {fileID: 0}
+    - target: {fileID: 137192118622158412, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.06487191
+      objectReference: {fileID: 0}
+    - target: {fileID: 137192118622158412, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.024172902
+      objectReference: {fileID: 0}
+    - target: {fileID: 137192118622158412, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.06313717
+      objectReference: {fileID: 0}
+    - target: {fileID: 137192118622158412, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.046455473
+      objectReference: {fileID: 0}
+    - target: {fileID: 137192118622158412, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.057701472
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e72f6569a41fbc4087a743f57700fca, type: 2}
   m_IsPrefabParent: 0
