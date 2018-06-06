@@ -254,7 +254,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
         //sugar.GetComponent<SimpleRotate>().enabled = false;
         nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
         Vector3 particlePos = new Vector3(transform.root.position.x, transform.root.position.y + 7, transform.root.position.z + 5);
-        npc.CmdPlayParticleEffect("Pick Up Candy Particle", transform.root.gameObject, particlePos, 10f);
+        npc.CmdPlayParticleEffect("Pick Up Candy Particle", transform.root.gameObject, particlePos, 1f);
 
 		dropping = true;
 		sugar.GetComponent<Collider>().enabled = false;
