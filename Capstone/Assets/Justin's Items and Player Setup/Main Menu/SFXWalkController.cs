@@ -51,7 +51,7 @@ public class SFXWalkController : NetworkBehaviour {
                 else if (layerName == "MetalSurface")
                     nsc.PlaySFXLocal("(Footsteps) Metal", transform.root.gameObject, 1f, 100f, false, false);
                 else if (layerName == "CarpetSurface")
-                    nsc.PlaySFXLocal("(Footsteps) Carpet", transform.root.gameObject, 1f, 100f, false, false);
+                    nsc.PlaySFXLocal("(Footsteps) Carpet", transform.root.gameObject, 1f, 100f, true, false);
             }
             else
             {
