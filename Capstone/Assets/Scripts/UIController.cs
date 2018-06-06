@@ -18,6 +18,7 @@ public class UIController : NetworkBehaviour {
 
     private PlayerClass player;
     private NetworkSoundController nsc;
+    private NetworkParticleController netparticle;
     private jkuo.net_PlayerController npc;
     private StatManager sm;
     public Texture2D cursorTexture;
@@ -122,6 +123,7 @@ public class UIController : NetworkBehaviour {
         SetUpTicker();
 
         nsc = GetComponent<NetworkSoundController>();
+        netparticle = GetComponent<NetworkParticleController>();
         emoteUICG = emoteUI.GetComponent<CanvasGroup>();
         tickerTextUICG = tickerTextUI.GetComponent<CanvasGroup>();
         emoteUICG.alpha = 0f;

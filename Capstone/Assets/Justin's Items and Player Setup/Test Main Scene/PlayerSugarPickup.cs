@@ -19,6 +19,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 
     private UIController uiController;
     private NetworkSoundController nsc;
+    private NetworkParticleController npc;
     private float defaultMaxDist;
     private StatManager sm;
 
@@ -28,6 +29,7 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		player = GetComponentInParent<playerClassAdd>().player;
 		uiController = GetComponentInParent<UIController>();
         nsc = GetComponentInParent<NetworkSoundController>();
+        npc = GetComponentInParent<NetworkParticleController>();
         defaultMaxDist = SoundEffectManager.instance.defaultMaxDist;
         sm = StatManager.instance;
 
@@ -251,6 +253,8 @@ public class PlayerSugarPickup : NetworkBehaviour {
         //Pick up sugar from the ground
         //sugar.GetComponent<SimpleRotate>().enabled = false;
         nsc.CmdPlaySFX("Sugar Pickup", transform.parent.gameObject, 1f, defaultMaxDist, true, false);
+        Vector3 particlePos = new Vector3(transform.root.position.x, transform.root.position.y + 7, transform.root.position.z + 5);
+        npc.CmdPlayParticleEffect("Pick Up Candy Particle", transform.root.gameObject, particlePos, 10f);
 
 		dropping = true;
 		sugar.GetComponent<Collider>().enabled = false;

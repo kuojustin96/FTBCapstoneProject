@@ -29810,6 +29810,11 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23423359485966562, guid: 6e72f6569a41fbc4087a743f57700fca,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: acce4904fc56c1d45a1e5959f8166868, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e72f6569a41fbc4087a743f57700fca, type: 2}
   m_IsPrefabParent: 0
@@ -33425,6 +33430,10 @@ MonoBehaviour:
     objToPool: {fileID: 1713015796573352, guid: 5802f8c2fa288a24592a38a08ed0dc06,
       type: 2}
     numToPool: 5
+  - name: Pick Up Candy Particle
+    objToPool: {fileID: 1548333959784440, guid: 6ce77dd7e4c193747baa22c2f96886b1,
+      type: 2}
+    numToPool: 20
 --- !u!1 &1898292969
 GameObject:
   m_ObjectHideFlags: 0

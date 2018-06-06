@@ -32,8 +32,15 @@ public class NetworkParticleController : NetworkBehaviour
     private IEnumerator PlayParticleEffect(string name, GameObject parent, Vector3 position, float size)
     {
         GameObject g = ObjectPoolManager.instance.SpawnObject(name, size);
-        float duration = g.GetComponent<ParticleSystem>().main.duration;
-        g.transform.parent = parent.transform;
+        float duration;
+        if (g.GetComponent<ParticleSystem>())
+            duration = g.GetComponent<ParticleSystem>().main.duration;
+        else
+            duration = g.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
+
+        if (parent)
+            g.transform.parent = parent.transform;
+
         g.transform.position = position;
 
         float saveTime = Time.time;
