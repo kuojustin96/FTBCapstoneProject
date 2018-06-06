@@ -453,7 +453,7 @@ namespace jkuo
         }
 
         [Command]
-        private void CmdStopGlideParticle()
+        public void CmdStopGlideParticle()
         {
             RpcStopGlideParticle();
         }
