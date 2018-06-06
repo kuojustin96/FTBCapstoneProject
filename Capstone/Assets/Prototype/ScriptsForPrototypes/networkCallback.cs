@@ -23,7 +23,7 @@ public class networkCallback : NetworkBehaviour {
 
 	[Command]
 	public void CmdSugarCall(){
-		sugarPickup.StartCoroutine ("DropSugarMovement");
+		sugarPickup.StartCoroutine ("DropSugarAni");
 		RpcSugarCall ();
 
 	}

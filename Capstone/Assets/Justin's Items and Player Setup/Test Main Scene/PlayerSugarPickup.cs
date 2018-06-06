@@ -169,7 +169,8 @@ public class PlayerSugarPickup : NetworkBehaviour {
 		dropping = true;
 		GameObject sugar = sugarInBackpack[0];
 		sugar.SetActive(true);
-		sugarInBackpack.Remove(sugarInBackpack[0]);
+        sugar.GetComponent<Collider>().enabled = true;
+        sugarInBackpack.Remove(sugarInBackpack[0]);
 		sugar.transform.parent = null;
 		float saveTime = Time.time;
 		dropping = false;
