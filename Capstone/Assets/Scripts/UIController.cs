@@ -430,7 +430,7 @@ public class UIController : NetworkBehaviour {
 
     private IEnumerator CraftItemWaitTime(string itemType)
     {
-		craftingItem = true;
+        craftingItem = true;
         lastItemCrafted = IngameItemUI.texture;
         IngameItemUI.texture = NoItemTexture;
         CraftingItemUI.texture = NoItemTexture;
@@ -476,6 +476,7 @@ public class UIController : NetworkBehaviour {
         CanvasOFF(CraftingUI);
         StartCoroutine(HideCraftingUI());
 		craftingItem = false;
+        craftingCoroutine = null;
     }
     #endregion
 
