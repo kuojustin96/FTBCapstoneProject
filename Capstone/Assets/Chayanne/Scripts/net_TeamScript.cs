@@ -16,6 +16,7 @@ namespace ckp
             Yellow
         };
 
+        [SyncVar]
         public Team teamColor;
 		void Start(){
 			//SetTeam ();

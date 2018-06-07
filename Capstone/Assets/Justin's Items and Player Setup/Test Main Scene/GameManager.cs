@@ -5,7 +5,8 @@ using Prototype.NetworkLobby;
 using ckp;
 using TMPro;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager instance = null;
 
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour {
     [Tooltip("Amount of speed gained/lost when dropping/picking up sugar")]
     public float speedPerSugar = 0.5f;
     public float minSpeed = 20f;
-	public static int curPlayers;
+    public static int curPlayers;
 
     public bool endGame = false;
 
@@ -54,13 +55,13 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             //DontDestroyOnLoad(this);
         }
 
-		curPlayers = 0;
+        curPlayers = 0;
         foreach (DropoffPointsClass d in DropoffPoints)
             d.dropoffGO.SetActive(false);
     }
@@ -71,31 +72,60 @@ public class GameManager : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-        numPlayers = GameObject.Find("LobbyManager").GetComponent<LobbyManager>()._playerNumber;
-	}
-
-	public void SetUpGame(GameObject player, net_TeamScript.Team team)
+    void Start()
     {
-		int x = curPlayers;
-		DropoffPointsClass d = DropoffPoints[x];
-		d.dropoffGO.SetActive (true);
+        numPlayers = GameObject.Find("LobbyManager").GetComponent<LobbyManager>()._playerNumber;
+    }
+
+    public void SetUpGame(GameObject player, net_TeamScript.Team team)
+    {
+        int playerNum = 0;
+
+        Debug.Log("my team is " + team);
+        //green, blue, yellow red
+        DropoffPointsClass d;
+        switch (team)
+        {
+            case net_TeamScript.Team.Green:
+                d = DropoffPoints[0];
+                playerNum = 0;
+                break;
+            case net_TeamScript.Team.Purple:
+                d = DropoffPoints[1];
+                playerNum = 1;
+                break;
+            case net_TeamScript.Team.Yellow:
+                d = DropoffPoints[2];
+                playerNum = 2;
+                break;
+            case net_TeamScript.Team.Red:
+                d = DropoffPoints[3];
+                playerNum = 3;
+                break;
+            default:
+                Debug.LogError("EXTREMELY BAD ERROR TELL CHAYANNE");
+                d = DropoffPoints[0];
+                playerNum = 0;
+                break;
+        }
+
+        d.dropoffGO.SetActive(true);
         PlayerClass ply = new PlayerClass();
-		ply.SetUpPlayer(x, maxSugarCarry, player, d.dropoffGO, "Player " + (x + 1));
+        ply.SetUpPlayer(playerNum, maxSugarCarry, player, d.dropoffGO, "Player " + (playerNum + 1));
         player.GetComponent<playerClassAdd>().player = ply;
         playerList.Add(ply);
         playerDropOffDict.Add(d.dropoffGO, ply);
         dropoffToPlayer.Add(ply, d);
 
-		//temporary position and color
-		player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
+        //temporary position and color
+        //player.transform.position = ply.dropoffPoint.transform.position + new Vector3(0,20,0);
 
         foreach (PlayerClass p in playerList)
             p.playerGO.GetComponent<IndicatorManager>().UpdatePlayerTransforms(playerList);
 
         //playerClassAdd playerClass = player.GetComponent<playerClassAdd>();
 
-		curPlayers++;
+        curPlayers++;
     }
 
     public void SetUpBaseName(PlayerClass ply)
