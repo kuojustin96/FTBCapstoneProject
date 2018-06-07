@@ -19,7 +19,7 @@ public class tornadoTrigger : NetworkBehaviour {
 		Vector3 explosionPos = transform.position;
 		Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
 		foreach (Collider hit in colliders) {
-			if (hit.tag == "NetPlayer") {
+			if (hit.tag == "NetPlayer" && hit.gameObject != parentPlayer) {
 				Rigidbody rb = hit.GetComponent<Rigidbody> ();
 
                 // if (rb != null && rb.gameObject != parentPlayer)

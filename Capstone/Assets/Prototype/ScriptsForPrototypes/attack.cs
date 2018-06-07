@@ -61,7 +61,9 @@ public class attack : NetworkBehaviour {
 			if (player.currentItem.name == "iceHolder" ) {
 				CmdBlizzard ();
 				attackable = false;
-				Invoke ("Attacking", 2);
+                nsc.CmdPlaySFX("Blizzard Freeze", gameObject, 0.1f, defaultMaxDist, true, false);
+                nsc.CmdPlaySFX("Blizzard Crack", gameObject, 0.1f, defaultMaxDist, true, false);
+                Invoke ("Attacking", 2);
                // nsc.CmdPlaySFX("IceHolder", gameObject, 0.5f, false);
             }
 			if (player.currentItem.name == "fanHolder" ) {
