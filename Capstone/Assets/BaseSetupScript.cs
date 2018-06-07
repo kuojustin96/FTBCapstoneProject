@@ -14,6 +14,6 @@ public class BaseSetupScript : NetworkBehaviour {
 
     void OnDestroy()
     {
-        LobbyManager.s_Singleton.UnregisterPlayer(gameObject);)
+        LobbyManager.s_Singleton.UnregisterPlayer(gameObject);
     }
 }
