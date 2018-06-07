@@ -5,13 +5,13 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
-
+using System.Collections.Generic;
 
 namespace Prototype.NetworkLobby
 {
 
     //This is our singleton. Please use it.
-    
+
     public class LobbyManager : NetworkLobbyManager
     {
         static short MsgKicked = MsgType.Highest + 1;
@@ -42,6 +42,7 @@ namespace Prototype.NetworkLobby
         public Text hostInfo;
 
         public LobbySingleton cameraHolder;
+
 
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
@@ -91,8 +92,54 @@ namespace Prototype.NetworkLobby
 
 
         bool madeHost = false;
+
+
+        private static Dictionary<string, LobbyPlayer> players = new Dictionary<string, LobbyPlayer>();
+
+
+        public void RegisterPlayer(string id, LobbyPlayer player)
+        {
+
+            players.Add(id, player);
+
+        }
+
+        public void UnregisterPlayer(string id, LobbyPlayer player)
+        {
+
+            players.Remove(id);
+
+        }
+
+        public void UnregisterPlayer(GameObject player)
+        {
+
+            NetworkIdentity id = player.GetComponent<NetworkIdentity>();
+            if (id)
+            {
+                string _netID = id.clientAuthorityOwner.connectionId.ToString();
+                players.Remove(_netID);
+
+            }
+
+
+        }
+
+        public LobbyPlayer GetLobbyPlayer(GameObject playerObject)
+        {
+            if (!playerObject.GetComponent<NetworkIdentity>())
+            {
+                Debug.Log("This isnt a player!!!!!!!!!");
+                return null;
+            }
+            string _netID = playerObject.GetComponent<NetworkIdentity>().clientAuthorityOwner.connectionId.ToString();
+
+            return players[_netID];
+        }
+
+
         void OnLevelWasLoaded()
-        {   
+        {
         }
 
         public static bool IsPlayScene()
@@ -343,7 +390,7 @@ namespace Prototype.NetworkLobby
             _currentMatchID = (System.UInt64)matchInfo.networkId;
         }
 
-        public override void OnDestroyMatch(bool success, string extendedInfo)  
+        public override void OnDestroyMatch(bool success, string extendedInfo)
         {
             base.OnDestroyMatch(success, extendedInfo);
             if (_disconnectServer)
@@ -353,7 +400,7 @@ namespace Prototype.NetworkLobby
             }
         }
 
-        
+
 
         //allow to handle the (+) button to add/remove player
         public void OnPlayersNumberModified(int count)
@@ -379,13 +426,13 @@ namespace Prototype.NetworkLobby
             LobbyPlayer newPlayer = playerObj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
-            if(!madeHost)
+            if (!madeHost)
             {
                 host = newPlayer;
                 madeHost = true;
             }
 
-            
+
 
             Debug.Log("OnLobbyServerCreateLobbyPlayer! " + gameObject.name);
             //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
@@ -410,7 +457,7 @@ namespace Prototype.NetworkLobby
             Transform spawn = GetStartPosition();
 
             //Create our 3D Player here
-            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject,spawn.position,spawn.rotation) as GameObject;
+            GameObject playerObj = Instantiate(lobbyPlayerPrefab.gameObject, spawn.position, spawn.rotation) as GameObject;
 
             //Lobby_Player_Setup setup = playerObj.GetComponent<Lobby_Player_Setup>();
             //setup.SetupPosition();
@@ -539,9 +586,9 @@ namespace Prototype.NetworkLobby
             conn.RegisterHandler(MsgKicked, KickedMessageHandler);
 
 
-            Debug.Log("Client Connected!");
-            
-            
+            //Debug.Log("Client Connected!");
+
+
 
             if (!NetworkServer.active)
             {//only to do on pure client (not self hosting client)
@@ -597,7 +644,7 @@ namespace Prototype.NetworkLobby
             if (sceneName != lobbyScene)
             {
 
-               
+
 
             }
 

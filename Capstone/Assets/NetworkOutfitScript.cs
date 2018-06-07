@@ -31,7 +31,7 @@ public class NetworkOutfitScript : NetworkBehaviour
     void Start()
     {
         PopulateHats();
-        Debug.Log("AM I LOCAL? " + isLocalPlayer);
+        //Debug.Log("AM I LOCAL? " + isLocalPlayer);
             
         //ChangeColor(theColor);
 

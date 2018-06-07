@@ -34,9 +34,9 @@ namespace Prototype.NetworkLobby
         public void OnClickHost()
         {
 
-            Debug.Log("LobbyMainMenu!");
+            //Debug.Log("LobbyMainMenu!");
             bool didHost = (lobbyManager.StartHost() != null);
-            Debug.Log("LobbyMainMenu!");
+            //Debug.Log("LobbyMainMenu!");
             if (didHost)
             {
                 LobbyManager.s_Singleton.TransitionToLobbyMenu();

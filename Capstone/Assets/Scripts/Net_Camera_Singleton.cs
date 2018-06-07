@@ -76,7 +76,7 @@ public class Net_Camera_Singleton : MonoBehaviour
 
     public void SetupCamera(GameObject camTarget)
     {
-        Debug.Log("Setting camera for " + camTarget.name);
+        //Debug.Log("Setting camera for " + camTarget.name);
         playerCam.LookAt = camTarget.transform;
         playerCam.Follow = camTarget.transform;
     }

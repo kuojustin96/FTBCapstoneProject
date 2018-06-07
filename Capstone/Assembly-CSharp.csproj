@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BaseScript.cs" />
+     <Compile Include="Assets\BaseSetupScript.cs" />
      <Compile Include="Assets\Chayanne\Animations\Chad\Character_animation\AlwaysEnableObject.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyBoxTop.cs" />
      <Compile Include="Assets\Chayanne\Lobby\Scripts\DontDestroyOnSceneChange.cs" />

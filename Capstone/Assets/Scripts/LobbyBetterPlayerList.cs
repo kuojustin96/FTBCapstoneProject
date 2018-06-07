@@ -38,7 +38,7 @@ public class LobbyBetterPlayerList : MonoBehaviour {
 
     public void RemoveName(string name)
     {
-        Debug.Log("removing" + name);
+        //Debug.Log("removing" + name);
         foreach(Transform t in transform)
         {
             if(t.name == name)

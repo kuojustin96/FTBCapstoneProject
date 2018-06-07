@@ -59,15 +59,35 @@ namespace Prototype.NetworkLobby
 
 
 
+        //called per player that connects
+
         public override void OnStartClient()
         {
-            Debug.Log("=========OnStartClient=========");
             base.OnStartClient();
-            Debug.Log("=========OnStartClient=========");
+
+
 
         }
 
-        //void Awake()
+        void Start()
+        {
+            RegisterPlayer();
+        }
+
+        public void RegisterPlayer()
+        {
+            Debug.Log("Registering!");
+            NetworkIdentity id = GetComponent<NetworkIdentity>();
+            if (id)
+            {
+                string _netID = id.clientAuthorityOwner.connectionId.ToString();
+                LobbyManager.s_Singleton.RegisterPlayer(_netID, this);
+
+            }
+
+        }
+
+        //void Awake()  
         //{
         //    Debug.Log("Awake " + gameObject.name);
         //}

@@ -86,6 +86,13 @@ namespace jkuo
 
         public PlayerSugarPickup sugarPickup;
         // Use this for initialization
+
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+        }
+
         void Start()
         {
             currentSpeedMult = 1.0f;

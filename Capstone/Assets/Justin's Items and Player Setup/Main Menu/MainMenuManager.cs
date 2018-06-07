@@ -122,7 +122,7 @@ public class MainMenuManager : MonoBehaviour {
         }
 
         string currentRes = PlayerPrefs.GetInt("ScreenWidth") + " x " + PlayerPrefs.GetInt("ScreenHeight");
-        Debug.Log("current Resolution: " + currentRes);
+        //Debug.Log("current Resolution: " + currentRes);
         //load settings
         int qualitySettings = PlayerPrefs.GetInt("QualityLevel");
 
