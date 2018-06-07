@@ -21,8 +21,8 @@ public class StreamVideo : MonoBehaviour {
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.O))
-        //    PlayStartClip();
+        if (Input.GetKeyDown(KeyCode.O))
+            PlayStartClip();
     }
 
     public void PlayStartClip()

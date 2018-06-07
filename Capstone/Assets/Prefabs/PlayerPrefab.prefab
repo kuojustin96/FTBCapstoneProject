@@ -363,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1099537052372458
 GameObject:
   m_ObjectHideFlags: 1
@@ -3932,7 +3932,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189846312776972}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 325.21164, y: 245.28996, z: 68.30554}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000218716509136}
@@ -12777,8 +12777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab99ce99af110243b50ca9d9e52e456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startClip: {fileID: 32900000, guid: 4feb74f39e616814b937b4b189a11d34, type: 3}
-  endClip: {fileID: 32900000, guid: 64db50127dc0f7e499334e5defac4ed5, type: 3}
+  startClip: {fileID: 32900000, guid: adeaceaabae51264f83ae7b81b8eab51, type: 3}
+  endClip: {fileID: 32900000, guid: 625d79339fb88af40a92a371b335e5c7, type: 3}
 --- !u!114 &114878344419454594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13764,8 +13764,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00034236908, y: 0.06487179, z: -0.024172902}
-    m_Extent: {x: 0.06313728, y: 0.046455614, z: 0.057701375}
+    m_Center: {x: 0.00034334307, y: 0.06487194, z: -0.024172895}
+    m_Extent: {x: 0.06313719, y: 0.046455458, z: 0.057701472}
   m_DirtyAABB: 0
 --- !u!137 &137707340190667300
 SkinnedMeshRenderer:
@@ -49878,7 +49878,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -960, y: -2051.724}
   m_SizeDelta: {x: 1200, y: 525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224725221201019922
