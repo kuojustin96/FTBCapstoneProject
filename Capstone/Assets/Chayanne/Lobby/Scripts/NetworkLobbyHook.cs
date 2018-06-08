@@ -34,23 +34,23 @@ public class NetworkLobbyHook : LobbyHook
 
         switch (lobby.GetTeamColor())
         {
-            case net_TeamScript.Team.Green:
-                Vector3 temp = net_GameManager.instance.greenSpawn.position;
+            case net_TeamScript.Team.Zero:
+                Vector3 temp = net_GameManager.instance.ZeroSpawn.position;
                 player.transform.position = new Vector3(temp.x, temp.y + 10, temp.z);
             //    GameManager.instance.SetUpGame(gamePlayer, net_TeamScript.Team.Green);
                 break;
-            case net_TeamScript.Team.Purple:
-                Vector3 temp2 = net_GameManager.instance.purpleSpawn.position;
+            case net_TeamScript.Team.One:
+                Vector3 temp2 = net_GameManager.instance.OneSpawn.position;
                 player.transform.position = new Vector3(temp2.x, temp2.y + 10, temp2.z);
              //   GameManager.instance.SetUpGame(gamePlayer, net_TeamScript.Team.Purple);
                 break;
-            case net_TeamScript.Team.Yellow:
-                Vector3 temp3 = net_GameManager.instance.yellowSpawn.position;
+            case net_TeamScript.Team.Two:
+                Vector3 temp3 = net_GameManager.instance.TwoSpawn.position;
                 player.transform.position = new Vector3(temp3.x, temp3.y + 10, temp3.z);
             //    GameManager.instance.SetUpGame(gamePlayer, net_TeamScript.Team.Yellow);
                 break;
-            case net_TeamScript.Team.Red:
-                Vector3 temp4 = net_GameManager.instance.redSpawn.position;
+            case net_TeamScript.Team.Three:
+                Vector3 temp4 = net_GameManager.instance.ThreeSpawn.position;
                 player.transform.position = new Vector3(temp4.x, temp4.y + 10, temp4.z);
               //  GameManager.instance.SetUpGame(gamePlayer, net_TeamScript.Team.Red);
                 break;

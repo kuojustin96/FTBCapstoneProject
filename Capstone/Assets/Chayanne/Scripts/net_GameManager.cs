@@ -13,10 +13,10 @@ namespace ckp
         public static GameManager gm;
 
         [Header("Spawns")]
-        public Transform yellowSpawn;
-        public Transform greenSpawn;
-        public Transform purpleSpawn;
-        public Transform redSpawn;
+        public Transform ZeroSpawn;
+        public Transform OneSpawn;
+        public Transform TwoSpawn;
+        public Transform ThreeSpawn;
 
         [Space(10)]
         public GameSettingsSO GameSettings;

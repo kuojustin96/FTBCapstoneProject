@@ -14,6 +14,8 @@ public struct PlayerData
 
     public int playerHatIndex;
 
+
+
 }
 public class PlayerGameProfile : MonoBehaviour {
 
@@ -21,6 +23,9 @@ public class PlayerGameProfile : MonoBehaviour {
 
     public TMP_InputField text;
 
+    public Color[] Colors;
+
+    public Material[] baseColorMats;
 
     [SerializeField]
     PlayerData data;
@@ -37,6 +42,19 @@ public class PlayerGameProfile : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        Debug.Assert(baseColorMats.Length == 4, "NOt 4 materials!");
+        Debug.Assert(Colors.Length == 4, "NOt 4 Colors!");
+
+        int index = 0;
+        foreach (Material mat in baseColorMats)
+        {
+
+            Debug.Assert(mat,"YOU DIDNT FILL IT OUT MAN");
+            mat.color = Colors[index];
+            index++;
+
+
+        }
 
         DontDestroyOnLoad(gameObject);
     }

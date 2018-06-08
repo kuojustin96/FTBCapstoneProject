@@ -10,10 +10,10 @@ namespace ckp
 
         public enum Team
         {
-            Red,
-            Green,
-            Purple,
-            Yellow
+            Zero,
+            One,
+            Two,
+            Three
         };
 
         [SyncVar]
@@ -30,7 +30,7 @@ namespace ckp
 
             teamColor = (Team)team;
 			//GameManager.instance.SetUpGame(gameObject, teamColor);
-            Debug.Log("Assigned to the " + teamColor.ToString() + " team!");
+            Debug.Log("Assigned to the " + teamColor.ToString() + " team! " + (int)teamColor);
 			//CmdSetTeam ();
 
         }

@@ -86,19 +86,19 @@ public class GameManager : MonoBehaviour
         DropoffPointsClass d;
         switch (team)
         {
-            case net_TeamScript.Team.Green:
+            case net_TeamScript.Team.Zero:
                 d = DropoffPoints[0];
                 playerNum = 0;
                 break;
-            case net_TeamScript.Team.Purple:
+            case net_TeamScript.Team.One:
                 d = DropoffPoints[1];
                 playerNum = 1;
                 break;
-            case net_TeamScript.Team.Yellow:
+            case net_TeamScript.Team.Two:
                 d = DropoffPoints[2];
                 playerNum = 2;
                 break;
-            case net_TeamScript.Team.Red:
+            case net_TeamScript.Team.Three:
                 d = DropoffPoints[3];
                 playerNum = 3;
                 break;
@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        Debug.LogError("enabling " + d.dropoffGO.name);
         d.dropoffGO.SetActive(true);
         PlayerClass ply = new PlayerClass();
         ply.SetUpPlayer(playerNum, maxSugarCarry, player, d.dropoffGO, "Player " + (playerNum + 1));
