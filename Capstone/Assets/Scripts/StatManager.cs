@@ -91,7 +91,7 @@ public class StatManager : NetworkBehaviour {
         if (scene.buildIndex == 1)
         {
             ResetTickerTimer();
-            StartCoroutine(c_GameTimer());
+           // StartCoroutine(c_GameTimer());
         }
     }
 
