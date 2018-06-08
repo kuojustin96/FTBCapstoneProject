@@ -20,7 +20,42 @@ ModelImporter:
     9500000: //RootNode
     11400000: //RootNode
     11400002: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CandyStash_tx
+    second: {fileID: 2100000, guid: 5b025e095c6c92241bab86fd6ab4c5ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightBlue
+    second: {fileID: 2100000, guid: 044152679e09ca347ab280989f310dd9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange
+    second: {fileID: 2100000, guid: 478d1e078eb6bb34f84eb103e26b16a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pink
+    second: {fileID: 2100000, guid: 684d5668ead04c5469fca9ca39449f94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Purple
+    second: {fileID: 2100000, guid: 2d38a7d8e90d49e46b9c9463cd004e6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: 2056e628014259540aa80fffbd5ea2be, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red_Dark
+    second: {fileID: 2100000, guid: 7a69016aae7c2584db5e3f6b8fb09c21, type: 2}
   materials:
     importMaterials: 1
     materialName: 1
@@ -50,7 +85,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 71.94583
+    globalScale: 80
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
