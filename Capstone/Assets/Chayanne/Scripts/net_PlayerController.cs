@@ -73,6 +73,8 @@ namespace jkuo
         public float gravityDivisor = 20f;
         public float glideFatigueSpeed = 0.25f;
         private GameObject glidingParticleEffect;
+        [SerializeField]
+        bool canJumpHover = false;
 
         CharacterController character;
 
@@ -104,11 +106,6 @@ namespace jkuo
             LocalCameraCheck();
             Cursor.lockState = CursorLockMode.Locked;
 
-            if (isLocalPlayer)
-            {
-                //nhs = GameObject.Find ("Canvas").GetComponent<Net_Hud_SugarCounter> ();
-                //nhs.player = player;
-            }
 
 
             if (isLocalPlayer)
@@ -129,43 +126,99 @@ namespace jkuo
 
         private void LocalCameraCheck()
         {
-            if (!GetComponent<net_PlayerController>().isLocalPlayer)
+            if (!isLocalPlayer)
             {
                 playerUI.SetActive(false);
                 GetComponent<AudioListener>().enabled = false;
             }
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (isLocalPlayer || offlineTesting)
             {
-                    if (!player.craftingUIOpen)
+                if (!player.craftingUIOpen)
+                {
+                    if (!player.playerPaused)
                     {
-                        if (!player.playerPaused)
-                        {
-                            //Camera Rotation
-                            Rotation();
 
-                            FreeCam();
-
-                            //Emotes
-                            UseEmotes();
-
-                        }
-                        else
-                        {
-                            PauseFreeCam();
-                        }
-
-                        //Movement
-                        Movement();
-
-                        //Jump
-                        Jumping();
                     }
+                    else
+                    {
+
+                    }
+
+                    //Movement
+                    FixedUpdateMovement();
+
+                }
             }
         }
+
+        protected virtual void FixedUpdateMovement()
+        {
+            if (character.isGrounded)
+            {
+                //m_MoveDir.y = -m_StickToGroundForce;
+
+                if (jumped)
+                {
+                    jumped = false;
+                    m_MoveDir.y = jumpForce;
+                }
+
+                if (player.playerPaused)
+                {
+                    m_MoveDir.x = 0f;
+                    m_MoveDir.z = 0f;
+                }
+            }
+            else
+            {
+                m_MoveDir += Physics.gravity * gravityScale * Time.fixedDeltaTime;
+
+                //if ((player.playerPaused && pausedGravity == null) || player.isStunned)
+                //    pausedGravity = StartCoroutine(c_PausedGravity());
+            }
+            character.Move(m_MoveDir * Time.fixedDeltaTime);
+        }
+
+        void Update()
+        {
+
+            bool localCheck = isLocalPlayer || offlineTesting;
+            if (localCheck)
+            {
+
+                bool menuOpen = player.craftingUIOpen || player.playerPaused;
+
+                if (!menuOpen)
+                {
+                    //Camera Rotation
+                    Rotation();
+
+                    FreeCam();
+
+                    //Emotes
+                    UseEmotes();
+                }
+                else
+                {
+                    PauseFreeCam();
+                }
+
+                //Movement
+                Movement();
+
+                //Jump
+                Jumping();
+
+                
+                UpdateAnimationParameters();
+            }
+        }
+
+
 
         void PauseFreeCam()
         {
@@ -202,7 +255,7 @@ namespace jkuo
         }
 
 
-        private void Rotation()
+        protected virtual void Rotation()
         {
 
             float xRot;
@@ -217,7 +270,7 @@ namespace jkuo
             }
         }
 
-        private void Movement()
+        protected virtual void Movement()
         {
             if (!player.playerPaused && !player.isStunned)
             {
@@ -228,22 +281,6 @@ namespace jkuo
                 }
                 moveHori = transform.right * Input.GetAxis("Horizontal");
                 moveVert = transform.forward * Input.GetAxis("Vertical");
-
-                float x = Input.GetAxis("Vertical");
-                float y = Input.GetAxis("Horizontal");
-
-                anim.SetFloat("Vertical", x);
-                anim.SetFloat("Horizontal", y);
-                anim.SetBool("IsGrounded", isGrounded);
-                animateCharacter(x, y, isGrounded,isGliding);
-
-                //velocity = (moveHori + moveVert) * speed;
-
-
-
-                //velocity += (Physics.gravity * gravityScale * Time.fixedDeltaTime);
-                //character.Move(velocity * Time.deltaTime);
-
 
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = (moveHori + moveVert) * currentSpeedMult;
@@ -257,173 +294,162 @@ namespace jkuo
                 m_MoveDir.z = desiredMove.z * baseSpeed * currentSpeedMult;
             }
 
-            if (character.isGrounded)
+
+        }
+
+        protected virtual void Jumping()
+        {
+
+            //IsGrounded check
+
+            bool groundedLastFrame = isGrounded;
+
+            //RaycastHit hit;
+            //isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, 5f, jumpMask);
+
+            isGrounded = character.isGrounded;
+            if (isGrounded)
             {
-                //m_MoveDir.y = -m_StickToGroundForce;
-
-                if (jumped)
+                if (!groundedLastFrame)
                 {
-                    jumped = false;
-                    m_MoveDir.y = jumpForce;
+                    staminaResetCoroutine = StartCoroutine(RegenStamina());
+                    StopGlide();
                 }
 
-                if (player.playerPaused)
-                {
-                    m_MoveDir.x = 0f;
-                    m_MoveDir.z = 0f;
-                }
+                canJump = true;
+                isGliding = false;
+                canJumpHover = true;
             }
             else
             {
-                m_MoveDir += Physics.gravity * gravityScale * Time.fixedDeltaTime;
+                canJump = false;
 
-                if ((player.playerPaused && pausedGravity == null) || player.isStunned)
-                    pausedGravity = StartCoroutine(c_PausedGravity());
+                //stop stamina regen
+                StopStaminaRegen();
+                GlideUpdate();
             }
-            character.Move(m_MoveDir * Time.fixedDeltaTime);
-        }
-
-        private IEnumerator c_PausedGravity()
-        {
-            bool checking = true;
-            while (checking)
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
             {
-                if (character.isGrounded)
-                {
-                    m_MoveDir.x = 0f;
-                    m_MoveDir.z = 0f;
-                    checking = false;
-                }
-
-                yield return null;
+                
+                JumpParticle();
             }
+
+            //Jumping/Gliding stop
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                Debug.Log("getkeyup space ");
+                canJumpHover = false;
+                canJump = false;
+                StopGlide();
+            }
+
+            //begin jump glide
+            if (Input.GetKey(KeyCode.Space) && canJumpHover)
+            {
+                Debug.Log(canJumpHover);
+                //hovering up
+                if (currentStamina > stamina - maxJumpStamina)
+                {
+                    Debug.Log("jumping hover");
+                    JumpingHover();
+                }
+            }
+
+            //Gliding 
+            bool canGlide = !canJump && !isGliding && currentStamina > 1.0f
+                && Input.GetAxis("Vertical") > 0.0f;
+
+            if (Input.GetKeyDown(KeyCode.Space) && canGlide)
+            {
+                StartGlide();
+            }
+
+
+
         }
 
-
-        private void Jumping()
+        private void UpdateAnimationParameters()    
         {
             Animator anim = netAnim.animator;
             float x = Input.GetAxis("Vertical");
             float y = Input.GetAxis("Horizontal");
 
             //Animation based on movement inputs
-            anim.SetFloat("Vertical", x);
-            anim.SetFloat("Horizontal", y);
-            anim.SetBool("IsGrounded", isGrounded);
+            anim.SetFloat("Vertical", character.velocity.x);
+            anim.SetFloat("Horizontal", character.velocity.y);
+            anim.SetBool("IsGrounded", character.isGrounded);
             anim.SetBool("IsGliding", isGliding);
 
+            animateCharacter(x, y, character.isGrounded, isGliding);
+        }
 
-            //IsGrounded check
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 5f, jumpMask))
+        private void StopStaminaRegen()
+        {
+            if (staminaResetCoroutine != null)
             {
-                if (!player.playerPaused)
-                {
-                    if (!isGrounded)
-                        staminaResetCoroutine = StartCoroutine(RegenStamina());
-
-                    isGrounded = true;
-                    canJump = true;
-                    isGliding = false;
-
-                    if (glidingParticleEffect)
-                    {
-                        CmdStopGlideParticle();
-                    }
-
-                    nsc.CmdStopSFX("Gliding", gameObject);
-                }
-            }
-            else
-            {
-
-                //stamina regen
-                if (isGrounded && staminaResetCoroutine != null)
-                {
-                    StopCoroutine(staminaResetCoroutine);
-                    staminaResetCoroutine = null;
-                }
-
-                isGrounded = false;
-                //apply gravity
-
-                if (isGliding && currentStamina > 0)
-                {
-                    //Gliding
-                    //rb.AddForce(new Vector3(0f, -(gravity / gravityDivisor), 0f), ForceMode.Force);
-                    m_MoveDir.y = -4.0f;
-                    currentSpeedMult = glideSpeedMult;
-                    currentStamina -= (glideFatigueSpeed + (player.sugarInBackpack * sugarStaminaFatigue));
-                    staminaSlider.value = currentStamina;
-
-                    if (currentStamina <= 0)
-                        isGliding = false;
-                }
-                else
-                {
-                    currentSpeedMult = 1.0f;   
-                    //Falling
-                    //rb.AddForce(new Vector3(0f, -gravity, 0f), ForceMode.Force);
-                    //rb.AddForce(Vector3.down * downwardAcceleration, ForceMode.Impulse);
-                }
-            }
-            if (!player.playerPaused && !player.isStunned)
-            {
-                if (Input.GetKeyDown(KeyCode.Space) && canJump)
-                {
-                    Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
-                    netparticle.CmdPlayParticleEffect("Walk Particle", gameObject, pos, 5f);
-                    nsc.CmdPlaySFX("Jump", gameObject, 0.3f, defaultMaxDist, true, false);
-                }
-                    
-
-                if (Input.GetKey(KeyCode.Space) && canJump)
-                {
-                    //Jumping
-                    if (currentStamina > stamina - maxJumpStamina)
-                    {
-                        _jumpForce = transform.up * (jumpForce);
-                        m_MoveDir.y = _jumpForce.y;
-                        //rb.AddForce(_jumpForce * Time.fixedDeltaTime);
-
-                        //if (Input.GetKeyDown(KeyCode.Space) && canJump) {
-                        animateCharacter(x, y, isGrounded, isGliding);
-                        //}
-
-                        currentStamina -= fatigueSpeed;
-                        staminaSlider.value = currentStamina;
-                    }
-                }
-
-                //Gliding initiation
-                if (Input.GetKeyDown(KeyCode.Space) && !canJump && !isGliding)
-                {
-                    isGliding = true;
-                    CmdPlayGlideParticle();
-                    nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, defaultMaxDist, false, false);
-                    nsc.CmdPlaySFX("Jump", gameObject, 0.3f, defaultMaxDist, true, false);
-                }
-
-
-                //Jumping/Gliding
-                if (Input.GetKeyUp(KeyCode.Space))
-                {
-                    canJump = false;
-
-                    if (isGliding)
-                    {
-                        isGliding = false;
-                        if (glidingParticleEffect)
-                            CmdStopGlideParticle();
-                    }
-                }
+                StopCoroutine(staminaResetCoroutine);
+                staminaResetCoroutine = null;
             }
         }
 
-        public void ApplyJumpForce(Vector3 force)
+        private void JumpingHover()
+        {
+            _jumpForce = transform.up * (jumpForce);
+            m_MoveDir.y = _jumpForce.y;
+            currentStamina -= fatigueSpeed;
+            staminaSlider.value = currentStamina;
+        }
+
+        private void GlideUpdate()
+        {
+            if (isGliding && currentStamina > 0)
+            {
+                //Gliding
+                //rb.AddForce(new Vector3(0f, -(gravity / gravityDivisor), 0f), ForceMode.Force);
+                m_MoveDir.y = -4.0f;
+                currentStamina -= (glideFatigueSpeed + (player.sugarInBackpack * sugarStaminaFatigue));
+                staminaSlider.value = currentStamina;
+
+                if (currentStamina <= 0)
+                {
+                    StopGlide();
+                }
+
+            }
+        }
+
+        void StartGlide()
+        {
+            isGliding = true;
+            currentSpeedMult = glideSpeedMult;
+            CmdPlayGlideParticle();
+            nsc.CmdPlaySFX("Gliding", gameObject, 0.5f, defaultMaxDist, false, false);
+            nsc.CmdPlaySFX("Jump", gameObject, 0.3f, defaultMaxDist, true, false);
+        }
+
+        void StopGlide()
+        {
+            currentSpeedMult = 1.0f;
+            isGliding = false;
+
+            if (glidingParticleEffect)
+                CmdStopGlideParticle();
+
+            nsc.CmdStopSFX("Gliding", gameObject);
+        }
+
+        private void JumpParticle()
+        {
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
+            netparticle.CmdPlayParticleEffect("Walk Particle", gameObject, pos, 5f);
+            nsc.CmdPlaySFX("Jump", gameObject, 0.3f, defaultMaxDist, true, false);
+        }
+
+        public virtual void ApplyJumpForce(Vector3 force)
         {
             m_MoveDir.y = force.y;
         }
+
         private IEnumerator RegenStamina()
         {
             yield return new WaitForSeconds(staminaRegenDelay);
@@ -437,47 +463,11 @@ namespace jkuo
             }
         }
 
-        #region Glide Particle Effect
-        [Command]
-        private void CmdPlayGlideParticle()
-        {
-            RpcPlayGlideParticle();
-        }
-
-        [ClientRpc]
-        private void RpcPlayGlideParticle()
-        {
-            glidingParticleEffect = ObjectPoolManager.instance.SpawnObject("Glide Particle", 3f);
-            glidingParticleEffect.transform.parent = transform;
-            glidingParticleEffect.transform.position = transform.position;
-        }
-
-        [Command]
-        public void CmdStopGlideParticle()
-        {
-            RpcStopGlideParticle();
-        }
-
-        [ClientRpc]
-        private void RpcStopGlideParticle()
-        {
-            if (glidingParticleEffect)
-            {
-                float delay = glidingParticleEffect.GetComponent<ParticleSystem>().main.duration;
-                ObjectPoolManager.instance.RecycleObject("Glide Particle", glidingParticleEffect, delay);
-                glidingParticleEffect.transform.parent = null;
-                glidingParticleEffect = null;
-            }
-        }
-        #endregion
-
         #region Play Emotes
         private void UseEmotes()
         {
             if (emoteMenuOpen && !playingEmote)
             {
-                if (!isLocalPlayer)
-                    return;
 
                 if (Input.GetKeyDown(KeyCode.C))
                 {
@@ -530,7 +520,7 @@ namespace jkuo
 
             if (!isLocalPlayer)
             {
-            // code run on other players
+                // code run on other players
                 Vector3 temp = Emotes[emoteNum].transform.localScale;
                 temp.x = -1;
                 Emotes[emoteNum].transform.localScale = temp;
@@ -558,6 +548,40 @@ namespace jkuo
                 yield return null;
 
             playingEmote = false;
+        }
+        #endregion
+
+        #region Glide Particle Effect
+        [Command]
+        private void CmdPlayGlideParticle()
+        {
+            RpcPlayGlideParticle();
+        }
+
+        [ClientRpc]
+        private void RpcPlayGlideParticle()
+        {
+            glidingParticleEffect = ObjectPoolManager.instance.SpawnObject("Glide Particle", 3f);
+            glidingParticleEffect.transform.parent = transform;
+            glidingParticleEffect.transform.position = transform.position;
+        }
+
+        [Command]
+        public void CmdStopGlideParticle()
+        {
+            RpcStopGlideParticle();
+        }
+
+        [ClientRpc]
+        private void RpcStopGlideParticle()
+        {
+            if (glidingParticleEffect)
+            {
+                float delay = glidingParticleEffect.GetComponent<ParticleSystem>().main.duration;
+                ObjectPoolManager.instance.RecycleObject("Glide Particle", glidingParticleEffect, delay);
+                glidingParticleEffect.transform.parent = null;
+                glidingParticleEffect = null;
+            }
         }
         #endregion
 

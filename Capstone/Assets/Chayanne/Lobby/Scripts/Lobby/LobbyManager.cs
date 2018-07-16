@@ -116,7 +116,7 @@ namespace Prototype.NetworkLobby
             return s_Singleton.mainMenu.isHosting;
         }
 
-        //TODO: Please call this when we make out in game menu so that the box top mesh can be unloaded properly
+        //[TODO: Please call this when we make out in game menu so that the box top mesh can be unloaded properly
         public void SetInGame(bool val)
         {
             inGame = val;
