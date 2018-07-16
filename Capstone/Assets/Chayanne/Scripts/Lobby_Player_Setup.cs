@@ -36,7 +36,6 @@ public class Lobby_Player_Setup : NetworkBehaviour  {
             //Transform spawn = Prototype.NetworkLobby.LobbyManager.s_Singleton.lobbySpawn.transform;
 
             //transform.rotation = Quaternion.Euler(new Vector3(0, spawn.eulerAngles.y, 0));
-            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             //transform.position = spawn.position;
         }
 

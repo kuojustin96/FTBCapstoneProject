@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class AlwaysEnableObject : MonoBehaviour {
 
-    public GameObject gameObj;
+    public GameObject[] gameObj;
 	
 	// Update is called once per frame
 	void Update () {
-        if(!gameObj.activeSelf)
-        gameObj.SetActive(true);	
+
+        foreach(GameObject obj in gameObj)
+        {
+            obj.SetActive(true);
+        }
+
 	}
 }

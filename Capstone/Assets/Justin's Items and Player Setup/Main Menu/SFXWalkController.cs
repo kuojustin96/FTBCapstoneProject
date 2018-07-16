@@ -24,7 +24,7 @@ public class SFXWalkController : NetworkBehaviour {
     private NetworkParticleController netparticle;
     private SoundEffectManager sfm;
     private SFXOverrideTrigger sot;
-    private net_PlayerController npc;
+    private ChadController npc;
     private NetworkSoundController nsc;
     private Vector3 walkParticlePos;
 
@@ -32,7 +32,7 @@ public class SFXWalkController : NetworkBehaviour {
 	void Start () {
         sfm = SoundEffectManager.instance;
         nsc = transform.root.GetComponent<NetworkSoundController>();
-        npc = transform.root.GetComponent<net_PlayerController>();
+        npc = transform.root.GetComponent<ChadController>();
         netparticle = transform.root.GetComponent<NetworkParticleController>();
 	}
 

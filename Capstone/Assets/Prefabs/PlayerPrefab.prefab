@@ -4055,7 +4055,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1110498428686178}
-  m_LocalRotation: {x: -0.73172635, y: 0.68132114, z: -0.013391361, w: 0.014101597}
+  m_LocalRotation: {x: -0.7317263, y: 0.6813211, z: -0.013391359, w: 0.014101595}
   m_LocalPosition: {x: 0, y: 0, z: -0.0055241664}
   m_LocalScale: {x: 0.9998602, y: 1.3286723, z: 0.7046922}
   m_Children: []
@@ -12137,18 +12137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5567aa07cdf72b4886d1d8d2cfcd86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualCam: {fileID: 0}
+  canDoGlide: 1
   offlineTesting: 0
-  cam: {fileID: 0}
-  playerUI: {fileID: 1114035442323022}
-  staminaSlider: {fileID: 114053109298589062}
-  Emotes:
-  - {fileID: 198643749250549362}
-  - {fileID: 198110135843414588}
-  - {fileID: 198774619469836044}
-  - {fileID: 198670858787665374}
-  emoteMenuOpen: 0
-  netAnim: {fileID: 114025893836392214}
+  virtualCam: {fileID: 0}
   baseSpeed: 50
   currentSpeedMult: 1
   glideSpeedMult: 3
@@ -12156,20 +12147,31 @@ MonoBehaviour:
   staminaRegenSpeed: 1.5
   staminaRegenDelay: 0.5
   maxJumpStamina: 75
-  velocity: {x: 0, y: 0, z: 0}
-  lookSensitivity: 3
+  sugarStaminaFatigue: 0.1
+  fatigueSpeed: 1
+  netAnim: {fileID: 114025893836392214}
   jumpForce: 40
+  gravityScale: 5
   jumpMask:
     serializedVersion: 2
     m_Bits: 4294963673
+  isGrounded: 0
   canJump: 1
-  sugarStaminaFatigue: 0.1
-  fatigueSpeed: 1
+  lookSensitivity: 3
+  isGliding: 0
   gravityDivisor: 5
   glideFatigueSpeed: 0.4
+  canJumpHover: 0
+  playerUI: {fileID: 1114035442323022}
   stun: {fileID: 1038917897427234}
-  gravityScale: 5
   sugarPickup: {fileID: 114726637079279308}
+  staminaSlider: {fileID: 114053109298589062}
+  Emotes:
+  - {fileID: 198643749250549362}
+  - {fileID: 198110135843414588}
+  - {fileID: 198774619469836044}
+  - {fileID: 198670858787665374}
+  emoteMenuOpen: 0
 --- !u!114 &114818591518782536
 MonoBehaviour:
   m_ObjectHideFlags: 1

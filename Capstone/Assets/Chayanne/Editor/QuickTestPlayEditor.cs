@@ -65,6 +65,9 @@ public class QuickTestPlayEditor : EditorWindow {
                 EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(winScene));
             }
         }
+
     }
+
+
 
 }

@@ -51,6 +51,12 @@ public class Net_Camera_Singleton : MonoBehaviour
 
     }
 
+    public void DebugPrepare()
+    {
+        Debug.LogWarning("Debug mode!");
+        localCamera.Priority = 999;
+    }
+
     void Awake()
     {
         //Check if instance already exists

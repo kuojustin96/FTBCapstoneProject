@@ -289,11 +289,6 @@ public class UIController : NetworkBehaviour {
             FadeManager.instance.CanvasGroupOFF(pauseCG, false, false);
             Cursor.lockState = CursorLockMode.Locked;
             
-            if(npc.pausedGravity != null)
-            {
-                StopCoroutine(npc.pausedGravity);
-                npc.pausedGravity = null;
-            }
         }
     }
 

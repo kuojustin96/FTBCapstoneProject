@@ -21,7 +21,15 @@ public class ObjectPoolManager : MonoBehaviour {
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+
     }
 
     // Use this for initialization
