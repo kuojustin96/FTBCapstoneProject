@@ -2539,7 +2539,7 @@ MonoBehaviour:
   canDoGlide: 0
   offlineTesting: 0
   virtualCam: {fileID: 0}
-  baseSpeed: 50
+  baseSpeed: 30
   currentSpeedMult: 0
   glideSpeedMult: 3
   inAirDamping: 5
@@ -2549,7 +2549,7 @@ MonoBehaviour:
   sugarStaminaFatigue: 0.05
   fatigueSpeed: 1
   netAnim: {fileID: 114619463874326512}
-  jumpForce: 40
+  jumpForce: 20
   gravityScale: 5
   jumpMask:
     serializedVersion: 2
