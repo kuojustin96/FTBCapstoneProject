@@ -1144,7 +1144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189846312776972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -183.47955, y: 140.6002, z: -42.595764}
+  m_LocalPosition: {x: 6583.19, y: -78.92, z: 65.85296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4486029876844214}
@@ -1735,7 +1735,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1281486576167526}
-  m_LocalRotation: {x: -0.73172635, y: 0.68132114, z: -0.013391353, w: 0.014101589}
+  m_LocalRotation: {x: -0.7317263, y: 0.6813211, z: -0.01339135, w: 0.014101586}
   m_LocalPosition: {x: 0, y: 0, z: -0.0055241664}
   m_LocalScale: {x: 0.9998602, y: 1.3286723, z: 0.7046922}
   m_Children: []
@@ -2492,7 +2492,7 @@ MonoBehaviour:
   lobbyPlayer: {fileID: 0}
   profile: {fileID: 0}
   rends:
-  - {fileID: 0}
+  - {fileID: 137399946590687646}
 --- !u!114 &114095472629564860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3034,8 +3034,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00034284592, y: 0.06487179, z: -0.024172843}
-    m_Extent: {x: 0.063137285, y: 0.046455614, z: 0.057701487}
+    m_Center: {x: 0.00036621094, y: 0.064872265, z: -0.024172783}
+    m_Extent: {x: 0.06314358, y: 0.046455387, z: 0.05770176}
   m_DirtyAABB: 0
 --- !u!143 &143038339690542346
 CharacterController:

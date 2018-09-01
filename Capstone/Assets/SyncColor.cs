@@ -37,6 +37,16 @@ public class SyncColor : MonoBehaviour
             Debug.Log("No profile!");
         }
 
+
+        if(!shouldEnable)
+        {
+            foreach (Renderer r in rends)
+            {
+                    if (r)
+                        r.material.color = Color.gray;
+            }
+        }
+
         enabled = shouldEnable;
 
     }
