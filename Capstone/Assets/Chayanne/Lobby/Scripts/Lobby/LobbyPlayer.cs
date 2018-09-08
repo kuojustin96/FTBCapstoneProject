@@ -36,14 +36,6 @@ namespace Prototype.NetworkLobby
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
 
-        public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
-        public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
-
-        static Color JoinColor = new Color(255.0f/255.0f, 0.0f, 101.0f/255.0f,1.0f);
-        static Color NotReadyColor = new Color(34.0f / 255.0f, 44 / 255.0f, 55.0f / 255.0f, 1.0f);
-        static Color ReadyColor = new Color(0.0f, 204.0f / 255.0f, 204.0f / 255.0f, 1.0f);
-        static Color TransparentColor = new Color(0, 0, 0, 0);
-
         //static Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         //static Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
@@ -60,57 +52,27 @@ namespace Prototype.NetworkLobby
 
         public override void OnStartClient()
         {
-            Debug.Log("=========OnStartClient=========");
             base.OnStartClient();
-            Debug.Log("=========OnStartClient=========");
 
         }
 
-        //void Awake()
-        //{
-        //    Debug.Log("Awake " + gameObject.name);
-        //}
         void Awake()
         {
             Colors = PlayerGameProfile.instance.Colors;
             outfitScript = GetComponent<NetworkOutfitScript>();
         }
 
-        //[Command]
-        //void CmdAddToPlayerList(string name)
-        //{
-
-        //    Debug.Log("Requesting name!");
-        //    RpcAddToPlayerList(name);
-        //}
-
-        //[ClientRpc]
-        //void RpcAddToPlayerList(string name)
-        //{
-        //    Debug.Log("RPC recieved!");
-        //    LobbyManager.s_Singleton.playerList.CreateName(name);
-        //}
-
         public override void OnClientEnterLobby()
         {
-            Debug.Log("=========OnClientEnterLobby=========");
             Debug.Log("Local:" + isLocalPlayer);
             Debug.Log("Sever:" + isServer);
 
             //client, NOT server!
             base.OnClientEnterLobby();
                     
-            //if(isLocalPlayer && !isServer)
-            //{
-            //    CmdNameChanged(LobbyManager.s_Singleton.GetLocalPlayerName());
-            //}
-
-            //How will we get other players' names?
-            
 
             if (isLocalPlayer)
             {
-                Debug.LogError("WHAT THE FUCK");
                 SetupLocalPlayer();
             }
             else
@@ -122,14 +84,8 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             //AddLobbyPlayer();
             OnMyColor(playerColor);
-            Debug.Log("=========OnClientEnterLobby=========");
         }
 
-        private void AddLobbyPlayer()
-        {
-            //if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(1);
-            //LobbyPlayerList._instance.AddPlayer(this);
-        }
 
         public override void OnStartAuthority()
         {
@@ -142,15 +98,6 @@ namespace Prototype.NetworkLobby
             //AddLobbyPlayer();
         }
 
-        void ChangeReadyButtonColor(Color c)
-        {
-            ColorBlock b = readyButton.colors;
-            b.normalColor = c;
-            b.pressedColor = c;
-            b.highlightedColor = c;
-            b.disabledColor = c;
-            readyButton.colors = b;
-        }
 
         void SetupOtherPlayer()
         {
@@ -168,20 +115,18 @@ namespace Prototype.NetworkLobby
 
         void SetupLocalPlayer(bool isHost = false)
         {
-
-
             Debug.Log("Setting local player! " + isHost);
-            CinemachineVirtualCameraBase playerCamera = LobbySingleton.instance.PlayerCam;
-            CinemachineVirtualCameraBase lobbyCam = LobbySingleton.instance.LobbyCam;
+            //ps: camera sets itself up
+            CinemachineVirtualCameraBase lobbyCam = Net_Camera_Singleton.LobbyCam;
             lobbyCam.enabled = false;
+
 
             PlayerGameProfile.instance.SetLobbyPlayer(this);
 
 
-            //ps: camera sets itself up
+            ReadyUpManager.instance.getReadyUpText().SetActive(true);
 
-            //cameraScript.SwitchToCameraLocal(playerCamera);
-            LobbySingleton.instance.getReadyUpText().SetActive(true);
+
             if (playerColor == Color.white)
             {
                 CmdColorChange();
@@ -191,9 +136,6 @@ namespace Prototype.NetworkLobby
 
             CmdOutfitChanged(PlayerGameProfile.instance.GetPlayerOutfitSelection());
 
-
-            //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
-            //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
         }
 
@@ -220,24 +162,15 @@ namespace Prototype.NetworkLobby
         {
             if (readyState)
             {
-                ChangeReadyButtonColor(TransparentColor);
-
-                Text textComponent = readyButton.transform.GetChild(0).GetComponent<Text>();
-                textComponent.text = "READY";
-                textComponent.color = ReadyColor;
-                readyButton.interactable = false;
-                colorButton.interactable = false;
-                nameInput.interactable = false;
 
                 readyObject.SetActive(true);
                 if (isLocalPlayer)
                 {
-                    LobbySingleton.instance.getReadyUpText().SetActive(false);
+                    ReadyUpManager.instance.getReadyUpText().SetActive(false);
                 }
             }
             else
             {
-                ChangeReadyButtonColor(isLocalPlayer ? JoinColor : NotReadyColor);
 
                 Text textComponent = readyButton.transform.GetChild(0).GetComponent<Text>();
                 textComponent.text = isLocalPlayer ? "JOIN" : "...";
@@ -248,7 +181,7 @@ namespace Prototype.NetworkLobby
 
                 readyObject.SetActive(false);
 
-                LobbySingleton.instance.getReadyUpText().SetActive(true);
+                ReadyUpManager.instance.getReadyUpText().SetActive(true);
             }
         }
 
@@ -318,7 +251,7 @@ namespace Prototype.NetworkLobby
             if(!countDownStart)
             {
                 countDownStart = true;
-                LobbySingleton.instance.TransitionCam.gameObject.SetActive(true);
+                Net_Camera_Singleton.TransitionCam.gameObject.SetActive(true);
                 LobbyManager.s_Singleton.lobbyAnims.PlayOpenDoorAnimation();
 
                 SoundEffectManager.instance.PlaySFX("Door Open", Camera.main.gameObject, 0.2f);

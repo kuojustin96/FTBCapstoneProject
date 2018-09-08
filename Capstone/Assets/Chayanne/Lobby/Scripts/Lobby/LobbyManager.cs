@@ -41,7 +41,7 @@ namespace Prototype.NetworkLobby
         public Text statusInfo;
         public Text hostInfo;
 
-        public LobbySingleton cameraHolder;
+        public ReadyUpManager cameraHolder;
 
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number

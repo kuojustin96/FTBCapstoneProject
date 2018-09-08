@@ -528,7 +528,6 @@
     <Compile Include="Assets\Scripts\Lobby_Player_Movement.cs" />
     <Compile Include="Assets\Scripts\LobbyBetterPlayerList.cs" />
     <Compile Include="Assets\Scripts\LobbyListName.cs" />
-    <Compile Include="Assets\Scripts\LobbySingleton.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MusicTriggerBox.cs" />
     <Compile Include="Assets\Scripts\Net_Camera_Singleton.cs" />
@@ -538,6 +537,7 @@
     <Compile Include="Assets\Scripts\PlayerAttachCamera.cs" />
     <Compile Include="Assets\Scripts\PlayerGameProfile.cs" />
     <Compile Include="Assets\Scripts\PlayerListUpdater.cs" />
+    <Compile Include="Assets\Scripts\ReadyUpManager.cs" />
     <Compile Include="Assets\Scripts\StatManager.cs" />
     <Compile Include="Assets\Scripts\TempAudioTest.cs" />
     <Compile Include="Assets\Scripts\Test_Camera_Tracker.cs" />

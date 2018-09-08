@@ -5,7 +5,7 @@ using Prototype.NetworkLobby;
 using UnityEngine.Networking;
 public class FindBullshit : MonoBehaviour {
 
-    public LobbySingleton[] memes;
+    public ReadyUpManager[] memes;
 
     // Use this for initialization
     void Start () {
@@ -17,6 +17,6 @@ public class FindBullshit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        memes = GameObject.FindObjectsOfType<LobbySingleton>();
+        memes = GameObject.FindObjectsOfType<ReadyUpManager>();
     }
 }
