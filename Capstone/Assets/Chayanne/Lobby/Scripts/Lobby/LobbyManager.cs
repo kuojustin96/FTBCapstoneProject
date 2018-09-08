@@ -377,7 +377,6 @@ namespace Prototype.NetworkLobby
             GameObject playerObj = CreateAndSetupPlayer();
 
             LobbyPlayer newPlayer = playerObj.GetComponent<LobbyPlayer>();
-            newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
 
             if(!madeHost)
             {
@@ -388,18 +387,6 @@ namespace Prototype.NetworkLobby
             
 
             Debug.Log("OnLobbyServerCreateLobbyPlayer! " + gameObject.name);
-            //Prototype.NetworkLobby.LobbyPlayerList._instance.theList.RpcRegenerateList();
-
-            for (int i = 0; i < lobbySlots.Length; ++i)
-            {
-                LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
-
-                if (p != null)
-                {
-                    p.RpcUpdateRemoveButton();
-                    p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
-                }
-            }
 
             return playerObj;
         }
@@ -429,19 +416,6 @@ namespace Prototype.NetworkLobby
 
         //}
 
-        public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
-        {
-            for (int i = 0; i < lobbySlots.Length; ++i)
-            {
-                LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
-
-                if (p != null)
-                {
-                    p.RpcUpdateRemoveButton();
-                    p.ToggleJoinButton(numPlayers + 1 >= minPlayers);
-                }
-            }
-        }
 
         public override void OnLobbyServerDisconnect(NetworkConnection conn)
         {

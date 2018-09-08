@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using Cinemachine;
 using System;
 
+//The in game player
 namespace jkuo
 {
 

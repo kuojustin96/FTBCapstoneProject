@@ -49,7 +49,6 @@ namespace Prototype.NetworkLobby
         public int outfitNum;
 
 
-
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -172,13 +171,6 @@ namespace Prototype.NetworkLobby
             else
             {
 
-                Text textComponent = readyButton.transform.GetChild(0).GetComponent<Text>();
-                textComponent.text = isLocalPlayer ? "JOIN" : "...";
-                textComponent.color = Color.white;
-                readyButton.interactable = isLocalPlayer;
-                colorButton.interactable = isLocalPlayer;
-                nameInput.interactable = isLocalPlayer;
-
                 readyObject.SetActive(false);
 
                 ReadyUpManager.instance.getReadyUpText().SetActive(true);
@@ -205,9 +197,6 @@ namespace Prototype.NetworkLobby
         }
 
         //===== UI Handler
-
-        //Note that those handler use Command function, as we need to change the value on the server not locally
-        //so that all client get the new value throught syncvar
         public void OnColorClicked()
         {
             CmdColorChange();
@@ -218,29 +207,17 @@ namespace Prototype.NetworkLobby
             SendReadyToBeginMessage();
         }
 
-        //public void OnNameChanged(string str)
+
+        //public void OnRemovePlayerClick()
         //{
-        //    CmdNameChanged(str);
-        //}
-
-
-
-        public void OnRemovePlayerClick()
-        {
-            if (isLocalPlayer)
-            {
-                RemovePlayer();
-            }
-            else if (isServer)
-                LobbyManager.s_Singleton.KickPlayer(connectionToClient);
+        //    if (isLocalPlayer)
+        //    {
+        //        RemovePlayer();
+        //    }
+        //    else if (isServer)
+        //        LobbyManager.s_Singleton.KickPlayer(connectionToClient);
                 
-        }
-
-        public void ToggleJoinButton(bool enabled)
-        {
-            readyButton.gameObject.SetActive(enabled);
-            waitingPlayerButton.gameObject.SetActive(!enabled);
-        }
+        //}
 
         [ClientRpc]
         public void RpcUpdateCountdown(int countdown)
@@ -340,9 +317,6 @@ namespace Prototype.NetworkLobby
             {
                 LobbyManager.s_Singleton.playerList.RemoveName(playerName);
             }
-            ////My instance is in this list!~
-            //LobbyPlayerList._instance.RemovePlayer(this);
-            //if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
 
             int idx = System.Array.IndexOf(Colors, playerColor);
 
