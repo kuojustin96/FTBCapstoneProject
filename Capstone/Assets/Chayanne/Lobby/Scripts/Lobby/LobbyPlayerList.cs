@@ -74,7 +74,7 @@ namespace Prototype.NetworkLobby
             int i = 0;
             foreach (KeyValuePair<LobbyPlayer, LobbyListName> p in _players)
             {
-                p.Key.OnPlayerListChanged(i);
+                //p.Key.OnPlayerListChanged(i);
                 ++i;
             }
         }

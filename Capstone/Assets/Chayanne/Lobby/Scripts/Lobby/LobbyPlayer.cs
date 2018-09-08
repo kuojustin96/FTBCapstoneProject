@@ -144,24 +144,10 @@ namespace Prototype.NetworkLobby
             outfitScript.CmdChangeHat(outfitIndex);
         }
 
-        //This enable/disable the remove button depending on if that is the only local player or not
-        public void CheckRemoveButton()
-        {
-            if (!isLocalPlayer)
-                return;
-
-            int localPlayerCount = 0;
-            foreach (PlayerController p in ClientScene.localPlayers)
-                localPlayerCount += (p == null || p.playerControllerId == -1) ? 0 : 1;
-
-            removePlayerButton.interactable = localPlayerCount > 1;
-        }
-
         public override void OnClientReady(bool readyState)
         {
             if (readyState)
             {
-
                 readyObject.SetActive(true);
                 if (isLocalPlayer)
                 {
@@ -177,10 +163,6 @@ namespace Prototype.NetworkLobby
             }
         }
 
-        public void OnPlayerListChanged(int idx)
-        { 
-            //GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;
-        }
 
         ///===== callback from sync var
         
@@ -240,14 +222,6 @@ namespace Prototype.NetworkLobby
 
             LobbyManager.s_Singleton.countdownPanel.UIText.text = "Match Starting in " + countdown;
             LobbyManager.s_Singleton.countdownPanel.gameObject.SetActive(countdown != 0);
-        }
-
-
-
-        [ClientRpc]
-        public void RpcUpdateRemoveButton()
-        {
-            CheckRemoveButton();
         }
 
         //====== Server Command
