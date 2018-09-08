@@ -163,15 +163,6 @@ namespace Prototype.NetworkLobby
             }
         }
 
-
-        ///===== callback from sync var
-        
-        public void OnMyName(string newName)
-        {
-            Debug.Log("OnMyName");
-            playerName = newName;
-        }
-
         public void OnMyColor(Color newColor)
         {
             playerColor = newColor;
@@ -204,8 +195,6 @@ namespace Prototype.NetworkLobby
         [ClientRpc]
         public void RpcUpdateCountdown(int countdown)
         {
-
-            //BAD code!
 
             if(!countDownStart)
             {
