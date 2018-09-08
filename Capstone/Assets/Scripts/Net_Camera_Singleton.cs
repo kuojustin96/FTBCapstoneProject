@@ -7,8 +7,6 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using System;
 
-
-//sorry im bad with names this is mainly for the player camera.
 public class Net_Camera_Singleton : MonoBehaviour
 {
 
@@ -22,6 +20,10 @@ public class Net_Camera_Singleton : MonoBehaviour
 
     [SerializeField]
     CinemachineVirtualCameraBase transitionCam;
+
+    [SerializeField]
+    CinemachineVirtualCameraBase localCamera;
+
 
     public static CinemachineVirtualCameraBase TransitionCam
     {
@@ -131,10 +133,6 @@ public class Net_Camera_Singleton : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
     }
-
-    [SerializeField]
-    CinemachineVirtualCameraBase localCamera;
-
 
     public void SetupCamera(GameObject camTarget)
     {
